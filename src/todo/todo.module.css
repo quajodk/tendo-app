@@ -1,0 +1,96 @@
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.formText {
+  border: 1px solid silver;
+  background-color: grey;
+  margin: 10px;
+  width: 60vw;
+  padding: 3px;
+  padding-left: 20px;
+  color: white;
+  height: 75px;
+  transition: all 1s;
+  border-radius: 11px;
+}
+
+.formText::placeholder {
+  color: white;
+}
+
+.formText:focus {
+  outline: none;
+  background-color: white;
+  color: #000;
+}
+
+/* Todo FOrm Button */
+.btn {
+  background-color: #0369dd;
+  padding: 10px;
+  color: white;
+  width: 200px;
+  border-radius: 5px;
+  outline: none;
+  transition: all 2s;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:hover {
+  transform: scale(0.8);
+  background-color: #02438d;
+}
+
+/* TODO DISPLAY */
+
+.todo {
+  display: flex;
+  flex-direction: row;
+  margin: 12px;
+  margin-bottom: 20px;
+}
+
+.todoItem {
+  width: auto;
+  flex: 1;
+  text-overflow: ellipsis;
+}
+
+.editBtn,
+.trashBtn {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 3px;
+  transition: all 1s;
+  cursor: pointer;
+}
+
+.editBtn:hover,
+.trashBtn:hover {
+  transform: scaleX(.9);
+  border-radius: 50%;
+}
+
+.trashBtn {
+  background-color: red;
+}
+
+.editBtn {
+  background-color: blue;
+}
+
+.todoList {
+  margin: 50px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
