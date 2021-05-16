@@ -6,6 +6,15 @@ import useSheetData from "../../hooks/useSheetData";
 import ProductListing from "./ProductListing";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import {
+  BsFillGrid1X2Fill,
+  BsFillGridFill,
+  BsFillTagFill,
+} from "react-icons/bs";
+import { FaHeadphonesAlt } from "react-icons/fa";
+
+import { AiFillHdd } from "react-icons/ai";
+import NavItem from "../../components/mobile/navItem";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -19,14 +28,22 @@ const MobileLayer = () => {
         style={{ position: "relative", backgroundColor: "rgb(21, 24, 30)" }}
       >
         {loading && data.length === 0 ? (
-          <Spin indicator={antIcon} />
+          <div className="flex justify-center items-center h-full">
+            <Spin indicator={antIcon} />
+          </div>
         ) : (
           <>
-            <AppBar />
+            <AppBar title={"Home"} />
             <MobileBody>
               <ProductListing items={data} />
             </MobileBody>
-            <MobileTapNav />
+            <MobileTapNav>
+              <NavItem icon={<BsFillGrid1X2Fill size={24} />} title={"Home"} />
+              <NavItem icon={<AiFillHdd size={24} />} title={"Categories"} />
+              <NavItem icon={<BsFillGridFill size={24} />} title={"Explore"} />
+              <NavItem icon={<BsFillTagFill size={24} />} title={"Promos"} />
+              <NavItem icon={<FaHeadphonesAlt size={24} />} title={"Help"} />
+            </MobileTapNav>
           </>
         )}
       </div>

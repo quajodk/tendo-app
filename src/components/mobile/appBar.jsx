@@ -13,6 +13,16 @@ const AppBar = ({ children, title }) => {
           transition: "height 0.1s ease 0s",
         }}
       >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "auto",
+            transform: "translateY(0px)",
+            backgroundColor: "rgba(0, 0, 0, 0.976)",
+            boxShadow: "rgba(255, 255, 255, 0.12) -1px 0px 0px inset",
+          }}
+        ></div>
         <div className="overflow-hidden" style={{ marginTop: 44 }}>
           <div className="flex flex-col items-stretch pointer-events-auto transform translate-y-0">
             <div className="h-0 w-full overflow-hidden flex">

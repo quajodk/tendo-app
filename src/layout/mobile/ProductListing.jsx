@@ -1,9 +1,10 @@
 import React from "react";
+import { gDriveFileId } from "../../utils/utils";
 
 const ProductListing = ({ items }) => {
   return (
     <>
-      <div className="flex flex-col w-full">
+      <div className="grid grid-cols-1 gap-4">
         {items
           ? items.map((item) =>
               item.glideStatus === "TRUE" ? (
@@ -21,15 +22,17 @@ export default ProductListing;
 const ProductCard = ({ item }) => {
   return (
     <>
-      <div className="m-4">
-        <div className="rounded-lg">
-          <div
-            className="w-full relative"
-            style={{
-              paddingBottom: "33.3333%",
-            }}
-          >
-            <img src={item.titleImage} alt="" />
+      <div className="mx-4">
+        <div className="rounded-lg flex flex-col overflow-hidden">
+          <div className="h-32">
+            <img
+              src={`https://drive.google.com/thumbnail?id=${gDriveFileId({
+                gURL: item.titleImage,
+              })}`}
+              alt="productImage"
+              className="w-full"
+              style={{ objectFit: "contain" }}
+            />
           </div>
           <div
             className="flex flex-col p-3 flex-grow text-white"

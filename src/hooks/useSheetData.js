@@ -13,6 +13,7 @@ export default function useSheetData() {
     axios({
       method: "GET",
       url: URL,
+      credentials: "same-origin",
       headers: {
         Authorization: "Bearer TEST_TOKEN",
         Accept: "application/json",

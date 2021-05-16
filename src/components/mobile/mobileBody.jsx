@@ -7,7 +7,6 @@ const MobileBody = ({ children }) => {
         style={{
           position: "relative",
           width: "100%",
-
           paddingLeft: "env(safe-area-inset-left)",
           paddingRight: "env(safe-area-inset-right)",
           paddingTop: "calc(env(safe-area-inset-top) + 96px)",
