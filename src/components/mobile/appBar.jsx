@@ -11,6 +11,7 @@ const AppBar = ({ children, title }) => {
           paddingRight: "env(safe-area-inset-right)",
           height: "calc(env(safe-area-inset-top) + 96px)",
           transition: "height 0.1s ease 0s",
+          backgroundColor: "rgba(0, 0, 0, 0.976)",
         }}
       >
         <div

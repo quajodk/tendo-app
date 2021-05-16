@@ -34,8 +34,11 @@ const ProductAppBar = ({ title }) => {
             alignItems: "center",
           }}
         >
-          <div className="flex content-center justify-center text-blue-500 text-base">
-            <HiChevronLeft size={24} onClick={goBack} /> Back
+          <div
+            className="flex content-center justify-center text-blue-500 text-base cursor-pointer"
+            onClick={goBack}
+          >
+            <HiChevronLeft size={24} /> Back
           </div>
           <div
             className="mx-4"
