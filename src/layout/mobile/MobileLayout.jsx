@@ -37,7 +37,11 @@ const MobileLayer = () => {
         ) : (
           <>
             <AppBar title={screens[currentScreen]["title"]} />
-            <MobileBody>{screens[currentScreen]["component"]}</MobileBody>
+            <MobileBody>
+              {React.cloneElement(screens[currentScreen]["component"], {
+                items: data,
+              })}
+            </MobileBody>
             <MobileTapNav>
               <NavItem
                 icon={<BsFillGrid1X2Fill size={24} />}

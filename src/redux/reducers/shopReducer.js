@@ -35,8 +35,6 @@ const initialState = {
     { component: <PromoMobile />, title: "Promotions" },
     { component: <HelpMobile />, title: "Help" },
   ],
-  mobileProducts: [],
-  loading: true,
 };
 
 function shopReducer(state = initialState, action) {

@@ -9,7 +9,7 @@ const AppBar = ({ children, title }) => {
           paddingTop: "env(safe-area-inset-top)",
           paddingLeft: "env(safe-area-inset-left)",
           paddingRight: "env(safe-area-inset-right)",
-          height: "calc( env(safe-area-inset-top) + 96px )",
+          height: "calc(env(safe-area-inset-top) + 96px)",
           transition: "height 0.1s ease 0s",
         }}
       >
