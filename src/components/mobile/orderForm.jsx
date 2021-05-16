@@ -83,7 +83,7 @@ const OrderForm = () => {
                 name="sku"
                 id="sku"
                 required
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
                 placeholder="SKU"
               />
             </div>
@@ -101,7 +101,7 @@ const OrderForm = () => {
                 name="qnty"
                 id="qnty"
                 required
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
                 placeholder="Quantity"
               />
             </div>
@@ -119,7 +119,7 @@ const OrderForm = () => {
                 name="productSpec"
                 id="productSpec"
                 required
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
                 placeholder="eg, Nike React (size 42, blue)"
               />
             </div>
@@ -137,7 +137,7 @@ const OrderForm = () => {
                 name="totalAmount"
                 id="totalAmount"
                 required
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
                 placeholder="Sum up Cost of Product, Profit &amp; Delivery"
               />
             </div>
@@ -155,7 +155,7 @@ const OrderForm = () => {
                 name="customerName"
                 id="customerName"
                 required
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
           </div>
@@ -172,7 +172,7 @@ const OrderForm = () => {
                 name="customerLocation"
                 id="customerLocation"
                 required
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
           </div>
@@ -189,7 +189,7 @@ const OrderForm = () => {
                 name="landmark"
                 id="landmark"
                 required
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
           </div>
@@ -206,7 +206,7 @@ const OrderForm = () => {
                 name="customerPhoneNumber"
                 id="customerPhoneNumber"
                 required
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
           </div>
@@ -223,7 +223,7 @@ const OrderForm = () => {
                 name="resellerName"
                 id="resellerName"
                 required
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
           </div>
@@ -240,7 +240,7 @@ const OrderForm = () => {
                 name="resellerPhone"
                 id="resellerPhone"
                 required
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
           </div>
@@ -257,7 +257,7 @@ const OrderForm = () => {
                 name="momoNumber"
                 id="momoNumber"
                 required
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
           </div>
@@ -274,7 +274,7 @@ const OrderForm = () => {
                 name="momoAccountName"
                 id="momoAccountName"
                 required
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
           </div>
@@ -291,7 +291,7 @@ const OrderForm = () => {
                 name="deliveryNote"
                 id="deliveryNote"
                 required
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
           </div>
@@ -308,7 +308,7 @@ const OrderForm = () => {
                 name="referralCode"
                 id="referralCode"
                 required
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
           </div>

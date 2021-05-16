@@ -129,7 +129,7 @@ const ProductDetailsBody = ({ item }) => {
         <div className="mx-4 my-2">
           <button
             type="button"
-            className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2"
+            className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-blue-500"
             style={{
               backgroundColor: "rgba(33, 150, 243, 0.118)",
               borderColor: "rgba(33, 150, 243, 0.118)",
