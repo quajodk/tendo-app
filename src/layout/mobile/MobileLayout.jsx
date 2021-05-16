@@ -14,13 +14,16 @@ import {
 import { FaHeadphonesAlt } from "react-icons/fa";
 
 import { AiFillHdd } from "react-icons/ai";
+import { useSelector } from "react-redux";
 import NavItem from "../../components/mobile/navItem";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const MobileLayer = () => {
   const [data, loading] = useSheetData();
-  console.log(data, loading, "data from sheet");
+
+  const screens = useSelector((state) => state.mobileScreens);
+  const currentScreen = useSelector((state) => state.currentMobileScreen);
   return (
     <>
       <div
@@ -33,16 +36,39 @@ const MobileLayer = () => {
           </div>
         ) : (
           <>
-            <AppBar title={"Home"} />
-            <MobileBody>
-              <ProductListing items={data} />
-            </MobileBody>
+            <AppBar title={screens[currentScreen]["title"]} />
+            <MobileBody>{screens[currentScreen]["component"]}</MobileBody>
             <MobileTapNav>
-              <NavItem icon={<BsFillGrid1X2Fill size={24} />} title={"Home"} />
-              <NavItem icon={<AiFillHdd size={24} />} title={"Categories"} />
-              <NavItem icon={<BsFillGridFill size={24} />} title={"Explore"} />
-              <NavItem icon={<BsFillTagFill size={24} />} title={"Promos"} />
-              <NavItem icon={<FaHeadphonesAlt size={24} />} title={"Help"} />
+              <NavItem
+                icon={<BsFillGrid1X2Fill size={24} />}
+                title={"Home"}
+                active={currentScreen === 0 ? true : false}
+                index={0}
+              />
+              <NavItem
+                icon={<AiFillHdd size={24} />}
+                title={"Categories"}
+                active={currentScreen === 1 ? true : false}
+                index={1}
+              />
+              <NavItem
+                icon={<BsFillGridFill size={24} />}
+                title={"Explore"}
+                active={currentScreen === 2 ? true : false}
+                index={2}
+              />
+              <NavItem
+                icon={<BsFillTagFill size={24} />}
+                title={"Promos"}
+                active={currentScreen === 3 ? true : false}
+                index={3}
+              />
+              <NavItem
+                icon={<FaHeadphonesAlt size={24} />}
+                title={"Help"}
+                active={currentScreen === 4 ? true : false}
+                index={4}
+              />
             </MobileTapNav>
           </>
         )}
