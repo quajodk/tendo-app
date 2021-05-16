@@ -1,8 +1,16 @@
 import React from "react";
 import { FiClipboard, FiImage, FiShoppingCart } from "react-icons/fi";
+import { useDispatch } from "react-redux";
 import { gDriveFileId } from "../../utils/utils";
 
 const ProductDetailsBody = ({ item }) => {
+  const dispatch = useDispatch();
+  const orderProduct = () => {
+    dispatch({
+      type: "toggleOrderForm",
+    });
+  };
+
   return (
     <>
       <div>
@@ -62,7 +70,7 @@ const ProductDetailsBody = ({ item }) => {
           {" "}
           GHS {item.wholesale}
         </p>
-        <hr className="my-4" />
+        <hr className="my-4 mx-2" />
         <div
           style={{
             position: "relative",
@@ -127,7 +135,12 @@ const ProductDetailsBody = ({ item }) => {
               borderColor: "rgba(33, 150, 243, 0.118)",
             }}
           >
-            <a href={item.imageLink} target="_blank" rel="noopener noreferrer">
+            <a
+              href={item.imageLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-row"
+            >
               <FiImage size={24} className="mr-2" />
               View Product Gallery
             </a>
@@ -224,21 +237,21 @@ const ProductDetailsBody = ({ item }) => {
             <FiClipboard size={24} />
           </div>
         </div>
-        <div className="mx-4 my-2">
+        <div className="mx-4 my-5">
           <button
             type="button"
-            className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2"
+            className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-blue-500"
             style={{
               backgroundColor: "rgba(33, 150, 243, 0.118)",
               borderColor: "rgba(33, 150, 243, 0.118)",
             }}
+            onClick={orderProduct}
           >
-            <a href={item.imageLink} target="_blank" rel="noopener noreferrer">
-              <FiShoppingCart size={24} className="mr-2" />
-              Order Product
-            </a>
+            <FiShoppingCart size={24} className="mr-2" />
+            Order Product
           </button>
         </div>
+        <div className="mx-4 my-3 h-2"></div>
       </div>
     </>
   );

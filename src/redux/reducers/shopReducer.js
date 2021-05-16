@@ -35,6 +35,9 @@ const initialState = {
     { component: <PromoMobile />, title: "Promotions" },
     { component: <HelpMobile />, title: "Help" },
   ],
+  mobileProductSelect: null,
+  productName: "",
+  showOrderForm: false,
 };
 
 function shopReducer(state = initialState, action) {
@@ -118,6 +121,17 @@ function shopReducer(state = initialState, action) {
       return {
         ...state,
         currentMobileScreen: action.payload,
+      };
+    case "selectMobileProduct":
+      return {
+        ...state,
+        mobileProductSelect: action.payload,
+        productName: action.payload?.product,
+      };
+    case "toggleOrderForm":
+      return {
+        ...state,
+        showOrderForm: !state.showOrderForm,
       };
     default:
       return state;

@@ -1,11 +1,20 @@
 import React from "react";
 import { HiChevronLeft } from "react-icons/hi";
+import { useDispatch } from "react-redux";
 
 const ProductAppBar = ({ title }) => {
+  const dispatch = useDispatch();
+
+  const goBack = () => {
+    dispatch({
+      type: "selectMobileProduct",
+      payload: null,
+    });
+  };
   return (
     <>
       <div
-        className=""
+        className="bg-black z-20"
         style={{
           position: "absolute",
           pointerEvents: "auto",
@@ -25,11 +34,11 @@ const ProductAppBar = ({ title }) => {
             alignItems: "center",
           }}
         >
-          <div className="flex content-center justify-center text-blue-500 text-sm">
-            <HiChevronLeft size={24} /> Back
+          <div className="flex content-center justify-center text-blue-500 text-base">
+            <HiChevronLeft size={24} onClick={goBack} /> Back
           </div>
           <div
-            className=""
+            className="mx-4"
             style={{
               flexGrow: 1,
               textAlign: "center",

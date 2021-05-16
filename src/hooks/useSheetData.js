@@ -21,7 +21,6 @@ export default function useSheetData() {
     })
       .then((res) => {
         if (res) {
-          console.log(res.data);
           setLoading(false);
           setData([...data, ...res?.data?.resellerCatalog]);
         }

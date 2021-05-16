@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { gDriveFileId } from "../../utils/utils";
 
 const ProductListing = ({ items }) => {
@@ -20,9 +21,18 @@ const ProductListing = ({ items }) => {
 export default ProductListing;
 
 const ProductCard = ({ item }) => {
+  const dispatch = useDispatch();
+
+  const selectProduct = () => {
+    dispatch({
+      type: "selectMobileProduct",
+      payload: item,
+    });
+  };
+
   return (
     <>
-      <div className="mx-4">
+      <div className="mx-4" onClick={selectProduct}>
         <div className="rounded-lg flex flex-col overflow-hidden">
           <div className="h-32">
             <img
