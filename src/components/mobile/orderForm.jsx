@@ -1,11 +1,19 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
 const OrderForm = () => {
+  const dispatch = useDispatch();
+  const closeOrderForm = () => {
+    dispatch({
+      type: "toggleOrderForm",
+    });
+  };
+
   return (
     <>
-      <form className="relative">
+      <form className="h-screen overflow-x-auto">
         <div
-          className="bg-black z-20 fixed"
+          className="bg-black z-20"
           style={{
             position: "absolute",
             pointerEvents: "auto",
@@ -25,7 +33,10 @@ const OrderForm = () => {
               alignItems: "center",
             }}
           >
-            <div className="flex content-center justify-center text-blue-500 text-base">
+            <div
+              className="flex content-center justify-center text-blue-500 text-base cursor-pointer"
+              onClick={closeOrderForm}
+            >
               Cancel
             </div>
             <div
@@ -52,10 +63,11 @@ const OrderForm = () => {
           </div>
         </div>
         <div
-          className="flex flex-col relative min-h-full z-2"
+          className="flex flex-col relative min-h-full z-2 py-4"
           style={{
             paddingBottom: "calc(0px + env(safe-area-inset-bottom))",
             backgroundColor: "rgb(21, 24, 30)",
+            paddingTop: "calc(env(safe-area-inset-top) + 96px)",
           }}
         >
           <div className="px-4 pt-1 pb-3">

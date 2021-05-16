@@ -251,7 +251,7 @@ const ProductDetailsBody = ({ item }) => {
             Order Product
           </button>
         </div>
-        <div className="mx-4 my-3 h-2"></div>
+        <div className="mx-4 my-3 h-4"></div>
       </div>
     </>
   );
