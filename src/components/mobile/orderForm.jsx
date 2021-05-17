@@ -1,7 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { message } from "antd";
+import _ from "lodash";
 
-const OrderForm = () => {
+const OrderForm = ({ item }) => {
+  const { register, handleSubmit } = useForm();
+
   const dispatch = useDispatch();
   const closeOrderForm = () => {
     dispatch({
@@ -9,9 +15,39 @@ const OrderForm = () => {
     });
   };
 
+  const onOrderSubmit = (values) => {
+    if (_.isEmpty(values))
+      return message.error("Form fields can not be empty", 5);
+    const hide = message.loading("Loadings..", 0);
+    axios({
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer TEST_TOKEN",
+      },
+      data: { order: values },
+      url: "https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/orders",
+    })
+      .then((res) => {
+        if (res.data) {
+          hide();
+          message.success("Order was placed successfully", 5);
+          closeOrderForm();
+        }
+      })
+      .catch((e) => {
+        hide();
+        message.error("Something went wrong, try again", 5);
+        console.log(e);
+      });
+  };
+
   return (
     <>
-      <form className="h-screen overflow-x-auto">
+      <form
+        onSubmit={handleSubmit(onOrderSubmit)}
+        className="h-screen overflow-x-auto"
+      >
         <div
           className="bg-black z-20"
           style={{
@@ -57,9 +93,12 @@ const OrderForm = () => {
             >
               Order Form
             </div>
-            <div className="flex content-center justify-center text-blue-500 text-base">
+            <button
+              type="submit"
+              className="flex content-center justify-center text-blue-500 text-base"
+            >
               Submit
-            </div>
+            </button>
           </div>
         </div>
         <div
@@ -80,9 +119,11 @@ const OrderForm = () => {
             <div className="mt-2 border-b border-teal-500 py-2">
               <input
                 type="text"
-                name="sku"
+                name="productSku"
                 id="sku"
                 required
+                defaultValue={item.skUs}
+                ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
                 placeholder="SKU"
               />
@@ -98,9 +139,10 @@ const OrderForm = () => {
             <div className="mt-2 border-b border-teal-500 py-2">
               <input
                 type="text"
-                name="qnty"
+                name="productQty"
                 id="qnty"
                 required
+                ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
                 placeholder="Quantity"
               />
@@ -116,9 +158,10 @@ const OrderForm = () => {
             <div className="mt-2 border-b border-teal-500 py-2">
               <input
                 type="text"
-                name="productSpec"
+                name="productSpec (type,Size,Color,Etc)"
                 id="productSpec"
                 required
+                ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
                 placeholder="eg, Nike React (size 42, blue)"
               />
@@ -134,9 +177,10 @@ const OrderForm = () => {
             <div className="mt-2 border-b border-teal-500 py-2">
               <input
                 type="text"
-                name="totalAmount"
+                name="totalAmountToCollectFromCustomer"
                 id="totalAmount"
                 required
+                ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
                 placeholder="Sum up Cost of Product, Profit &amp; Delivery"
               />
@@ -155,6 +199,7 @@ const OrderForm = () => {
                 name="customerName"
                 id="customerName"
                 required
+                ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
@@ -172,6 +217,7 @@ const OrderForm = () => {
                 name="customerLocation"
                 id="customerLocation"
                 required
+                ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
@@ -186,9 +232,10 @@ const OrderForm = () => {
             <div className="mt-2 border-b border-teal-500 py-2">
               <input
                 type="text"
-                name="landmark"
+                name="landmarkCloseToLocation"
                 id="landmark"
                 required
+                ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
@@ -206,6 +253,7 @@ const OrderForm = () => {
                 name="customerPhoneNumber"
                 id="customerPhoneNumber"
                 required
+                ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
@@ -223,6 +271,7 @@ const OrderForm = () => {
                 name="resellerName"
                 id="resellerName"
                 required
+                ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
@@ -237,9 +286,10 @@ const OrderForm = () => {
             <div className="mt-2 border-b border-teal-500 py-2">
               <input
                 type="text"
-                name="resellerPhone"
+                name="resellerPhoneNumber"
                 id="resellerPhone"
                 required
+                ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
@@ -254,9 +304,10 @@ const OrderForm = () => {
             <div className="mt-2 border-b border-teal-500 py-2">
               <input
                 type="text"
-                name="momoNumber"
+                name="momoNumberToSendProfitTo"
                 id="momoNumber"
                 required
+                ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
@@ -271,9 +322,10 @@ const OrderForm = () => {
             <div className="mt-2 border-b border-teal-500 py-2">
               <input
                 type="text"
-                name="momoAccountName"
+                name="whatIsYourMomoAccountName"
                 id="momoAccountName"
                 required
+                ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
@@ -288,9 +340,9 @@ const OrderForm = () => {
             <div className="mt-2 border-b border-teal-500 py-2">
               <input
                 type="text"
-                name="deliveryNote"
+                name="deliveryInstructions"
                 id="deliveryNote"
-                required
+                ref={register({ required: false })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>
@@ -305,9 +357,9 @@ const OrderForm = () => {
             <div className="mt-2 border-b border-teal-500 py-2">
               <input
                 type="text"
-                name="referralCode"
+                name="whoReferredYou?"
                 id="referralCode"
-                required
+                ref={register({ required: false })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
             </div>

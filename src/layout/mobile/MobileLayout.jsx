@@ -42,7 +42,7 @@ const MobileLayer = () => {
         ) : (
           <>
             {showOrderForm ? (
-              <OrderForm />
+              <OrderForm item={selectedMobileItem} />
             ) : (
               <>
                 (
