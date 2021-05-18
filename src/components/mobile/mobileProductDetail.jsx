@@ -28,10 +28,9 @@ const ProductDetailsBody = ({ item }) => {
           <p className="text-white font-bold text-base">{item.product}</p>
         </div>
         <div
-          className=""
+          className="px-2 py-4"
           style={{
             position: "relative",
-            padding: "8px 16px",
             transition: "background-color 250ms ease-out 0s",
             display: "flex",
             alignItems: "center",
@@ -60,7 +59,7 @@ const ProductDetailsBody = ({ item }) => {
             >
               Supplier Name
             </p>
-            <p className="text-base font-semibold text-white">
+            <p className="text-lg font-semibold text-white">
               {" "}
               {item.supplierGenericNameGh}
             </p>
@@ -103,7 +102,10 @@ const ProductDetailsBody = ({ item }) => {
             >
               Description
             </p>
-            <p className="text-base font-semibold text-white">
+            <p
+              className="text-base font-semibold text-white"
+              style={{ whiteSpace: "pre-wrap" }}
+            >
               {" "}
               {`${item["cleanDescriptionWith\n\nSkUs"]}`}
             </p>
@@ -121,6 +123,11 @@ const ProductDetailsBody = ({ item }) => {
               minWidth: "40px",
               marginLeft: "10px",
               flexShrink: 0,
+            }}
+            onClick={() => {
+              navigator.clipboard.writeText(
+                item["cleanDescriptionWith\n\nSkUs"]
+              );
             }}
           >
             <FiClipboard size={24} />
@@ -217,7 +224,7 @@ const ProductDetailsBody = ({ item }) => {
             >
               Product SKU
             </p>
-            <p className="text-base font-semibold text-white"> {item.skUs}</p>
+            <p className="text-base font-semibold text-white">{item.skUs}</p>
           </div>
           <div
             style={{
@@ -232,6 +239,9 @@ const ProductDetailsBody = ({ item }) => {
               minWidth: "40px",
               marginLeft: "10px",
               flexShrink: 0,
+            }}
+            onClick={() => {
+              navigator.clipboard.writeText(item.skUs);
             }}
           >
             <FiClipboard size={24} />

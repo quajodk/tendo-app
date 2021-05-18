@@ -11,17 +11,16 @@ const ProductListing = () => {
   const [data, loading] = useSheetData({ sheet: "resellerCatalog" });
   const mobileProducts = useSelector((state) => state.mobileProducts);
   const dispatch = useDispatch();
-  // const init = useRef({ data });
+
 
   useEffect(() => {
-    // const { data } = init.current;
+  
     dispatch({
       type: "getMobileProducts",
       payload: data,
     });
   }, [data, dispatch]);
 
-  // console.log(mobileProducts, "items");
 
   return (
     <>
