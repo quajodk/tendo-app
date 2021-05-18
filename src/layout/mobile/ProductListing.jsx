@@ -1,26 +1,50 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { gDriveFileId } from "../../utils/utils";
+import useSheetData from "../../hooks/useSheetData";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
-const ProductListing = ({ items }) => {
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+
+const ProductListing = () => {
+  const [data, loading] = useSheetData({ sheet: "resellerCatalog" });
+  const mobileProducts = useSelector((state) => state.mobileProducts);
+  const dispatch = useDispatch();
+  // const init = useRef({ data });
+
+  useEffect(() => {
+    // const { data } = init.current;
+    dispatch({
+      type: "getMobileProducts",
+      payload: data,
+    });
+  }, [data, dispatch]);
+
+  // console.log(mobileProducts, "items");
+
   return (
     <>
-      <div className="grid grid-cols-1 gap-4">
-        {items
-          ? items.map((item) =>
-              item.glideStatus === "TRUE" ? (
-                <ProductCard item={item} key={item.id} />
-              ) : null
-            )
-          : "Loading"}
-      </div>
+      {loading && mobileProducts.length === 0 ? (
+        <div className="flex justify-center items-center h-full">
+          <Spin indicator={antIcon} />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-4">
+          {mobileProducts.map((item) =>
+            item.glideStatus === "TRUE" ? (
+              <ProductCard item={item} key={item.id} />
+            ) : null
+          )}
+        </div>
+      )}
     </>
   );
 };
 
 export default ProductListing;
 
-const ProductCard = ({ item }) => {
+export const ProductCard = ({ item }) => {
   const dispatch = useDispatch();
 
   const selectProduct = () => {
@@ -40,8 +64,7 @@ const ProductCard = ({ item }) => {
                 gURL: item.titleImage,
               })}`}
               alt="productImage"
-              className="w-full"
-              style={{ objectFit: "contain" }}
+              className="w-full h-full object-cover"
             />
           </div>
           <div

@@ -38,6 +38,11 @@ const initialState = {
   mobileProductSelect: null,
   productName: "",
   showOrderForm: false,
+  mobileProducts: [],
+  mobileCategories: [],
+  mobileSelectedCategory: [],
+  categorySelected: false,
+  categoryName: "",
 };
 
 function shopReducer(state = initialState, action) {
@@ -127,11 +132,41 @@ function shopReducer(state = initialState, action) {
         ...state,
         mobileProductSelect: action.payload,
         productName: action.payload?.product,
+        categorySelected: !state.categorySelected,
       };
     case "toggleOrderForm":
       return {
         ...state,
         showOrderForm: !state.showOrderForm,
+      };
+    case "getMobileProducts":
+      return {
+        ...state,
+        mobileProducts: [...state.mobileProducts, ...action.payload],
+      };
+    case "getMobileCategory":
+      return {
+        ...state,
+        mobileCategories: [...state.mobileCategories, ...action.payload],
+      };
+    case "selectedMobileCategory":
+      return {
+        ...state,
+        mobileSelectedCategory: [
+          ...state.mobileSelectedCategory,
+          ...state.mobileProducts.filter((items) =>
+            [items.type1, items.type2, items.type3].includes(action.payload)
+          ),
+        ],
+        categorySelected: !state.categorySelected,
+        categoryName: action.payload,
+      };
+    case "categorySelectedPop":
+      return {
+        ...state,
+        mobileSelectedCategory: [],
+        categorySelected: !state.categorySelected,
+        categoryName: "",
       };
     default:
       return state;
