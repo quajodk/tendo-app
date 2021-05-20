@@ -6,9 +6,9 @@ const Header = ({ title }) => {
   const currentScreen = useSelector((state) => state.currentMobileScreen);
   return (
     <div className="bg-tendo-bg py-3">
-      <div className="flex w-screen bg-red-400">
-        <div className="w-20"></div>
-        <div className="w-auto text-center">
+      <div className="flex w-screen ">
+        <div className="w-20 "></div>
+        <div className="flex-1 text-center">
           <span className="text-white font-medium text-xl">
             {screens[currentScreen]["title"]}
           </span>
