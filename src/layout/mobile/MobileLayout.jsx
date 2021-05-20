@@ -23,6 +23,8 @@ const MobileLayer = () => {
       {/* Header Goes here */}
       <Header />
       {/* Body Goes here */}
+
+      {/* Bottom Tab navigator */}
       <BottomTabNavigation />
     </Fragment>
   );

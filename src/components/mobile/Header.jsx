@@ -19,7 +19,7 @@ const Header = ({ title }) => {
         </div>
       </div>
       <div className="flex w-screen mt-3 px-3">
-        <div className="flex overflow-x-hidden w-auto flex-1">
+        <div className="flex overflow-x-hidden rounded-lg w-auto flex-1">
           <div className="bg-gray-400 flex items-center px-3 justify-center">
             <BiSearch color="white" size={20} />
           </div>
