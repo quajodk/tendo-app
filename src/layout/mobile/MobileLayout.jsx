@@ -20,7 +20,7 @@ const MobileLayer = () => {
   const showOrderForm = useSelector((state) => state.showOrderForm);
   const categorySelected = useSelector((state) => state.categorySelected);
   return (
-    <Fragment className="flex flex-col">
+    <div className="flex h-screen flex-1 bg-red-600 flex-col">
       {/* Header Goes here */}
       <Header />
       {/* Body Goes here */}
@@ -33,7 +33,7 @@ const MobileLayer = () => {
       </div>
       {/* Bottom Tab navigator */}
       <BottomTabNavigation />
-    </Fragment>
+    </div>
   );
 };
 
