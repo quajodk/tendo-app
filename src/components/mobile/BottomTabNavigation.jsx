@@ -1,7 +1,15 @@
 import React from "react";
 import MobileTapNav from "./mobileNavTap";
-
+import NavItem from "../../components/mobile/navItem";
+import {
+  BsFillGrid1X2Fill,
+  BsFillGridFill,
+  BsFillTagFill,
+} from "react-icons/bs";
+import { useSelector } from "react-redux";
 const BottomTabNavigation = () => {
+  const screens = useSelector((state) => state.mobileScreens);
+  const currentScreen = useSelector((state) => state.currentMobileScreen);
   return (
     <MobileTapNav>
       <NavItem
