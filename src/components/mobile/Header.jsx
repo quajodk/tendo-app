@@ -17,7 +17,9 @@ const Header = ({ title }) => {
           </span>
         </div>
       </div>
-      <div></div>
+      <div className="flex w-screen">
+          <input type="text" className="bg-gray-400 py-2 rounded px-2" />
+      </div>
     </div>
   );
 };
