@@ -18,7 +18,10 @@ const Header = ({ title }) => {
         </div>
       </div>
       <div className="flex w-screen px-3">
-          <input type="text" className="bg-gray-400 py-2 rounded-lg w-auto px-2" />
+        <input
+          type="text"
+          className="bg-gray-400 flex-1 py-2 outline-none focus:outline-none w-100  w-auto px-2"
+        />
       </div>
     </div>
   );
