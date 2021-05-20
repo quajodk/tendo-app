@@ -23,7 +23,7 @@ const MobileLayer = () => {
     <div className="flex h-screen flex-1  flex-col">
       {/* Handle when a product is selected */}
 
-      {selectedMobileItem !== null && (
+      {!selectedMobileItem && (
         <div className="h-screen flex-1 flex-col">
           {/* Header Goes here */}
           <Header />
@@ -33,6 +33,8 @@ const MobileLayer = () => {
           </div>
         </div>
       )}
+
+      {selectedMobileItem && <ProductDetailsBody item={selectedMobileItem} />}
 
       {/* Bottom Tab navigator */}
       <BottomTabNavigation />
