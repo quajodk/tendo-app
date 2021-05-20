@@ -25,7 +25,8 @@ const Header = ({ title }) => {
           </div>
           <input
             type="text"
-            className="bg-gray-400 text-white font-medium flex-1 py-1 outline-none focus:outline-none w-100  w-auto px-2"
+            placeholder="Search"
+            className="bg-gray-400 placeholder-gray-200 text-white font-medium flex-1 py-1 outline-none focus:outline-none w-100  w-auto px-2"
           />
         </div>
       </div>
