@@ -21,13 +21,19 @@ const MobileLayer = () => {
   const categorySelected = useSelector((state) => state.categorySelected);
   return (
     <div className="flex h-screen flex-1  flex-col">
-      {/* Header Goes here */}
-      <Header />
-      {/* Body Goes here */}
-      <div className="flex-1 overflow-y-scroll bg-tendo-bg">
-        
-        <ProductListing />
-      </div>
+      {/* Handle when a product is selected */}
+
+      {selectedMobileItem !== null && (
+        <div className="h-screen flex-1 flex-col">
+          {/* Header Goes here */}
+          <Header />
+          {/* Body Goes here */}
+          <div className="flex-1 overflow-y-scroll bg-tendo-bg">
+            <ProductListing />
+          </div>
+        </div>
+      )}
+
       {/* Bottom Tab navigator */}
       <BottomTabNavigation />
     </div>
