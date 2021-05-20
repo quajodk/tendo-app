@@ -12,31 +12,30 @@ const ProductListing = () => {
   const mobileProducts = useSelector((state) => state.mobileProducts);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
-  
     dispatch({
       type: "getMobileProducts",
       payload: data,
     });
   }, [data, dispatch]);
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-full">
+        <Spin indicator={antIcon} />
+      </div>
+    );
+  }
 
   return (
     <>
-      {loading && mobileProducts.length === 0 ? (
-        <div className="flex justify-center items-center h-full">
-          <Spin indicator={antIcon} />
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 gap-4">
-          {mobileProducts.map((item) =>
-            item.glideStatus === "TRUE" ? (
-              <ProductCard item={item} key={item.id} />
-            ) : null
-          )}
-        </div>
-      )}
+      <div className="grid grid-cols-1 gap-4">
+        {mobileProducts.map((item) =>
+          item.glideStatus === "TRUE" ? (
+            <ProductCard item={item} key={item.id} />
+          ) : null
+        )}
+      </div>
     </>
   );
 };
