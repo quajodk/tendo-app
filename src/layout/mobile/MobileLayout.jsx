@@ -25,10 +25,7 @@ const MobileLayer = () => {
   const categorySelected = useSelector((state) => state.categorySelected);
   return (
     <>
-      <div
-        className="h-screen"
-        // style={{ position: "relative", backgroundColor: "rgb(21, 24, 30)" }}
-      >
+      <div className="h-screen" style={{ backgroundColor: "rgb(21, 24, 30)" }}>
         <>
           {showOrderForm ? (
             <OrderForm item={selectedMobileItem} />
