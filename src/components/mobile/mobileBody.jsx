@@ -27,7 +27,7 @@ const MobileBody = ({ children }) => {
             zIndex: 2,
           }}
         > */}
-      <div className="bg-tendo-bg overflow-y-scroll">
+      <div className="bg-red-400 h-auto flex-1 overflow-y-scroll">
         {children}
       </div>
       {/* </div> */}
