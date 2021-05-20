@@ -20,12 +20,16 @@ const MobileLayer = () => {
   const showOrderForm = useSelector((state) => state.showOrderForm);
   const categorySelected = useSelector((state) => state.categorySelected);
   return (
-    <Fragment>
+    <Fragment className="flex flex-col">
       {/* Header Goes here */}
       <Header />
       {/* Body Goes here */}
-      <div className="h-auto flex-1 bg-gray-800">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut eum aliquam dolorem sunt odit aperiam reiciendis consequatur at quae id illo provident sint, officia ipsam. Maiores nesciunt cumque quia quae soluta laboriosam dolorum voluptas ullam ducimus atque corporis alias iure voluptates quod fugit illo, esse animi, vel quidem neque? Possimus!
+      <div className="flex-1 bg-tendo-bg">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut eum aliquam
+        dolorem sunt odit aperiam reiciendis consequatur at quae id illo
+        provident sint, officia ipsam. Maiores nesciunt cumque quia quae soluta
+        laboriosam dolorum voluptas ullam ducimus atque corporis alias iure
+        voluptates quod fugit illo, esse animi, vel quidem neque? Possimus!
       </div>
       {/* Bottom Tab navigator */}
       <BottomTabNavigation />
