@@ -27,7 +27,7 @@ const MobileBody = ({ children }) => {
             zIndex: 2,
           }}
         >
-          <div className="" style={{ marginBottom: "-16px" }}>
+          <div className="bg-tendo-bg" style={{ marginBottom: "-16px" }}>
             {children}
           </div>
         </div>
