@@ -18,7 +18,7 @@ const Header = ({ title }) => {
           </span>
         </div>
       </div>
-      <div className="flex w-screen mt-3 px-3">
+      <div className="flex w-screen mt-3 px-6">
         <div className="flex overflow-x-hidden rounded-lg w-auto flex-1">
           <div className="bg-gray-400 flex items-center px-3 justify-center">
             <BiSearch color="white" size={20} />
@@ -26,7 +26,7 @@ const Header = ({ title }) => {
           <input
             type="text"
             placeholder="Search"
-            className="bg-gray-400 placeholder-gray-200 text-white font-medium flex-1 py-1 outline-none focus:outline-none w-100  w-auto px-2"
+            className="bg-gray-400 placeholder-gray-200 font-thin text-white font-medium flex-1 py-1 outline-none focus:outline-none w-100  w-auto px-2"
           />
         </div>
       </div>
