@@ -14,6 +14,7 @@ import Header from "../../components/mobile/Header";
 
 const MobileLayer = () => {
   const screens = useSelector((state) => state.mobileScreens);
+  const currentScreen = useSelector((state) => state.currentMobileScreen);
   const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
   const productName = useSelector((state) => state.productName);
   const showOrderForm = useSelector((state) => state.showOrderForm);
@@ -23,7 +24,14 @@ const MobileLayer = () => {
       {/* Header Goes here */}
       <Header />
       {/* Body Goes here */}
-
+      <MobileBody>
+        {selectedMobileItem !== null &&
+        (currentScreen === 0 || currentScreen === 1 || currentScreen === 2) ? (
+          <ProductDetailsBody item={selectedMobileItem} />
+        ) : (
+          screens[currentScreen]["component"]
+        )}
+      </MobileBody>
       {/* Bottom Tab navigator */}
       <BottomTabNavigation />
     </Fragment>
