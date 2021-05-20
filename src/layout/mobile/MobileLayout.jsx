@@ -20,21 +20,18 @@ const MobileLayer = () => {
   const showOrderForm = useSelector((state) => state.showOrderForm);
   const categorySelected = useSelector((state) => state.categorySelected);
   return (
-    <div className="">
+    <div className="flex h-screen flex-1  flex-col">
       {/* Handle when a product is selected */}
-
-      {!selectedMobileItem && (
-        <div className="h-screen flex-1 overflow-y-scroll flex-col">
-          {/* Header Goes here */}
-          <Header />
-          {/* Body Goes here */}
+      <div className="h-screen flex-1 flex-col">
+        {/* Header Goes here */}
+        <Header />
+        {/* Body Goes here */}
+        {!selectedMobileItem && (
           <div className="flex-1 overflow-y-scroll bg-tendo-bg">
             <ProductListing />
           </div>
-        </div>
-      )}
-
-      {selectedMobileItem && <ProductDetailsBody item={selectedMobileItem} />}
+        )}
+      </div>
 
       {/* Bottom Tab navigator */}
       <BottomTabNavigation />
