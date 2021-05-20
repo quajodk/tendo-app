@@ -29,6 +29,16 @@ const MobileLayer = () => {
         className="h-screen"
         style={{ position: "relative", backgroundColor: "rgb(21, 24, 30)" }}
       >
+        <MobileBody>
+          {selectedMobileItem !== null &&
+          (currentScreen === 0 ||
+            currentScreen === 1 ||
+            currentScreen === 2) ? (
+            <ProductDetailsBody item={selectedMobileItem} />
+          ) : (
+            screens[currentScreen]["component"]
+          )}
+        </MobileBody>
         <MobileTapNav>
           <NavItem
             icon={<BsFillGrid1X2Fill size={24} />}
