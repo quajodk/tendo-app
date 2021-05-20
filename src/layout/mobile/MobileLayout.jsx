@@ -11,6 +11,7 @@ import OrderForm from "../../components/mobile/orderForm";
 import CategoryProductsScreen from "../../components/mobile/categoriesProducts";
 import BottomTabNavigation from "../../components/mobile/BottomTabNavigation";
 import Header from "../../components/mobile/Header";
+import ProductListing from "./ProductListing";
 
 const MobileLayer = () => {
   const screens = useSelector((state) => state.mobileScreens);
@@ -20,16 +21,12 @@ const MobileLayer = () => {
   const showOrderForm = useSelector((state) => state.showOrderForm);
   const categorySelected = useSelector((state) => state.categorySelected);
   return (
-    <div className="flex h-screen flex-1 bg-red-600 flex-col">
+    <div className="flex h-screen flex-1  flex-col">
       {/* Header Goes here */}
       <Header />
       {/* Body Goes here */}
-      <div className="flex-1 bg-tendo-bg">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut eum aliquam
-        dolorem sunt odit aperiam reiciendis consequatur at quae id illo
-        provident sint, officia ipsam. Maiores nesciunt cumque quia quae soluta
-        laboriosam dolorum voluptas ullam ducimus atque corporis alias iure
-        voluptates quod fugit illo, esse animi, vel quidem neque? Possimus!
+      <div className="flex-1 overflow-y-scroll bg-tendo-bg">
+        <ProductListing />
       </div>
       {/* Bottom Tab navigator */}
       <BottomTabNavigation />
