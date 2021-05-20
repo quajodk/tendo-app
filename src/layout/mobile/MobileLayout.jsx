@@ -20,6 +20,9 @@ const MobileLayer = () => {
   const categorySelected = useSelector((state) => state.categorySelected);
   return (
     <Fragment>
+      {/* Header Goes here */}
+      
+      {/* Body Goes here */}
       <BottomTabNavigation />
     </Fragment>
   );
