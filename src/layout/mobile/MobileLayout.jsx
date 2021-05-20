@@ -12,7 +12,6 @@ import CategoryProductsScreen from "../../components/mobile/categoriesProducts";
 import BottomTabNavigation from "../../components/mobile/BottomTabNavigation";
 import Header from "../../components/mobile/Header";
 import ProductListing from "./ProductListing";
-
 const MobileLayer = () => {
   const screens = useSelector((state) => state.mobileScreens);
   const currentScreen = useSelector((state) => state.currentMobileScreen);
@@ -26,6 +25,7 @@ const MobileLayer = () => {
       <Header />
       {/* Body Goes here */}
       <div className="flex-1 overflow-y-scroll bg-tendo-bg">
+        
         <ProductListing />
       </div>
       {/* Bottom Tab navigator */}
