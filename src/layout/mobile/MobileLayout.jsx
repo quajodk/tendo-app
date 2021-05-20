@@ -21,7 +21,7 @@ const MobileLayer = () => {
   return (
     <Fragment>
       {/* Header Goes here */}
-      <Header title={screens[currentScreen]["title"]} />
+      <Header />
       {/* Body Goes here */}
       <BottomTabNavigation />
     </Fragment>
