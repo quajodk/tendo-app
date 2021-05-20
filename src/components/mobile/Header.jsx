@@ -9,7 +9,7 @@ const Header = ({ title }) => {
     <div className="bg-tendo-bg py-3">
       <div className="flex w-screen ">
         <div className="w-20 flex justify-center items-center ">
-          <AiOutlineMenu size={25} color="white" />
+          <AiOutlineMenu size={25} className="text-tendo-active" />
         </div>
         <div className="flex-1 text-center">
           <span className="text-white font-medium text-xl">
