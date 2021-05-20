@@ -27,7 +27,7 @@ const MobileLayer = () => {
     <>
       <div
         className="h-screen"
-        style={{ position: "relative", backgroundColor: "rgb(21, 24, 30)" }}
+        // style={{ position: "relative", backgroundColor: "rgb(21, 24, 30)" }}
       >
         <>
           {showOrderForm ? (
