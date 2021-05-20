@@ -13,6 +13,7 @@ import BottomTabNavigation from "../../components/mobile/BottomTabNavigation";
 import Header from "../../components/mobile/Header";
 
 const MobileLayer = () => {
+  const screens = useSelector((state) => state.mobileScreens);
   const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
   const productName = useSelector((state) => state.productName);
   const showOrderForm = useSelector((state) => state.showOrderForm);
@@ -20,7 +21,7 @@ const MobileLayer = () => {
   return (
     <Fragment>
       {/* Header Goes here */}
-      <Header />
+      <Header title={screens[currentScreen]["title"]} />
       {/* Body Goes here */}
       <BottomTabNavigation />
     </Fragment>

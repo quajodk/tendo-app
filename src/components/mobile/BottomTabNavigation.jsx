@@ -10,9 +10,7 @@ import { FaHeadphonesAlt } from "react-icons/fa";
 import { AiFillHdd } from "react-icons/ai";
 import { useSelector } from "react-redux";
 
-
 const BottomTabNavigation = () => {
-  const screens = useSelector((state) => state.mobileScreens);
   const currentScreen = useSelector((state) => state.currentMobileScreen);
   return (
     <MobileTapNav>
