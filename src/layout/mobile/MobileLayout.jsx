@@ -29,6 +29,7 @@ const MobileLayer = () => {
         className="h-screen"
         style={{ position: "relative", backgroundColor: "rgb(21, 24, 30)" }}
       >
+        <AppBar title={screens[currentScreen]["title"]} />
         <MobileBody>
           {selectedMobileItem !== null &&
           (currentScreen === 0 ||
