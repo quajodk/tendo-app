@@ -32,7 +32,11 @@ const MobileLayer = () => {
           </div>
         )}
 
-        {selectedMobileItem && <ProductDetailsBody item={selectedMobileItem} />}
+        {selectedMobileItem && (
+          <div className="flex-1 overflow-y-scroll pb-11 bg-tendo-bg">
+            <ProductDetailsBody item={selectedMobileItem} />
+          </div>
+        )}
       </div>
 
       {/* Bottom Tab navigator */}
