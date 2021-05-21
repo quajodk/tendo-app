@@ -31,6 +31,8 @@ const MobileLayer = () => {
             <ProductListing />
           </div>
         )}
+
+        {selectedMobileItem && <ProductDetailsBody item={selectedMobileItem} />}
       </div>
 
       {/* Bottom Tab navigator */}
