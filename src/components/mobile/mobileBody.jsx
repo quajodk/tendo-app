@@ -3,7 +3,7 @@ import React from "react";
 const MobileBody = ({ children }) => {
   return (
     <>
-      <div
+      {/* <div
         style={{
           position: "relative",
           width: "100%",
@@ -15,8 +15,8 @@ const MobileBody = ({ children }) => {
           overscrollBehavior: "contain",
           height: "100%",
         }}
-      >
-        <div
+      > */}
+      {/* <div
           style={{
             display: "flex",
             flexDirection: "column",
@@ -26,12 +26,12 @@ const MobileBody = ({ children }) => {
             position: "relative",
             zIndex: 2,
           }}
-        >
-          <div className="" style={{ marginBottom: "-16px" }}>
-            {children}
-          </div>
-        </div>
+        > */}
+      <div className="bg-red-400 h-auto flex-1 overflow-y-scroll">
+        {children}
       </div>
+      {/* </div> */}
+      {/* </div> */}
     </>
   );
 };

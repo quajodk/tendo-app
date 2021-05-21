@@ -3,6 +3,7 @@ import useSheetData from "../../hooks/useSheetData";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import EmptyImage from "../../assets/emptyImage.jpg";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -59,7 +60,7 @@ const CategoryCard = ({ item }) => {
         <div className="relative">
           <div className="h-32 relative rounded-lg overflow-hidden">
             <img
-              src={item.images}
+              src={item.images ?? EmptyImage}
               alt="category"
               className="object-cover h-full w-full"
             />

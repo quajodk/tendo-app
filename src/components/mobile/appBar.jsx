@@ -63,7 +63,7 @@ const AppBar = ({ children, title }) => {
               <div className="flex items-center w-full min-w-max">
                 <div className="w-full px-2 lg:px-6">
                   <label htmlFor="search" className="sr-only">
-                    Search projects
+                    Search
                   </label>
                   <div className="relative text-gray-200 focus-within:text-gray-400">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
