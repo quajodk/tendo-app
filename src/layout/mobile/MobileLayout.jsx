@@ -15,6 +15,7 @@ import ProductDetailsBody from "../../components/mobile/mobileProductDetail";
 import ProductAppBar from "../../components/mobile/detailsAppBar";
 import OrderForm from "../../components/mobile/orderForm";
 import CategoryProductsScreen from "../../components/mobile/categoriesProducts";
+import ExploreProduct from "../../components/mobile/exploreProduct";
 
 const MobileLayer = () => {
   const screens = useSelector((state) => state.mobileScreens);
@@ -23,6 +24,12 @@ const MobileLayer = () => {
   const productName = useSelector((state) => state.productName);
   const showOrderForm = useSelector((state) => state.showOrderForm);
   const categorySelected = useSelector((state) => state.categorySelected);
+  const mobileSelectedCategory = useSelector(
+    (state) => state.mobileSelectedCategory
+  );
+  const exploreProductSelected = useSelector(
+    (state) => state.exploreProductSelected
+  );
   return (
     <>
       <div
@@ -35,26 +42,34 @@ const MobileLayer = () => {
           ) : (
             <>
               (
-              {categorySelected ? (
-                <CategoryProductsScreen />
-              ) : selectedMobileItem !== null &&
-                (currentScreen === 0 ||
-                  currentScreen === 1 ||
-                  currentScreen === 2) ? (
-                <ProductAppBar title={productName} />
+              {exploreProductSelected && currentScreen === 2 ? (
+                <ExploreProduct />
               ) : (
-                <AppBar title={screens[currentScreen]["title"]} />
+                <>
+                  {categorySelected &&
+                  mobileSelectedCategory.length &&
+                  currentScreen === 1 ? (
+                    <CategoryProductsScreen />
+                  ) : selectedMobileItem !== null &&
+                    (currentScreen === 0 ||
+                      currentScreen === 1 ||
+                      currentScreen === 2) ? (
+                    <ProductAppBar title={productName} />
+                  ) : (
+                    <AppBar title={screens[currentScreen]["title"]} />
+                  )}
+                  <MobileBody>
+                    {selectedMobileItem !== null &&
+                    (currentScreen === 0 ||
+                      currentScreen === 1 ||
+                      currentScreen === 2) ? (
+                      <ProductDetailsBody item={selectedMobileItem} />
+                    ) : (
+                      screens[currentScreen]["component"]
+                    )}
+                  </MobileBody>
+                </>
               )}
-              <MobileBody>
-                {selectedMobileItem !== null &&
-                (currentScreen === 0 ||
-                  currentScreen === 1 ||
-                  currentScreen === 2) ? (
-                  <ProductDetailsBody item={selectedMobileItem} />
-                ) : (
-                  screens[currentScreen]["component"]
-                )}
-              </MobileBody>
               <MobileTapNav>
                 <NavItem
                   icon={<BsFillGrid1X2Fill size={24} />}

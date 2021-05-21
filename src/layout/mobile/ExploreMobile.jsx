@@ -45,7 +45,7 @@ export const ExploreCard = ({ item }) => {
 
   const selectProduct = () => {
     dispatch({
-      type: "selectMobileProduct",
+      type: "selectExploreProduct",
       payload: item,
     });
   };
