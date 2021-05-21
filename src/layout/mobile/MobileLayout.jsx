@@ -13,6 +13,7 @@ import BottomTabNavigation from "../../components/mobile/BottomTabNavigation";
 import Header from "../../components/mobile/Header";
 import ProductListing from "./ProductListing";
 import HomeTab from "./tabs/HomeTab";
+import { routes } from "./routes";
 const MobileLayer = () => {
   const screens = useSelector((state) => state.mobileScreens);
   const currentScreen = useSelector((state) => state.currentMobileScreen);
@@ -29,7 +30,13 @@ const MobileLayer = () => {
         {/* Body Goes here */}
         <div className="flex-1 overflow-y-scroll bg-tendo-bg">
           <Switch>
-            <Route path="/" component={HomeTab} />
+            {routes.map((screen, screenID) => (
+              <Route
+                key={screenID}
+                path={screen.title?.toLowerCase()}
+                component={screen.component ?? null}
+              />
+            ))}
           </Switch>
         </div>
       </div>
