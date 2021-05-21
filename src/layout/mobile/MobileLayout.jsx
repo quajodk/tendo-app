@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import AppBar from "../../components/mobile/appBar";
 import MobileBody from "../../components/mobile/mobileBody";
 import MobileTapNav from "../../components/mobile/mobileNavTap";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import NavItem from "../../components/mobile/navItem";
 import ProductDetailsBody from "../../components/mobile/mobileProductDetail";
@@ -37,6 +37,7 @@ const MobileLayer = () => {
                 component={screen.component ?? null}
               />
             ))}
+            <Redirect from="/" to="/home" />
           </Switch>
         </div>
       </div>
