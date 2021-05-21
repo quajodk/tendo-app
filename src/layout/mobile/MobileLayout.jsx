@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import AppBar from "../../components/mobile/appBar";
 import MobileBody from "../../components/mobile/mobileBody";
 import MobileTapNav from "../../components/mobile/mobileNavTap";
-
+import { Switch, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import NavItem from "../../components/mobile/navItem";
 import ProductDetailsBody from "../../components/mobile/mobileProductDetail";
@@ -12,6 +12,7 @@ import CategoryProductsScreen from "../../components/mobile/categoriesProducts";
 import BottomTabNavigation from "../../components/mobile/BottomTabNavigation";
 import Header from "../../components/mobile/Header";
 import ProductListing from "./ProductListing";
+import HomeTab from "./tabs/HomeTab";
 const MobileLayer = () => {
   const screens = useSelector((state) => state.mobileScreens);
   const currentScreen = useSelector((state) => state.currentMobileScreen);
@@ -27,11 +28,9 @@ const MobileLayer = () => {
         <Header />
         {/* Body Goes here */}
         <div className="flex-1 overflow-y-scroll bg-tendo-bg">
-          {selectedMobileItem ? (
-            <ProductDetailsBody item={selectedMobileItem} />
-          ) : (
-            <ProductListing />
-          )}
+          <Switch>
+            <Route path="/" component={HomeTab} />
+          </Switch>
         </div>
       </div>
 
