@@ -29,7 +29,6 @@ const MobileLayer = () => {
         <Header />
         {/* Body Goes here */}
         <div className="flex-1 overflow-y-scroll bg-tendo-bg">
-          {/* <Route path="/" component={HomeTab} /> */}
           <Switch>
             {routes.map((screen, screenID) => (
               <Route
