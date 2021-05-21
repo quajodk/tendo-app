@@ -8,13 +8,13 @@ import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
-      <ApolloProvider client={client}>
-        <Provider store={store}>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <BrowserRouter>
           <Shop />
-        </Provider>
-      </ApolloProvider>
-    </BrowserRouter>
+        </BrowserRouter>
+      </Provider>
+    </ApolloProvider>
   );
 }
 
