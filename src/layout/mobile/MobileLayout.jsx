@@ -26,17 +26,13 @@ const MobileLayer = () => {
         {/* Header Goes here */}
         <Header />
         {/* Body Goes here */}
-        {!selectedMobileItem && (
-          <div className="flex-1 overflow-y-scroll bg-tendo-bg">
-            <ProductListing />
-          </div>
-        )}
-
-        {selectedMobileItem && (
-          <div className="flex-1 overflow-y-scroll pb-11 bg-tendo-bg">
+        <div className="flex-1 overflow-y-scroll bg-tendo-bg">
+          {selectedMobileItem ? (
             <ProductDetailsBody item={selectedMobileItem} />
-          </div>
-        )}
+          ) : (
+            <ProductListing />
+          )}
+        </div>
       </div>
 
       {/* Bottom Tab navigator */}
