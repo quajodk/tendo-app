@@ -22,7 +22,7 @@ const MobileLayer = () => {
   return (
     <div className="flex h-screen flex-1  flex-col">
       {/* Handle when a product is selected */}
-      <div className="h-screen flex-1 flex-col">
+      <div className="h-screen flex-1 flex flex-col">
         {/* Header Goes here */}
         <Header />
         {/* Body Goes here */}
