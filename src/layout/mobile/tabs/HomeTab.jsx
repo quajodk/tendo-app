@@ -6,7 +6,7 @@ import ProductListing from "../ProductListing";
 const HomeTab = () => {
   const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
   return (
-    <div>
+    <div className="flex-1">
       {selectedMobileItem ? (
         <ProductDetailsBody item={selectedMobileItem} />
       ) : (
