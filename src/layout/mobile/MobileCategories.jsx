@@ -3,6 +3,7 @@ import useSheetData from "../../hooks/useSheetData";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useRouteMatch } from "react-router-dom";
 import EmptyImage from "../../assets/emptyImage.jpg";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -41,65 +42,66 @@ export default MobileCategories;
 
 const CategoryCard = ({ item }) => {
   const dispatch = useDispatch();
+  const { url } = useRouteMatch();
+
   const onCategoryTap = () => {
+    console.log("1234");
     dispatch({
       type: "selectedMobileCategory",
       payload: item.categories,
     });
   };
   return (
-    <>
-      <div
-        style={{
-          boxShadow: "rgba(255, 255, 255, 0) 0px 0px 1px",
-          transition: "transform 0.2s ease 0s",
-          color: "white",
-        }}
-        onClick={onCategoryTap}
-      >
-        <div className="relative">
-          <div className="h-32 relative rounded-lg overflow-hidden">
-            <img
-              src={item.images ?? EmptyImage}
-              alt="category"
-              className="object-cover h-full w-full"
-            />
-          </div>
+    <div
+      style={{
+        boxShadow: "rgba(255, 255, 255, 0) 0px 0px 1px",
+        transition: "transform 0.2s ease 0s",
+        color: "white",
+      }}
+      onClick={onCategoryTap}
+    >
+      <div className="relative">
+        <div className="h-32 relative rounded-lg overflow-hidden">
+          <img
+            src={item.images ?? EmptyImage}
+            alt="category"
+            className="object-cover h-full w-full"
+          />
+        </div>
+        <div
+          className="rounded-lg h-full w-full flex flex-col top-0 left-0 overflow-hidden pointer-events-none absolute"
+          style={{ background: "rgba(0, 0, 0, 0.4)" }}
+        >
           <div
-            className="rounded-lg h-full w-full flex flex-col top-0 left-0 overflow-hidden pointer-events-none absolute"
-            style={{ background: "rgba(0, 0, 0, 0.4)" }}
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "8px",
+              right: "8px",
+              transform: "translateY(-50%)",
+            }}
           >
-            <div
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "8px",
-                right: "8px",
-                transform: "translateY(-50%)",
-              }}
-            >
-              <div className="text-center mb-0">
-                <div
-                  className=""
-                  style={{
-                    color: "white",
-                    margin: "0px",
-                    fontWeight: 500,
-                    fontSize: "0.875rem",
-                    lineHeight: "1.0625rem",
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    textAlign: "unset",
-                  }}
-                >
-                  {item.categories}
-                </div>
+            <div className="text-center mb-0">
+              <div
+                className=""
+                style={{
+                  color: "white",
+                  margin: "0px",
+                  fontWeight: 500,
+                  fontSize: "0.875rem",
+                  lineHeight: "1.0625rem",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  textAlign: "unset",
+                }}
+              >
+                {item.categories}
               </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

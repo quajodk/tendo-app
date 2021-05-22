@@ -34,7 +34,7 @@ const BottomTabNavigation = () => {
       />
       <NavItem
         icon={<BsFillTagFill size={24} />}
-        title={"Promos"}
+        title={"Promotions"}
         active={currentScreen === 3 ? true : false}
         index={3}
       />

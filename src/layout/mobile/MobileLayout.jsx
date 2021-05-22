@@ -1,10 +1,17 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useRouteMatch } from "react-router-dom";
+import { useSelector } from "react-redux";
 import BottomTabNavigation from "../../components/mobile/BottomTabNavigation";
 import Header from "../../components/mobile/Header";
+import ProductDetailsBody from "../../components/mobile/mobileProductDetail";
+import CategoryProductsScreen from "../../components/mobile/mobileProductDetail";
 
 import { routes } from "./routes";
 const MobileLayer = () => {
+  const { path } = useRouteMatch();
+  const productName = useSelector((state) => state.productName);
+  const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
+  const categoryName = useSelector((state) => state.categoryName);
   return (
     <div className="flex h-screen flex-1  flex-col">
       {/* Handle when a product is selected */}
@@ -19,9 +26,22 @@ const MobileLayer = () => {
                 key={screenID}
                 path={`/${screen.title?.toLowerCase()}`}
                 component={screen.component ?? null}
-                exact
+                exact={screen.exact}
               />
             ))}
+            {/* <Route
+              path={`/${categoryName.toLowerCase()}`}
+              render={(props) => <CategoryProductsScreen {...props} />}
+            /> */}
+            {selectedMobileItem && (
+              <Route
+                path={`/${productName?.toLowerCase()}`}
+                render={(props) => (
+                  <ProductDetailsBody {...props} item={selectedMobileItem} />
+                )}
+              />
+            )}
+
             <Redirect from="/" to="/home" />
           </Switch>
         </div>

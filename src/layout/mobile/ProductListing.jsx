@@ -4,6 +4,7 @@ import { gDriveFileId } from "../../utils/utils";
 import useSheetData from "../../hooks/useSheetData";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
+import { Link, useRouteMatch } from "react-router-dom";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -44,6 +45,7 @@ export default ProductListing;
 
 export const ProductCard = ({ item }) => {
   const dispatch = useDispatch();
+  const { url } = useRouteMatch();
 
   const selectProduct = () => {
     dispatch({
@@ -54,35 +56,37 @@ export const ProductCard = ({ item }) => {
 
   return (
     <>
-      <div className="mx-4" onClick={selectProduct}>
-        <div className="rounded-lg flex flex-col overflow-hidden">
-          <div className="h-32">
-            <img
-              src={`https://drive.google.com/thumbnail?id=${gDriveFileId({
-                gURL: item.titleImage,
-              })}`}
-              alt="productImage"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div
-            className="flex flex-col p-3 flex-grow text-white"
-            style={{ backgroundColor: "rgb(30, 34, 43)" }}
-          >
-            <div className="mb-1">
-              <p className="text-xs font-bold text-blue-700 overflow-ellipsis uppercase whitespace-nowrap">
-                {item.supplierGenericNameGh}
-              </p>
-              <p className="font-normal text-sm overflow-ellipsis overflow-hidden whitespace-nowrap">
-                {item.product}
-              </p>
+      <Link to={`/${item.product.toLowerCase()}`} onClick={selectProduct}>
+        <div className="mx-4">
+          <div className="rounded-lg flex flex-col overflow-hidden">
+            <div className="h-32">
+              <img
+                src={`https://drive.google.com/thumbnail?id=${gDriveFileId({
+                  gURL: item.titleImage,
+                })}`}
+                alt="productImage"
+                className="w-full h-full object-cover"
+              />
             </div>
-            <div className="text-sm text-gray-400 font-normal">
-              GHS {item.wholesale}
+            <div
+              className="flex flex-col p-3 flex-grow text-white"
+              style={{ backgroundColor: "rgb(30, 34, 43)" }}
+            >
+              <div className="mb-1">
+                <p className="text-xs font-bold text-blue-700 overflow-ellipsis uppercase whitespace-nowrap">
+                  {item.supplierGenericNameGh}
+                </p>
+                <p className="font-normal text-sm overflow-ellipsis overflow-hidden whitespace-nowrap">
+                  {item.product}
+                </p>
+              </div>
+              <div className="text-sm text-gray-400 font-normal">
+                GHS {item.wholesale}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 };

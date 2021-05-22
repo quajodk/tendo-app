@@ -17,7 +17,7 @@ const ProductDetailsBody = ({ item }) => {
         <div className="mx-2 my-4 relative rounded-lg overflow-hidden">
           <img
             src={`https://drive.google.com/thumbnail?id=${gDriveFileId({
-              gURL: item.titleImage,
+              gURL: item?.titleImage,
             })}`}
             alt="productImage"
             className="w-full"
@@ -25,7 +25,7 @@ const ProductDetailsBody = ({ item }) => {
           />
         </div>
         <div className="px-2 py-4">
-          <p className="text-white font-bold text-base">{item.product}</p>
+          <p className="text-white font-bold text-base">{item?.product}</p>
         </div>
         <div
           className="px-2 py-4"
@@ -61,13 +61,13 @@ const ProductDetailsBody = ({ item }) => {
             </p>
             <p className="text-lg font-semibold text-white">
               {" "}
-              {item.supplierGenericNameGh}
+              {item?.supplierGenericNameGh}
             </p>
           </div>
         </div>
         <p className="px-2 py-4 text-base font-semibold text-white">
           {" "}
-          GHS {item.wholesale}
+          GHS {item?.wholesale}
         </p>
         <hr className="my-4 mx-2" />
         <div
@@ -107,7 +107,7 @@ const ProductDetailsBody = ({ item }) => {
               style={{ whiteSpace: "pre-wrap" }}
             >
               {" "}
-              {`${item["cleanDescriptionWith\n\nSkUs"]}`}
+              {`${item && item["cleanDescriptionWith\n\nSkUs"]}`}
             </p>
           </div>
           <div
@@ -126,7 +126,7 @@ const ProductDetailsBody = ({ item }) => {
             }}
             onClick={() => {
               navigator.clipboard.writeText(
-                item["cleanDescriptionWith\n\nSkUs"]
+                item && item["cleanDescriptionWith\n\nSkUs"]
               );
             }}
           >
@@ -143,7 +143,7 @@ const ProductDetailsBody = ({ item }) => {
             }}
           >
             <a
-              href={item.imageLink}
+              href={item?.imageLink}
               target="_blank"
               rel="noopener noreferrer"
               className="flex flex-row"
@@ -188,7 +188,7 @@ const ProductDetailsBody = ({ item }) => {
             </p>
             <p className="text-base font-semibold text-white">
               {" "}
-              {item.jijiPrice}
+              {item?.jijiPrice}
             </p>
           </div>
         </div>
@@ -224,7 +224,7 @@ const ProductDetailsBody = ({ item }) => {
             >
               Product SKU
             </p>
-            <p className="text-base font-semibold text-white">{item.skUs}</p>
+            <p className="text-base font-semibold text-white">{item?.skUs}</p>
           </div>
           <div
             style={{
@@ -241,7 +241,7 @@ const ProductDetailsBody = ({ item }) => {
               flexShrink: 0,
             }}
             onClick={() => {
-              navigator.clipboard.writeText(item.skUs);
+              navigator.clipboard.writeText(item?.skUs);
             }}
           >
             <FiClipboard size={24} />
