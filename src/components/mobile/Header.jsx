@@ -14,7 +14,7 @@ const Header = ({ title }) => {
   const mobileSelectedCategory = useSelector(
     (state) => state.mobileSelectedCategory
   );
-  const mobileProducts = useSelector((state) => state.mobileProducts);
+  const mobileProducts = useSelector((state) => state.orginalMobileProducts);
   const dispatch = useDispatch();
   let history = useHistory();
   const pop = () => {
@@ -44,6 +44,11 @@ const Header = ({ title }) => {
       dispatch({
         type: "getMobileProducts",
         payload: filteredProduct,
+      });
+    } else {
+      dispatch({
+        type: "getMobileProducts",
+        payload: mobileProducts,
       });
     }
   };
