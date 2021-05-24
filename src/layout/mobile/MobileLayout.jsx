@@ -7,6 +7,7 @@ import ProductDetailsBody from "../../components/mobile/mobileProductDetail";
 
 import { routes } from "./routes";
 import OrderForm from "../../components/mobile/orderForm";
+import OrderConfirm from "../../components/mobile/orderConfirm";
 const MobileLayer = () => {
   const productName = useSelector((state) => state.productName);
   const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
@@ -44,6 +45,7 @@ const MobileLayer = () => {
                     )}
                   />
                 )}
+                <Route path="/confirmorder/:sku" component={OrderConfirm} />
                 <Redirect from="/" to="/home" />
               </Switch>
             </div>

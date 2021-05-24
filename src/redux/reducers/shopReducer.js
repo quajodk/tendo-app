@@ -46,6 +46,7 @@ const initialState = {
   categorySelected: false,
   categoryName: "",
   orderProduct: null,
+  deliveryLocations: [],
 };
 
 function shopReducer(state = initialState, action) {
@@ -182,6 +183,11 @@ function shopReducer(state = initialState, action) {
         ...state,
         exploreProductSelected: action.payload,
         productName: action.payload?.product,
+      };
+    case "getDeliveryRate":
+      return {
+        ...state,
+        deliveryLocations: action.payload,
       };
     default:
       return state;

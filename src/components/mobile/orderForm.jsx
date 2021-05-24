@@ -4,14 +4,17 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { message } from "antd";
 import _ from "lodash";
+import { useHistory } from "react-router-dom";
 
 const OrderForm = ({ item }) => {
   const { register, handleSubmit } = useForm();
+  const history = useHistory();
 
   const dispatch = useDispatch();
   const closeOrderForm = () => {
     dispatch({
       type: "toggleOrderForm",
+      payload: null,
     });
   };
 
@@ -33,6 +36,7 @@ const OrderForm = ({ item }) => {
           hide();
           message.success("Order was placed successfully", 5);
           closeOrderForm();
+          history.push(`confirmorder/${item?.skUs}`);
         }
       })
       .catch((e) => {

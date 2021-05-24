@@ -3,7 +3,6 @@ import useSheetData from "../../hooks/useSheetData";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useRouteMatch } from "react-router-dom";
 import EmptyImage from "../../assets/emptyImage.jpg";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -29,8 +28,8 @@ const MobileCategories = () => {
       ) : (
         <div className="grid grid-cols-2 gap-4 mx-4">
           {mobileCategories &&
-            mobileCategories.map((item) => (
-              <CategoryCard item={item} key={item.id} />
+            mobileCategories.map((item, idx) => (
+              <CategoryCard item={item} key={idx + 1} />
             ))}
         </div>
       )}
@@ -42,10 +41,8 @@ export default MobileCategories;
 
 const CategoryCard = ({ item }) => {
   const dispatch = useDispatch();
-  const { url } = useRouteMatch();
 
   const onCategoryTap = () => {
-    console.log("1234");
     dispatch({
       type: "selectedMobileCategory",
       payload: item.categories,

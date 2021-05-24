@@ -248,7 +248,7 @@ const ProductDetailsBody = ({ item }) => {
             <FiClipboard size={24} />
           </div>
         </div>
-        <div className="mx-4 my-5">
+        <div className="mx-4 mt-5 mb-14">
           <button
             type="button"
             className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-blue-500"
@@ -262,7 +262,6 @@ const ProductDetailsBody = ({ item }) => {
             Order Product
           </button>
         </div>
-        <div className="mx-4 my-3 h-4"></div>
       </div>
     </>
   );

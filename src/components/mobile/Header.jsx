@@ -21,11 +21,11 @@ const Header = ({ title }) => {
   let history = useHistory();
   const pop = () => {
     if (mobileProductSelect && !showOrderForm && !orderProduct) {
-      history.goBack();
-      return dispatch({
+      dispatch({
         type: "selectMobileProduct",
         payload: null,
       });
+      return history.goBack();
     }
 
     if (currentScreen === 1 && mobileSelectedCategory.length !== 0) {
@@ -40,6 +40,7 @@ const Header = ({ title }) => {
         payload: null,
       });
     }
+    return history.goBack();
   };
 
   const search = (text) => {
