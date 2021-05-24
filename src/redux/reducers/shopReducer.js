@@ -43,7 +43,6 @@ const initialState = {
   mobileSelectedCategory: [],
   categorySelected: false,
   categoryName: "",
-  exploreProductSelected: null,
 };
 
 function shopReducer(state = initialState, action) {
@@ -142,7 +141,7 @@ function shopReducer(state = initialState, action) {
     case "getMobileProducts":
       return {
         ...state,
-        mobileProducts: [...state.mobileProducts, ...action.payload],
+        mobileProducts: action.payload,
       };
     case "getMobileCategory":
       return {

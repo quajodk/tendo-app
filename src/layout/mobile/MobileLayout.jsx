@@ -29,10 +29,6 @@ const MobileLayer = () => {
                 exact={screen.exact}
               />
             ))}
-            {/* <Route
-              path={`/${categoryName.toLowerCase()}`}
-              render={(props) => <CategoryProductsScreen {...props} />}
-            /> */}
             {selectedMobileItem && (
               <Route
                 path={`/${productName?.toLowerCase()}`}
@@ -41,7 +37,6 @@ const MobileLayer = () => {
                 )}
               />
             )}
-
             <Redirect from="/" to="/home" />
           </Switch>
         </div>

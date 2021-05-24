@@ -9,7 +9,9 @@ import { Link, useRouteMatch } from "react-router-dom";
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const ProductListing = () => {
-  const [data, loading] = useSheetData({ sheet: "resellerCatalog" });
+  const [data, loading] = useSheetData({
+    sheet: "resellerCatalog",
+  });
   const mobileProducts = useSelector((state) => state.mobileProducts);
   const dispatch = useDispatch();
 
@@ -20,7 +22,7 @@ const ProductListing = () => {
     });
   }, [data, dispatch]);
 
-  if (loading) {
+  if (loading && mobileProducts.length === 0) {
     return (
       <div className="flex justify-center items-center h-full">
         <Spin indicator={antIcon} />
@@ -31,9 +33,9 @@ const ProductListing = () => {
   return (
     <>
       <div className="grid grid-cols-1 gap-4">
-        {mobileProducts.map((item) =>
+        {mobileProducts.map((item, idx) =>
           item.glideStatus === "TRUE" ? (
-            <ProductCard item={item} key={item.id} />
+            <ProductCard item={item} key={idx} />
           ) : null
         )}
       </div>
