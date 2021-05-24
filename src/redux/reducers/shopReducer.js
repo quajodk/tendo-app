@@ -144,6 +144,12 @@ function shopReducer(state = initialState, action) {
       return {
         ...state,
         mobileProducts: action.payload,
+        orginalMobileProducts: action.payload,
+      };
+    case "updateMobileProducts":
+      return {
+        ...state,
+        mobileProducts: action.payload,
       };
     case "getMobileCategory":
       return {

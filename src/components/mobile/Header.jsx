@@ -42,12 +42,12 @@ const Header = ({ title }) => {
       );
       console.log(filteredProduct, "search");
       dispatch({
-        type: "getMobileProducts",
+        type: "updateMobileProducts",
         payload: filteredProduct,
       });
     } else {
       dispatch({
-        type: "getMobileProducts",
+        type: "updateMobileProducts",
         payload: mobileProducts,
       });
     }
