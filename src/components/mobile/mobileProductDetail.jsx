@@ -8,6 +8,7 @@ const ProductDetailsBody = ({ item }) => {
   const orderProduct = () => {
     dispatch({
       type: "toggleOrderForm",
+      payload: item,
     });
   };
 

@@ -24,7 +24,7 @@ const ProductListing = () => {
 
   if (loading && mobileProducts.length === 0) {
     return (
-      <div className="flex justify-center items-center h-full">
+      <div className="flex justify-center items-center h-screen">
         <Spin indicator={antIcon} />
       </div>
     );
@@ -47,7 +47,6 @@ export default ProductListing;
 
 export const ProductCard = ({ item }) => {
   const dispatch = useDispatch();
-  const { url } = useRouteMatch();
 
   const selectProduct = () => {
     dispatch({

@@ -46,69 +46,9 @@ const OrderForm = ({ item }) => {
     <>
       <form
         onSubmit={handleSubmit(onOrderSubmit)}
-        className="h-screen overflow-x-auto"
+        className="w-screen flex-1 overflow-y-scroll bg-tendo-bg z-20"
       >
-        <div
-          className="bg-black z-20"
-          style={{
-            position: "absolute",
-            pointerEvents: "auto",
-            left: "env(safe-area-inset-left)",
-            right: "env(safe-area-inset-right)",
-            top: "env(safe-area-inset-top)",
-          }}
-        >
-          <div
-            className="p-4"
-            style={{
-              color: "rgb(33, 150, 243)",
-              height: 44,
-              flexShrink: 0,
-              display: "flex",
-              position: "relative",
-              alignItems: "center",
-            }}
-          >
-            <div
-              className="flex content-center justify-center text-blue-500 text-base cursor-pointer"
-              onClick={closeOrderForm}
-            >
-              Cancel
-            </div>
-            <div
-              className="mx-4"
-              style={{
-                flexGrow: 1,
-                textAlign: "center",
-                fontWeight: 500,
-                fontSize: 16,
-                lineHeight: 19,
-                color: "rgb(255, 255, 255)",
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                opacity: 1,
-                transition: "opacity 0.2s ease 0s",
-              }}
-            >
-              Order Form
-            </div>
-            <button
-              type="submit"
-              className="flex content-center justify-center text-blue-500 text-base"
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-        <div
-          className="flex flex-col relative min-h-full z-2 py-4"
-          style={{
-            paddingBottom: "calc(0px + env(safe-area-inset-bottom))",
-            backgroundColor: "rgb(21, 24, 30)",
-            paddingTop: "calc(env(safe-area-inset-top) + 96px)",
-          }}
-        >
+        <div className="flex flex-col relative">
           <div className="px-4 pt-1 pb-3">
             <label
               htmlFor="sku"
@@ -122,7 +62,7 @@ const OrderForm = ({ item }) => {
                 name="productSku"
                 id="sku"
                 required
-                defaultValue={item.skUs}
+                defaultValue={item?.skUs}
                 ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
                 placeholder="SKU"
@@ -362,6 +302,16 @@ const OrderForm = ({ item }) => {
                 ref={register({ required: false })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
+            </div>
+          </div>
+          <div className="flex">
+            <div className="mx-4 my-5 w-full">
+              <button
+                type="submit"
+                className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white"
+              >
+                Place Order
+              </button>
             </div>
           </div>
         </div>

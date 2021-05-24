@@ -15,19 +15,29 @@ const Header = ({ title }) => {
     (state) => state.mobileSelectedCategory
   );
   const mobileProducts = useSelector((state) => state.orginalMobileProducts);
+  const showOrderForm = useSelector((state) => state.showOrderForm);
+  const orderProduct = useSelector((state) => state.orderProduct);
   const dispatch = useDispatch();
   let history = useHistory();
   const pop = () => {
-    if (mobileProductSelect) {
-      dispatch({
+    if (mobileProductSelect && !showOrderForm && !orderProduct) {
+      history.goBack();
+      return dispatch({
         type: "selectMobileProduct",
         payload: null,
       });
-      history.goBack();
     }
-    if (mobileSelectedCategory.length !== 0) {
-      dispatch({
+
+    if (currentScreen === 1 && mobileSelectedCategory.length !== 0) {
+      return dispatch({
         type: "categorySelectedPop",
+      });
+    }
+
+    if (showOrderForm && orderProduct) {
+      return dispatch({
+        type: "toggleOrderForm",
+        payload: null,
       });
     }
   };
@@ -40,7 +50,7 @@ const Header = ({ title }) => {
           (x?.product?.toLowerCase().includes(text.toLowerCase()) ||
             x?.skUs?.toLowerCase().includes(text.toLowerCase()))
       );
-      console.log(filteredProduct, "search");
+
       dispatch({
         type: "updateMobileProducts",
         payload: filteredProduct,
@@ -57,7 +67,9 @@ const Header = ({ title }) => {
     <div className="bg-tendo-bg py-3">
       <div className="flex w-screen ">
         <div className="w-20 flex justify-center items-center">
-          {mobileProductSelect || mobileSelectedCategory.length !== 0 ? (
+          {mobileProductSelect ||
+          mobileSelectedCategory.length !== 0 ||
+          (showOrderForm && orderProduct) ? (
             <div
               className="flex items-center text-lg text-tendo-active"
               onClick={pop}
@@ -70,7 +82,9 @@ const Header = ({ title }) => {
         </div>
         <div className="flex-1 text-center">
           <span className="text-white font-medium text-lg">
-            {mobileProductSelect
+            {showOrderForm && orderProduct
+              ? "Order Form"
+              : mobileProductSelect
               ? productName
               : mobileSelectedCategory.length !== 0
               ? categoryName
@@ -78,22 +92,24 @@ const Header = ({ title }) => {
           </span>
         </div>
       </div>
-      {[0, 1, 2].includes(currentScreen) && !mobileProductSelect && (
-        <div className="flex w-screen mt-3 px-6">
-          <div className="flex overflow-x-hidden rounded-lg w-auto flex-1">
-            <div className="bg-gray-400 flex items-center px-3 justify-center">
-              <BiSearch color="white" size={20} />
+      {[0, 1, 2].includes(currentScreen) &&
+        !mobileProductSelect &&
+        !showOrderForm && (
+          <div className="flex w-screen mt-3 px-6">
+            <div className="flex overflow-x-hidden rounded-lg w-auto flex-1">
+              <div className="bg-gray-400 flex items-center px-3 justify-center">
+                <BiSearch color="white" size={20} />
+              </div>
+              <input
+                type="text"
+                name="search"
+                placeholder="Search"
+                className="bg-gray-400 placeholder-gray-200 font-thin text-white font-medium flex-1 py-1 outline-none focus:outline-none w-100  w-auto px-2"
+                onChange={(e) => search(e.target.value)}
+              />
             </div>
-            <input
-              type="text"
-              name="search"
-              placeholder="Search"
-              className="bg-gray-400 placeholder-gray-200 font-thin text-white font-medium flex-1 py-1 outline-none focus:outline-none w-100  w-auto px-2"
-              onChange={(e) => search(e.target.value)}
-            />
           </div>
-        </div>
-      )}
+        )}
     </div>
   );
 };

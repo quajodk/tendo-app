@@ -45,6 +45,7 @@ const initialState = {
   mobileSelectedCategory: [],
   categorySelected: false,
   categoryName: "",
+  orderProduct: null,
 };
 
 function shopReducer(state = initialState, action) {
@@ -139,6 +140,7 @@ function shopReducer(state = initialState, action) {
       return {
         ...state,
         showOrderForm: !state.showOrderForm,
+        orderProduct: action?.payload,
       };
     case "getMobileProducts":
       return {
