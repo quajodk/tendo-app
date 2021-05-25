@@ -26,8 +26,6 @@ const MobileLayer = () => {
 
   const token = localStorage.getItem("resellerToken") ?? null;
 
-  console.log(token, "token");
-
   useEffect(() => {
     const { dispatch } = init.current;
 
