@@ -57,22 +57,21 @@ export const ProductCard = ({ item }) => {
       payload: item,
     });
   };
-
+  const imageSrc = `https://drive.google.com/thumbnail?id=${gDriveFileId({
+    gURL: item.titleImage,
+  })}`;
   return (
     <>
       <Link to={`/${item.product.toLowerCase()}`} onClick={selectProduct}>
         <div className="mx-4">
           <div className="rounded-lg flex flex-col overflow-hidden">
             <div className="h-32">
-              <img
-                src={
-                  `https://drive.google.com/thumbnail?id=${gDriveFileId({
-                    gURL: item.titleImage,
-                  })}` ?? EmptyImage
-                }
+              <ImageWithLoading src={imageSrc} />
+              {/* <img
+                src={imageSrc ?? EmptyImage}
                 alt="productImage"
                 className="w-full h-full object-cover"
-              />
+              /> */}
             </div>
             <div
               className="flex flex-col p-3 flex-grow text-white"
@@ -96,3 +95,27 @@ export const ProductCard = ({ item }) => {
     </>
   );
 };
+class ImageWithLoading extends React.Component {
+  state = { isLoaded: false };
+
+  componentDidMount() {
+    const image = new Image();
+    image.onload = () => this.setState({ isLoaded: true });
+    image.src = this.props.src;
+  }
+
+  render() {
+    const { src } = this.props;
+    const { isLoaded } = this.state;
+
+    return isLoaded ? (
+      <img className="w-full h-full object-cover" src={src} alt="product" />
+    ) : (
+      <img
+        className="w-full h-full object-cover"
+        src={EmptyImage}
+        alt="product"
+      />
+    );
+  }
+}
