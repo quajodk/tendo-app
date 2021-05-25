@@ -6,7 +6,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import ConfirmBg from "../../assets/confirm-order-bg.jpeg";
 import useSheetData from "../../hooks/useSheetData";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -16,6 +16,7 @@ const OrderConfirm = () => {
   const dispatch = useDispatch();
   const init = useRef({ dispatch });
   const { sku } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     const { dispatch } = init.current;
@@ -94,15 +95,11 @@ const OrderConfirm = () => {
               backgroundColor: "rgba(33, 150, 243, 0.118)",
               borderColor: "rgba(33, 150, 243, 0.118)",
             }}
+            onClick={() => history.push("/myorders")}
           >
             <FiTruck size={24} className="mr-2" /> Check Status of Existing
             Orders
           </button>
-        </div>
-        <div className="text-center px-4 py-2">
-          <span className="text-xs text-gray-400">
-            You will be redirected to WhatsApp
-          </span>
         </div>
         <div className="flex justify-between px-4 pb-2">
           <span className="font-bold text-sm text-white">Delivery Rate</span>

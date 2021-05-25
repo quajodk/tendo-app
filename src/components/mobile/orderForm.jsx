@@ -19,12 +19,21 @@ const OrderForm = ({ item }) => {
     });
   };
 
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
   const onOrderSubmit = (values) => {
     if (_.isEmpty(values))
       return message.error("Form fields can not be empty", 5);
     const hide = message.loading("Loadings..", 0);
     values.orderStatus = "Pending";
     values.username = auth?.username;
+    values.orderedOn = new Date().toLocaleDateString("en-US", options);
+    console.log(values);
     axios({
       method: "POST",
       headers: {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { gDriveFileId } from "../../utils/utils";
 import useSheetData from "../../hooks/useSheetData";
@@ -14,13 +14,15 @@ const ProductListing = () => {
   });
   const mobileProducts = useSelector((state) => state.mobileProducts);
   const dispatch = useDispatch();
+  const init = useRef({ dispatch });
 
   useEffect(() => {
+    const { dispatch } = init.current;
     dispatch({
       type: "getMobileProducts",
       payload: data,
     });
-  }, [data, dispatch]);
+  }, [data]);
 
   if (loading && mobileProducts.length === 0) {
     return (

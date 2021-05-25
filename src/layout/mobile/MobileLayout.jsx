@@ -12,6 +12,7 @@ import OrderConfirm from "../../components/mobile/orderConfirm";
 import Modal from "../../components/Modal";
 import MobileLoginForm from "../../components/mobile/mobileLoginForm";
 import MobileRegisterForm from "../../components/mobile/mobileRegisterForm";
+import UserOrders from "../../components/mobile/userOrders";
 
 const MobileLayer = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,9 @@ const MobileLayer = () => {
   const mobileShowSignUp = useSelector((state) => state.mobileShowSignUp);
   const init = useRef({ dispatch });
 
-  const token = JSON.stringify(localStorage.getItem("resellerToken")) ?? null;
+  const token = localStorage.getItem("resellerToken") ?? null;
+
+  console.log(token, "token");
 
   useEffect(() => {
     const { dispatch } = init.current;
@@ -38,6 +41,7 @@ const MobileLayer = () => {
         url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/users?filter[token]=${token}`,
       })
         .then(({ data }) => {
+          console.log(data, "user");
           if (data?.users.length === 1) {
             dispatch({
               type: "authenticateUser",
@@ -83,6 +87,7 @@ const MobileLayer = () => {
                       )}
                     />
                   )}
+                  <Route path="/myorders" component={UserOrders} />
                   <Route path="/confirmorder/:sku" component={OrderConfirm} />
                   <Redirect from="/" to="/home" />
                 </Switch>
