@@ -76,7 +76,10 @@ const MobileLayer = () => {
                   ))}
                   {selectedMobileItem && (
                     <Route
-                      path={`/${productName?.toLowerCase()}`}
+                      path={`/${productName
+                        ?.replace("(", " ")
+                        .replace(")", " ")
+                        .toLowerCase()}`}
                       render={(props) => (
                         <ProductDetailsBody
                           {...props}

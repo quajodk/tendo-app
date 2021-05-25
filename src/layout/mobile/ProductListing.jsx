@@ -1,29 +1,39 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { gDriveFileId } from "../../utils/utils";
-import useSheetData from "../../hooks/useSheetData";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
 import EmptyImage from "../../assets/emptyImage.jpg";
+import axios from "axios";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const ProductListing = () => {
-  const [data, loading] = useSheetData({
-    sheet: "resellerCatalog",
-  });
+  const [loading, setLoading] = useState(true);
   const mobileProducts = useSelector((state) => state.mobileProducts);
   const dispatch = useDispatch();
   const init = useRef({ dispatch });
 
   useEffect(() => {
     const { dispatch } = init.current;
-    dispatch({
-      type: "getMobileProducts",
-      payload: data,
-    });
-  }, [data]);
+    axios({
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer TEST_TOKEN",
+      },
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/resellerCatalog?filter[glideStatus]=TRUE`,
+    })
+      .then(({ data }) => {
+        setLoading(false);
+        dispatch({
+          type: "getMobileProducts",
+          payload: data?.resellerCatalog,
+        });
+      })
+      .catch((e) => console.log(e));
+  }, []);
 
   if (loading && mobileProducts.length === 0) {
     return (
@@ -62,7 +72,13 @@ export const ProductCard = ({ item }) => {
   })}`;
   return (
     <>
-      <Link to={`/${item.product.toLowerCase()}`} onClick={selectProduct}>
+      <Link
+        to={`/${item.product
+          ?.replace("(", " ")
+          .replace(")", " ")
+          .toLowerCase()}`}
+        onClick={selectProduct}
+      >
         <div className="mx-4">
           <div className="rounded-lg flex flex-col overflow-hidden">
             <div className="h-32">
@@ -95,7 +111,7 @@ export const ProductCard = ({ item }) => {
     </>
   );
 };
-class ImageWithLoading extends React.Component {
+export class ImageWithLoading extends React.Component {
   state = { isLoaded: false };
 
   componentDidMount() {

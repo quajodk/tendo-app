@@ -5,12 +5,14 @@ import store from "./redux/store";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./graphql/client";
 import { BrowserRouter } from "react-router-dom";
+import ScrollToTop from "./utils/scrollToTop";
 
 function App() {
   return (
     <ApolloProvider client={client}>
       <Provider store={store}>
         <BrowserRouter>
+          <ScrollToTop />
           <Shop />
         </BrowserRouter>
       </Provider>

@@ -1,6 +1,7 @@
 import React from "react";
 import { FiClipboard, FiImage, FiShoppingCart } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
+import { ImageWithLoading } from "../../layout/mobile/ProductListing";
 import { gDriveFileId } from "../../utils/utils";
 
 const ProductDetailsBody = ({ item }) => {
@@ -18,18 +19,15 @@ const ProductDetailsBody = ({ item }) => {
     });
   };
 
+  const imageSrc = `https://drive.google.com/thumbnail?id=${gDriveFileId({
+    gURL: item.titleImage,
+  })}`;
+
   return (
     <>
       <div>
         <div className="mx-2 my-4 relative rounded-lg overflow-hidden">
-          <img
-            src={`https://drive.google.com/thumbnail?id=${gDriveFileId({
-              gURL: item?.titleImage,
-            })}`}
-            alt="productImage"
-            className="w-full"
-            style={{ objectFit: "contain" }}
-          />
+          <ImageWithLoading src={imageSrc} />
         </div>
         <div className="px-2 py-4">
           <p className="text-white font-bold text-base">{item?.product}</p>
@@ -254,7 +252,7 @@ const ProductDetailsBody = ({ item }) => {
             <FiClipboard size={24} />
           </div>
         </div>
-        <div className="mx-4 mt-5 mb-14">
+        <div className="mx-4 mt-5 mb-16">
           <button
             type="button"
             className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-blue-500"

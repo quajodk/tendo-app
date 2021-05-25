@@ -27,9 +27,10 @@ export default function useSheetData({ sheet }) {
         }
       })
       .catch((e) => {
+        setLoading(false);
         console.log(e);
       });
-  }, []);
+  }, [sheet]);
 
   return [data, loading];
 }
