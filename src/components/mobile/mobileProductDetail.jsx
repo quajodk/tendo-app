@@ -25,7 +25,7 @@ const ProductDetailsBody = ({ item }) => {
 
   return (
     <>
-      <div>
+      <div className="min-h-full">
         <div className="mx-2 my-4 relative rounded-lg overflow-hidden">
           <ImageWithLoading src={imageSrc} />
         </div>
