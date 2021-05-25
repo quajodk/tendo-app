@@ -47,6 +47,8 @@ const initialState = {
   categoryName: "",
   orderProduct: null,
   deliveryLocations: [],
+  mobileShowLogin: false,
+  mobileShowSignUp: false,
 };
 
 function shopReducer(state = initialState, action) {
@@ -188,6 +190,16 @@ function shopReducer(state = initialState, action) {
       return {
         ...state,
         deliveryLocations: action.payload,
+      };
+    case "toggleMobileLogin":
+      return {
+        ...state,
+        showMobileLogin: !state.showMobileLogin,
+      };
+    case "toggleMobileSignUp":
+      return {
+        ...state,
+        mobileShowSignUp: !state.mobileShowSignUp,
       };
     default:
       return state;

@@ -1,11 +1,17 @@
 import React from "react";
 import { FiClipboard, FiImage, FiShoppingCart } from "react-icons/fi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { gDriveFileId } from "../../utils/utils";
 
 const ProductDetailsBody = ({ item }) => {
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
   const orderProduct = () => {
+    if (!auth) {
+      dispatch({
+        type: "toggleMobileLogin",
+      });
+    }
     dispatch({
       type: "toggleOrderForm",
       payload: item,

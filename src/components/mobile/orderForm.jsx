@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { message } from "antd";
@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 const OrderForm = ({ item }) => {
   const { register, handleSubmit } = useForm();
   const history = useHistory();
+  const auth = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const closeOrderForm = () => {
@@ -22,6 +23,8 @@ const OrderForm = ({ item }) => {
     if (_.isEmpty(values))
       return message.error("Form fields can not be empty", 5);
     const hide = message.loading("Loadings..", 0);
+    values.orderStatus = "Pending";
+    values.username = auth?.username;
     axios({
       method: "POST",
       headers: {
@@ -215,6 +218,7 @@ const OrderForm = ({ item }) => {
                 name="resellerName"
                 id="resellerName"
                 required
+                defaultValue={auth?.fullName}
                 ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
@@ -233,6 +237,7 @@ const OrderForm = ({ item }) => {
                 name="resellerPhoneNumber"
                 id="resellerPhone"
                 required
+                defaultValue={auth?.phone}
                 ref={register({ required: true })}
                 className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
               />
