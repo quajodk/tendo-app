@@ -5,6 +5,7 @@ import useSheetData from "../../hooks/useSheetData";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
+import EmptyImage from "../../assets/emptyImage.jpg";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -64,9 +65,11 @@ export const ProductCard = ({ item }) => {
           <div className="rounded-lg flex flex-col overflow-hidden">
             <div className="h-32">
               <img
-                src={`https://drive.google.com/thumbnail?id=${gDriveFileId({
-                  gURL: item.titleImage,
-                })}`}
+                src={
+                  `https://drive.google.com/thumbnail?id=${gDriveFileId({
+                    gURL: item.titleImage,
+                  })}` ?? EmptyImage
+                }
                 alt="productImage"
                 className="w-full h-full object-cover"
               />
