@@ -26,7 +26,7 @@ const MobileCategories = () => {
           <Spin indicator={antIcon} />
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-4 mx-4">
+        <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 mx-4">
           {mobileCategories &&
             mobileCategories.map((item, idx) => (
               <CategoryCard item={item} key={idx + 1} />

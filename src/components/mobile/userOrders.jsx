@@ -4,6 +4,8 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { HiOutlineTicket } from "react-icons/hi";
 import axios from "axios";
+import ScreenWrapper from "../ScreenWrapper";
+import EmptyCart from "../EmptyCart";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -42,31 +44,36 @@ const UserOrders = () => {
 
   if (loading && userOrders.length === 0) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <Spin indicator={antIcon} />
-      </div>
+      <ScreenWrapper title="My orders">
+        <div className="flex justify-center items-center h-screen">
+          <Spin indicator={antIcon} />
+        </div>
+      </ScreenWrapper>
     );
   }
 
   if (userOrders.length === 0) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <span className="text-lg text-white font-medium text-center">
-          No order(s) yet. Your list of orders will appear here
-        </span>
-      </div>
+      <ScreenWrapper title="My orders">
+        <div className="flex flex-col justify-center items-center h-screen">
+          <EmptyCart />
+          <span className="text-lg text-white font-medium text-center">
+            No order(s) yet. Your list of orders will appear here
+          </span>
+        </div>
+      </ScreenWrapper>
     );
   }
 
   return (
-    <>
+    <ScreenWrapper title="My orders">
       <div className="grid grid-cols-1 gap-4 p-4">
         {userOrders.length &&
           userOrders.map((order, idx) => (
             <OrderCard order={order} key={idx + 1} />
           ))}
       </div>
-    </>
+    </ScreenWrapper>
   );
 };
 

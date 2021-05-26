@@ -45,7 +45,7 @@ const ProductListing = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid lg:grid-cols-4 grid-cols-1 gap-4">
         {mobileProducts.map((item, idx) =>
           item.glideStatus === "TRUE" ? (
             <ProductCard item={item} key={idx} />
@@ -119,10 +119,14 @@ export class ImageWithLoading extends React.Component {
     const { isLoaded } = this.state;
 
     return isLoaded ? (
-      <img className="w-full h-full object-cover" src={src} alt="product" />
+      <img
+        className="w-full lg:h-1/2 h-full object-cover"
+        src={src}
+        alt="product"
+      />
     ) : (
       <img
-        className="w-full h-full object-cover"
+        className="w-full lg:h-1/2 h-full object-cover"
         src={EmptyImage}
         alt="product"
       />

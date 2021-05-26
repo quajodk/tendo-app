@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import BottomTabNavigation from "./mobile/BottomTabNavigation";
 
 const ScreenWrapper = ({
   title,
@@ -17,7 +18,10 @@ const ScreenWrapper = ({
         title={title}
         showBack={showBackBtn}
       />
-      <div className="flex-1 overflow-y-scroll bg-tendo-bg">{children}</div>
+      <div className="flex-1 h-full lg:py-6 overflow-y-scroll bg-tendo-bg">
+        {children}
+      </div>
+      <BottomTabNavigation />
     </div>
   );
 };
