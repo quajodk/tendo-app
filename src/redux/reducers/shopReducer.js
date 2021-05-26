@@ -163,13 +163,16 @@ function shopReducer(state = initialState, action) {
       return {
         ...state,
         mobileCategories: [...state.mobileCategories, ...action.payload],
-        originalMobileCategories: [...state.mobileCategories, ...action.payload],
+        originalMobileCategories: [
+          ...state.mobileCategories,
+          ...action.payload,
+        ],
       };
     case "updateMobileCategories":
       return {
         ...state,
-        mobileCategories: [...action.payload]
-      }
+        mobileCategories: [...action.payload],
+      };
     case "selectedMobileCategory":
       return {
         ...state,
@@ -214,6 +217,11 @@ function shopReducer(state = initialState, action) {
       return {
         ...state,
         userOrders: [...action.payload],
+      };
+    case "closeOrderForm":
+      return {
+        ...state,
+        showOrderForm: !state.showOrderForm,
       };
     default:
       return state;

@@ -61,7 +61,11 @@ const OrderForm = ({ item }) => {
 
   return (
     <>
-      <ScreenWrapper title="Order Form">
+      <ScreenWrapper
+        title="Order Form"
+        showBackBtn
+        backFunction={() => dispatch({ type: "closeOrderForm" })}
+      >
         <form
           onSubmit={handleSubmit(onOrderSubmit)}
           className="w-screen flex-1 overflow-y-scroll bg-tendo-bg z-20"
@@ -324,7 +328,7 @@ const OrderForm = ({ item }) => {
                 />
               </div>
             </div>
-            <div className="flex">
+            <div className="flex mb-12">
               <div className="mx-4 my-5 w-full">
                 <button
                   type="submit"
@@ -334,6 +338,7 @@ const OrderForm = ({ item }) => {
                 </button>
               </div>
             </div>
+            <div className="h-8"></div>
           </div>
         </form>
       </ScreenWrapper>

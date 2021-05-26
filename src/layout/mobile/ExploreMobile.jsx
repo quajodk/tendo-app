@@ -1,35 +1,74 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { gDriveFileId } from "../../utils/utils";
-import useSheetData from "../../hooks/useSheetData";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
 import { ImageWithLoading } from "./ProductListing";
 import ScreenWrapper from "../../components/ScreenWrapper";
+import axios from "axios";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const ExploreMobile = () => {
-  const [data, loading] = useSheetData({ sheet: "resellerCatalog" });
+  const [loading, setLoading] = useState(true);
   const mobileProducts = useSelector((state) => state.mobileProducts);
+  const orginalMobileProducts = useSelector(
+    (state) => state.orginalMobileProducts
+  );
   const dispatch = useDispatch();
 
+  const init = useRef({ dispatch });
+
   useEffect(() => {
-    dispatch({
-      type: "getMobileProducts",
-      payload: data,
-    });
-  }, [data, dispatch]);
+    const { dispatch } = init.current;
+    axios({
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer TEST_TOKEN",
+      },
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/resellerCatalog?filter[glideStatus]=TRUE`,
+    })
+      .then(({ data }) => {
+        setLoading(false);
+        dispatch({
+          type: "getMobileProducts",
+          payload: data?.resellerCatalog,
+        });
+      })
+      .catch((e) => console.log(e));
+  }, []);
+
+  const search = (text) => {
+    if (mobileProducts.length !== 0) {
+      const filteredProduct = orginalMobileProducts.filter(
+        (x) =>
+          x.glideStatus === "TRUE" &&
+          (x?.product?.toLowerCase().includes(text.toLowerCase()) ||
+            x?.skUs?.toLowerCase().includes(text.toLowerCase()))
+      );
+
+      dispatch({
+        type: "updateMobileProducts",
+        payload: filteredProduct,
+      });
+    } else {
+      dispatch({
+        type: "updateMobileProducts",
+        payload: orginalMobileProducts,
+      });
+    }
+  };
 
   return (
-    <ScreenWrapper title="Explore">
+    <ScreenWrapper title="Explore" searchFunction={search}>
       {loading && mobileProducts.length === 0 ? (
         <div className="flex justify-center items-center h-full">
           <Spin indicator={antIcon} />
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-4 mx-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mx-4">
           {mobileProducts.map((item) =>
             item.glideStatus === "TRUE" ? (
               <ExploreCard item={item} key={item.id} />
