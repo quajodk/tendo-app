@@ -1,8 +1,8 @@
 import React from "react";
-import { AiOutlineMenu } from "react-icons/ai";
 import { FiChevronLeft } from "react-icons/fi";
 import { BiSearch } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
+import TendoLogo from "../assets/tendo-logo.png";
 
 const Header = ({ title, showBack, search, goBack }) => {
   const history = useHistory();
@@ -20,7 +20,13 @@ const Header = ({ title, showBack, search, goBack }) => {
               <FiChevronLeft size={25} className="text-tendo-active" /> Back
             </div>
           ) : (
-            <AiOutlineMenu size={25} className="text-tendo-active" />
+            <img
+              src={TendoLogo}
+              alt="tendo logo"
+              height={25}
+              width={25}
+              className="rounded-sm"
+            />
           )}
         </div>
         <div className="flex-1 text-center">

@@ -10,7 +10,7 @@ const CategoryProductsScreen = () => {
   return (
     <>
       <div className="w-screen">
-        <div className="grid grid-cols-1 gap-4 my-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 my-8">
           {mobileSelectedCategory.map((item) =>
             item.glideStatus === "TRUE" ? (
               <ProductCard item={item} key={item.id} />
