@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import BottomTabNavigation from "../../components/mobile/BottomTabNavigation";
@@ -23,8 +23,12 @@ const MobileLayer = () => {
   const showMobileLogin = useSelector((state) => state.showMobileLogin);
   const mobileShowSignUp = useSelector((state) => state.mobileShowSignUp);
   const init = useRef({ dispatch });
+  const location = useLocation();
 
   const token = localStorage.getItem("resellerToken") ?? null;
+  const refCode = new URLSearchParams(location.search);
+
+  console.log(refCode.get("refCode"));
 
   useEffect(() => {
     const { dispatch } = init.current;
@@ -39,7 +43,6 @@ const MobileLayer = () => {
         url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/users?filter[token]=${token}`,
       })
         .then(({ data }) => {
-          console.log(data, "user");
           if (data?.users.length === 1) {
             dispatch({
               type: "authenticateUser",
@@ -122,7 +125,7 @@ const MobileLayer = () => {
         }
         size={100}
       >
-        <MobileRegisterForm />
+        <MobileRegisterForm refCode={refCode || null} />
       </Modal>
     </>
   );

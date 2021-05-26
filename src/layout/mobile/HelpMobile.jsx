@@ -28,8 +28,9 @@ const HelpMobile = () => {
               <span className="text-2xl font-bold text-white">
                 {auth?.fullName}
               </span>
-              <span className="text-sm font-medium text-gray-600">
-                {auth?.username}
+              <span className="text-sm font-medium text-gray-600 flex items-center">
+                {auth?.username} -{" "}
+                <span className="text-white ml-2 text-xs">Referral code</span>
               </span>
 
               <span className="text-sm font-medium text-gray-600">

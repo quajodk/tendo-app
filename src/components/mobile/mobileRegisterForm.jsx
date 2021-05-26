@@ -8,7 +8,7 @@ import _ from "lodash";
 
 import "react-phone-input-2/lib/bootstrap.css";
 
-const MobileRegisterForm = () => {
+const MobileRegisterForm = ({ refCode }) => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const [phone, setPhone] = useState("");
@@ -26,13 +26,16 @@ const MobileRegisterForm = () => {
     values.phone = phone;
     values.token = btoa(`${values.fullName} ${phone}`);
     values.referralCode =
-      values.referralCode !== undefined ? values.referralCode : "tendo";
+      values.referralCode !== undefined
+        ? values.referralCode
+        : refCode
+        ? refCode
+        : "tendo";
     values.username = createUserName({
       name: values.fullName,
       phone,
       length: 3,
     });
-    console.log(values);
     if (_.isEmpty(values))
       return message.error("Form fields can not be empty", 5);
     const hide = message.loading("Loading...", 0);
@@ -47,7 +50,6 @@ const MobileRegisterForm = () => {
       url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/users?filter[phone]=${phone}`,
     })
       .then(({ data }) => {
-        console.log(data);
         if (data?.users?.length === 0) {
           //   add user if does not exist
           axios({
