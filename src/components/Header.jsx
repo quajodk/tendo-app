@@ -27,22 +27,18 @@ const Header = ({ title, showBack, search }) => {
           <span className="text-white font-medium text-lg">{title}</span>
         </div>
       </div>
-      <div className="flex w-screen mt-3 px-6">
-        <div className="flex overflow-x-hidden bg-gray-400 rounded-lg w-auto flex-1">
-          <div className="bg-gray-400 flex items-center px-3 justify-center">
-            <BiSearch color="white" size={20} />
+      {search && (
+        <div className="flex w-screen mt-3 px-6">
+          <div className="flex overflow-x-hidden bg-gray-400 rounded-lg w-auto flex-1">
+            <div className="bg-gray-400 flex items-center px-3 justify-center">
+              <BiSearch color="white" size={20} />
+            </div>
+            <input
+              type="text"
+              name="search"
+              placeholder="Search"
+              className="bg-gray-400 placeholder-gray-200 text-white font-medium flex-1 py-1 outline-none focus:outline-none w-100  w-auto px-2"
+              onChange={(e) => search(e.target.value)}
+            />
           </div>
-          <input
-            type="text"
-            name="search"
-            placeholder="Search"
-            className="bg-gray-400 placeholder-gray-200 text-white font-medium flex-1 py-1 outline-none focus:outline-none w-100  w-auto px-2"
-            onChange={(e) => search(e.target.value)}
-          />
         </div>
-      </div>
-    </div>
-  );
-};
-
-export default Header;
