@@ -60,6 +60,11 @@ const PromoMobile = () => {
             </button>
           </div>
         </div>
+        {auth && (
+          <span className="text-sm text-white my-9 text-center font-bold">
+            Referral Code: {auth?.username}
+          </span>
+        )}
       </div>
     </>
   );

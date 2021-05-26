@@ -25,7 +25,7 @@ const ProductDetailsBody = ({ item }) => {
 
   return (
     <>
-      <div className="min-h-full">
+      <div className="min-h-max overflow-y-scroll">
         <div className="mx-2 my-4 relative rounded-lg overflow-hidden">
           <ImageWithLoading src={imageSrc} />
         </div>
@@ -158,45 +158,7 @@ const ProductDetailsBody = ({ item }) => {
             </a>
           </button>
         </div>
-        <div
-          className=""
-          style={{
-            position: "relative",
-            padding: "8px 16px",
-            transition: "background-color 250ms ease-out 0s",
-            display: "flex",
-            alignItems: "center",
-            minHeight: "3.375rem",
-          }}
-        >
-          <div
-            style={{
-              textDecoration: "none",
-              flexGrow: 1,
-              flexShrink: 1,
-              width: 1,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-          >
-            <p
-              className="text-sm font-medium text-gray-500"
-              style={{
-                textOverflow: "inherit",
-                whiteSpace: "normal",
-                wordBreak: "break-word",
-                overflow: "visible",
-              }}
-            >
-              Jiji Price (Just for reference)
-            </p>
-            <p className="text-base font-semibold text-white">
-              {" "}
-              {item?.jijiPrice}
-            </p>
-          </div>
-        </div>
+
         <div
           style={{
             position: "relative",
@@ -252,7 +214,7 @@ const ProductDetailsBody = ({ item }) => {
             <FiClipboard size={24} />
           </div>
         </div>
-        <div className="mx-4 mt-5 mb-16">
+        <div className="mx-4 mt-5 mb-18">
           <button
             type="button"
             className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-blue-500"

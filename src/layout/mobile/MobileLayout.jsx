@@ -22,16 +22,21 @@ const MobileLayer = () => {
   const orderProduct = useSelector((state) => state.orderProduct);
   const showMobileLogin = useSelector((state) => state.showMobileLogin);
   const mobileShowSignUp = useSelector((state) => state.mobileShowSignUp);
-  const init = useRef({ dispatch });
   const location = useLocation();
 
   const token = localStorage.getItem("resellerToken") ?? null;
   const refCode = new URLSearchParams(location.search);
 
   console.log(refCode.get("refCode"));
+  const init = useRef({ dispatch, refCode });
 
   useEffect(() => {
-    const { dispatch } = init.current;
+    const { dispatch, refCode } = init.current;
+
+    refCode &&
+      dispatch({
+        type: "toggleMobileSignUp",
+      });
 
     token &&
       axios({
