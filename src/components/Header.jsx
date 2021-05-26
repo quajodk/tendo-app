@@ -36,7 +36,7 @@ const Header = ({ title, showBack, search, goBack }) => {
         </div>
       </div>
       {search && (
-        <div className="flex w-screen mt-3 px-6">
+        <div className="flex w-screen lg:w-96 mt-3 px-6">
           <div className="flex overflow-x-hidden bg-gray-400 rounded-lg w-auto flex-1">
             <div className="bg-gray-400 flex items-center px-3 justify-center">
               <BiSearch color="white" size={20} />

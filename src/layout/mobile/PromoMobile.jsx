@@ -27,45 +27,47 @@ const PromoMobile = () => {
   };
   return (
     <ScreenWrapper title="Promotions">
-      <div className="flex flex-col relative min-h-max">
-        <div className="relative h-72">
-          <img
-            src={PromoBg}
-            alt=""
-            className="object-cover w-full h-full bg-transparent"
-          />
-          <div className="absolute flex flex-col overflow-hidden h-full w-full justify-end left-0 top-0">
-            <div
-              className="text-white p-4 -m-b-1"
-              style={{
-                backgroundImage:
-                  "linear-gradient(transparent, rgba(0, 0, 0, 0.9))",
-              }}
-            >
-              <div className="text-xl font-bold">
-                Invite a friend and earn GHc 10 when they place their first
-                order
+      <div className="flex lg:justify-center">
+        <div className="flex lg:w-1/2 flex-col relative min-h-max">
+          <div className="relative h-72">
+            <img
+              src={PromoBg}
+              alt=""
+              className="object-cover w-full h-full bg-transparent"
+            />
+            <div className="absolute flex flex-col overflow-hidden h-full w-full justify-end left-0 top-0">
+              <div
+                className="text-white p-4 -m-b-1"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(transparent, rgba(0, 0, 0, 0.9))",
+                }}
+              >
+                <div className="text-xl font-bold">
+                  Invite a friend and earn GHc 10 when they place their first
+                  order
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex">
-          <div className="mx-4 my-5 w-full">
-            <button
-              type="button"
-              className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white"
-              onClick={shareInvite}
-            >
-              <BiShare size={24} className="mr-2" />
-              Share Invite Link
-            </button>
+          <div className="flex">
+            <div className="mx-4 my-5 w-full">
+              <button
+                type="button"
+                className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white"
+                onClick={shareInvite}
+              >
+                <BiShare size={24} className="mr-2" />
+                Share Invite Link
+              </button>
+            </div>
           </div>
+          {auth && (
+            <span className="text-sm text-white my-9 text-center font-bold">
+              Referral Code: {auth?.username}
+            </span>
+          )}
         </div>
-        {auth && (
-          <span className="text-sm text-white my-9 text-center font-bold">
-            Referral Code: {auth?.username}
-          </span>
-        )}
       </div>
     </ScreenWrapper>
   );
