@@ -2,6 +2,7 @@ import React from "react";
 import { BiShare } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import PromoBg from "../../assets/inviteAfriend.png";
+import ScreenWrapper from "../../components/ScreenWrapper";
 
 const PromoMobile = () => {
   const auth = useSelector((state) => state.auth);
@@ -25,7 +26,7 @@ const PromoMobile = () => {
     }
   };
   return (
-    <>
+    <ScreenWrapper title="Promotions">
       <div className="flex flex-col relative min-h-max">
         <div className="relative h-72">
           <img
@@ -66,7 +67,7 @@ const PromoMobile = () => {
           </span>
         )}
       </div>
-    </>
+    </ScreenWrapper>
   );
 };
 

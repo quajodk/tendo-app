@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useRouteMatch } from "react-router-dom";
 import CategoryProductsScreen from "../../../components/mobile/categoriesProducts";
+import ScreenWrapper from "../../../components/ScreenWrapper";
 import MobileCategories from "../MobileCategories";
 
 const CategoryTab = () => {
@@ -12,13 +13,13 @@ const CategoryTab = () => {
   const { path } = useRouteMatch();
   console.log(path);
   return (
-    <div className="flex-1">
+    <ScreenWrapper title="Categories">
       {mobileSelectedCategory.length ? (
         <CategoryProductsScreen />
       ) : (
         <MobileCategories />
       )}
-    </div>
+    </ScreenWrapper>
   );
 };
 

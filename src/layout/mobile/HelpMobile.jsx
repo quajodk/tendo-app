@@ -9,6 +9,7 @@ import {
 } from "react-icons/hi";
 import { BsFillPersonFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import ScreenWrapper from "../../components/ScreenWrapper";
 
 const HelpMobile = () => {
   const auth = useSelector((state) => state.auth);
@@ -20,7 +21,7 @@ const HelpMobile = () => {
     });
   };
   return (
-    <>
+    <ScreenWrapper title="Account">
       <div className="flex-1 p-4">
         <div className="flex flex-col justify-start mb-4">
           {auth && (
@@ -73,7 +74,7 @@ const HelpMobile = () => {
           </div>
         </div>
       </div>
-    </>
+    </ScreenWrapper>
   );
 };
 

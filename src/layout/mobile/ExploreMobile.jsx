@@ -6,6 +6,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
 import { ImageWithLoading } from "./ProductListing";
+import ScreenWrapper from "../../components/ScreenWrapper";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -22,7 +23,7 @@ const ExploreMobile = () => {
   }, [data, dispatch]);
 
   return (
-    <>
+    <ScreenWrapper title="Explore">
       {loading && mobileProducts.length === 0 ? (
         <div className="flex justify-center items-center h-full">
           <Spin indicator={antIcon} />
@@ -36,7 +37,7 @@ const ExploreMobile = () => {
           )}
         </div>
       )}
-    </>
+    </ScreenWrapper>
   );
 };
 
