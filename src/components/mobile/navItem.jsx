@@ -27,7 +27,7 @@ const NavItem = ({ active, icon, title, index, path }) => {
       >
         <div className="flex flex-col justify-center items-center text-center pt-2">
           <div>{icon}</div>
-          <div className="w-full overflow-ellipsis whitespace-nowrap">
+          <div className="w-full text-xs overflow-ellipsis whitespace-nowrap">
             {title}
           </div>
         </div>

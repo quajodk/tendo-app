@@ -83,11 +83,6 @@ export const ProductCard = ({ item }) => {
           <div className="rounded-lg flex flex-col overflow-hidden">
             <div className="h-32">
               <ImageWithLoading src={imageSrc} />
-              {/* <img
-                src={imageSrc ?? EmptyImage}
-                alt="productImage"
-                className="w-full h-full object-cover"
-              /> */}
             </div>
             <div
               className="flex flex-col p-3 flex-grow text-white"

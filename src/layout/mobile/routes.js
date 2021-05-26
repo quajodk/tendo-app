@@ -9,5 +9,5 @@ export const routes = [
   { component: CategoryTab, title: "Categories" },
   { component: ExploreMobile, title: "Explore" },
   { component: PromoMobile, title: "Promotions" },
-  { component: HelpMobile, title: "Help" },
+  { component: HelpMobile, title: "Account" },
 ];

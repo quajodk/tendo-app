@@ -33,7 +33,7 @@ const initialState = {
     { component: <MobileCategories />, title: "Categories" },
     { component: <ExploreMobile />, title: "Explore" },
     { component: <PromoMobile />, title: "Promotions" },
-    { component: <HelpMobile />, title: "Help" },
+    { component: <HelpMobile />, title: "Account" },
   ],
   mobileProductSelect: null,
   productName: "",
@@ -134,7 +134,7 @@ function shopReducer(state = initialState, action) {
         ...state,
         currentMobileScreen: action.payload,
         mobileProductSelect: null,
-        mobileSelectedCategory: []
+        mobileSelectedCategory: [],
       };
     case "selectMobileProduct":
       return {

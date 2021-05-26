@@ -5,8 +5,8 @@ import {
   BsFillGrid1X2Fill,
   BsFillGridFill,
   BsFillTagFill,
+  BsFillPersonFill,
 } from "react-icons/bs";
-import { FaHeadphonesAlt } from "react-icons/fa";
 import { AiFillHdd } from "react-icons/ai";
 import { useSelector } from "react-redux";
 
@@ -39,8 +39,8 @@ const BottomTabNavigation = () => {
         index={3}
       />
       <NavItem
-        icon={<FaHeadphonesAlt size={24} />}
-        title={"Help"}
+        icon={<BsFillPersonFill size={24} />}
+        title={"Account"}
         active={currentScreen === 4 ? true : false}
         index={4}
       />

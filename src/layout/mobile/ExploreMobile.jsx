@@ -5,6 +5,7 @@ import useSheetData from "../../hooks/useSheetData";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
+import { ImageWithLoading } from "./ProductListing";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -51,19 +52,17 @@ export const ExploreCard = ({ item }) => {
     });
   };
 
+  const imageSrc = `https://drive.google.com/thumbnail?id=${gDriveFileId({
+    gURL: item.titleImage,
+  })}`;
+
   return (
     <>
       <Link to={`/${item.product.toLowerCase()}`} onClick={selectProduct}>
         <div onClick={selectProduct}>
           <div className="rounded-lg flex flex-col overflow-hidden">
             <div className="h-32">
-              <img
-                src={`https://drive.google.com/thumbnail?id=${gDriveFileId({
-                  gURL: item.titleImage,
-                })}`}
-                alt="productImage"
-                className="w-full h-full object-cover"
-              />
+              <ImageWithLoading src={imageSrc} />
             </div>
             <div
               className="flex flex-col p-3 flex-grow text-white"

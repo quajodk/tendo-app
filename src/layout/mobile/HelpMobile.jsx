@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   HiOutlineTicket,
   HiCreditCard,
@@ -7,10 +7,18 @@ import {
   HiSupport,
   HiOutlineInformationCircle,
 } from "react-icons/hi";
+import { BsFillPersonFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const HelpMobile = () => {
   const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const login = () => {
+    dispatch({
+      type: "toggleMobileLogin",
+    });
+  };
   return (
     <>
       <div className="flex-1 p-4">
@@ -28,6 +36,19 @@ const HelpMobile = () => {
                 {auth?.phone}
               </span>
             </>
+          )}
+          {!auth && (
+            <div className="flex">
+              <div className="my-5 w-full">
+                <button
+                  type="button"
+                  className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white"
+                  onClick={login}
+                >
+                  <BsFillPersonFill size={24} className="mr-2" /> Login
+                </button>
+              </div>
+            </div>
           )}
         </div>
         <div className="flex flex-col justify-start w-full">
