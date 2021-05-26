@@ -33,7 +33,7 @@ const OrderForm = ({ item }) => {
     values.orderStatus = "Pending";
     values.username = auth?.username;
     values.orderedOn = new Date().toLocaleDateString("en-US", options);
-    console.log(values);
+    // console.log(values);
     axios({
       method: "POST",
       headers: {
