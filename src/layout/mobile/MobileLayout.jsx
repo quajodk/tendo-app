@@ -22,6 +22,7 @@ const MobileLayer = () => {
   const orderProduct = useSelector((state) => state.orderProduct);
   const showMobileLogin = useSelector((state) => state.showMobileLogin);
   const mobileShowSignUp = useSelector((state) => state.mobileShowSignUp);
+  const auth = useSelector((state) => state.auth);
   const location = useLocation();
 
   const token = localStorage.getItem("resellerToken") ?? null;
@@ -34,7 +35,8 @@ const MobileLayer = () => {
   useEffect(() => {
     const { dispatch, refCode } = init.current;
 
-    refCode &&
+    !auth &&
+      refCode &&
       dispatch({
         type: "toggleMobileSignUp",
       });

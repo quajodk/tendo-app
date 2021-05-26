@@ -8,7 +8,7 @@ const PromoMobile = () => {
   const url = window.location.host;
   const protocol = window.location.protocol;
 
-  console.log(`${protocol}//${url}`);
+  console.log(`${protocol}//${url}?refCode=${auth ? auth?.username : null}`);
 
   const shareInvite = async () => {
     const data = {
