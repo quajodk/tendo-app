@@ -8,12 +8,12 @@ const PromoMobile = () => {
   const url = window.location.host;
   const protocol = window.location.protocol;
 
+  console.log(`${protocol}//${url}`);
+
   const shareInvite = async () => {
     const data = {
       title: "Tendo Invite",
-      text: `You can Earn Ghc 200+ from home. Join me and hundreds people who are earning money from home using Tendo App. Get free delivery on your 1st order, if you enter my name and number under referral when placing an order.\nAccess TendoGh Now - ${
-        protocol / url
-      }?refCode=${
+      text: `You can Earn Ghc 200+ from home. Join me and hundreds people who are earning money from home using Tendo App. Get free delivery on your 1st order, if you enter my name and number under referral when placing an order.\nAccess TendoGh Now - ${protocol}//${url}?refCode=${
         auth ? auth?.username : null
       }\nKnow More about how to earn with Tendo: http://tendo.app`,
     };
