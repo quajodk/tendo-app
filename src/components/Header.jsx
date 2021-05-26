@@ -14,7 +14,7 @@ const Header = ({ title, showBack, search, goBack }) => {
         <div className="w-20 flex justify-center items-center mr-2">
           {showBack ? (
             <div
-              className="flex items-center text-lg text-tendo-active"
+              className="flex items-center text-lg text-tendo-active cursor-pointer"
               onClick={goBack ? goBack : _goBack}
             >
               <FiChevronLeft size={25} className="text-tendo-active" /> Back
