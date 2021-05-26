@@ -229,7 +229,7 @@ const ProductDetailsBody = ({ item }) => {
             Order Product
           </button>
         </div>
-        <div className="h-24"></div>
+        <div className="h-12"></div>
       </div>
     </ScreenWrapper>
   );

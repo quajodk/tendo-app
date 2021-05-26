@@ -11,7 +11,7 @@ const Header = ({ title, showBack, search, goBack }) => {
   return (
     <div className="bg-tendo-bg py-3">
       <div className="flex w-screen ">
-        <div className="w-20 flex justify-center items-center">
+        <div className="w-20 flex justify-center items-center mr-2">
           {showBack ? (
             <div
               className="flex items-center text-lg text-tendo-active"
