@@ -4,7 +4,7 @@ import ProductListing from "../ProductListing";
 
 const HomeTab = () => {
   return (
-    <ScreenWrapper>
+    <ScreenWrapper title="Home">
       <ProductListing />
     </ScreenWrapper>
   );
