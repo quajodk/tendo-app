@@ -18,6 +18,8 @@ const MobileRegisterForm = ({ refCode }) => {
     document.getElementById("referralCode").value = refCode;
   }, [refCode]);
 
+  console.log(refCode, "referral code >>>>");
+
   const createUserName = ({ name, phone, length }) => {
     let username;
     const part1 = name.split(" ")[0].substring(0, length);
@@ -40,6 +42,8 @@ const MobileRegisterForm = ({ refCode }) => {
       phone,
       length: 3,
     });
+    if (phone.length <= 3 || phone.length > 12)
+      return message.error("Invalid phone number. Check and try again", 5);
     if (_.isEmpty(values))
       return message.error("Form fields can not be empty", 5);
     const hide = message.loading("Loading...", 0);
