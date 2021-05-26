@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import ItemsListing from "../components/ItemsListing";
 import FlitersPane from "./FlitersPane";
 import SelectedItem from "../components/SelectedItem";
