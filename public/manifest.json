@@ -39,7 +39,7 @@
    "density": "4.0"
   },
   {
-      "src": "/tendo-logo.png",
+      "src": "./tendo-logo.png",
       "type": "image/png",
       "sizes": "512x512"
     }
