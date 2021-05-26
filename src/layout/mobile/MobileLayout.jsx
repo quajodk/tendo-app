@@ -34,7 +34,7 @@ const MobileLayer = () => {
   useEffect(() => {
     const { dispatch, refCode } = init.current;
 
-    (refCode !== null || refCode !== undefined) &&
+    refCode &&
       dispatch({
         type: "toggleMobileSignUp",
       });
