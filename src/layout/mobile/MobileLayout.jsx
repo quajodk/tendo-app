@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import BottomTabNavigation from "../../components/mobile/BottomTabNavigation";
-import Header from "../../components/mobile/Header";
+// import Header from "../../components/mobile/Header";
 import ProductDetailsBody from "../../components/mobile/mobileProductDetail";
 
 import { routes } from "./routes";
@@ -23,6 +23,7 @@ const MobileLayer = () => {
   const showMobileLogin = useSelector((state) => state.showMobileLogin);
   const mobileShowSignUp = useSelector((state) => state.mobileShowSignUp);
   const auth = useSelector((state) => state.auth);
+  const [referralCode, setReferralCode] = useState("");
   const location = useLocation();
 
   const token = localStorage.getItem("resellerToken") ?? null;
@@ -34,7 +35,10 @@ const MobileLayer = () => {
   useEffect(() => {
     const { dispatch, auth, refCode } = init.current;
 
+    setReferralCode(refCode || null);
+
     !auth &&
+      !token &&
       refCode &&
       dispatch({
         type: "toggleMobileSignUp",
@@ -130,7 +134,7 @@ const MobileLayer = () => {
         }
         size={100}
       >
-        <MobileRegisterForm refCode={refCode || null} />
+        <MobileRegisterForm refCode={referralCode} />
       </Modal>
     </>
   );

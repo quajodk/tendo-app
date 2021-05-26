@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PhoneInput from "react-phone-input-2";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -13,6 +13,12 @@ const MobileRegisterForm = ({ refCode }) => {
   const { register, handleSubmit } = useForm();
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    document.getElementById("referralCode").value = refCode;
+  }, [refCode]);
+
+  console.log(refCode, "referral code >>>>");
 
   const createUserName = ({ name, phone, length }) => {
     let username;
@@ -36,6 +42,8 @@ const MobileRegisterForm = ({ refCode }) => {
       phone,
       length: 3,
     });
+    if (phone.length <= 3 || phone.length > 12)
+      return message.error("Invalid phone number. Check and try again", 5);
     if (_.isEmpty(values))
       return message.error("Form fields can not be empty", 5);
     const hide = message.loading("Loading...", 0);
