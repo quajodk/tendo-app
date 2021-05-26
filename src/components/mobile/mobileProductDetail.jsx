@@ -54,7 +54,7 @@ const ProductDetailsBody = ({ item }) => {
             }}
           >
             <p
-              className="text-sm font-medium text-gray-500"
+              className="text-sm font-normal text-gray-500"
               style={{
                 textOverflow: "inherit",
                 whiteSpace: "normal",
@@ -64,13 +64,13 @@ const ProductDetailsBody = ({ item }) => {
             >
               Supplier Name
             </p>
-            <p className="text-lg font-semibold text-white">
+            <p className="text-sm font-medium text-white">
               {" "}
               {item?.supplierGenericNameGh}
             </p>
           </div>
         </div>
-        <p className="px-2 py-4 text-base font-semibold text-white">
+        <p className="px-2 py-4 text-base font-medium text-white">
           {" "}
           GHS {item?.wholesale}
         </p>
@@ -108,7 +108,7 @@ const ProductDetailsBody = ({ item }) => {
               Description
             </p>
             <p
-              className="text-base font-semibold text-white"
+              className="text-sm font-normal text-white"
               style={{ whiteSpace: "pre-wrap" }}
             >
               {" "}
