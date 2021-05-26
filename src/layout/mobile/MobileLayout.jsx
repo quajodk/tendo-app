@@ -25,15 +25,16 @@ const MobileLayer = () => {
   const location = useLocation();
 
   const token = localStorage.getItem("resellerToken") ?? null;
-  const refCode = new URLSearchParams(location.search);
+  const refLink = new URLSearchParams(location.search);
+  const refCode = refLink?.get("refCode");
 
-  console.log(refCode.get("refCode"));
+  console.log(refCode);
   const init = useRef({ dispatch, refCode });
 
   useEffect(() => {
     const { dispatch, refCode } = init.current;
 
-    refCode !== null &&
+    (refCode !== null || refCode !== undefined) &&
       dispatch({
         type: "toggleMobileSignUp",
       });

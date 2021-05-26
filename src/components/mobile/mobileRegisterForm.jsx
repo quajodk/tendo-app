@@ -170,7 +170,7 @@ const MobileRegisterForm = ({ refCode }) => {
                   autoComplete="referralCode"
                   className="focus:ring-sokoBlue focus:border-sokoBlue block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 rounded-md"
                   placeholder="Enter referral code"
-                  defaultValue="Tendo"
+                  defaultValue={refCode}
                   ref={register()}
                 />
               </div>
