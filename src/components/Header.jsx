@@ -9,7 +9,7 @@ const Header = ({ title, showBack, search, goBack }) => {
   const _goBack = () => history.goBack();
 
   return (
-    <div className="bg-tendo-bg py-3">
+    <div className="bg-tendo-bg py-3 bg-tendo-bg flex lg:items-center flex-col lg:flex-row py-3">
       <div className="flex w-screen ">
         <div className="w-20 flex justify-center items-center mr-2">
           {showBack ? (
