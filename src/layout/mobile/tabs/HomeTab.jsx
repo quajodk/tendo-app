@@ -1,11 +1,12 @@
 import React from "react";
+import ScreenWrapper from "../../../components/ScreenWrapper";
 import ProductListing from "../ProductListing";
 
 const HomeTab = () => {
   return (
-    <div className="flex-1">
+    <ScreenWrapper>
       <ProductListing />
-    </div>
+    </ScreenWrapper>
   );
 };
 
