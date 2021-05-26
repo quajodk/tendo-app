@@ -11,19 +11,16 @@ const ScreenWrapper = ({
 }) => {
   return (
     <div className="h-screen flex-1 flex flex-col">
-      {/* Header component */}
-      <Header
-        goBack={backFunction}
-        search={searchFunction}
-        title={title}
-        showBack={showBackBtn}
-      />
-      <div className="flex-1 h-full lg:py-6 overflow-y-scroll bg-tendo-bg">
-        {children}
+      <div className="h-auto">
+        {/* Header component */}
+        <Header
+          goBack={backFunction}
+          search={searchFunction}
+          title={title}
+          showBack={showBackBtn}
+        />
+        <div className="flex-1 h-full lg:py-6 overflow-y-scroll bg-tendo-bg">
+          {children}
+        </div>
       </div>
-      <BottomTabNavigation />
-    </div>
-  );
-};
-
-export default ScreenWrapper;
+      <BottomTabNavi
