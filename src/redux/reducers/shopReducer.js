@@ -133,6 +133,7 @@ function shopReducer(state = initialState, action) {
       return {
         ...state,
         currentMobileScreen: action.payload,
+        mobileProductSelect: null,
       };
     case "selectMobileProduct":
       return {
