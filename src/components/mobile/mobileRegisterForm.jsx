@@ -106,9 +106,7 @@ const MobileRegisterForm = ({ refCode }) => {
         <div className="pt-10 lg:pt-7 pb-7">
           <form onSubmit={handleSubmit(onSignUpSubmit)}>
             <div className="text-left mb-9">
-              <h1 className="text-3xl lg:text-black text-white">
-                Create your account
-              </h1>
+              <h1 className="text-3xl text-white">Create your account</h1>
               <p className="text-sm text-gray-400 mt-3">
                 Already have an account?{" "}
                 <span
@@ -125,7 +123,7 @@ const MobileRegisterForm = ({ refCode }) => {
             <div className="mb-5">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium lg:text-black text-white"
+                className="block text-sm font-medium text-white"
               >
                 Your full name
               </label>
@@ -146,7 +144,7 @@ const MobileRegisterForm = ({ refCode }) => {
             <div className="mb-5">
               <label
                 htmlFor="phone"
-                className="block text-sm font-medium lg:text-black text-white"
+                className="block text-sm font-medium text-white"
               >
                 Your phone number
               </label>
@@ -166,7 +164,7 @@ const MobileRegisterForm = ({ refCode }) => {
             <div className="mb-5">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium lg:text-black text-white"
+                className="block text-sm font-medium text-white"
               >
                 Who referred you?
               </label>

@@ -61,7 +61,7 @@ const MobileLoginForm = () => {
         <div className="pt-10 lg:pt-7 pb-7">
           <form onSubmit={onLoginSubmit} className="w-full mx-4">
             <div className="text-left mb-9">
-              <h1 className="text-3xl lg:text-black text-white">Login</h1>
+              <h1 className="text-3xl text-white">Login</h1>
               <p className="text-sm text-gray-400 mt-3">
                 Not a Reseller yet?{" "}
                 <span
@@ -78,7 +78,7 @@ const MobileLoginForm = () => {
             <div className="mb-5">
               <label
                 htmlFor="phone"
-                className="block text-sm font-medium lg:text-black text-white"
+                className="block text-sm font-medium text-white"
               >
                 Your phone number
               </label>
