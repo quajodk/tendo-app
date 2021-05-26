@@ -133,7 +133,7 @@ function shopReducer(state = initialState, action) {
       return {
         ...state,
         currentMobileScreen: action.payload,
-        mobileProductSelect: null,
+        // mobileProductSelect: null,
         mobileSelectedCategory: [],
       };
     case "selectMobileProduct":
@@ -163,7 +163,13 @@ function shopReducer(state = initialState, action) {
       return {
         ...state,
         mobileCategories: [...state.mobileCategories, ...action.payload],
+        originalMobileCategories: [...state.mobileCategories, ...action.payload],
       };
+    case "updateMobileCategories":
+      return {
+        ...state,
+        mobileCategories: [...action.payload]
+      }
     case "selectedMobileCategory":
       return {
         ...state,

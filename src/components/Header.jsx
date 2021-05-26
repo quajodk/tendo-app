@@ -4,9 +4,9 @@ import { FiChevronLeft } from "react-icons/fi";
 import { BiSearch } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 
-const Header = ({ title, showBack, search }) => {
+const Header = ({ title, showBack, search, goBack }) => {
   const history = useHistory();
-  const goBack = () => history.goBack();
+  const _goBack = () => history.goBack();
 
   return (
     <div className="bg-tendo-bg py-3">
@@ -15,7 +15,7 @@ const Header = ({ title, showBack, search }) => {
           {showBack ? (
             <div
               className="flex items-center text-lg text-tendo-active"
-              onClick={goBack}
+              onClick={goBack ? goBack : _goBack}
             >
               <FiChevronLeft size={25} className="text-tendo-active" /> Back
             </div>
@@ -24,7 +24,9 @@ const Header = ({ title, showBack, search }) => {
           )}
         </div>
         <div className="flex-1 text-center">
-          <span className="text-white font-medium text-lg">{title}</span>
+          <span className="text-white font-medium truncate text-lg">
+            {title}
+          </span>
         </div>
       </div>
       {search && (

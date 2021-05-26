@@ -3,6 +3,7 @@ import { FiClipboard, FiImage, FiShoppingCart } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { ImageWithLoading } from "../../layout/mobile/ProductListing";
 import { gDriveFileId } from "../../utils/utils";
+import ScreenWrapper from "../ScreenWrapper";
 
 const ProductDetailsBody = ({ item }) => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const ProductDetailsBody = ({ item }) => {
   })}`;
 
   return (
-    <>
+    <ScreenWrapper title={item.product} showBackBtn>
       <div className="min-h-max overflow-y-scroll">
         <div className="mx-2 my-4 relative rounded-lg overflow-hidden">
           <ImageWithLoading src={imageSrc} />
@@ -230,7 +231,7 @@ const ProductDetailsBody = ({ item }) => {
         </div>
         <div className="h-24"></div>
       </div>
-    </>
+    </ScreenWrapper>
   );
 };
 
