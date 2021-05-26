@@ -42,3 +42,9 @@ const Header = ({ title, showBack, search }) => {
             />
           </div>
         </div>
+      )}
+    </div>
+  );
+};
+
+export default Header;

@@ -67,8 +67,6 @@ const MobileLayer = () => {
       <div className="flex h-screen flex-1  flex-col font-poppins">
         {/* Handle when a product is selected */}
         <div className="h-screen flex-1 flex flex-col">
-          {/* Header Goes here */}
-          <Header />
           {showOrderForm ? (
             <OrderForm item={orderProduct} />
           ) : (
