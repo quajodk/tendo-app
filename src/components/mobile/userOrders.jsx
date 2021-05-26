@@ -39,9 +39,6 @@ const UserOrders = () => {
       });
   }, [auth?.username]);
 
-  console.log(userOrders, "orders");
-  console.log(auth?.username, "username");
-
   if (loading && userOrders.length === 0) {
     return (
       <ScreenWrapper title="My orders">
@@ -54,9 +51,11 @@ const UserOrders = () => {
 
   if (userOrders.length === 0) {
     return (
-      <ScreenWrapper title="My orders">
+      <ScreenWrapper title="My orders" showBackBtn>
         <div className="flex flex-col justify-center items-center h-screen">
-          <EmptyCart />
+          <div className="w-full sm:w-1/2">
+            <EmptyCart />
+          </div>
           <span className="text-lg text-white font-medium text-center">
             No order(s) yet. Your list of orders will appear here
           </span>
@@ -66,7 +65,7 @@ const UserOrders = () => {
   }
 
   return (
-    <ScreenWrapper title="My orders">
+    <ScreenWrapper title="My orders" showBackBtn>
       <div className="grid grid-cols-1 gap-4 p-4">
         {userOrders.length &&
           userOrders.map((order, idx) => (

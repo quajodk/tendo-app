@@ -43,6 +43,7 @@ const initialState = {
   mobileCategories: [],
   originalMobileCategories: [],
   mobileSelectedCategory: [],
+  originalMobileSelectedCategory: [],
   categorySelected: false,
   categoryName: "",
   orderProduct: null,
@@ -182,8 +183,19 @@ function shopReducer(state = initialState, action) {
             [items.type1, items.type2, items.type3].includes(action.payload)
           ),
         ],
+        originalMobileSelectedCategory: [
+          ...state.mobileSelectedCategory,
+          ...state.mobileProducts.filter((items) =>
+            [items.type1, items.type2, items.type3].includes(action.payload)
+          ),
+        ],
         categorySelected: !state.categorySelected,
         categoryName: action.payload,
+      };
+    case "updateSelectedMobileCategory":
+      return {
+        ...state,
+        mobileSelectedCategory: [...action.payload],
       };
     case "categorySelectedPop":
       return {

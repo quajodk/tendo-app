@@ -11,7 +11,9 @@ const CategoryTab = () => {
   );
   const cateogories = useSelector((state) => state.originalMobileCategories);
   const categoryName = useSelector((state) => state.categoryName);
-  const mobileProducts = useSelector((state) => state.orginalMobileProducts);
+  const originalMobileSelectedCategory = useSelector(
+    (state) => state.originalMobileSelectedCategory
+  );
   const goBackHandler = () => {
     dispatch({
       type: "categorySelectedPop",
@@ -37,8 +39,8 @@ const CategoryTab = () => {
   };
 
   const productSearch = (text) => {
-    if (mobileProducts.length !== 0) {
-      const filteredProduct = mobileProducts.filter(
+    if (mobileSelectedCategory.length !== 0) {
+      const filteredProduct = originalMobileSelectedCategory.filter(
         (x) =>
           x.glideStatus === "TRUE" &&
           (x?.product?.toLowerCase().includes(text.toLowerCase()) ||
@@ -46,13 +48,13 @@ const CategoryTab = () => {
       );
 
       dispatch({
-        type: "updateMobileProducts",
+        type: "updateSelectedMobileCategory",
         payload: filteredProduct,
       });
     } else {
       dispatch({
-        type: "updateMobileProducts",
-        payload: mobileProducts,
+        type: "updateSelectedMobileCategory",
+        payload: originalMobileSelectedCategory,
       });
     }
   };

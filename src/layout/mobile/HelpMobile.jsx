@@ -20,6 +20,13 @@ const HelpMobile = () => {
       type: "toggleMobileLogin",
     });
   };
+
+  const confirmOrder = () => {
+    const message = `Hi I am ${
+      auth && auth?.fullName
+    }, a reseller on TendoGh 🇬🇭 App. I require some assistance`;
+    window.open(`https://wa.me/+233503247275/?text=${message}`, "blank");
+  };
   return (
     <ScreenWrapper title="Account">
       <div className="flex lg:justify-center">
@@ -55,19 +62,22 @@ const HelpMobile = () => {
             )}
           </div>
           <div className="flex flex-col justify-start w-full">
-            <Link to="/myorders">
+            <Link to="/myorders" className="cursor-pointer">
               <div className="flex items-center text-lg text-tendo-active my-4">
                 <HiOutlineTicket size={25} className="mr-6" /> My Orders
               </div>
             </Link>
 
-            <div className="flex items-center text-lg text-tendo-active my-4">
+            <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
               <HiCreditCard size={25} className="mr-6" /> My Earnings
             </div>
-            <div className="flex items-center text-lg text-tendo-active my-4">
+            <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
               <HiCog size={25} className="mr-6" /> Settings
             </div>
-            <div className="flex items-center text-lg text-tendo-active my-4">
+            <div
+              className="flex items-center text-lg text-tendo-active my-4 cursor-pointer"
+              onClick={confirmOrder}
+            >
               <HiSupport size={25} className="mr-6" /> Help
             </div>
             <div className="flex items-center text-lg text-tendo-active my-4">
