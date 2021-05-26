@@ -61,7 +61,7 @@ const MobileLayer = () => {
         .catch((e) => {
           console.log(e);
         });
-  }, [token]);
+  }, [auth, token]);
 
   return (
     <>
