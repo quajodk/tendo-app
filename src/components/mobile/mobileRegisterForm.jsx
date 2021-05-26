@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PhoneInput from "react-phone-input-2";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -13,6 +13,10 @@ const MobileRegisterForm = ({ refCode }) => {
   const { register, handleSubmit } = useForm();
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    document.getElementById("referralCode").value = refCode;
+  }, [refCode]);
 
   const createUserName = ({ name, phone, length }) => {
     let username;

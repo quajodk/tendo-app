@@ -35,6 +35,7 @@ const MobileLayer = () => {
     const { dispatch, auth, refCode } = init.current;
 
     !auth &&
+      !token &&
       refCode &&
       dispatch({
         type: "toggleMobileSignUp",
