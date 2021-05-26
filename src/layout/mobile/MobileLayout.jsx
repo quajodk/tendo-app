@@ -29,11 +29,10 @@ const MobileLayer = () => {
   const refLink = new URLSearchParams(location.search);
   const refCode = refLink?.get("refCode");
 
-  console.log(refCode);
-  const init = useRef({ dispatch, refCode });
+  const init = useRef({ dispatch, auth, refCode });
 
   useEffect(() => {
-    const { dispatch, refCode } = init.current;
+    const { dispatch, auth, refCode } = init.current;
 
     !auth &&
       refCode &&
@@ -61,7 +60,7 @@ const MobileLayer = () => {
         .catch((e) => {
           console.log(e);
         });
-  }, [auth, token]);
+  }, [token]);
 
   return (
     <>
