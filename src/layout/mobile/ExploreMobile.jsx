@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { gDriveFileId } from "../../utils/utils";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -6,15 +6,20 @@ import { Spin } from "antd";
 import { Link } from "react-router-dom";
 import { ImageWithLoading } from "./ProductListing";
 import ScreenWrapper from "../../components/ScreenWrapper";
-import axios from "axios";
+import useSheetData from "../../hooks/useSheetData";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const ExploreMobile = () => {
-  const [loading, setLoading] = useState(true);
-  const mobileProducts = useSelector((state) => state.mobileProducts);
-  const orginalMobileProducts = useSelector(
-    (state) => state.orginalMobileProducts
+  const [data, loading] = useSheetData({
+    sheet: "evansExplore?filter[glideStatus]=TRUE",
+    method: "GET",
+  });
+  const mobileExploreProducts = useSelector(
+    (state) => state.mobileExploreProducts
+  );
+  const originalMobileExploreProducts = useSelector(
+    (state) => state.originalMobileExploreProducts
   );
   const dispatch = useDispatch();
 
@@ -22,27 +27,15 @@ const ExploreMobile = () => {
 
   useEffect(() => {
     const { dispatch } = init.current;
-    axios({
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer TEST_TOKEN",
-      },
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/resellerCatalog?filter[glideStatus]=TRUE`,
-    })
-      .then(({ data }) => {
-        setLoading(false);
-        dispatch({
-          type: "getMobileProducts",
-          payload: data?.resellerCatalog,
-        });
-      })
-      .catch((e) => console.log(e));
-  }, []);
+    dispatch({
+      type: "getMobileExploreProducts",
+      payload: data,
+    });
+  }, [data]);
 
   const search = (text) => {
-    if (mobileProducts.length !== 0) {
-      const filteredProduct = orginalMobileProducts.filter(
+    if (mobileExploreProducts.length !== 0) {
+      const filteredProduct = originalMobileExploreProducts.filter(
         (x) =>
           x.glideStatus === "TRUE" &&
           (x?.product?.toLowerCase().includes(text.toLowerCase()) ||
@@ -50,26 +43,26 @@ const ExploreMobile = () => {
       );
 
       dispatch({
-        type: "updateMobileProducts",
+        type: "updateMobileExploreProducts",
         payload: filteredProduct,
       });
     } else {
       dispatch({
-        type: "updateMobileProducts",
-        payload: orginalMobileProducts,
+        type: "updateMobileExploreProducts",
+        payload: originalMobileExploreProducts,
       });
     }
   };
 
   return (
     <ScreenWrapper title="Explore" searchFunction={search}>
-      {loading && mobileProducts.length === 0 ? (
+      {loading && mobileExploreProducts.length === 0 ? (
         <div className="flex justify-center items-center h-full">
           <Spin indicator={antIcon} />
         </div>
       ) : (
         <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 mx-4">
-          {mobileProducts.map((item) =>
+          {mobileExploreProducts.map((item) =>
             item.glideStatus === "TRUE" ? (
               <ExploreCard item={item} key={item.id} />
             ) : null

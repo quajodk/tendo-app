@@ -49,9 +49,9 @@ const MobileLayer = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer TEST_TOKEN",
+          Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
         },
-        url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/users?filter[token]=${token}`,
+        url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users?filter[token]=${token}`,
       })
         .then(({ data }) => {
           if (data?.users.length === 1) {

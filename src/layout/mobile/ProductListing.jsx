@@ -1,39 +1,30 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { gDriveFileId } from "../../utils/utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
 import EmptyImage from "../../assets/emptyImage.jpg";
-import axios from "axios";
+import useSheetData from "../../hooks/useSheetData";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const ProductListing = () => {
-  const [loading, setLoading] = useState(true);
+  const [data, loading] = useSheetData({
+    sheet: "evansHome?filter[glideStatus]=TRUE",
+    method: "GET",
+  });
   const mobileProducts = useSelector((state) => state.mobileProducts);
   const dispatch = useDispatch();
   const init = useRef({ dispatch });
 
   useEffect(() => {
     const { dispatch } = init.current;
-    axios({
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer TEST_TOKEN",
-      },
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/resellerCatalog?filter[glideStatus]=TRUE`,
-    })
-      .then(({ data }) => {
-        setLoading(false);
-        dispatch({
-          type: "getMobileProducts",
-          payload: data?.resellerCatalog,
-        });
-      })
-      .catch((e) => console.log(e));
-  }, []);
+    dispatch({
+      type: "getMobileProducts",
+      payload: data,
+    });
+  }, [data]);
 
   if (loading && mobileProducts.length === 0) {
     return (
@@ -122,7 +113,7 @@ export class ImageWithLoading extends React.Component {
       <img className="w-full h-full object-cover" src={src} alt="product" />
     ) : (
       <img
-        className="w-full lg:h-1/2 h-full object-cover"
+        className="w-full h-full object-cover"
         src={EmptyImage}
         alt="product"
       />

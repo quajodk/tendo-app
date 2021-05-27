@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import useSheetData from "../../hooks/useSheetData";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
@@ -8,16 +8,18 @@ import EmptyImage from "../../assets/emptyImage.jpg";
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const MobileCategories = () => {
-  const [data, loading] = useSheetData({ sheet: "glideCategories" });
+  const [data, loading] = useSheetData({ sheet: "categories", method: "GET" });
   const mobileCategories = useSelector((state) => state.mobileCategories);
   const dispatch = useDispatch();
+  const init = useRef({ dispatch });
 
   useEffect(() => {
+    const { dispatch } = init.current;
     dispatch({
       type: "getMobileCategory",
       payload: data,
     });
-  }, [data, dispatch]);
+  }, [data]);
 
   return (
     <>

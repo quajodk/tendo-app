@@ -39,10 +39,10 @@ const OrderForm = ({ item }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer TEST_TOKEN",
+        Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
       },
-      data: { order: values },
-      url: "https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/orders",
+      data: { newAppOrder: values },
+      url: "https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders",
     })
       .then((res) => {
         if (res.data) {

@@ -66,11 +66,13 @@ const CategoryTab = () => {
       backFunction={goBackHandler}
       searchFunction={mobileSelectedCategory.length ? productSearch : search}
     >
-      {mobileSelectedCategory.length ? (
-        <CategoryProductsScreen />
-      ) : (
-        <MobileCategories />
-      )}
+      <div className="overflow-y-scroll mb-24">
+        {mobileSelectedCategory.length ? (
+          <CategoryProductsScreen />
+        ) : (
+          <MobileCategories />
+        )}
+      </div>
     </ScreenWrapper>
   );
 };

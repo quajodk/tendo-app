@@ -15,7 +15,7 @@ const MobileLoginForm = () => {
     e.preventDefault();
     if (phone === undefined || phone === "")
       return message.error("Form fields can not be empty", 5);
-    console.log(phone);
+
     const hide = message.loading("Loading...", 0);
     setLoading(true);
 
@@ -23,9 +23,9 @@ const MobileLoginForm = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer TEST_TOKEN",
+        Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
       },
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/users?filter[phone]=${phone}`,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users?filter[phone]=${phone}`,
     })
       .then(({ data }) => {
         setLoading(false);

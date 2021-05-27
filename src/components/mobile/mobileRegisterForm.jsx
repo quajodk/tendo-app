@@ -18,8 +18,6 @@ const MobileRegisterForm = ({ refCode }) => {
     document.getElementById("referralCode").value = refCode;
   }, [refCode]);
 
-  console.log(refCode, "referral code >>>>");
-
   const createUserName = ({ name, phone, length }) => {
     let username;
     const part1 = name.split(" ")[0].substring(0, length);
@@ -53,9 +51,9 @@ const MobileRegisterForm = ({ refCode }) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer TEST_TOKEN",
+        Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
       },
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/users?filter[phone]=${phone}`,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users?filter[phone]=${phone}`,
     })
       .then(({ data }) => {
         if (data?.users?.length === 0) {
@@ -64,10 +62,10 @@ const MobileRegisterForm = ({ refCode }) => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: "Bearer TEST_TOKEN",
+              Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
             },
             data: { user: values },
-            url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/users`,
+            url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users`,
           })
             .then(({ data }) => {
               hide();

@@ -1,29 +1,28 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
-const BASE_URL =
-  "https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/";
-export default function useSheetData({ sheet }) {
+export default function useSheetData({ sheet, method }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const int = useRef({ data, sheet });
+
+  const key = sheet.includes("?") ? sheet.split("?")[0] : sheet;
+  const init = useRef({ method, key, data });
 
   useEffect(() => {
-    const { data, sheet } = int.current;
+    const { method, key, data } = init.current;
     axios({
-      method: "GET",
-      baseURL: BASE_URL,
-      url: sheet,
+      method,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/${sheet}`,
       credentials: "same-origin",
       headers: {
-        Authorization: "Bearer TEST_TOKEN",
+        Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
         Accept: "application/json",
       },
     })
       .then((res) => {
         if (res) {
           setLoading(false);
-          setData([...data, ...res?.data?.[sheet]]);
+          setData([...data, ...res?.data?.[key]]);
         }
       })
       .catch((e) => {

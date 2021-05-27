@@ -23,18 +23,19 @@ const UserOrders = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer TEST_TOKEN",
+        Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
       },
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/orders?filter[username]=${auth?.username}`,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders?filter[username]=${auth?.username}`,
     })
       .then(({ data }) => {
         setLoading(false);
         dispatch({
           type: "getUserOrders",
-          payload: data?.orders,
+          payload: data?.newAppOrders,
         });
       })
       .catch((e) => {
+        setLoading(false);
         console.log(e);
       });
   }, [auth?.username]);

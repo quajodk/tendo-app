@@ -39,6 +39,8 @@ const initialState = {
   productName: "",
   showOrderForm: false,
   mobileProducts: [],
+  mobileExploreProducts: [],
+  originalMobileExploreProducts: [],
   orginalMobileProducts: [],
   mobileCategories: [],
   originalMobileCategories: [],
@@ -155,10 +157,21 @@ function shopReducer(state = initialState, action) {
         mobileProducts: action.payload,
         orginalMobileProducts: action.payload,
       };
+    case "getMobileExploreProducts":
+      return {
+        ...state,
+        mobileExploreProducts: action.payload,
+        originalMobileExploreProducts: action.payload,
+      };
     case "updateMobileProducts":
       return {
         ...state,
         mobileProducts: action.payload,
+      };
+    case "updateMobileExploreProducts":
+      return {
+        ...state,
+        mobileExploreProducts: action.payload,
       };
     case "getMobileCategory":
       return {
@@ -177,7 +190,14 @@ function shopReducer(state = initialState, action) {
         mobileSelectedCategory: [
           ...state.mobileSelectedCategory,
           ...state.mobileProducts.filter((items) =>
-            [items.type1, items.type2, items.type3].includes(action.payload)
+            [
+              items.type1,
+              items.type2,
+              items.type3,
+              items.type4,
+              items.type5,
+              items.type6,
+            ].includes(action.payload)
           ),
         ],
         originalMobileSelectedCategory: [
