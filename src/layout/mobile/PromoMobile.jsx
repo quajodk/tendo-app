@@ -1,6 +1,6 @@
 import React from "react";
 import { BiShare } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import PromoBg from "../../assets/inviteAfriend.png";
 import ScreenWrapper from "../../components/ScreenWrapper";
 
@@ -8,10 +8,16 @@ const PromoMobile = () => {
   const auth = useSelector((state) => state.auth);
   const url = window.location.host;
   const protocol = window.location.protocol;
+  const dispatch = useDispatch();
 
-  console.log(`${protocol}//${url}?refCode=${auth ? auth?.username : null}`);
+  // console.log(`${protocol}//${url}?refCode=${auth ? auth?.username : null}`);
 
   const shareInvite = async () => {
+    if (!auth) {
+      dispatch({
+        type: "toggleMobileSignUp",
+      });
+    }
     const data = {
       title: "Tendo Invite",
       text: `You can start an e-commerce store with zero capital and. Join me and hundreds of people who are earning money from home using the Tendo App.\n\nYou can start selling products without investing any money. Just find products at wholesale products, add your profit, and share on social media. Tendo will handle deliveries for you and send you your profit.\n\nGet free delivery on your 1st order, if you enter my referral code.\nAccess TendoGh Now - ${protocol}//${url}?refCode=${
