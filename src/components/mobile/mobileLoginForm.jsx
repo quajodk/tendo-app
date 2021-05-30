@@ -25,17 +25,17 @@ const MobileLoginForm = () => {
         "Content-Type": "application/json",
         Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
       },
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users?filter[phone]=${phone}`,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoNigeriaResellerApp/nigeriaUsers?filter[phone]=${phone}`,
     })
       .then(({ data }) => {
         setLoading(false);
-        if (data?.users.length === 1) {
+        if (data?.nigeriaUsers.length === 1) {
           hide();
           dispatch({
             type: "authenticateUser",
-            payload: data?.users[0],
+            payload: data?.nigeriaUsers[0],
           });
-          localStorage.setItem("resellerToken", data?.users[0]?.token);
+          localStorage.setItem("resellerToken", data?.nigeriaUsers[0]?.token);
           dispatch({
             type: "toggleMobileLogin",
           });
@@ -84,7 +84,7 @@ const MobileLoginForm = () => {
               </label>
               <div className="mt-2 relative rounded-md shadow-sm">
                 <PhoneInput
-                  country={"gh"}
+                  country={"ng"}
                   enableSearch={true}
                   inputStyle={{ width: "100%" }}
                   inputClass="focus:ring-sokoBlue focus:border-sokoBlue sm:text-sm border-gray-300 py-4"

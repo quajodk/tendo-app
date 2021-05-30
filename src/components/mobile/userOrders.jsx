@@ -25,13 +25,13 @@ const UserOrders = () => {
         "Content-Type": "application/json",
         Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
       },
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders?filter[username]=${auth?.username}`,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetNigeria/nigeriaOrders?filter[username]=${auth?.username}`,
     })
       .then(({ data }) => {
         setLoading(false);
         dispatch({
           type: "getUserOrders",
-          payload: data?.newAppOrders,
+          payload: data?.nigeriaOrders,
         });
       })
       .catch((e) => {

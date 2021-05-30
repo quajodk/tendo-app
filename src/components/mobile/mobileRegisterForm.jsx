@@ -53,10 +53,11 @@ const MobileRegisterForm = ({ refCode }) => {
         "Content-Type": "application/json",
         Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
       },
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users?filter[phone]=${phone}`,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoNigeriaResellerApp/nigeriaUsers?filter[phone]=${phone}`,
     })
       .then(({ data }) => {
-        if (data?.users?.length === 0) {
+        console.log(data);
+        if (data?.nigeriaUsers?.length === 0) {
           //   add user if does not exist
           axios({
             method: "POST",
@@ -64,16 +65,16 @@ const MobileRegisterForm = ({ refCode }) => {
               "Content-Type": "application/json",
               Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
             },
-            data: { user: values },
-            url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users`,
+            data: { nigeriaUser: values },
+            url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoNigeriaResellerApp/nigeriaUsers`,
           })
             .then(({ data }) => {
               hide();
               dispatch({
                 type: "authenticateUser",
-                payload: data?.user,
+                payload: data?.nigeriaUser,
               });
-              localStorage.setItem("resellerToken", data?.user?.token);
+              localStorage.setItem("resellerToken", data?.nigeriaUser?.token);
               dispatch({
                 type: "toggleMobileSignUp",
               });
@@ -148,7 +149,7 @@ const MobileRegisterForm = ({ refCode }) => {
               </label>
               <div className="mt-2 relative rounded-md shadow-sm">
                 <PhoneInput
-                  country={"gh"}
+                  country={"ng"}
                   enableSearch={true}
                   inputStyle={{ width: "100%" }}
                   inputClass="focus:ring-sokoBlue focus:border-sokoBlue sm:text-sm border-gray-300 py-4"
@@ -174,7 +175,7 @@ const MobileRegisterForm = ({ refCode }) => {
                   autoComplete="referralCode"
                   className="focus:ring-sokoBlue focus:border-sokoBlue block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 rounded-md"
                   placeholder="Enter referral code"
-                  defaultValue={refCode}
+                  defaultValue={refCode || "Tendo"}
                   ref={register()}
                 />
               </div>

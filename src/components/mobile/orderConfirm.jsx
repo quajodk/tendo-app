@@ -28,8 +28,8 @@ const OrderConfirm = () => {
   }, [data]);
 
   const confirmOrder = () => {
-    const message = `Hi I would like to confirm my order with product SKU ${sku} on TendoGh 🇬🇭 App`;
-    window.open(`https://wa.me/+233503247275/?text=${message}`, "blank");
+    const message = `Hi I would like to confirm my order with product SKU ${sku} on TendoNg 🇳🇬 App`;
+    window.open(`https://wa.me/+2349014992643/?text=${message}`, "blank");
   };
 
   return (
@@ -136,7 +136,7 @@ const DeliveryRateCard = ({ rate }) => {
         </div>
         <div>
           <span className="text-xs text-gray-400 my-1">
-            {rate.deliveryRateGhs}
+            &#8358; {rate["rate (naira)"]}
           </span>
         </div>
       </div>

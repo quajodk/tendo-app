@@ -1,7 +1,7 @@
 import React from "react";
 import { BiShare } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
-import PromoBg from "../../assets/inviteAfriend.png";
+import PromoBg from "../../assets/tendongInvite.jpeg";
 import ScreenWrapper from "../../components/ScreenWrapper";
 
 const PromoMobile = () => {
@@ -50,8 +50,8 @@ const PromoMobile = () => {
                 }}
               >
                 <div className="text-xl font-bold">
-                  Invite a friend and earn GHc 10 when they place their first
-                  order
+                  Invite a friend and earn &#8358; 800 when they place their
+                  first order
                 </div>
               </div>
             </div>

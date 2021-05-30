@@ -87,7 +87,7 @@ export const ProductCard = ({ item }) => {
               </p>
 
               <div className="text-sm text-gray-400 font-light">
-                GHS {item.wholesale}
+                &#8358; {item.wholesale}
               </div>
             </div>
           </div>

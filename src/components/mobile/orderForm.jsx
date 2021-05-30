@@ -41,8 +41,8 @@ const OrderForm = ({ item }) => {
         "Content-Type": "application/json",
         Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
       },
-      data: { newAppOrder: values },
-      url: "https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders",
+      data: { nigeriaOrder: values },
+      url: "https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetNigeria/nigeriaOrders",
     })
       .then((res) => {
         if (res.data) {
@@ -261,34 +261,54 @@ const OrderForm = ({ item }) => {
               </div>
               <div className="px-4 pt-1 pb-3">
                 <label
-                  htmlFor="momoNumber"
+                  htmlFor="bankName"
                   className="block text-xs font-medium text-white"
                 >
-                  MOMO Number To Send Profit To
+                  What's The Name of Your Bank
                 </label>
                 <div className="mt-2 border-b border-teal-500 py-2">
                   <input
                     type="text"
-                    name="momoNumberToSendProfitTo"
-                    id="momoNumber"
+                    name="bankName"
+                    id="bankName"
                     required
                     ref={register({ required: true })}
                     className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
+                    placeholder="This is where your profit will be paid"
                   />
                 </div>
               </div>
               <div className="px-4 pt-1 pb-3">
                 <label
-                  htmlFor="momoAccountName"
+                  htmlFor="accountNumber"
                   className="block text-xs font-medium text-white"
                 >
-                  What is Your MOMO Account Name
+                  What is Your Account Number
                 </label>
                 <div className="mt-2 border-b border-teal-500 py-2">
                   <input
                     type="text"
-                    name="whatIsYourMomoAccountName"
-                    id="momoAccountName"
+                    name="accountNumber"
+                    id="accountNumber"
+                    required
+                    ref={register({ required: true })}
+                    className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
+                    placeholder="This is where your profit will be paid"
+                  />
+                </div>
+              </div>
+              <div className="px-4 pt-1 pb-3">
+                <label
+                  htmlFor="accountName"
+                  className="block text-xs font-medium text-white"
+                >
+                  What is Your Account Name
+                </label>
+                <div className="mt-2 border-b border-teal-500 py-2">
+                  <input
+                    type="text"
+                    name="accountName"
+                    id="accountName"
                     required
                     ref={register({ required: true })}
                     className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"

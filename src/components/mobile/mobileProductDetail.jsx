@@ -79,7 +79,7 @@ const ProductDetailsBody = ({ item }) => {
           </div>
           <p className="px-2 py-4 text-base font-medium text-white">
             {" "}
-            GHS {item?.wholesale}
+            &#8358; {item?.wholesale}
           </p>
           <hr className="my-4 mx-2" />
           <div

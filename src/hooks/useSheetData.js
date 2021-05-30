@@ -12,7 +12,7 @@ export default function useSheetData({ sheet, method }) {
     const { method, key, data } = init.current;
     axios({
       method,
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/${sheet}`,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoNigeriaResellerApp/${sheet}`,
       credentials: "same-origin",
       headers: {
         Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
