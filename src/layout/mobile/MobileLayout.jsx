@@ -39,7 +39,6 @@ const MobileLayer = () => {
 
     !auth &&
       !token &&
-      refCode &&
       dispatch({
         type: "toggleMobileSignUp",
       });
@@ -91,6 +90,7 @@ const MobileLayer = () => {
                       path={`/${productName
                         ?.replace("(", " ")
                         .replace(")", " ")
+                        .replace("/", " ")
                         .toLowerCase()}`}
                       render={(props) => (
                         <ProductDetailsBody

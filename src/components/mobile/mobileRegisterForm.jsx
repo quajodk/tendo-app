@@ -15,7 +15,7 @@ const MobileRegisterForm = ({ refCode }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    document.getElementById("referralCode").value = refCode;
+    document.getElementById("referralCode").value = refCode ? refCode : "Tendo";
   }, [refCode]);
 
   const createUserName = ({ name, phone, length }) => {
@@ -174,7 +174,7 @@ const MobileRegisterForm = ({ refCode }) => {
                   autoComplete="referralCode"
                   className="focus:ring-sokoBlue focus:border-sokoBlue block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 rounded-md"
                   placeholder="Enter referral code"
-                  defaultValue={refCode}
+                  defaultValue={refCode ? refCode : "Tendo"}
                   ref={register()}
                 />
               </div>

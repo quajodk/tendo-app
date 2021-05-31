@@ -21,7 +21,7 @@ const ProductDetailsBody = ({ item }) => {
     });
   };
 
-  const imageSrc = `https://drive.google.com/thumbnail?id=${gDriveFileId({
+  const imageSrc = `https://drive.google.com/uc?id=${gDriveFileId({
     gURL: item.titleImage,
   })}`;
 
@@ -146,24 +146,21 @@ const ProductDetailsBody = ({ item }) => {
             </div>
           </div>
           <div className="mx-4 my-2">
-            <button
-              type="button"
+            <a
+              href={item?.imageLink}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-blue-500"
               style={{
                 backgroundColor: "rgba(33, 150, 243, 0.118)",
                 borderColor: "rgba(33, 150, 243, 0.118)",
               }}
             >
-              <a
-                href={item?.imageLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-row"
-              >
+              <div className="flex flex-row">
                 <FiImage size={24} className="mr-2" />
                 View Product Gallery
-              </a>
-            </button>
+              </div>
+            </a>
           </div>
 
           <div

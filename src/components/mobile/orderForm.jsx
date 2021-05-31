@@ -324,6 +324,7 @@ const OrderForm = ({ item }) => {
                     type="text"
                     name="whoReferredYou?"
                     id="referralCode"
+                    defaultValue={auth?.referralCode}
                     ref={register({ required: false })}
                     className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
                   />
