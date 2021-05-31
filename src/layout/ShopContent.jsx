@@ -35,7 +35,6 @@ const ShopContent = () => {
 
     !auth &&
       !token &&
-      refCode &&
       dispatch({
         type: "toggleMobileSignUp",
       });
@@ -45,15 +44,15 @@ const ShopContent = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer TEST_TOKEN",
+          Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
         },
-        url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/productCatalogueGhana/users?filter[token]=${token}`,
+        url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoNigeriaResellerApp/nigeriaUsers?filter[token]=${token}`,
       })
         .then(({ data }) => {
-          if (data?.users.length === 1) {
+          if (data?.nigeriaUsers.length === 1) {
             dispatch({
               type: "authenticateUser",
-              payload: data?.users[0],
+              payload: data?.nigeriaUsers[0],
             });
           }
         })

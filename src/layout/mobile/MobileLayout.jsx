@@ -39,7 +39,6 @@ const MobileLayer = () => {
 
     !auth &&
       !token &&
-      refCode &&
       dispatch({
         type: "toggleMobileSignUp",
       });
