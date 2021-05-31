@@ -90,6 +90,7 @@ const MobileLayer = () => {
                       path={`/${productName
                         ?.replace("(", " ")
                         .replace(")", " ")
+                        .replace(")", " ")
                         .toLowerCase()}`}
                       render={(props) => (
                         <ProductDetailsBody

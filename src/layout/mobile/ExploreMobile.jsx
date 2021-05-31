@@ -85,7 +85,7 @@ export const ExploreCard = ({ item }) => {
     });
   };
 
-  const imageSrc = `https://drive.google.com/thumbnail?id=${gDriveFileId({
+  const imageSrc = `https://drive.google.com/uc?id=${gDriveFileId({
     gURL: item.titleImage,
   })}`;
 

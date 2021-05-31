@@ -80,6 +80,7 @@ const ShopContent = () => {
               path={`/${productName
                 ?.replace("(", " ")
                 .replace(")", " ")
+                .replace("/", " ")
                 .toLowerCase()}`}
               render={(props) => (
                 <ProductDetailsBody {...props} item={selectedMobileItem} />
