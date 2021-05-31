@@ -110,7 +110,11 @@ export class ImageWithLoading extends React.Component {
     const { isLoaded } = this.state;
 
     return isLoaded ? (
-      <img className="w-full h-full object-cover" src={src} alt="product" />
+      <img
+        className="w-full h-full lg:h-full object-cover"
+        src={src}
+        alt="product"
+      />
     ) : (
       <img
         className="w-full h-full object-cover"
