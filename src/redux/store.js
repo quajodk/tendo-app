@@ -1,7 +1,18 @@
 import { createStore } from "redux";
 import reducer from './reducers/shopReducer';
+import storage from 'redux-persist/lib/storage'
+import { persistReducer, persistStore } from 'redux-persist'
 
-const store = createStore(reducer);
+const persistConfig = {
+    key: 'tendo-root-app',
+    storage,
+}
 
 
-export default store;
+
+const persistedReducer = persistReducer(persistConfig, reducer)
+const store = createStore(persistedReducer);
+const persistor = persistStore(store);
+
+
+export { store, persistor };

@@ -9,8 +9,8 @@ const Header = ({ title, showBack, search, goBack }) => {
   const _goBack = () => history.goBack();
 
   return (
-    <div className="bg-tendo-bg py-3">
-      <div className="flex w-screen ">
+    <div className="bg-tendo-bg flex lg:items-center flex-col lg:flex-row py-3">
+      <div className="flex w-screen lg:w-auto lg:flex-1">
         <div className="w-20 flex justify-center items-center">
           {showBack ? (
             <div
@@ -30,7 +30,7 @@ const Header = ({ title, showBack, search, goBack }) => {
         </div>
       </div>
       {search && (
-        <div className="flex w-screen mt-3 px-6">
+        <div className="flex w-screen lg:w-96 mt-3 px-6">
           <div className="flex overflow-x-hidden bg-gray-400 rounded-lg w-auto flex-1">
             <div className="bg-gray-400 flex items-center px-3 justify-center">
               <BiSearch color="white" size={20} />

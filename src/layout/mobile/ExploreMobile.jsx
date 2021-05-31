@@ -29,7 +29,7 @@ const ExploreMobile = () => {
           <Spin indicator={antIcon} />
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-4 mx-4">
+        <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 mx-4">
           {mobileProducts.map((item) =>
             item.glideStatus === "TRUE" ? (
               <ExploreCard item={item} key={item.id} />
