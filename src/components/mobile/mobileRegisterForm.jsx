@@ -193,7 +193,7 @@ const MobileRegisterForm = ({ refCode }) => {
             </div>
             <p className="text-center text-sm text-gray-400 mt-3">
               By clicking on create an account <br />
-              you have agreed to out{" "}
+              you have agreed to our{" "}
               <span to="#!" className="ml-1 text-blue-500">
                 Terms and Conditions
               </span>
