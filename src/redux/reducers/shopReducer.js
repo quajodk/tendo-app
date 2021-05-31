@@ -4,7 +4,7 @@ import HelpMobile from "../../layout/mobile/HelpMobile";
 import MobileCategories from "../../layout/mobile/MobileCategories";
 import ProductListing from "../../layout/mobile/ProductListing";
 import PromoMobile from "../../layout/mobile/PromoMobile";
-import { GET_CATEGORIES, GET_PRODUCTS, SELECT_PRODUCT, SET_SCREEN, TOGGLE_ORDER_FORM, UPDATE_PRODUCTS } from "../actions";
+import { GET_CATEGORIES, GET_PRODUCTS, POP_SELECTED_CATEGORY, SELECT_CATEGORY, SELECT_PRODUCT, SET_SCREEN, TOGGLE_ORDER_FORM, UPDATE_CATEGORIES, UPDATE_PRODUCTS } from "../actions";
 
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
@@ -121,12 +121,12 @@ function shopReducer(state = initialState, action) {
         mobileCategories: [...state.mobileCategories, ...action.payload],
         originalMobileCategories: [...state.mobileCategories, ...action.payload],
       };
-    case "updateMobileCategories":
+    case UPDATE_CATEGORIES:
       return {
         ...state,
         mobileCategories: [...action.payload]
       }
-    case "selectedMobileCategory":
+    case SELECT_CATEGORY:
       return {
         ...state,
         mobileSelectedCategory: [
@@ -138,7 +138,7 @@ function shopReducer(state = initialState, action) {
         categorySelected: !state.categorySelected,
         categoryName: action.payload,
       };
-    case "categorySelectedPop":
+    case POP_SELECTED_CATEGORY:
       return {
         ...state,
         mobileSelectedCategory: [],
