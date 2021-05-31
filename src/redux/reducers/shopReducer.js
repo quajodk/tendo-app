@@ -4,6 +4,7 @@ import HelpMobile from "../../layout/mobile/HelpMobile";
 import MobileCategories from "../../layout/mobile/MobileCategories";
 import ProductListing from "../../layout/mobile/ProductListing";
 import PromoMobile from "../../layout/mobile/PromoMobile";
+import { GET_CATEGORIES, GET_PRODUCTS, SELECT_PRODUCT, SET_SCREEN, TOGGLE_ORDER_FORM, UPDATE_PRODUCTS } from "../actions";
 
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
@@ -54,51 +55,6 @@ const initialState = {
 
 function shopReducer(state = initialState, action) {
   switch (action.type) {
-    case "SelectSneaker":
-      return {
-        ...state,
-        selectedSneaker: { ...action.payload, qty: 1 },
-      };
-    case "unselectSneaker":
-      return {
-        ...state,
-        selectedSneaker: null,
-      };
-    case "increaseQty":
-      const cart = state.cart;
-      cart[action.payload] = {
-        ...cart[action.payload],
-        qty: cart[action.payload].qty + 1,
-      };
-      return {
-        ...state,
-        cart: cart,
-      };
-    case "decreaseQty":
-      const _cart = state.cart;
-      _cart[action.payload] = {
-        ..._cart[action.payload],
-        qty: _cart[action.payload].qty - 1,
-      };
-      return {
-        ...state,
-        cart: _cart,
-      };
-    case "removeSneaker":
-      return {
-        ...state,
-        cart: [...state.cart.filter((el) => el.id !== action.payload.id)],
-      };
-    case "SelectCategory":
-      const hasIt = state.selectedCategories.find(
-        (el) => el === action.payload
-      );
-      return {
-        ...state,
-        selectedCategories: hasIt
-          ? [...state.selectedCategories.filter((el) => el !== action.payload)]
-          : [...state.selectedCategories, action.payload],
-      };
     case "toggleLogin":
       return {
         ...state,
@@ -129,37 +85,37 @@ function shopReducer(state = initialState, action) {
         ...state,
         auth: null,
       };
-    case "setScreen":
+    case SET_SCREEN:
       return {
         ...state,
         currentMobileScreen: action.payload,
         // mobileProductSelect: null,
         mobileSelectedCategory: [],
       };
-    case "selectMobileProduct":
+    case SELECT_PRODUCT:
       return {
         ...state,
         mobileProductSelect: action.payload,
         productName: action.payload?.product,
       };
-    case "toggleOrderForm":
+    case TOGGLE_ORDER_FORM:
       return {
         ...state,
         showOrderForm: !state.showOrderForm,
         orderProduct: action?.payload,
       };
-    case "getMobileProducts":
+    case GET_PRODUCTS:
       return {
         ...state,
         mobileProducts: action.payload,
         orginalMobileProducts: action.payload,
       };
-    case "updateMobileProducts":
+    case UPDATE_PRODUCTS:
       return {
         ...state,
         mobileProducts: action.payload,
       };
-    case "getMobileCategory":
+    case GET_CATEGORIES:
       return {
         ...state,
         mobileCategories: [...state.mobileCategories, ...action.payload],
