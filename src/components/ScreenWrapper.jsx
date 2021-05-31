@@ -18,8 +18,8 @@ const ScreenWrapper = ({
         title={title}
         showBack={showBackBtn}
       />
-      <div className="flex-1 h-full lg:py-6 overflow-y-scroll bg-tendo-bg">
-        {children}
+      <div className="h-auto flex-1 lg:py-6 overflow-y-scroll pb-3 bg-tendo-bg">
+        <div className="flex-1 h-full ">{children}</div>
       </div>
       <BottomTabNavigation />
     </div>

@@ -51,11 +51,9 @@ const UserOrders = () => {
 
   if (userOrders.length === 0) {
     return (
-      <ScreenWrapper title="My orders" showBackBtn>
+      <ScreenWrapper title="My orders">
         <div className="flex flex-col justify-center items-center h-screen">
-          <div className="w-full sm:w-1/2">
-            <EmptyCart />
-          </div>
+          <EmptyCart />
           <span className="text-lg text-white font-medium text-center">
             No order(s) yet. Your list of orders will appear here
           </span>
@@ -65,7 +63,7 @@ const UserOrders = () => {
   }
 
   return (
-    <ScreenWrapper title="My orders" showBackBtn>
+    <ScreenWrapper title="My orders">
       <div className="grid grid-cols-1 gap-4 p-4">
         {userOrders.length &&
           userOrders.map((order, idx) => (

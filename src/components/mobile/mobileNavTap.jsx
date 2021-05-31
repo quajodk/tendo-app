@@ -4,7 +4,7 @@ const MobileTapNav = ({ children }) => {
   return (
     <>
       <div
-        className="w-screen fixed overflow-y-hidden absolute left-0 bottom-0 inset-x-0 z-10 flex flex-col items-center"
+        className="w-screen  overflow-y-hidden  left-0 bottom-0 inset-x-0 z-10 flex flex-col items-center"
         style={{
           height: "calc(49px + env(safe-area-inset-bottom))",
           backgroundColor: "rgba(0, 0, 0, 0.976)",

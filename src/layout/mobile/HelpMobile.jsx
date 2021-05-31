@@ -62,22 +62,19 @@ const HelpMobile = () => {
             )}
           </div>
           <div className="flex flex-col justify-start w-full">
-            <Link to="/myorders" className="cursor-pointer">
+            <Link to="/myorders">
               <div className="flex items-center text-lg text-tendo-active my-4">
                 <HiOutlineTicket size={25} className="mr-6" /> My Orders
               </div>
             </Link>
 
-            <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
+            <div className="flex items-center text-lg text-tendo-active my-4">
               <HiCreditCard size={25} className="mr-6" /> My Earnings
             </div>
-            <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
+            <div className="flex items-center text-lg text-tendo-active my-4">
               <HiCog size={25} className="mr-6" /> Settings
             </div>
-            <div
-              className="flex items-center text-lg text-tendo-active my-4 cursor-pointer"
-              onClick={confirmOrder}
-            >
+            <div className="flex items-center text-lg text-tendo-active my-4">
               <HiSupport size={25} className="mr-6" /> Help
             </div>
             <div className="flex items-center text-lg text-tendo-active my-4">
