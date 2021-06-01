@@ -40,7 +40,7 @@ const MobileRegisterForm = ({ refCode }) => {
       phone,
       length: 3,
     });
-    if (phone.length <= 3 || phone.length > 12)
+    if (phone.length <= 3)
       return message.error("Invalid phone number. Check and try again", 5);
     if (_.isEmpty(values))
       return message.error("Form fields can not be empty", 5);
