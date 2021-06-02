@@ -26,12 +26,12 @@ const MobileRegisterForm = ({ refCode }) => {
     return username;
   };
 
-  const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
+  // const options = {
+  //   weekday: "long",
+  //   year: "numeric",
+  //   month: "long",
+  //   day: "numeric",
+  // };
 
   const onSignUpSubmit = (values) => {
     values.phone = phone;
@@ -47,7 +47,7 @@ const MobileRegisterForm = ({ refCode }) => {
       phone,
       length: 3,
     });
-    values.createdAt = new Date().toLocaleDateString("en-US", options);
+    values.createdAt = new Date().toLocaleDateString("en-GB");
     if (phone.length <= 3)
       return message.error("Invalid phone number. Check and try again", 5);
     if (_.isEmpty(values))
