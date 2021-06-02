@@ -1,5 +1,10 @@
 import React from "react";
-import { FiClipboard, FiImage, FiShoppingCart } from "react-icons/fi";
+import {
+  FiClipboard,
+  FiImage,
+  FiShoppingCart,
+  FiCheckSquare,
+} from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { ImageWithLoading } from "../../layout/mobile/ProductListing";
@@ -24,6 +29,11 @@ const ProductDetailsBody = ({ item }) => {
   const imageSrc = `https://drive.google.com/uc?id=${gDriveFileId({
     gURL: item.titleImage,
   })}`;
+
+  const check = () => {
+    const message = `Hi I would like to check the availability of the product with SKU ${item?.skUs} on TendoGh 🇬🇭 App`;
+    window.open(`https://wa.me/+233503247275/?text=${message}`, "blank");
+  };
 
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 });
 
@@ -218,7 +228,14 @@ const ProductDetailsBody = ({ item }) => {
               <FiClipboard size={24} />
             </div>
           </div>
-          <div className="mx-4 mt-5 mb-20">
+          <div
+            className="flex justify-between mt-4 mb-12 mx-4 text-blue-500 cursor-pointer"
+            onClick={check}
+          >
+            <span className="font-medium uppercase">Check Availability</span>
+            <FiCheckSquare size={24} />
+          </div>
+          <div className="mx-4 mt-8 mb-20">
             <button
               type="button"
               className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-blue-500"
@@ -232,7 +249,7 @@ const ProductDetailsBody = ({ item }) => {
               Order Product
             </button>
           </div>
-          <div className="h-24 lg:h-0 mt-16 lg:mt-0"></div>
+          <div className="h-24 lg:h-0 mt-20 lg:mt-0"></div>
         </div>
       </div>
     </ScreenWrapper>
