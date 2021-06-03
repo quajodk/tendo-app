@@ -4,6 +4,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import EmptyImage from "../../assets/emptyImage.jpg";
+import { gDriveFileId } from "../../utils/utils";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -50,6 +51,10 @@ const CategoryCard = ({ item }) => {
       payload: item.categories,
     });
   };
+
+  const imageSrc = `https://drive.google.com/uc?id=${gDriveFileId({
+    gURL: item.images,
+  })}`;
   return (
     <div
       style={{
@@ -62,7 +67,7 @@ const CategoryCard = ({ item }) => {
       <div className="relative">
         <div className="h-32 relative rounded-lg overflow-hidden">
           <img
-            src={item.images ?? EmptyImage}
+            src={imageSrc ?? EmptyImage}
             alt="category"
             className="object-cover h-full w-full"
           />
