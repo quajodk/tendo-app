@@ -16,6 +16,18 @@ export function gDriveFileId({ gURL }) {
   return fileID;
 }
 
+export function isSafari() {
+  if (
+    navigator.vendor &&
+    navigator.vendor.indexOf("Apple") > -1 &&
+    navigator.userAgent &&
+    navigator.userAgent.indexOf("CriOS") === -1 &&
+    navigator.userAgent.indexOf("FxiOS") === -1
+  )
+    return true;
+  return false;
+}
+
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
