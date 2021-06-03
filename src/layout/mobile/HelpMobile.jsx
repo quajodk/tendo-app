@@ -24,8 +24,8 @@ const HelpMobile = () => {
   const confirmOrder = () => {
     const message = `Hi I am ${
       auth && auth?.fullName
-    }, a reseller on TendoGh 🇬🇭 App. I require some assistance`;
-    window.open(`https://wa.me/+233503247275/?text=${message}`, "blank");
+    }, a reseller on TendoNg 🇳🇬 App. I require some assistance`;
+    window.open(`https://wa.me/+2349014992643/?text=${message}`, "blank");
   };
   return (
     <ScreenWrapper title="Account">
