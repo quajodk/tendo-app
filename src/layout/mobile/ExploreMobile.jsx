@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { gDriveFileId } from "../../utils/utils";
+import { gDriveFileId, isSafari } from "../../utils/utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
@@ -85,9 +85,13 @@ export const ExploreCard = ({ item }) => {
     });
   };
 
-  const imageSrc = `https://drive.google.com/uc?id=${gDriveFileId({
-    gURL: item.titleImage,
-  })}`;
+  const imageSrc = isSafari
+    ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
+        gURL: item.titleImage,
+      })}`
+    : `https://drive.google.com/uc?id=${gDriveFileId({
+        gURL: item.titleImage,
+      })}`;
 
   return (
     <>

@@ -8,7 +8,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { ImageWithLoading } from "../../layout/mobile/ProductListing";
-import { gDriveFileId } from "../../utils/utils";
+import { gDriveFileId, isSafari } from "../../utils/utils";
 import ScreenWrapper from "../ScreenWrapper";
 
 const ProductDetailsBody = ({ item }) => {
@@ -26,9 +26,13 @@ const ProductDetailsBody = ({ item }) => {
     });
   };
 
-  const imageSrc = `https://drive.google.com/uc?id=${gDriveFileId({
-    gURL: item.titleImage,
-  })}`;
+  const imageSrc = isSafari
+    ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
+        gURL: item.titleImage,
+      })}`
+    : `https://drive.google.com/uc?id=${gDriveFileId({
+        gURL: item.titleImage,
+      })}`;
 
   const check = () => {
     const message = `Hi I would like to check the availability of the product with SKU ${item?.skUs} on TendoGh 🇬🇭 App`;
