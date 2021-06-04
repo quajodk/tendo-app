@@ -34,10 +34,12 @@ const ProductDetailsBody = ({ item }) => {
         gURL: item.titleImage,
       })}`;
 
-  const check = () => {
-    const message = `Hi I would like to check the availability of the product with SKU ${item?.skUs} on TendoGh 🇬🇭 App`;
-    window.open(`https://wa.me/+233503247275/?text=${message}`, "blank");
-  };
+  const message = `Hi I would like to check the availability of the product with SKU ${item?.skUs} on TendoGh 🇬🇭 App`;
+
+  // const check = () => {
+  //   const message = `Hi I would like to check the availability of the product with SKU ${item?.skUs} on TendoGh 🇬🇭 App`;
+  //   window.open(`https://wa.me/+233503247275/?text=${message}`, "blank");
+  // };
 
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 });
 
@@ -232,13 +234,22 @@ const ProductDetailsBody = ({ item }) => {
               <FiClipboard size={24} />
             </div>
           </div>
-          <div
+          <a
+            className="flex justify-between mt-4 mb-12 mx-4 text-blue-500 cursor-pointer"
+            href={`https://wa.me/+233503247275/?text=${message}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="font-medium uppercase">Check Availability</span>
+            <FiCheckSquare size={24} />
+          </a>
+          {/* <div
             className="flex justify-between mt-4 mb-12 mx-4 text-blue-500 cursor-pointer"
             onClick={check}
           >
             <span className="font-medium uppercase">Check Availability</span>
             <FiCheckSquare size={24} />
-          </div>
+          </div> */}
           <div className="mx-4 mt-8 mb-20">
             <button
               type="button"
