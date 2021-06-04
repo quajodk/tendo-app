@@ -27,10 +27,12 @@ const OrderConfirm = () => {
     });
   }, [data]);
 
-  const confirmOrder = () => {
-    const message = `Hi I would like to confirm my order with product SKU ${sku} on TendoNg 🇳🇬 App`;
-    window.open(`https://wa.me/+2349014992643/?text=${message}`, "blank");
-  };
+  const message = `Hi I would like to confirm my order with product SKU ${sku} on TendoNg 🇳🇬 App`;
+
+  // const confirmOrder = () => {
+  //   const message = `Hi I would like to confirm my order with product SKU ${sku} on TendoNg 🇳🇬 App`;
+  //   window.open(`https://wa.me/+2349014992643/?text=${message}`, "blank");
+  // };
 
   return (
     <>
@@ -55,14 +57,23 @@ const OrderConfirm = () => {
           </div>
           <div className="flex">
             <div className="mx-4 my-5 w-full">
-              <button
+              <a
+                className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white"
+                href={`https://wa.me/+2349014992643/?text=${message}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaWhatsapp size={24} className="mr-2" />
+                Confirm Order
+              </a>
+              {/* <button
                 type="button"
                 className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white"
                 onClick={confirmOrder}
               >
                 <FaWhatsapp size={24} className="mr-2" />
                 Confirm Order
-              </button>
+              </button> */}
             </div>
           </div>
           <div className="mx-4 my-2 p-3 bg-blue-600 bg-opacity-10 rounded-sm border-1 text-blue-400 flex flex-col">

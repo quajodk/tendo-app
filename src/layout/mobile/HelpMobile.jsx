@@ -21,12 +21,16 @@ const HelpMobile = () => {
     });
   };
 
-  const confirmOrder = () => {
-    const message = `Hi I am ${
-      auth && auth?.fullName
-    }, a reseller on TendoNg 🇳🇬 App. I require some assistance`;
-    window.open(`https://wa.me/+2349014992643/?text=${message}`, "blank");
-  };
+  const message = `Hi I am ${
+    auth && auth?.fullName
+  }, a reseller on TendoNg 🇳🇬 App. I require some assistance`;
+
+  // const confirmOrder = () => {
+  //   const message = `Hi I am ${
+  //     auth && auth?.fullName
+  //   }, a reseller on TendoNg 🇳🇬 App. I require some assistance`;
+  //   window.open(`https://wa.me/+2349014992643/?text=${message}`, "blank");
+  // };
   return (
     <ScreenWrapper title="Account">
       <div className="flex lg:justify-center">
@@ -74,12 +78,20 @@ const HelpMobile = () => {
             <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
               <HiCog size={25} className="mr-6" /> Settings
             </div>
-            <div
+            <a
+              className="flex items-center text-lg text-tendo-active my-4 cursor-pointer"
+              href={`https://wa.me/+2349014992643/?text=${message}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <HiSupport size={25} className="mr-6" /> Help
+            </a>
+            {/* <div
               className="flex items-center text-lg text-tendo-active my-4 cursor-pointer"
               onClick={confirmOrder}
             >
               <HiSupport size={25} className="mr-6" /> Help
-            </div>
+            </div> */}
             <div className="flex items-center text-lg text-tendo-active my-4">
               <HiOutlineInformationCircle size={25} className="mr-6" /> About
             </div>

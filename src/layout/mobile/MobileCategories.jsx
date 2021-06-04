@@ -4,7 +4,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import EmptyImage from "../../assets/emptyImage.jpg";
-import { gDriveFileId } from "../../utils/utils";
+import { gDriveFileId, isSafari } from "../../utils/utils";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -52,9 +52,13 @@ const CategoryCard = ({ item }) => {
     });
   };
 
-  const imageSrc = `https://drive.google.com/uc?id=${gDriveFileId({
-    gURL: item.images,
-  })}`;
+  const imageSrc = isSafari
+    ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
+        gURL: item.images,
+      })}`
+    : `https://drive.google.com/uc?id=${gDriveFileId({
+        gURL: item.images,
+      })}`;
   return (
     <div
       style={{
