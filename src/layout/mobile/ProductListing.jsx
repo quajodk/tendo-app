@@ -36,7 +36,7 @@ const ProductListing = () => {
 
   return (
     <>
-      <div className="grid lg:grid-cols-4 grid-cols-1 gap-4">
+      <div className="grid lg:grid-cols-4 grid-cols-1 gap-4 mt-4 lg:mb-12 mb-16">
         {mobileProducts.map((item, idx) =>
           item.glideStatus === "TRUE" ? (
             <ProductCard item={item} key={idx} />

@@ -20,7 +20,7 @@ const PromoMobile = () => {
     }
     const data = {
       title: "Tendo Invite",
-      text: `You can start an e-commerce store with zero capital and. Join me and hundreds of people who are earning money from home using the Tendo App.\n\nYou can start selling products without investing any money. Just find products at wholesale products, add your profit, and share on social media. Tendo will handle deliveries for you and send you your profit.\n\nGet free delivery on your 1st order, if you enter my referral code.\nAccess TendoGh Now - ${protocol}//${url}?refCode=${
+      text: `You can start an e-commerce store with zero capital. Join me and hundreds of people who are earning money from home using the Tendo App.\n\nWith Tendo you can start selling products without investing any money. Just find products at wholesale products, add your profit, and share on social media. Tendo will handle deliveries for you and send you your profit.\n\nGet free delivery on your 1st order, if you enter my referral code. Access TendoGh Now - ${protocol}//${url}?refCode=${
         auth ? auth?.username : null
       }\n\nLearn more about Tendo here: http://tendo.app`,
     };
