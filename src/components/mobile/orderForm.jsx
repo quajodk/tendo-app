@@ -94,16 +94,16 @@ const OrderForm = ({ item }) => {
               </div>
               <div className="px-4 pt-1 pb-3">
                 <label
-                  htmlFor="qnty"
+                  htmlFor="productQty"
                   className="block text-xs font-medium text-white"
                 >
                   Product Quantity
                 </label>
                 <div className="mt-2 border-b border-teal-500 py-2">
                   <input
-                    type="text"
+                    type="number"
                     name="productQty"
-                    id="qnty"
+                    id="productQty"
                     required
                     ref={register({ required: true })}
                     className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
