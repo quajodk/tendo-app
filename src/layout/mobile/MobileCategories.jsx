@@ -52,7 +52,7 @@ const CategoryCard = ({ item }) => {
     });
   };
 
-  const imageSrc = isSafari
+  const imageSrc = isSafari()
     ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
         gURL: item.images,
       })}`
@@ -61,6 +61,7 @@ const CategoryCard = ({ item }) => {
       })}`;
   return (
     <div
+      className="cursor-pointer"
       style={{
         boxShadow: "rgba(255, 255, 255, 0) 0px 0px 1px",
         transition: "transform 0.2s ease 0s",

@@ -67,7 +67,7 @@ const CategoryTab = () => {
       searchFunction={mobileSelectedCategory.length ? productSearch : search}
     >
       <div className="overflow-y-scroll mb-24">
-        {mobileSelectedCategory.length ? (
+        {mobileSelectedCategory.length !== 0 ? (
           <CategoryProductsScreen />
         ) : (
           <MobileCategories />
