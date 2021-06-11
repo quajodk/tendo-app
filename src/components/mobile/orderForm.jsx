@@ -31,10 +31,11 @@ const OrderForm = ({ item }) => {
     if (_.isEmpty(values))
       return message.error("Form fields can not be empty", 5);
     const hide = message.loading("Loadings..", 0);
-    values.orderStatus = "Pending";
+    values.orderStatus = "PENDING";
     values.username = auth?.username;
     values.orderedOn = new Date().toLocaleDateString("en-GB");
-    // console.log(values);
+    values.orderNumber = `RS${Math.floor(Math.random() * 90000) + 10000}`;
+
     axios({
       method: "POST",
       headers: {

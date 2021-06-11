@@ -15,7 +15,7 @@ const MobileRegisterForm = ({ refCode }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    document.getElementById("referralCode").value = refCode ? refCode : "Tendo";
+    document.getElementById("referralCode").value = refCode ?? "";
   }, [refCode]);
 
   const createUserName = ({ name, phone, length }) => {
@@ -38,10 +38,8 @@ const MobileRegisterForm = ({ refCode }) => {
     values.token = btoa(`${values.fullName} ${phone}`);
     values.referralCode =
       values.referralCode !== undefined
-        ? values.referralCode
-        : refCode
-        ? refCode
-        : "tendo";
+        ? values.referralCode.toUpperCase()
+        : refCode.toUpperCase();
     values.username = createUserName({
       name: values.fullName,
       phone,
@@ -182,7 +180,7 @@ const MobileRegisterForm = ({ refCode }) => {
                   autoComplete="referralCode"
                   className="focus:ring-sokoBlue focus:border-sokoBlue block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 rounded-md"
                   placeholder="Enter referral code"
-                  defaultValue={refCode ? refCode : "Tendo"}
+                  defaultValue={refCode}
                   ref={register()}
                 />
               </div>

@@ -13,6 +13,7 @@ import Modal from "../../components/Modal";
 import MobileLoginForm from "../../components/mobile/mobileLoginForm";
 import MobileRegisterForm from "../../components/mobile/mobileRegisterForm";
 import UserOrders from "../../components/mobile/userOrders";
+import OrderDetails from "../../components/mobile/orderDetails";
 
 const MobileLayer = () => {
   const dispatch = useDispatch();
@@ -100,7 +101,11 @@ const MobileLayer = () => {
                       )}
                     />
                   )}
-                  <Route path="/myorders" component={UserOrders} />
+                  <Route exact path="/myorders" component={UserOrders} />
+                  <Route
+                    path="/:orderNumber"
+                    render={(props) => <OrderDetails {...props} />}
+                  />
                   <Route path="/confirmorder/:sku" component={OrderConfirm} />
                   <Redirect from="/" to="/home" />
                 </Switch>
