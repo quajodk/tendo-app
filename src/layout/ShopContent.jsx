@@ -89,7 +89,7 @@ const ShopContent = () => {
             />
           )}
           <Route
-            path="/:orderNumber"
+            path="/order/:orderNumber"
             render={(props) => <OrderDetails {...props} />}
           />
           <Route path="/myorders" component={UserOrders} />
