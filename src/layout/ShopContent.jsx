@@ -10,6 +10,7 @@ import Modal from "../components/Modal";
 import MobileLoginForm from "../components/mobile/mobileLoginForm";
 import MobileRegisterForm from "../components/mobile/mobileRegisterForm";
 import OrderForm from "../components/mobile/orderForm";
+import OrderDetails from "../components/mobile/orderDetails";
 
 const ShopContent = () => {
   const dispatch = useDispatch();
@@ -87,6 +88,10 @@ const ShopContent = () => {
               )}
             />
           )}
+          <Route
+            path="/:orderNumber"
+            render={(props) => <OrderDetails {...props} />}
+          />
           <Route path="/myorders" component={UserOrders} />
           <Route path="/confirmorder/:sku" component={OrderConfirm} />
           <Redirect from="/" to="/home" />

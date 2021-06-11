@@ -6,8 +6,8 @@ import HomeTab from "./tabs/HomeTab";
 
 export const routes = [
   { component: HomeTab, title: "Home", exact: true },
-  { component: CategoryTab, title: "Categories" },
-  { component: ExploreMobile, title: "Explore" },
-  { component: PromoMobile, title: "Promotions" },
-  { component: HelpMobile, title: "Account" },
+  { component: CategoryTab, title: "Categories", exact: true },
+  { component: ExploreMobile, title: "Explore", exact: true },
+  { component: PromoMobile, title: "Promotions", exact: true },
+  { component: HelpMobile, title: "Account", exact: true },
 ];
