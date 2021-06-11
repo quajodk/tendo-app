@@ -96,7 +96,7 @@ const OrderCard = ({ order }) => {
               </div>
               <div>
                 <span className="text-sm text-white font-medium">
-                  GHS {order?.totalAmountToCollectFromCustomer}
+                  &#8358; {order?.totalAmountToCollectFromCustomer}
                 </span>
               </div>
             </div>

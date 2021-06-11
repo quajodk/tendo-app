@@ -85,7 +85,7 @@ export const ExploreCard = ({ item }) => {
     });
   };
 
-  const imageSrc = isSafari
+  const imageSrc = isSafari()
     ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
         gURL: item.titleImage,
       })}`
