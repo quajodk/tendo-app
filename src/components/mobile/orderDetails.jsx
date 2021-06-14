@@ -28,6 +28,8 @@ const OrderDetails = () => {
     }).then((res) => {
       console.log(res);
       setLoading(false);
+      setOrder(res?.data);
+      setImageLink("");
     });
   }, [orderNumber]);
 
@@ -41,9 +43,11 @@ const OrderDetails = () => {
 
   if (loading && !order) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <Spin indicator={antIcon} />
-      </div>
+      <ScreenWrapper title="orders" showBackBtn>
+        <div className="flex justify-center items-center h-screen">
+          <Spin indicator={antIcon} />
+        </div>
+      </ScreenWrapper>
     );
   }
 
