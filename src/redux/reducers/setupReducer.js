@@ -1,14 +1,13 @@
+// const initialState = {}
 
-const initialState = {}
+// function setupReducer(state = initialState, action) {
 
-function setupReducer(state = initialState, action) {
+//     // switch (action.type) {
+//     //     case :
 
-    switch (action.type) {
-        case :
+//     //         break;
 
-            break;
-
-        default:
-            break;
-    }
-}
+//     //     default:
+//     //         break;
+//     // }
+// }
