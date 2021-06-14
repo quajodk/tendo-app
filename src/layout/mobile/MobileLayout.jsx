@@ -101,11 +101,11 @@ const MobileLayer = () => {
                       )}
                     />
                   )}
-                  <Route exact path="/myorders" component={UserOrders} />
                   <Route
-                    path="/:orderNumber"
+                    path="/order/:orderNumber"
                     render={(props) => <OrderDetails {...props} />}
                   />
+                  <Route exact path="/myorders" component={UserOrders} />
                   <Route path="/confirmorder/:sku" component={OrderConfirm} />
                   <Redirect from="/" to="/home" />
                 </Switch>

@@ -51,6 +51,7 @@ const Header = ({ title, showBack, search, goBack }) => {
           </div>
         </div>
       )}
+      <div className="onesignal-customlink-container"></div>
     </div>
   );
 };
