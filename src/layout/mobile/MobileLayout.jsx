@@ -15,6 +15,7 @@ import MobileRegisterForm from "../../components/mobile/mobileRegisterForm";
 import UserOrders from "../../components/mobile/userOrders";
 import OrderDetails from "../../components/mobile/orderDetails";
 import DeliveryPrices from "../../components/mobile/deliveryPrices";
+import Settings from "../../components/Settings";
 
 const MobileLayer = () => {
   const dispatch = useDispatch();
@@ -106,7 +107,8 @@ const MobileLayer = () => {
                     path="/order/:orderNumber"
                     render={(props) => <OrderDetails {...props} />}
                   />
-                  <Route path="/delivery" component={DeliveryPrices} />
+                  <Route path="/account/delivery" component={DeliveryPrices} />
+                  <Route path="/account/settings" component={Settings} />
                   <Route path="/myorders" component={UserOrders} />
                   <Route path="/confirmorder/:sku" component={OrderConfirm} />
                   <Redirect from="/home" to="/" />

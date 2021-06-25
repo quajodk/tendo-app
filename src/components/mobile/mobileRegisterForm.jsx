@@ -170,6 +170,26 @@ const MobileRegisterForm = ({ refCode }) => {
                 htmlFor="email"
                 className="block text-sm font-medium text-white"
               >
+                Your email
+              </label>
+              <div className="mt-2 relative rounded-md shadow-sm">
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  autoComplete="email"
+                  className="focus:ring-sokoBlue focus:border-sokoBlue block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 rounded-md"
+                  placeholder="example@mail.com"
+                  ref={register({ required: true })}
+                />
+              </div>
+            </div>
+
+            <div className="mb-5">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-white"
+              >
                 Who referred you?
               </label>
               <div className="mt-2 relative rounded-md shadow-sm">
@@ -177,7 +197,6 @@ const MobileRegisterForm = ({ refCode }) => {
                   type="text"
                   name="referralCode"
                   id="referralCode"
-                  autoComplete="referralCode"
                   className="focus:ring-sokoBlue focus:border-sokoBlue block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 rounded-md"
                   placeholder="Enter referral code"
                   defaultValue={refCode}

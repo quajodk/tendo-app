@@ -82,7 +82,7 @@ const HelpMobile = () => {
             <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
               <HiCreditCard size={25} className="mr-6" /> My Earnings
             </div>
-            <Link to="/delivery" className="cursor-pointer">
+            <Link to="/account/delivery" className="cursor-pointer">
               <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
                 <FiPackage size={25} className="mr-6" /> Delivery Prices
               </div>
@@ -90,9 +90,11 @@ const HelpMobile = () => {
             <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
               <HiBell size={25} className="mr-6" /> Notifications
             </div>
-            <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
-              <HiCog size={25} className="mr-6" /> Settings
-            </div>
+            <Link to="/account/settings" className="cursor-pointer">
+              <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
+                <HiCog size={25} className="mr-6" /> Settings
+              </div>
+            </Link>
             <a
               className="flex items-center text-lg text-tendo-active my-4 cursor-pointer"
               href={`https://wa.me/+233503247275/?text=${message}`}
