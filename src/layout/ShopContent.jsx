@@ -11,6 +11,7 @@ import MobileLoginForm from "../components/mobile/mobileLoginForm";
 import MobileRegisterForm from "../components/mobile/mobileRegisterForm";
 import OrderForm from "../components/mobile/orderForm";
 import OrderDetails from "../components/mobile/orderDetails";
+import DeliveryPrices from "../components/mobile/deliveryPrices";
 
 const ShopContent = () => {
   const dispatch = useDispatch();
@@ -71,7 +72,7 @@ const ShopContent = () => {
           {routes.map((screen, screenID) => (
             <Route
               key={screenID}
-              path={`/${screen.title?.toLowerCase()}`}
+              path={screen.path}
               component={screen.component ?? null}
               exact={screen.exact}
             />
@@ -92,9 +93,10 @@ const ShopContent = () => {
             path="/order/:orderNumber"
             render={(props) => <OrderDetails {...props} />}
           />
+          <Route path="/delivery" component={DeliveryPrices} />
           <Route path="/myorders" component={UserOrders} />
           <Route path="/confirmorder/:sku" component={OrderConfirm} />
-          <Redirect from="/" to="/home" />
+          <Redirect from="/home" to="/" />
         </Switch>
       )}
       <Modal

@@ -14,6 +14,7 @@ import MobileLoginForm from "../../components/mobile/mobileLoginForm";
 import MobileRegisterForm from "../../components/mobile/mobileRegisterForm";
 import UserOrders from "../../components/mobile/userOrders";
 import OrderDetails from "../../components/mobile/orderDetails";
+import DeliveryPrices from "../../components/mobile/deliveryPrices";
 
 const MobileLayer = () => {
   const dispatch = useDispatch();
@@ -81,7 +82,7 @@ const MobileLayer = () => {
                   {routes.map((screen, screenID) => (
                     <Route
                       key={screenID}
-                      path={`/${screen.title?.toLowerCase()}`}
+                      path={screen.path}
                       component={screen.component ?? null}
                       exact={screen.exact}
                     />
@@ -105,9 +106,10 @@ const MobileLayer = () => {
                     path="/order/:orderNumber"
                     render={(props) => <OrderDetails {...props} />}
                   />
-                  <Route exact path="/myorders" component={UserOrders} />
+                  <Route path="/delivery" component={DeliveryPrices} />
+                  <Route path="/myorders" component={UserOrders} />
                   <Route path="/confirmorder/:sku" component={OrderConfirm} />
-                  <Redirect from="/" to="/home" />
+                  <Redirect from="/home" to="/" />
                 </Switch>
               </div>
             </>

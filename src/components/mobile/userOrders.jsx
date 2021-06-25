@@ -81,7 +81,6 @@ const UserOrders = () => {
 export default UserOrders;
 
 const OrderCard = ({ order }) => {
-  console.log(order, "order");
   return (
     <>
       <Link

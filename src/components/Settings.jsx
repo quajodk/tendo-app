@@ -13,7 +13,7 @@ import { FiPackage } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import ScreenWrapper from "../../components/ScreenWrapper";
 
-const HelpMobile = () => {
+const Settings = () => {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -90,20 +90,6 @@ const HelpMobile = () => {
             <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
               <HiBell size={25} className="mr-6" /> Notifications
             </div>
-            <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
-              <HiCog size={25} className="mr-6" /> Settings
-            </div>
-            <a
-              className="flex items-center text-lg text-tendo-active my-4 cursor-pointer"
-              href={`https://wa.me/+233503247275/?text=${message}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <HiSupport size={25} className="mr-6" /> Help
-            </a>
-            <div className="flex items-center text-lg text-tendo-active my-4">
-              <HiOutlineInformationCircle size={25} className="mr-6" /> About
-            </div>
           </div>
         </div>
       </div>
@@ -111,4 +97,4 @@ const HelpMobile = () => {
   );
 };
 
-export default HelpMobile;
+export default Settings;

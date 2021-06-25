@@ -59,6 +59,7 @@ const CategoryCard = ({ item }) => {
     : `https://drive.google.com/uc?id=${gDriveFileId({
         gURL: item.images,
       })}`;
+
   return (
     <div
       className="cursor-pointer"

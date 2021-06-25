@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export function gDriveFileId({ gURL }) {
   const regex1 = new RegExp("/drive.google.com/open?id=(.*)/");
   const regex2 = new RegExp("/drive.google.com/file/d/(.*?)/");
@@ -37,4 +39,23 @@ function shuffleArray(array) {
 
 export const exploreRandomized = ({ data }) => {
   setInterval(shuffleArray(data), 900000);
+};
+
+export const request = async ({ method, url, data = {} }) => {
+  try {
+    const response = await axios({
+      method,
+      url,
+      credentials: "same-origin",
+      headers: {
+        Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
+        Accept: "application/json",
+      },
+      data,
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
