@@ -6,7 +6,7 @@ import OrderConfirm from "../components/mobile/orderConfirm";
 import UserOrders from "../components/mobile/userOrders";
 import { routes } from "./mobile/routes";
 import axios from "axios";
-import Modal from "../components/Modal";
+// import Modal from "../components/Modal";
 import MobileLoginForm from "../components/mobile/mobileLoginForm";
 import MobileRegisterForm from "../components/mobile/mobileRegisterForm";
 import OrderForm from "../components/mobile/orderForm";
