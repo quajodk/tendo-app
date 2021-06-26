@@ -1,15 +1,16 @@
 import React, { Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { HiOutlineTicket, HiCreditCard, HiUser } from "react-icons/hi";
+import { HiCreditCard, HiUser } from "react-icons/hi";
 import { BsFillPersonFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
 import ScreenWrapper from "../components/ScreenWrapper";
-import { Dialog, Transition, RadioGroup } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import { HiOutlineX } from "react-icons/hi";
 import UpdateUserAccountForm from "./mobile/profileUpdateForm";
+import UpdateUserPaymentForm from "./mobile/paymentDetails";
 
 const Settings = () => {
   let [isOpen, setIsOpen] = useState(false);
+  let [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -23,8 +24,15 @@ const Settings = () => {
     setIsOpen(false);
   }
 
+  function closePaymentModal() {
+    setIsPaymentOpen(false);
+  }
+
   function openModal() {
     setIsOpen(!isOpen);
+  }
+  function openPaymentModal() {
+    setIsPaymentOpen(!isOpen);
   }
 
   // const message = `Hi I am ${
@@ -84,7 +92,10 @@ const Settings = () => {
               <HiUser size={25} className="mr-6" /> Update Account
             </div>
 
-            <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
+            <div
+              className="flex items-center text-lg text-tendo-active my-4 cursor-pointer"
+              onClick={openPaymentModal}
+            >
               <HiCreditCard size={25} className="mr-6" /> Add Payment Details
             </div>
           </div>
@@ -95,6 +106,61 @@ const Settings = () => {
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto bg-tendo-bg"
           onClose={closeModal}
+          open={isOpen}
+        >
+          <div className="min-h-screen px-4 text-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0" />
+            </Transition.Child>
+
+            {/* This element is to trick the browser into centering the modal contents. */}
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                <Dialog.Title
+                  as="h3"
+                  className="text-lg font-medium leading-6 text-gray-900 flex justify-end"
+                >
+                  <HiOutlineX onClick={closeModal} className="cursor-pointer" />
+                </Dialog.Title>
+
+                <div className="w-full px-4 py-4">
+                  <div className="w-full max-w-md mx-auto">
+                    <UpdateUserAccountForm setModal={setIsOpen} />
+                  </div>
+                </div>
+              </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition>
+      <Transition appear show={isPaymentOpen} as={Fragment}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 z-10 overflow-y-auto bg-tendo-bg"
+          onClose={closePaymentModal}
+          open={isPaymentOpen}
         >
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
@@ -130,12 +196,15 @@ const Settings = () => {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900 flex justify-end"
                 >
-                  <HiOutlineX onClick={closeModal} className="cursor-pointer" />
+                  <HiOutlineX
+                    onClick={closePaymentModal}
+                    className="cursor-pointer"
+                  />
                 </Dialog.Title>
 
                 <div className="w-full px-4 py-4">
                   <div className="w-full max-w-md mx-auto">
-                    <UpdateUserAccountForm setModal={setIsOpen} />
+                    <UpdateUserPaymentForm setModal={setIsPaymentOpen} />
                   </div>
                 </div>
               </div>

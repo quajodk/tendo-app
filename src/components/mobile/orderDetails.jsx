@@ -352,6 +352,7 @@ const OrderDetails = () => {
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto bg-tendo-bg"
           onClose={closeModal}
+          open={isOpen}
         >
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
@@ -488,7 +489,7 @@ const OrderDetails = () => {
 
 export default OrderDetails;
 
-function CheckIcon(props) {
+export function CheckIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <circle cx={12} cy={12} r={12} fill="#fff" opacity="0.2" />

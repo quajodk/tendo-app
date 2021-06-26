@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,8 +11,6 @@ const UpdateUserAccountForm = ({ setModal }) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-
-  useEffect(() => {}, []);
 
   const onAccountUpdate = async (values) => {
     setLoading(true);
@@ -115,7 +113,9 @@ const UpdateUserAccountForm = ({ setModal }) => {
         <div className="my-5 w-full">
           <button
             type="submit"
-            className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white"
+            className={`w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white ${
+              loading ? "cursor-not-allowed" : null
+            }`}
             disabled={loading ? true : false}
           >
             {loading ? "Updating Account ..." : "Update Account"}

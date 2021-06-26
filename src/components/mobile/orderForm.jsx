@@ -175,11 +175,11 @@ const OrderForm = ({ item }) => {
                       leaveTo="opacity-0"
                     >
                       {loading ? (
-                        <Listbox.Options className="absolute w-screen mx-4 py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        <Listbox.Options className="absolute w-full mx-4 py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                           Loading ...
                         </Listbox.Options>
                       ) : (
-                        <Listbox.Options className="absolute w-screen mx-4 py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        <Listbox.Options className="absolute w-full mx-4 py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                           {deliveryLocations.map((rate, idx) => (
                             <Listbox.Option
                               key={idx + 1}

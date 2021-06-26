@@ -13,6 +13,7 @@ import OrderForm from "../components/mobile/orderForm";
 import OrderDetails from "../components/mobile/orderDetails";
 import DeliveryPrices from "../components/mobile/deliveryPrices";
 import Settings from "../components/Settings";
+import { Dialog, Transition } from "@headlessui/react";
 
 const ShopContent = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const ShopContent = () => {
   const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
   const showOrderForm = useSelector((state) => state.showOrderForm);
   const orderProduct = useSelector((state) => state.orderProduct);
-  const showMobileLogin = useSelector((state) => state.showMobileLogin);
+  const showMobileLogin = useSelector((state) => state.mobileShowLogin);
   const mobileShowSignUp = useSelector((state) => state.mobileShowSignUp);
   const auth = useSelector((state) => state.auth);
   const [referralCode, setReferralCode] = useState("");
@@ -101,7 +102,7 @@ const ShopContent = () => {
           <Redirect from="/home" to="/" />
         </Switch>
       )}
-      <Modal
+      {/* <Modal
         show={showMobileLogin}
         // canClose={!loading}
         setShow={() =>
@@ -112,8 +113,8 @@ const ShopContent = () => {
         size={100}
       >
         <MobileLoginForm />
-      </Modal>
-      <Modal
+      </Modal> */}
+      {/* <Modal
         show={mobileShowSignUp}
         // canClose={!loading}
         setShow={() =>
@@ -124,7 +125,130 @@ const ShopContent = () => {
         size={100}
       >
         <MobileRegisterForm refCode={referralCode} />
-      </Modal>
+      </Modal> */}
+      <Transition appear show={showMobileLogin} as={Fragment}>
+        <Dialog
+          as="div"
+          open={showMobileLogin}
+          className="fixed inset-0 z-10 overflow-y-auto bg-tendo-bg"
+          onClose={() =>
+            dispatch({
+              type: "toggleMobileLogin",
+            })
+          }
+        >
+          <div className="min-h-screen px-4 text-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0" />
+            </Transition.Child>
+
+            {/* This element is to trick the browser into centering the modal contents. */}
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl bg-">
+                {/* <Dialog.Title
+                  as="h3"
+                  className="text-lg font-medium leading-6 text-gray-900 flex justify-end"
+                >
+                  <HiOutlineX
+                    onClick={closePaymentModal}
+                    className="cursor-pointer"
+                  />
+                </Dialog.Title> */}
+
+                <div className="w-full px-4 py-4">
+                  <div className="w-full max-w-md mx-auto">
+                    <MobileLoginForm />
+                  </div>
+                </div>
+              </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition>
+
+      <Transition appear show={mobileShowSignUp} as={Fragment}>
+        <Dialog
+          as="div"
+          open={mobileShowSignUp}
+          className="fixed inset-0 z-10 overflow-y-auto bg-tendo-bg"
+          onClose={() =>
+            dispatch({
+              type: "toggleMobileSignUp",
+            })
+          }
+        >
+          <div className="min-h-screen px-4 text-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0" />
+            </Transition.Child>
+
+            {/* This element is to trick the browser into centering the modal contents. */}
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                {/* <Dialog.Title
+                  as="h3"
+                  className="text-lg font-medium leading-6 text-gray-900 flex justify-end"
+                >
+                  <HiOutlineX
+                    onClick={closePaymentModal}
+                    className="cursor-pointer"
+                  />
+                </Dialog.Title> */}
+
+                <div className="w-full px-4 py-4">
+                  <div className="w-full max-w-md mx-auto">
+                    <MobileRegisterForm refCode={referralCode} />
+                  </div>
+                </div>
+              </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition>
     </Fragment>
   );
 };
