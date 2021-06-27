@@ -12,6 +12,7 @@ import MobileRegisterForm from "../components/mobile/mobileRegisterForm";
 import OrderForm from "../components/mobile/orderForm";
 import OrderDetails from "../components/mobile/orderDetails";
 import DeliveryPrices from "../components/mobile/deliveryPrices";
+import NotificationsPage from "../components/mobile/notification";
 import Settings from "../components/Settings";
 import { Dialog, Transition } from "@headlessui/react";
 
@@ -97,6 +98,7 @@ const ShopContent = () => {
           />
           <Route path="/account/delivery" component={DeliveryPrices} />
           <Route path="/account/settings" component={Settings} />
+          <Route path="/account/notification" component={NotificationsPage} />
           <Route path="/myorders" component={UserOrders} />
           <Route path="/confirmorder/:sku" component={OrderConfirm} />
           <Redirect from="/home" to="/" />

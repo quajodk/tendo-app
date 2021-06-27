@@ -2,7 +2,7 @@ import React from "react";
 import ScreenWrapper from "../ScreenWrapper";
 import { ReactComponent as AnimatedSvg } from "../../assets/push-notifications-animate,svg";
 
-const Notifications = () => {
+const NotificationsPage = () => {
   return (
     <ScreenWrapper showBackBtn>
       <div className="flex flex-col justify-center items-center w-full h-screen">
@@ -13,4 +13,4 @@ const Notifications = () => {
   );
 };
 
-return Notifications;
+return NotificationsPage;
