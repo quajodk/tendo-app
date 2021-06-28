@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const NavItem = ({ active, icon, title, index, path }) => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const NavItem = ({ active, icon, title, index, path }) => {
   };
   return (
     <>
-      <Link
+      <NavLink
         to={`/${title.toLowerCase()}`}
         className="relative flex justify-end flex-col items-center flex-grow flex-shrink-0 p-0 m-0 text-center text-xs font-medium"
         style={{
@@ -31,7 +31,7 @@ const NavItem = ({ active, icon, title, index, path }) => {
             {title}
           </div>
         </div>
-      </Link>
+      </NavLink>
     </>
   );
 };

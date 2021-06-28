@@ -242,7 +242,7 @@ function shopReducer(state = initialState, action) {
     case "toggleMobileLogin":
       return {
         ...state,
-        showMobileLogin: !state.showMobileLogin,
+        mobileShowLogin: !state.mobileShowLogin,
       };
     case "toggleMobileSignUp":
       return {

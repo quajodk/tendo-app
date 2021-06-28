@@ -6,6 +6,7 @@ import { HiOutlineTicket } from "react-icons/hi";
 import axios from "axios";
 import ScreenWrapper from "../ScreenWrapper";
 import EmptyCart from "../EmptyCart";
+import { Link } from "react-router-dom";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -82,9 +83,12 @@ export default UserOrders;
 const OrderCard = ({ order }) => {
   return (
     <>
-      <div className="w-full rounded-lg flex p-4 justify-start bg-gray-800">
+      <Link
+        to={`/order/${order?.orderNumber.toLowerCase()}`}
+        className="w-full rounded-lg flex p-4 justify-start bg-gray-800"
+      >
         <div className="flex flex-row justify-between items-center w-full">
-          <div className="flex justify-center items-center bg-tendo-active rounded-lg mr-2">
+          <div className="flex justify-center items-center text-tendo-active rounded-lg mr-2">
             <HiOutlineTicket size={52} />
           </div>
           <div className="flex flex-col w-full">
@@ -114,7 +118,7 @@ const OrderCard = ({ order }) => {
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 };
