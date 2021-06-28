@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import ScreenWrapper from "../ScreenWrapper";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
-import { request } from "../../utils/utils";
+// import { request } from "../../utils/utils";
 
 const OrderForm = ({ item }) => {
   const { register, handleSubmit } = useForm();
@@ -61,15 +61,18 @@ const OrderForm = ({ item }) => {
       .then(async (res) => {
         if (res.data) {
           const slackMsg = {
-            text: `New Order\n\nOrder Number: ${values?.orderNumber}\nProduct SKU: ${values?.productSku}\nOrder Cost: ${values?.totalAmountToCollectFromCustomer}\nDelivery Location: ${values?.deliveryLocation}\nDelivery Cost: ${values?.deliveryCost}\n\nReseller Name: ${values?.resellerName}\nReseller Number: ${values?.resellerPhoneNumber}`,
+            text: `You Have New Order\n\nOrder Number: ${values?.orderNumber}\nOrder Status: ${values?.orderStatus}\nProduct SKU: ${values?.productSku}\nOrder Cost: ${values?.totalAmountToCollectFromCustomer}\n\nDelivery Information\nDelivery Location: ${values?.deliveryLocation}\nDelivery Cost: ${values?.deliveryCost}\n\nReseller Information\nReseller Name: ${values?.resellerName}\nReseller Number: ${values?.resellerPhoneNumber}\n\nCustomer Information\nCustomer Name: ${values?.customerName}\nCustomer Location: ${values?.customerLocation}\nCustomer Phone: ${values?.customerPhoneNumber}`,
           };
 
-          await request({
+          fetch(process.env.REACT_APP_SLACK_WEBHOOK, {
             method: "POST",
-            url: process.env.REACT_APP_SLACK_WEBHOOK,
-            data: slackMsg,
-            auth: false,
-          });
+            credentials: "omit",
+            body: JSON.stringify(slackMsg),
+          })
+            .then((res) => res.json())
+            .then((res) => console.log(res))
+            .catch((e) => console.log(e));
+
           hide();
           message.success("Order was placed successfully", 5);
           closeOrderForm();
