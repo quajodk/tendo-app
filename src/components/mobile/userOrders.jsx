@@ -70,9 +70,9 @@ const UserOrders = () => {
     <ScreenWrapper title="My orders" showBackBtn>
       <div className="grid grid-cols-1 gap-4 p-4">
         {userOrders.length &&
-          userOrders.map((order, idx) => (
-            <OrderCard order={order} key={idx + 1} />
-          ))}
+          userOrders
+            .sort((a, b) => (b.id > a.id ? 1 : -1))
+            .map((order, idx) => <OrderCard order={order} key={idx + 1} />)}
       </div>
     </ScreenWrapper>
   );
