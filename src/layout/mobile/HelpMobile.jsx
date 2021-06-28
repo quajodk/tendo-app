@@ -87,9 +87,11 @@ const HelpMobile = () => {
                 <FiPackage size={25} className="mr-6" /> Delivery Prices
               </div>
             </Link>
-            <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
-              <HiBell size={25} className="mr-6" /> Notifications
-            </div>
+            <Link to="/account/notification" className="cursor-pointer">
+              <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
+                <HiBell size={25} className="mr-6" /> Notifications
+              </div>
+            </Link>
             <Link to="/account/settings" className="cursor-pointer">
               <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
                 <HiCog size={25} className="mr-6" /> Settings
