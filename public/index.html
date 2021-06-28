@@ -46,6 +46,17 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+      window.OneSignal = window.OneSignal || [];
+      OneSignal.push(function () {
+        OneSignal.init({
+          appId: "bd1a59b7-1c9b-442b-83aa-08be962bcbdd",
+        });
+      });
+    </script>
+    
     <title>Tendo Reseller App</title>
   </head>
   <body>
