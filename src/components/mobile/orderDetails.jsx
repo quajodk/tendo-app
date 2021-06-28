@@ -66,15 +66,16 @@ const OrderDetails = () => {
           },
         })
           .then((res) => {
-            setProduct(res?.data?.evansHomes[0]);
+            console.log(res?.data);
+            setProduct(res?.data?.evansHome[0]);
 
             setImageSrc(
               isSafari()
                 ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
-                    gURL: res?.data?.evansHomes[0]?.titleImage,
+                    gURL: res?.data?.evansHome[0]?.titleImage,
                   })}`
                 : `https://drive.google.com/uc?id=${gDriveFileId({
-                    gURL: res?.data?.evansHomes[0]?.titleImage,
+                    gURL: res?.data?.evansHome[0]?.titleImage,
                   })}`
             );
           })
