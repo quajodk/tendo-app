@@ -55,25 +55,25 @@ const OrderDetails = () => {
     })
       .then((res) => {
         setLoading(false);
-        setOrder(res?.data?.newAppOrders[0]);
+        setOrder(res?.data?.nigeriaOrders[0]);
         axios({
           method: "GET",
-          url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/evansHome?filter[skUs]=${res?.data?.newAppOrders[0].productSku}`,
+          url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoNigeriaResellerApp/evansHome?filter[skUs]=${res?.data?.nigeriaOrders[0].productSku}`,
           headers: {
             Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
             Accept: "application/json",
           },
         })
           .then((res) => {
-            setProduct(res?.data?.evansHome[0]);
+            setProduct(res?.data?.evansHomes[0]);
 
             setImageSrc(
               isSafari()
                 ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
-                    gURL: res?.data?.evansHome[0]?.titleImage,
+                    gURL: res?.data?.evansHomes[0]?.titleImage,
                   })}`
                 : `https://drive.google.com/uc?id=${gDriveFileId({
-                    gURL: res?.data?.evansHome[0]?.titleImage,
+                    gURL: res?.data?.evansHomes[0]?.titleImage,
                   })}`
             );
           })
@@ -93,7 +93,7 @@ const OrderDetails = () => {
   const confirmOrder = () => {
     const message = `Hi I am ${
       auth && auth?.fullName
-    }, a reseller on TendoGh 🇬🇭 App. I want to cancel an my order with order number ${
+    }, a reseller on TendoNg  App. I want to cancel an my order with order number ${
       order?.orderNumber
     }`;
     window.open(`https://wa.me/+2349014992643/?text=${message}`, "blank");
@@ -110,16 +110,16 @@ const OrderDetails = () => {
       } else {
         order.remarks = selected.description;
         order.orderStatus = "CANCELLED";
-        const newAppOrder = order;
+        const nigeriaOrder = order;
 
         const result = await request({
-          url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders/${id}`,
+          url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetNigeria/nigeriaOrders/${id}`,
           method: "PUT",
-          data: { newAppOrder },
+          data: { nigeriaOrder },
         });
         setCancelling(false);
 
-        if (result.newAppOrder.id) closeModal();
+        if (result.nigeriaOrder.id) closeModal();
       }
     } catch (error) {
       console.log(error);
@@ -137,7 +137,7 @@ const OrderDetails = () => {
     );
   }
 
-  const message = `Hi I would like to confirm my order with product SKU ${order?.productSku} on TendoGh 🇬🇭 App.`;
+  const message = `Hi I would like to confirm my order with product SKU ${order?.productSku} on TendoNg  App.`;
 
   return (
     <>
@@ -198,7 +198,7 @@ const OrderDetails = () => {
                   <p className="text-sm font-medium text-white">Order Total:</p>
                   <p className="text-sm font-bold text-white">
                     {" "}
-                    GHS{" "}
+                    &#8358;{" "}
                     {parseFloat(
                       order?.totalAmountToCollectFromCustomer
                     ).toFixed(2)}
