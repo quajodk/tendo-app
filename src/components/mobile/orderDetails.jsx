@@ -92,7 +92,7 @@ const OrderDetails = () => {
     setIsOpen(!isOpen);
   }
 
-  const confirmOrder = () => {
+  const confirmOrderCancel = () => {
     const message = `Hi I am ${
       auth && auth?.fullName
     }, a reseller on TendoNg  App. I want to cancel an my order with order number ${
@@ -108,7 +108,7 @@ const OrderDetails = () => {
     try {
       if (selected.name.toLowerCase() === "others") {
         setCancelling(false);
-        return confirmOrder();
+        return confirmOrderCancel();
       } else {
         order.remarks = selected.description;
         order.orderStatus = "CANCELLED";
@@ -119,6 +119,18 @@ const OrderDetails = () => {
           method: "PUT",
           data: { nigeriaOrder },
         });
+        const slackMsg = {
+          text: `Order Cancellation\n\nOrder Number: ${order?.orderNumber}\n\nOrder Status: ${order?.orderStatus}\nProduct SKU: ${order?.productSku}\n\nReseller Name: ${order?.resellerName}\nReseller Number: ${order?.resellerPhoneNumber}\n\nRemarks: ${order.remarks}`,
+        };
+
+        fetch(process.env.REACT_APP_SLACK_WEBHOOK, {
+          method: "POST",
+          credentials: "omit",
+          body: JSON.stringify(slackMsg),
+        })
+          .then((res) => res.json())
+          .then((res) => console.log(res))
+          .catch((e) => console.log(e));
         setCancelling(false);
 
         if (result.nigeriaOrder.id) closeModal();
