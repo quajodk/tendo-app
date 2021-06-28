@@ -6,8 +6,10 @@ import {
   HiCog,
   HiSupport,
   HiOutlineInformationCircle,
+  HiBell,
 } from "react-icons/hi";
 import { BsFillPersonFill } from "react-icons/bs";
+import { FiPackage } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import ScreenWrapper from "../../components/ScreenWrapper";
 
@@ -75,9 +77,21 @@ const HelpMobile = () => {
             <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
               <HiCreditCard size={25} className="mr-6" /> My Earnings
             </div>
-            <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
-              <HiCog size={25} className="mr-6" /> Settings
-            </div>
+            <Link to="/account/delivery" className="cursor-pointer">
+              <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
+                <FiPackage size={25} className="mr-6" /> Delivery Prices
+              </div>
+            </Link>
+            <Link to="/account/notification" className="cursor-pointer">
+              <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
+                <HiBell size={25} className="mr-6" /> Notifications
+              </div>
+            </Link>
+            <Link to="/account/settings" className="cursor-pointer">
+              <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
+                <HiCog size={25} className="mr-6" /> Settings
+              </div>
+            </Link>
             <a
               className="flex items-center text-lg text-tendo-active my-4 cursor-pointer"
               href={`https://wa.me/+2349014992643/?text=${message}`}
@@ -86,12 +100,6 @@ const HelpMobile = () => {
             >
               <HiSupport size={25} className="mr-6" /> Help
             </a>
-            {/* <div
-              className="flex items-center text-lg text-tendo-active my-4 cursor-pointer"
-              onClick={confirmOrder}
-            >
-              <HiSupport size={25} className="mr-6" /> Help
-            </div> */}
             <div className="flex items-center text-lg text-tendo-active my-4">
               <HiOutlineInformationCircle size={25} className="mr-6" /> About
             </div>

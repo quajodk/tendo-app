@@ -1,4 +1,7 @@
 /* eslint-disable no-restricted-globals */
+/* eslint-disable no-undef */
+importScripts("https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js");
+importScripts("https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js");
 var CACHE_NAME = "tendo-reseller-app";
 var urlsToCache = ["/home", "/categories", "/explore"];
 

@@ -107,107 +107,112 @@ const MobileRegisterForm = ({ refCode }) => {
 
   return (
     <>
-      <div className="min-h-screen flex justify-center items-center bg-tendo-bg">
-        <div className="pt-10 lg:pt-7 pb-7">
-          <form onSubmit={handleSubmit(onSignUpSubmit)}>
-            <div className="text-left mb-9">
-              <h1 className="text-3xl text-white">Create your account</h1>
-              <p className="text-sm text-gray-400 mt-3">
-                Already have an account?{" "}
-                <span
-                  className="ml-1 text-blue-500 cursor-pointer"
-                  onClick={() => {
-                    dispatch({ type: "toggleMobileLogin" });
-                    dispatch({ type: "toggleMobileSignUp" });
-                  }}
-                >
-                  Sign in here
-                </span>
-              </p>
-            </div>
-            <div className="mb-5">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-white"
-              >
-                Your full name
-              </label>
-              <div className="mt-2 relative rounded-md shadow-sm">
-                <input
-                  type="text"
-                  name="fullName"
-                  id="fullName"
-                  autoComplete="fullName"
-                  required
-                  className="focus:ring-sokoBlue focus:border-sokoBlue block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 rounded-md"
-                  placeholder="John Doe"
-                  ref={register({ required: true })}
-                />
-              </div>
-            </div>
-
-            <div className="mb-5">
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium text-white"
-              >
-                Your phone number
-              </label>
-              <div className="mt-2 relative rounded-md shadow-sm">
-                <PhoneInput
-                  country={"ng"}
-                  enableSearch={true}
-                  inputStyle={{ width: "100%" }}
-                  inputClass="focus:ring-sokoBlue focus:border-sokoBlue sm:text-sm border-gray-300 py-4"
-                  placeholder="+233 20xxxxxx"
-                  value={phone}
-                  onChange={(value) => setPhone(value)}
-                />
-              </div>
-            </div>
-
-            <div className="mb-5">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-white"
-              >
-                Who referred you?
-              </label>
-              <div className="mt-2 relative rounded-md shadow-sm">
-                <input
-                  type="text"
-                  name="referralCode"
-                  id="referralCode"
-                  autoComplete="referralCode"
-                  className="focus:ring-sokoBlue focus:border-sokoBlue block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 rounded-md"
-                  placeholder="Enter referral code"
-                  defaultValue={refCode}
-                  ref={register()}
-                />
-              </div>
-            </div>
-
-            <div className="flex">
-              <div className="my-5 w-full">
-                <button
-                  type="submit"
-                  className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white"
-                  disabled={loading ? true : false}
-                >
-                  Create Account
-                </button>
-              </div>
-            </div>
-            <p className="text-center text-sm text-gray-400 mt-3">
-              By clicking on create an account <br />
-              you have agreed to our{" "}
-              <span to="#!" className="ml-1 text-blue-500">
-                Terms and Conditions
-              </span>
-            </p>
-          </form>
+      <form onSubmit={handleSubmit(onSignUpSubmit)}>
+        <div className="text-left mb-9">
+          <h1 className="text-3xl">Create your account</h1>
+          <p className="text-sm text-gray-400 mt-3">
+            Already have an account?{" "}
+            <span
+              className="ml-1 text-blue-500 cursor-pointer"
+              onClick={() => {
+                dispatch({ type: "toggleMobileLogin" });
+                dispatch({ type: "toggleMobileSignUp" });
+              }}
+            >
+              Sign in here
+            </span>
+          </p>
         </div>
-      </div>
+        <div className="mb-5">
+          <label htmlFor="email" className="block text-sm font-medium">
+            Your full name
+          </label>
+          <div className="mt-2 relative rounded-md shadow-sm">
+            <input
+              type="text"
+              name="fullName"
+              id="fullName"
+              autoComplete="fullName"
+              required
+              className="focus:ring-sokoBlue focus:border-sokoBlue block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 border-2  rounded-md"
+              placeholder="John Doe"
+              ref={register({ required: true })}
+            />
+          </div>
+        </div>
+
+        <div className="mb-5">
+          <label htmlFor="phone" className="block text-sm font-medium">
+            Your phone number
+          </label>
+          <div className="mt-2 relative rounded-md shadow-sm">
+            <PhoneInput
+              country={"ng"}
+              enableSearch={true}
+              inputStyle={{ width: "100%" }}
+              inputClass="focus:ring-gray-300 focus:border-gray-300 sm:text-sm border-gray-300 border-2 py-4"
+              placeholder="+234 20xxxxxx"
+              value={phone}
+              onChange={(value) => setPhone(value)}
+            />
+          </div>
+        </div>
+
+        <div className="mb-5">
+          <label htmlFor="email" className="block text-sm font-medium">
+            Your email
+          </label>
+          <div className="mt-2 relative rounded-md shadow-sm">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              autoComplete="email"
+              className="focus:ring-gray-300 focus:border-gray-300 block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 border-2  rounded-md"
+              placeholder="example@mail.com"
+              ref={register({ required: true })}
+            />
+          </div>
+        </div>
+
+        <div className="mb-5">
+          <label htmlFor="email" className="block text-sm font-medium">
+            Who referred you?
+          </label>
+          <div className="mt-2 relative rounded-md shadow-sm">
+            <input
+              type="text"
+              name="referralCode"
+              id="referralCode"
+              className="focus:ring-gray-300 focus:border-gray-300 block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 border-2  rounded-md"
+              placeholder="Enter referral code"
+              defaultValue={refCode}
+              ref={register()}
+            />
+          </div>
+        </div>
+
+        <div className="flex">
+          <div className="my-5 w-full">
+            <button
+              type="submit"
+              className={`w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white ${
+                loading ? "cursor-not-allowed" : null
+              }`}
+              disabled={loading ? true : false}
+            >
+              Create Account
+            </button>
+          </div>
+        </div>
+        <p className="text-center text-sm text-gray-400 mt-3">
+          By clicking on create an account <br />
+          you have agreed to our{" "}
+          <span to="#!" className="ml-1 text-blue-500">
+            Terms and Conditions
+          </span>
+        </p>
+      </form>
     </>
   );
 };

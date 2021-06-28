@@ -69,7 +69,9 @@ const OrderConfirm = () => {
               {/* <button
                 type="button"
                 className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white"
-                onClick={confirmOrder}
+                href={`https://wa.me/+2349014992643/?text=${message}`}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <FaWhatsapp size={24} className="mr-2" />
                 Confirm Order
@@ -86,13 +88,7 @@ const OrderConfirm = () => {
               suppliers, logistics companies and resellers.{" "}
             </p>
           </div>
-          <div className="mx-4 my-2 p-3 bg-blue-600 bg-opacity-10 rounded-sm border-1 text-blue-400 flex">
-            <p>
-              We charge a 10% processing fee on reseller profits only. This is
-              to enable us cover the transaction costs involved in paying
-              suppliers, logistics companies and resellers.{" "}
-            </p>
-          </div>
+
           <div className="flex flex-col p-4"></div>
           <div className="text-center px-4 py-2">
             <span className="text-base text-white font-normal">
@@ -136,7 +132,7 @@ const OrderConfirm = () => {
 
 export default OrderConfirm;
 
-const DeliveryRateCard = ({ rate }) => {
+export const DeliveryRateCard = ({ rate }) => {
   return (
     <>
       <div className="w-full rounded-lg flex flex-col p-4 justify-start bg-gray-800">

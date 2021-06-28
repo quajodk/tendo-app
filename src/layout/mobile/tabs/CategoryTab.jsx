@@ -9,7 +9,8 @@ const CategoryTab = () => {
   const mobileSelectedCategory = useSelector(
     (state) => state.mobileSelectedCategory
   );
-  const cateogories = useSelector((state) => state.originalMobileCategories);
+  const categories = useSelector((state) => state.originalMobileCategories);
+  const categorySelected = useSelector((state) => state.categorySelected);
   const categoryName = useSelector((state) => state.categoryName);
   const originalMobileSelectedCategory = useSelector(
     (state) => state.originalMobileSelectedCategory
@@ -21,8 +22,8 @@ const CategoryTab = () => {
   };
 
   const search = (text) => {
-    if (cateogories.length !== 0) {
-      const filteredProduct = cateogories.filter((x) =>
+    if (categories.length !== 0) {
+      const filteredProduct = categories.filter((x) =>
         x?.categories?.toLowerCase().includes(text.toLowerCase())
       );
 
@@ -33,7 +34,7 @@ const CategoryTab = () => {
     } else {
       dispatch({
         type: "updateMobileCategories",
-        payload: cateogories,
+        payload: categories,
       });
     }
   };
@@ -61,17 +62,13 @@ const CategoryTab = () => {
 
   return (
     <ScreenWrapper
-      title={mobileSelectedCategory.length ? categoryName : "Categories"}
-      showBackBtn={mobileSelectedCategory.length > 0}
+      title={categorySelected ? categoryName : "Categories"}
+      showBackBtn={categorySelected}
       backFunction={goBackHandler}
       searchFunction={mobileSelectedCategory.length ? productSearch : search}
     >
       <div className="overflow-y-scroll mb-24">
-        {mobileSelectedCategory.length !== 0 ? (
-          <CategoryProductsScreen />
-        ) : (
-          <MobileCategories />
-        )}
+        {categorySelected ? <CategoryProductsScreen /> : <MobileCategories />}
       </div>
     </ScreenWrapper>
   );
