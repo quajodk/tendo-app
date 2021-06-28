@@ -47,7 +47,7 @@ const OrderForm = ({ item }) => {
     values.orderedOn = new Date().toLocaleDateString("en-GB");
     values.orderNumber = `RS${Math.floor(Math.random() * 90000) + 10000}`;
     values.deliveryLocation = selectedDelivery.locations;
-    values.deliveryCost = selectedDelivery.deliveryRateGhs;
+    values.deliveryCost = selectedDelivery["rate (naira)"];
 
     axios({
       method: "POST",

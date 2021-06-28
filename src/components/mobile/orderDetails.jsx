@@ -47,13 +47,14 @@ const OrderDetails = () => {
   useEffect(() => {
     axios({
       method: "GET",
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetNigeria/nigeriaOrders?filter[orderNumber]=${orderNumber}`,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetNigeria/nigeriaOrders?filter[orderNumber]=${orderNumber.toUpperCase()}`,
       headers: {
         Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
         Accept: "application/json",
       },
     })
       .then((res) => {
+        console.log(res);
         setLoading(false);
         setOrder(res?.data?.nigeriaOrders[0]);
         axios({
@@ -330,7 +331,7 @@ const OrderDetails = () => {
                   </p>
                   <p className="text-sm font-bold text-white">
                     {" "}
-                    GHS {parseFloat(product?.wholesale).toFixed(2) ?? 0.0}
+                    &#8358; {parseFloat(product?.wholesale).toFixed(2) ?? 0.0}
                   </p>
                 </div>
               </div>
