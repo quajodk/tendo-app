@@ -143,12 +143,50 @@ const OrderForm = ({ item }) => {
                   />
                 </div>
               </div>
+
               <div className="px-4 pt-1 pb-3">
                 <label
                   htmlFor="totalAmount"
                   className="block text-xs font-medium text-white"
                 >
-                  Delivery Location
+                  Total Amount To collect from Customer
+                </label>
+                <div className="mt-2 border-b border-teal-500 py-2">
+                  <input
+                    type="text"
+                    name="totalAmountToCollectFromCustomer"
+                    id="totalAmount"
+                    required
+                    ref={register({ required: true })}
+                    className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
+                    placeholder="Sum up Cost of Product, Profit &amp; Delivery"
+                  />
+                </div>
+              </div>
+              <div className="px-4 pt-1 pb-3">
+                <label
+                  htmlFor="customerName"
+                  className="block text-xs font-medium text-white"
+                >
+                  Customer Name
+                </label>
+                <div className="mt-2 border-b border-teal-500 py-2">
+                  <input
+                    type="text"
+                    name="customerName"
+                    id="customerName"
+                    required
+                    ref={register({ required: true })}
+                    className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
+                  />
+                </div>
+              </div>
+              <div className="px-4 pt-1 pb-3">
+                <label
+                  htmlFor="totalAmount"
+                  className="block text-xs font-medium text-white"
+                >
+                  Delivery zone &amp; price
                 </label>
                 <div className="mt-2 py-2">
                   <Listbox
@@ -226,43 +264,6 @@ const OrderForm = ({ item }) => {
                       )}
                     </Transition>
                   </Listbox>
-                </div>
-              </div>
-              <div className="px-4 pt-1 pb-3">
-                <label
-                  htmlFor="totalAmount"
-                  className="block text-xs font-medium text-white"
-                >
-                  Total Amount To collect from Customer
-                </label>
-                <div className="mt-2 border-b border-teal-500 py-2">
-                  <input
-                    type="text"
-                    name="totalAmountToCollectFromCustomer"
-                    id="totalAmount"
-                    required
-                    ref={register({ required: true })}
-                    className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
-                    placeholder="Sum up Cost of Product, Profit &amp; Delivery"
-                  />
-                </div>
-              </div>
-              <div className="px-4 pt-1 pb-3">
-                <label
-                  htmlFor="customerName"
-                  className="block text-xs font-medium text-white"
-                >
-                  Customer Name
-                </label>
-                <div className="mt-2 border-b border-teal-500 py-2">
-                  <input
-                    type="text"
-                    name="customerName"
-                    id="customerName"
-                    required
-                    ref={register({ required: true })}
-                    className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
-                  />
                 </div>
               </div>
               <div className="px-4 pt-1 pb-3">
@@ -370,6 +371,7 @@ const OrderForm = ({ item }) => {
                     name="momoNumberToSendProfitTo"
                     id="momoNumber"
                     required
+                    defaultValue={auth?.accountNumber}
                     ref={register({ required: true })}
                     className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
                   />
@@ -388,6 +390,7 @@ const OrderForm = ({ item }) => {
                     name="whatIsYourMomoAccountName"
                     id="momoAccountName"
                     required
+                    defaultValue={auth?.accountName}
                     ref={register({ required: true })}
                     className="appearance-none bg-transparent border-none w-full text-blue-500 text-base mr-3 py-1 px-2 leading-tight focus:outline-none"
                   />
