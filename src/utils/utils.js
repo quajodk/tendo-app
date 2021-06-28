@@ -46,11 +46,11 @@ export const request = async ({ method, url, data = {}, auth = true }) => {
     const response = await axios({
       method,
       url,
-      credentials: "same-origin",
       headers: {
-        Authorization: auth ? "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=" : null,
-        Accept: "application/json",
-        "Content-type": "application/json",
+        Authorization: auth ? "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=" : "",
+        "Content-type": auth
+          ? "application/json"
+          : "application/x-www-form-urlencoded",
       },
       data,
     });
