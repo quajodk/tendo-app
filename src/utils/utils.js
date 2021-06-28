@@ -41,15 +41,16 @@ export const exploreRandomized = ({ data }) => {
   setInterval(shuffleArray(data), 900000);
 };
 
-export const request = async ({ method, url, data = {} }) => {
+export const request = async ({ method, url, data = {}, auth = true }) => {
   try {
     const response = await axios({
       method,
       url,
       credentials: "same-origin",
       headers: {
-        Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
+        Authorization: auth ? "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=" : null,
         Accept: "application/json",
+        "Content-type": "application/json",
       },
       data,
     });

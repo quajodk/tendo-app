@@ -73,13 +73,7 @@ const OrderConfirm = () => {
               suppliers, logistics companies and resellers.{" "}
             </p>
           </div>
-          <div className="mx-4 my-2 p-3 bg-blue-600 bg-opacity-10 rounded-sm border-1 text-blue-400 flex">
-            <p>
-              We charge a 10% processing fee on reseller profits only. This is
-              to enable us cover the transaction costs involved in paying
-              suppliers, logistics companies and resellers.{" "}
-            </p>
-          </div>
+
           <div className="flex flex-col p-4"></div>
           <div className="text-center px-4 py-2">
             <span className="text-base text-white font-normal">

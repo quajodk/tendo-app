@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import ScreenWrapper from "../ScreenWrapper";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { request } from "../../utils/utils";
 
 const OrderForm = ({ item }) => {
   const { register, handleSubmit } = useForm();
@@ -37,6 +38,8 @@ const OrderForm = ({ item }) => {
     });
   };
 
+  console.log(process.env.REACT_APP_SLACK_WEBHOOK, "web hook");
+
   const onOrderSubmit = (values) => {
     if (_.isEmpty(values))
       return message.error("Form fields can not be empty", 5);
@@ -57,8 +60,18 @@ const OrderForm = ({ item }) => {
       data: { newAppOrder: values },
       url: "https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders",
     })
-      .then((res) => {
+      .then(async (res) => {
         if (res.data) {
+          const slackMsg = {
+            text: `New Order\n\nOrder Number: ${values?.orderNumber}\nProduct SKU: ${values?.productSku}\nOrder Cost: ${values?.totalAmountToCollectFromCustomer}\nDelivery Location: ${values?.deliveryLocation}\nDelivery Cost: ${values?.deliveryCost}\n\nReseller Name: ${values?.resellerName}\nReseller Number: ${values?.resellerPhoneNumber}`,
+          };
+
+          await request({
+            method: "POST",
+            url: process.env.REACT_APP_SLACK_WEBHOOK,
+            data: slackMsg,
+            auth: false,
+          });
           hide();
           message.success("Order was placed successfully", 5);
           closeOrderForm();

@@ -9,6 +9,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { Dialog, Transition, RadioGroup } from "@headlessui/react";
 import { HiOutlineX } from "react-icons/hi";
+import { useSelector } from "react-redux";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -39,6 +40,7 @@ const OrderDetails = () => {
   let [isOpen, setIsOpen] = useState(false);
   let [cancelling, setCancelling] = useState(false);
   const [selected, setSelected] = useState(reasons[0]);
+  const auth = useSelector((state) => state.auth);
 
   const { orderNumber } = useParams();
 
@@ -88,20 +90,37 @@ const OrderDetails = () => {
     setIsOpen(!isOpen);
   }
 
+  const confirmOrder = () => {
+    const message = `Hi I am ${
+      auth && auth?.fullName
+    }, a reseller on TendoGh 🇬🇭 App. I want to cancel an my order with order number ${
+      order?.orderNumber
+    }`;
+    window.open(`https://wa.me/+2349014992643/?text=${message}`, "blank");
+    closeModal();
+  };
+
   const cancelOrder = async (id) => {
     setCancelling(true);
-    order.remarks = selected.description;
-    order.orderStatus = "CANCELLED";
-    const newAppOrder = order;
-    try {
-      const result = await request({
-        url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders/${id}`,
-        method: "PUT",
-        data: { newAppOrder },
-      });
-      setCancelling(false);
 
-      if (result.newAppOrder.id) closeModal();
+    try {
+      if (selected.name.toLowerCase() === "others") {
+        setCancelling(false);
+        return confirmOrder();
+      } else {
+        order.remarks = selected.description;
+        order.orderStatus = "CANCELLED";
+        const newAppOrder = order;
+
+        const result = await request({
+          url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders/${id}`,
+          method: "PUT",
+          data: { newAppOrder },
+        });
+        setCancelling(false);
+
+        if (result.newAppOrder.id) closeModal();
+      }
     } catch (error) {
       console.log(error);
       setCancelling(false);
@@ -388,7 +407,7 @@ const OrderDetails = () => {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900 flex justify-between"
                 >
-                  Order cancellation?{" "}
+                  Cancel order?{" "}
                   <HiOutlineX onClick={closeModal} className="cursor-pointer" />
                 </Dialog.Title>
 
@@ -396,7 +415,7 @@ const OrderDetails = () => {
                   <div className="w-full max-w-md mx-auto">
                     <RadioGroup value={selected} onChange={setSelected}>
                       <RadioGroup.Label className="sr-only">
-                        order cancellation
+                        Cancel order?
                       </RadioGroup.Label>
                       <div className="space-y-2">
                         {reasons.map((plan) => (
