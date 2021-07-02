@@ -188,7 +188,6 @@ function shopReducer(state = initialState, action) {
       return {
         ...state,
         mobileSelectedCategory: [
-          ...state.mobileSelectedCategory,
           ...state.mobileProducts.filter((items) =>
             [
               items.type1,
@@ -201,7 +200,6 @@ function shopReducer(state = initialState, action) {
           ),
         ],
         originalMobileSelectedCategory: [
-          ...state.mobileSelectedCategory,
           ...state.mobileProducts.filter((items) =>
             [
               items.type1,
@@ -213,7 +211,7 @@ function shopReducer(state = initialState, action) {
             ].includes(action.payload)
           ),
         ],
-        categorySelected: !state.categorySelected,
+        // categorySelected: !state.categorySelected,
         categoryName: action.payload,
       };
     case "updateSelectedMobileCategory":

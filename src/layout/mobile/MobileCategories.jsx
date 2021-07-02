@@ -5,12 +5,15 @@ import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import EmptyImage from "../../assets/emptyImage.jpg";
 import { gDriveFileId, isSafari } from "../../utils/utils";
+import ScreenWrapper from "../../components/ScreenWrapper";
+import { Link } from "react-router-dom";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const MobileCategories = () => {
   const [data, loading] = useSheetData({ sheet: "categories", method: "GET" });
   const mobileCategories = useSelector((state) => state.mobileCategories);
+  const categories = useSelector((state) => state.originalMobileCategories);
   const dispatch = useDispatch();
   const init = useRef({ dispatch });
 
@@ -22,8 +25,26 @@ const MobileCategories = () => {
     });
   }, [data]);
 
+  const search = (text) => {
+    if (categories.length !== 0) {
+      const filteredProduct = categories.filter((x) =>
+        x?.categories?.toLowerCase().includes(text.toLowerCase())
+      );
+
+      dispatch({
+        type: "updateMobileCategories",
+        payload: filteredProduct,
+      });
+    } else {
+      dispatch({
+        type: "updateMobileCategories",
+        payload: categories,
+      });
+    }
+  };
+
   return (
-    <>
+    <ScreenWrapper title="Categories" searchFunction={search}>
       {loading && mobileCategories.length === 0 ? (
         <div className="flex justify-center items-center h-full">
           <Spin indicator={antIcon} />
@@ -36,22 +57,13 @@ const MobileCategories = () => {
             ))}
         </div>
       )}
-    </>
+    </ScreenWrapper>
   );
 };
 
 export default MobileCategories;
 
 const CategoryCard = ({ item }) => {
-  const dispatch = useDispatch();
-
-  const onCategoryTap = () => {
-    dispatch({
-      type: "selectedMobileCategory",
-      payload: item.categories,
-    });
-  };
-
   const imageSrc = isSafari()
     ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
         gURL: item.images,
@@ -61,14 +73,14 @@ const CategoryCard = ({ item }) => {
       })}`;
 
   return (
-    <div
+    <Link
       className="cursor-pointer"
       style={{
         boxShadow: "rgba(255, 255, 255, 0) 0px 0px 1px",
         transition: "transform 0.2s ease 0s",
         color: "white",
       }}
-      onClick={onCategoryTap}
+      to={`/categories/${item.categories}`}
     >
       <div className="relative">
         <div className="h-32 relative rounded-lg overflow-hidden">
@@ -112,6 +124,6 @@ const CategoryCard = ({ item }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
