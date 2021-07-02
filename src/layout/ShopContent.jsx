@@ -15,6 +15,7 @@ import DeliveryPrices from "../components/mobile/deliveryPrices";
 import NotificationsPage from "../components/mobile/notification";
 import Settings from "../components/Settings";
 import { Dialog, Transition } from "@headlessui/react";
+import { request } from "../utils/utils";
 
 const ShopContent = () => {
   const dispatch = useDispatch();
@@ -59,6 +60,26 @@ const ShopContent = () => {
               type: "authenticateUser",
               payload: data?.users[0],
             });
+            // check if user's successful orders is undefined
+            request({
+              url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders?filter[username]=${
+                data?.users[0]?.username
+              }&filter[orderStatus]=${"PROFIT PAID"}`,
+              method: "GET",
+            })
+              .then((res) => {
+                res && console.log("success");
+                data.users[0].successfulOrders = res.newAppOrders.length;
+                const user = data.users[0];
+                request({
+                  url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users/${data?.users[0]?.id}`,
+                  method: "PUT",
+                  data: { user },
+                })
+                  .then((resp) => resp && console.log("success"))
+                  .catch((e) => console.log(e));
+              })
+              .catch((e) => console.log(e));
           }
         })
         .catch((e) => {
