@@ -19,6 +19,7 @@ import Settings from "../../components/Settings";
 import NotificationsPage from "../../components/mobile/notification";
 import { Dialog, Transition } from "@headlessui/react";
 import { request } from "../../utils/utils";
+import CategoryTab from "./tabs/CategoryTab";
 // import { HiOutlineX } from "react-icons/hi";
 
 const MobileLayer = () => {
@@ -130,6 +131,10 @@ const MobileLayer = () => {
                   <Route
                     path="/order/:orderNumber"
                     render={(props) => <OrderDetails {...props} />}
+                  />
+                  <Route
+                    path="/categories/:categoryName"
+                    render={(props) => <CategoryTab {...props} />}
                   />
                   <Route path="/account/delivery" component={DeliveryPrices} />
                   <Route path="/account/settings" component={Settings} />
