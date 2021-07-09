@@ -53,6 +53,10 @@ const initialState = {
   mobileShowLogin: false,
   mobileShowSignUp: false,
   userOrders: [],
+  numOfUserOrders: 0,
+  numOfCancelledUserOrders: 0,
+  numOfSuccessUserOrders: 0,
+  totalEarned: 0,
 };
 
 function shopReducer(state = initialState, action) {
@@ -148,7 +152,6 @@ function shopReducer(state = initialState, action) {
     case "toggleOrderForm":
       return {
         ...state,
-        showOrderForm: !state.showOrderForm,
         orderProduct: action?.payload,
       };
     case "getMobileProducts":
@@ -188,7 +191,6 @@ function shopReducer(state = initialState, action) {
       return {
         ...state,
         mobileSelectedCategory: [
-          ...state.mobileSelectedCategory,
           ...state.mobileProducts.filter((items) =>
             [
               items.type1,
@@ -201,7 +203,6 @@ function shopReducer(state = initialState, action) {
           ),
         ],
         originalMobileSelectedCategory: [
-          ...state.mobileSelectedCategory,
           ...state.mobileProducts.filter((items) =>
             [
               items.type1,
@@ -213,7 +214,7 @@ function shopReducer(state = initialState, action) {
             ].includes(action.payload)
           ),
         ],
-        categorySelected: !state.categorySelected,
+        // categorySelected: !state.categorySelected,
         categoryName: action.payload,
       };
     case "updateSelectedMobileCategory":
@@ -258,6 +259,26 @@ function shopReducer(state = initialState, action) {
       return {
         ...state,
         showOrderForm: !state.showOrderForm,
+      };
+    case "getNumOfUserOrders":
+      return {
+        ...state,
+        numOfUserOrders: action.payload,
+      };
+    case "getNumOfCancelledUserOrders":
+      return {
+        ...state,
+        numOfCancelledUserOrders: action.payload,
+      };
+    case "getNumOfSuccessfulUserOrders":
+      return {
+        ...state,
+        numOfSuccessUserOrders: action.payload,
+      };
+    case "getUserEarning":
+      return {
+        ...state,
+        totalEarned: action.payload,
       };
     default:
       return state;

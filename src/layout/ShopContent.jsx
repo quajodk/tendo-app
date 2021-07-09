@@ -15,13 +15,16 @@ import DeliveryPrices from "../components/mobile/deliveryPrices";
 import NotificationsPage from "../components/mobile/notification";
 import Settings from "../components/Settings";
 import { Dialog, Transition } from "@headlessui/react";
+import { request } from "../utils/utils";
+import CategoryTab from "./mobile/tabs/CategoryTab";
+import Earning from "../components/mobile/earnings";
 
 const ShopContent = () => {
   const dispatch = useDispatch();
-  const productName = useSelector((state) => state.productName);
-  const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
-  const showOrderForm = useSelector((state) => state.showOrderForm);
-  const orderProduct = useSelector((state) => state.orderProduct);
+  // const { productName } = useParams();
+  // const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
+  // const showOrderForm = useSelector((state) => state.showOrderForm);
+  // const orderProduct = useSelector((state) => state.orderProduct);
   const showMobileLogin = useSelector((state) => state.mobileShowLogin);
   const mobileShowSignUp = useSelector((state) => state.mobileShowSignUp);
   const auth = useSelector((state) => state.auth);
@@ -59,6 +62,26 @@ const ShopContent = () => {
               type: "authenticateUser",
               payload: data?.nigeriaUsers[0],
             });
+            // check if user's successful orders is undefined
+            request({
+              url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders?filter[username]=${
+                data?.users[0]?.username
+              }&filter[orderStatus]=${"PROFIT PAID"}`,
+              method: "GET",
+            })
+              .then((res) => {
+                res && console.log("success");
+                data.users[0].successfulOrders = res.newAppOrders.length;
+                const user = data.users[0];
+                request({
+                  url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users/${data?.users[0]?.id}`,
+                  method: "PUT",
+                  data: { user },
+                })
+                  .then((resp) => resp && console.log("success"))
+                  .catch((e) => console.log(e));
+              })
+              .catch((e) => console.log(e));
           }
         })
         .catch((e) => {
@@ -68,42 +91,44 @@ const ShopContent = () => {
 
   return (
     <Fragment>
-      {showOrderForm ? (
-        <OrderForm item={orderProduct} />
-      ) : (
-        <Switch>
-          {routes.map((screen, screenID) => (
-            <Route
-              key={screenID}
-              path={screen.path}
-              component={screen.component ?? null}
-              exact={screen.exact}
-            />
-          ))}
-          {selectedMobileItem && (
-            <Route
-              path={`/${productName
-                ?.replace("(", " ")
-                .replace(")", " ")
-                .replace("/", " ")
-                .toLowerCase()}`}
-              render={(props) => (
-                <ProductDetailsBody {...props} item={selectedMobileItem} />
-              )}
-            />
-          )}
+      <Switch>
+        {routes.map((screen, screenID) => (
           <Route
-            path="/order/:orderNumber"
-            render={(props) => <OrderDetails {...props} />}
+            key={screenID}
+            path={screen.path}
+            component={screen.component ?? null}
+            exact={screen.exact}
           />
-          <Route path="/account/delivery" component={DeliveryPrices} />
-          <Route path="/account/settings" component={Settings} />
-          <Route path="/account/notification" component={NotificationsPage} />
-          <Route path="/myorders" component={UserOrders} />
-          <Route path="/confirmorder/:sku" component={OrderConfirm} />
-          <Redirect from="/home" to="/" />
-        </Switch>
-      )}
+        ))}
+
+        <Route
+          exact
+          path="/product/order"
+          render={(props) => <OrderForm {...props} />}
+        />
+
+        <Route
+          path={`/product/:productName`}
+          render={(props) => <ProductDetailsBody {...props} />}
+        />
+
+        <Route
+          path="/order/:orderNumber"
+          render={(props) => <OrderDetails {...props} />}
+        />
+        <Route
+          path="/categories/:categoryName"
+          render={(props) => <CategoryTab {...props} />}
+        />
+        <Route path="/account/delivery" component={DeliveryPrices} />
+        <Route path="/account/wallet" component={Earning} />
+        <Route path="/account/settings" component={Settings} />
+        <Route path="/account/notification" component={NotificationsPage} />
+        <Route path="/myorders" component={UserOrders} />
+        <Route path="/confirmorder/:sku" component={OrderConfirm} />
+        <Redirect from="/home" to="/" />
+      </Switch>
+
       {/* <Modal
         show={showMobileLogin}
         // canClose={!loading}

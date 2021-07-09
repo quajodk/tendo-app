@@ -52,8 +52,6 @@ const UpdateUserPaymentForm = ({ setModal }) => {
       });
       setLoading(false);
 
-      console.log(result, "res");
-
       if (result.user.id) {
         dispatch({
           type: "authenticateUser",
@@ -70,8 +68,6 @@ const UpdateUserPaymentForm = ({ setModal }) => {
       message.error("Error occurred adding payment. Try again.", 5);
     }
   };
-
-  console.log(auth, "user details");
 
   return (
     <form onSubmit={handleSubmit(onPaymentUpdate)}>

@@ -35,7 +35,7 @@ const DeliveryPrices = () => {
   return (
     <ScreenWrapper title="Delivery Prices" showBackBtn>
       <div className="w-screen flex-1 overflow-y-scroll bg-tendo-bg z-20">
-        <div className="grid grid-cols-1 gap-4 mx-4 mb-14">
+        <div className="grid grid-cols-1 gap-4 mx-4 mb-14 lg:pb-0 pb-16">
           {deliveryLocations.length &&
             deliveryLocations.map((rate, idx) => (
               <DeliveryRateCard rate={rate} key={idx + 1} />

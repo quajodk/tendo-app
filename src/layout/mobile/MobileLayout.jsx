@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState, Fragment } from "react";
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import BottomTabNavigation from "../../components/mobile/BottomTabNavigation";
 // import Header from "../../components/mobile/Header";
 import ProductDetailsBody from "../../components/mobile/mobileProductDetail";
 
@@ -18,14 +17,13 @@ import DeliveryPrices from "../../components/mobile/deliveryPrices";
 import Settings from "../../components/Settings";
 import NotificationsPage from "../../components/mobile/notification";
 import { Dialog, Transition } from "@headlessui/react";
+import { request } from "../../utils/utils";
+import CategoryTab from "./tabs/CategoryTab";
 // import { HiOutlineX } from "react-icons/hi";
 
 const MobileLayer = () => {
   const dispatch = useDispatch();
-  const productName = useSelector((state) => state.productName);
-  const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
-  const showOrderForm = useSelector((state) => state.showOrderForm);
-  const orderProduct = useSelector((state) => state.orderProduct);
+
   const showMobileLogin = useSelector((state) => state.showMobileLogin);
   const mobileShowSignUp = useSelector((state) => state.mobileShowSignUp);
   const auth = useSelector((state) => state.auth);
@@ -64,6 +62,26 @@ const MobileLayer = () => {
               type: "authenticateUser",
               payload: data?.nigeriaUsers[0],
             });
+
+            request({
+              url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders?filter[username]=${
+                data?.users[0]?.username
+              }&filter[orderStatus]=${"PROFIT PAID"}`,
+              method: "GET",
+            })
+              .then((res) => {
+                res && console.log("success");
+                data.users[0].successfulOrders = res.newAppOrders.length;
+                const user = data.users[0];
+                request({
+                  url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users/${data?.users[0]?.id}`,
+                  method: "PUT",
+                  data: { user },
+                })
+                  .then((resp) => resp && console.log("success"))
+                  .catch((e) => console.log(e));
+              })
+              .catch((e) => console.log(e));
           }
         })
         .catch((e) => {
@@ -76,57 +94,51 @@ const MobileLayer = () => {
       <div className="flex h-screen flex-1  flex-col font-poppins">
         {/* Handle when a product is selected */}
         <div className="h-screen flex-1 flex flex-col">
-          {showOrderForm ? (
-            <OrderForm item={orderProduct} />
-          ) : (
-            <>
-              {/* Body Goes here */}
-              <div className="flex-1 overflow-y-scroll bg-tendo-bg">
-                <Switch>
-                  {routes.map((screen, screenID) => (
-                    <Route
-                      key={screenID}
-                      path={screen.path}
-                      component={screen.component ?? null}
-                      exact={screen.exact}
-                    />
-                  ))}
-                  {selectedMobileItem && (
-                    <Route
-                      path={`/${productName
-                        ?.replace("(", " ")
-                        .replace(")", " ")
-                        .replace("/", " ")
-                        .toLowerCase()}`}
-                      render={(props) => (
-                        <ProductDetailsBody
-                          {...props}
-                          item={selectedMobileItem}
-                        />
-                      )}
-                    />
-                  )}
-                  <Route
-                    path="/order/:orderNumber"
-                    render={(props) => <OrderDetails {...props} />}
-                  />
-                  <Route path="/account/delivery" component={DeliveryPrices} />
-                  <Route path="/account/settings" component={Settings} />
-                  <Route
-                    path="/account/notification"
-                    component={NotificationsPage}
-                  />
-                  <Route path="/myorders" component={UserOrders} />
-                  <Route path="/confirmorder/:sku" component={OrderConfirm} />
-                  <Redirect from="/home" to="/" />
-                </Switch>
-              </div>
-            </>
-          )}
+          {/* Body Goes here */}
+          <div className="flex-1 overflow-y-scroll bg-tendo-bg">
+            <Switch>
+              {routes.map((screen, screenID) => (
+                <Route
+                  key={screenID}
+                  path={screen.path}
+                  component={screen.component ?? null}
+                  exact={screen.exact}
+                />
+              ))}
+              <Route
+                exact
+                path="/product/order"
+                render={(props) => <OrderForm {...props} />}
+              />
+
+              <Route
+                path={`/product/:productName`}
+                render={(props) => <ProductDetailsBody {...props} />}
+              />
+
+              <Route
+                path="/order/:orderNumber"
+                render={(props) => <OrderDetails {...props} />}
+              />
+              <Route
+                path="/categories/:categoryName"
+                render={(props) => <CategoryTab {...props} />}
+              />
+              <Route path="/account/delivery" component={DeliveryPrices} />
+              <Route path="/account/settings" component={Settings} />
+              <Route
+                path="/account/notification"
+                component={NotificationsPage}
+              />
+              <Route path="/myorders" component={UserOrders} />
+              <Route path="/confirmorder/:sku" component={OrderConfirm} />
+              <Redirect from="/home" to="/" />
+            </Switch>
+          </div>
         </div>
 
         {/* Bottom Tab navigator */}
-        <BottomTabNavigation />
+        {/* <BottomTabNavigation /> */}
       </div>
 
       {/* <Modal

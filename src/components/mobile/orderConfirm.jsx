@@ -34,6 +34,10 @@ const OrderConfirm = () => {
   //   window.open(`https://wa.me/+2349014992643/?text=${message}`, "blank");
   // };
 
+  const goHome = () => {
+    return history.push("/");
+  };
+
   return (
     <>
       <ScreenWrapper title="Confirm an Order" showBackBtn>
@@ -45,20 +49,35 @@ const OrderConfirm = () => {
               className="object-cover w-full h-full bg-transparent"
             />
           </div>
+          <div className="mx-4 my-6 p-3 bg-green-500 bg-opacity-50 rounded-sm border-1 text-white flex flex-col">
+            <p className="text-sm font-semibold">Order notice</p>
+
+            <p>
+              Your order will be delivered within 2 - 3 working days after order
+              confirmation
+            </p>
+            <p className="text-xs">
+              Note: There is instant delivery option, which comes with a
+              different delivery cost. Confirm your order with our agents and
+              inquire more about this offer.
+            </p>
+          </div>
           <div className="text-center px-4 py-2">
             <span className="text-xl text-white font-bold">
               Your order was successfully placed! Kindly confirm below.
             </span>
           </div>
+
           <div className="text-center px-4 py-2">
             <span className="text-xs text-gray-400">
-              You will be redirected to WhatsApp
+              You will be redirected to WhatsApp, to talk to our customer care
+              representative.
             </span>
           </div>
-          <div className="flex">
+          <div className="flex justify-between">
             <div className="mx-4 my-5 w-full">
               <a
-                className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white"
+                className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white hover:text-white"
                 href={`https://wa.me/+2349014992643/?text=${message}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -76,6 +95,15 @@ const OrderConfirm = () => {
                 <FaWhatsapp size={24} className="mr-2" />
                 Confirm Order
               </button> */}
+            </div>
+            <div className="mx-4 my-5 w-full">
+              <button
+                className="w-full flex justify-center py-4 px-4 border border-transparent lg:text-base font-medium rounded-md bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white text-sm"
+                type="button"
+                onClick={goHome}
+              >
+                Continue Shopping
+              </button>
             </div>
           </div>
           <div className="mx-4 my-2 p-3 bg-blue-600 bg-opacity-10 rounded-sm border-1 text-blue-400 flex flex-col">

@@ -20,11 +20,12 @@ const ProductListing = () => {
 
   useEffect(() => {
     const { dispatch } = init.current;
-    dispatch({
-      type: "getMobileProducts",
-      payload: data,
-    });
-  }, [data]);
+    mobileProducts.length === 0 &&
+      dispatch({
+        type: "getMobileProducts",
+        payload: data,
+      });
+  }, [data, mobileProducts.length]);
 
   if (loading && mobileProducts.length === 0) {
     return (
@@ -68,10 +69,7 @@ export const ProductCard = ({ item }) => {
   return (
     <>
       <Link
-        to={`/${item.product
-          ?.replace("(", " ")
-          .replace(")", " ")
-          .toLowerCase()}`}
+        to={`/product/${item.product?.replace("/", "$")}`}
         onClick={selectProduct}
       >
         <div className="mx-4">
@@ -100,31 +98,55 @@ export const ProductCard = ({ item }) => {
     </>
   );
 };
-export class ImageWithLoading extends React.Component {
-  state = { isLoaded: false };
+// export class ImageWithLoading extends React.Component {
+//   state = { isLoaded: false };
 
-  componentDidMount() {
+//   componentDidMount() {
+//     const image = new Image();
+//     image.onload = () => this.setState({ isLoaded: true });
+//     image.src = this.props.src;
+//   }
+
+//   render() {
+//     const { src } = this.props;
+//     const { isLoaded } = this.state;
+
+//     return isLoaded ? (
+//       <img
+//         className="w-full h-full lg:h-full object-cover"
+//         src={src}
+//         alt="product"
+//       />
+//     ) : (
+//       <img
+//         className="w-full h-full object-cover"
+//         src={EmptyImage}
+//         alt="product"
+//       />
+//     );
+//   }
+// }
+
+export const ImageWithLoading = ({ src }) => {
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
+  useEffect(() => {
     const image = new Image();
-    image.onload = () => this.setState({ isLoaded: true });
-    image.src = this.props.src;
-  }
+    image.src = src;
+    image.onload = () => setIsLoaded(true);
+  }, [src]);
 
-  render() {
-    const { src } = this.props;
-    const { isLoaded } = this.state;
-
-    return isLoaded ? (
-      <img
-        className="w-full h-full lg:h-full object-cover"
-        src={src}
-        alt="product"
-      />
-    ) : (
-      <img
-        className="w-full h-full lg:h-full object-cover"
-        src={EmptyImage}
-        alt="product"
-      />
-    );
-  }
-}
+  return isLoaded ? (
+    <img
+      className="w-full h-full lg:h-full object-cover"
+      src={src}
+      alt="product"
+    />
+  ) : (
+    <img
+      className="w-full h-full object-cover"
+      src={EmptyImage}
+      alt="product"
+    />
+  );
+};

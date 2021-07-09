@@ -10,7 +10,11 @@ import "react-phone-input-2/lib/bootstrap.css";
 
 const MobileRegisterForm = ({ refCode }) => {
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -35,7 +39,7 @@ const MobileRegisterForm = ({ refCode }) => {
 
   const onSignUpSubmit = (values) => {
     values.phone = phone;
-    values.token = btoa(`${values.fullName} ${phone}`);
+    values.token = Buffer.from(`${values.fullName} ${phone}`, "base64");
     values.referralCode =
       values.referralCode !== undefined
         ? values.referralCode.toUpperCase()
@@ -50,7 +54,9 @@ const MobileRegisterForm = ({ refCode }) => {
       return message.error("Invalid phone number. Check and try again", 5);
     if (_.isEmpty(values))
       return message.error("Form fields can not be empty", 5);
+
     const hide = message.loading("Loading...", 0);
+
     setLoading(true);
     // check phone already exist
     axios({
@@ -133,12 +139,16 @@ const MobileRegisterForm = ({ refCode }) => {
               name="fullName"
               id="fullName"
               autoComplete="fullName"
-              required
               className="focus:ring-sokoBlue focus:border-sokoBlue block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 border-2  rounded-md"
               placeholder="John Doe"
               ref={register({ required: true })}
             />
           </div>
+          {errors.fullName?.type === "required" && (
+            <span className={`block text-xs text-red-600 mt-2 font-semibold`}>
+              Please enter your full legal name
+            </span>
+          )}
         </div>
 
         <div className="mb-5">
@@ -168,11 +178,16 @@ const MobileRegisterForm = ({ refCode }) => {
               name="email"
               id="email"
               autoComplete="email"
-              className="focus:ring-gray-300 focus:border-gray-300 block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 border-2  rounded-md"
+              className="focus:ring-gray-300 focus:border-gray-300 block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 border-2 rounded-md"
               placeholder="example@mail.com"
               ref={register({ required: true })}
             />
           </div>
+          {errors.email?.type === "required" && (
+            <span className={`block text-xs text-red-600 mt-2 font-semibold`}>
+              Please enter your email
+            </span>
+          )}
         </div>
 
         <div className="mb-5">
@@ -187,9 +202,19 @@ const MobileRegisterForm = ({ refCode }) => {
               className="focus:ring-gray-300 focus:border-gray-300 block w-full pl-7 pr-12 py-4 sm:text-sm border-gray-300 border-2  rounded-md"
               placeholder="Enter referral code"
               defaultValue={refCode}
-              ref={register()}
+              ref={register({ required: true })}
             />
           </div>
+          <span
+            className={`block text-xs ${
+              errors.referralCode?.type === "required"
+                ? "text-red-600"
+                : "text-green-600"
+            } mt-2 font-semibold`}
+          >
+            Enter the referral code of the one who referred you. If none, enter
+            tendo.
+          </span>
         </div>
 
         <div className="flex">
@@ -208,9 +233,14 @@ const MobileRegisterForm = ({ refCode }) => {
         <p className="text-center text-sm text-gray-400 mt-3">
           By clicking on create an account <br />
           you have agreed to our{" "}
-          <span to="#!" className="ml-1 text-blue-500">
-            Terms and Conditions
-          </span>
+          <a
+            href="https://rebrand.ly/tendo-policy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-1 text-blue-500"
+          >
+            Terms &amp; Conditions
+          </a>
         </p>
       </form>
     </>
