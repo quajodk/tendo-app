@@ -64,19 +64,20 @@ const ShopContent = () => {
             });
             // check if user's successful orders is undefined
             request({
-              url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders?filter[username]=${
-                data?.users[0]?.username
+              url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetNigeria/nigeriaOrders?filter[username]=${
+                data?.nigeriaUsers[0]?.username
               }&filter[orderStatus]=${"PROFIT PAID"}`,
               method: "GET",
             })
               .then((res) => {
                 res && console.log("success");
-                data.users[0].successfulOrders = res.newAppOrders.length;
-                const user = data.users[0];
+                data.nigeriaUsers[0].successfulOrders =
+                  res.nigeriaOrders.length;
+                const nigeriaUser = data.nigeriaUsers[0];
                 request({
-                  url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users/${data?.users[0]?.id}`,
+                  url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoNigeriaResellerApp/nigeriaUsers/${data?.nigeriaUsers[0]?.id}`,
                   method: "PUT",
-                  data: { user },
+                  data: { nigeriaUser },
                 })
                   .then((resp) => resp && console.log("success"))
                   .catch((e) => console.log(e));

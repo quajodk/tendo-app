@@ -54,7 +54,6 @@ const OrderDetails = () => {
       },
     })
       .then((res) => {
-        console.log(res);
         setLoading(false);
         setOrder(res?.data?.nigeriaOrders[0]);
         axios({
@@ -66,7 +65,6 @@ const OrderDetails = () => {
           },
         })
           .then((res) => {
-            console.log(res?.data);
             setProduct(res?.data?.evansHome[0]);
 
             setImageSrc(

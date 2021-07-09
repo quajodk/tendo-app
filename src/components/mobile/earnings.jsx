@@ -22,33 +22,33 @@ function Earning() {
     const { dispatch } = init.current;
     // all orders
     request({
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders?filter[username]=${auth?.username}`,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetNigeria/nigeriaOrders?filter[username]=${auth?.username}`,
       method: "GET",
     })
       .then((res) => {
         dispatch({
           type: "getNumOfUserOrders",
-          payload: res.newAppOrders.length,
+          payload: res.nigeriaOrders.length,
         });
       })
       .catch((e) => console.log(e));
 
     // all cancelled orders
     request({
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders?filter[username]=${auth?.username}&filter[orderStatus]=CANCELLED`,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetNigeria/nigeriaOrders?filter[username]=${auth?.username}&filter[orderStatus]=CANCELLED`,
       method: "GET",
     })
       .then((res) => {
         dispatch({
           type: "getNumOfCancelledUserOrders",
-          payload: res.newAppOrders.length,
+          payload: res.nigeriaOrders.length,
         });
       })
       .catch((e) => console.log(e));
 
     // all successful orders
     request({
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders?filter[username]=${
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetNigeria/nigeriaOrders?filter[username]=${
         auth?.username
       }&filter[orderStatus]=${"PROFIT PAID"}`,
       method: "GET",
@@ -56,20 +56,20 @@ function Earning() {
       .then((res) => {
         dispatch({
           type: "getNumOfSuccessfulUserOrders",
-          payload: res.newAppOrders.length,
+          payload: res.nigeriaOrders.length,
         });
       })
       .catch((e) => console.log(e));
 
     // all successful orders
     request({
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders?filter[username]=${
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetNigeria/nigeriaOrders?filter[username]=${
         auth?.username
       }&filter[orderStatus]=${"PROFIT PROCESSING"}`,
       method: "GET",
     })
       .then((res) => {
-        const amtEarned = res.newAppOrders.reduce((acc, cur) => {
+        const amtEarned = res.nigeriaOrders.reduce((acc, cur) => {
           return (
             acc +
             parseInt(
