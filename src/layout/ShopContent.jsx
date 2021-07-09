@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, Route, Switch, useLocation, useParams } from "react-router";
+import { Redirect, Route, Switch, useLocation } from "react-router";
 import ProductDetailsBody from "../components/mobile/mobileProductDetail";
 import OrderConfirm from "../components/mobile/orderConfirm";
 import UserOrders from "../components/mobile/userOrders";
@@ -23,8 +23,8 @@ const ShopContent = () => {
   const dispatch = useDispatch();
   // const { productName } = useParams();
   // const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
-  const showOrderForm = useSelector((state) => state.showOrderForm);
-  const orderProduct = useSelector((state) => state.orderProduct);
+  // const showOrderForm = useSelector((state) => state.showOrderForm);
+  // const orderProduct = useSelector((state) => state.orderProduct);
   const showMobileLogin = useSelector((state) => state.mobileShowLogin);
   const mobileShowSignUp = useSelector((state) => state.mobileShowSignUp);
   const auth = useSelector((state) => state.auth);
