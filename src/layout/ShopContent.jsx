@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, Route, Switch, useLocation } from "react-router";
+import { Redirect, Route, Switch, useLocation, useParams } from "react-router";
 import ProductDetailsBody from "../components/mobile/mobileProductDetail";
 import OrderConfirm from "../components/mobile/orderConfirm";
 import UserOrders from "../components/mobile/userOrders";
@@ -17,11 +17,12 @@ import Settings from "../components/Settings";
 import { Dialog, Transition } from "@headlessui/react";
 import { request } from "../utils/utils";
 import CategoryTab from "./mobile/tabs/CategoryTab";
+import Earning from "../components/mobile/earnings";
 
 const ShopContent = () => {
   const dispatch = useDispatch();
-  const productName = useSelector((state) => state.productName);
-  const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
+  // const { productName } = useParams();
+  // const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
   const showOrderForm = useSelector((state) => state.showOrderForm);
   const orderProduct = useSelector((state) => state.orderProduct);
   const showMobileLogin = useSelector((state) => state.mobileShowLogin);
@@ -90,46 +91,44 @@ const ShopContent = () => {
 
   return (
     <Fragment>
-      {showOrderForm ? (
-        <OrderForm item={orderProduct} />
-      ) : (
-        <Switch>
-          {routes.map((screen, screenID) => (
-            <Route
-              key={screenID}
-              path={screen.path}
-              component={screen.component ?? null}
-              exact={screen.exact}
-            />
-          ))}
-          {selectedMobileItem && (
-            <Route
-              path={`/${productName
-                ?.replace("(", " ")
-                .replace(")", " ")
-                .replace("/", " ")
-                .toLowerCase()}`}
-              render={(props) => (
-                <ProductDetailsBody {...props} item={selectedMobileItem} />
-              )}
-            />
-          )}
+      <Switch>
+        {routes.map((screen, screenID) => (
           <Route
-            path="/order/:orderNumber"
-            render={(props) => <OrderDetails {...props} />}
+            key={screenID}
+            path={screen.path}
+            component={screen.component ?? null}
+            exact={screen.exact}
           />
-          <Route
-            path="/categories/:categoryName"
-            render={(props) => <CategoryTab {...props} />}
-          />
-          <Route path="/account/delivery" component={DeliveryPrices} />
-          <Route path="/account/settings" component={Settings} />
-          <Route path="/account/notification" component={NotificationsPage} />
-          <Route path="/myorders" component={UserOrders} />
-          <Route path="/confirmorder/:sku" component={OrderConfirm} />
-          <Redirect from="/home" to="/" />
-        </Switch>
-      )}
+        ))}
+
+        <Route
+          exact
+          path="/product/order"
+          render={(props) => <OrderForm {...props} />}
+        />
+
+        <Route
+          path={`/product/:productName`}
+          render={(props) => <ProductDetailsBody {...props} />}
+        />
+
+        <Route
+          path="/order/:orderNumber"
+          render={(props) => <OrderDetails {...props} />}
+        />
+        <Route
+          path="/categories/:categoryName"
+          render={(props) => <CategoryTab {...props} />}
+        />
+        <Route path="/account/delivery" component={DeliveryPrices} />
+        <Route path="/account/wallet" component={Earning} />
+        <Route path="/account/settings" component={Settings} />
+        <Route path="/account/notification" component={NotificationsPage} />
+        <Route path="/myorders" component={UserOrders} />
+        <Route path="/confirmorder/:sku" component={OrderConfirm} />
+        <Redirect from="/home" to="/" />
+      </Switch>
+
       {/* <Modal
         show={showMobileLogin}
         // canClose={!loading}

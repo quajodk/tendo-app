@@ -19,11 +19,12 @@ const MobileCategories = () => {
 
   useEffect(() => {
     const { dispatch } = init.current;
-    dispatch({
-      type: "getMobileCategory",
-      payload: data,
-    });
-  }, [data]);
+    mobileCategories.length === 0 &&
+      dispatch({
+        type: "getMobileCategory",
+        payload: data,
+      });
+  }, [data, mobileCategories.length]);
 
   const search = (text) => {
     if (categories.length !== 0) {

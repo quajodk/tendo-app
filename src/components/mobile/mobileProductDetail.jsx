@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   FiClipboard,
   FiImage,
@@ -8,12 +8,51 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { ImageWithLoading } from "../../layout/mobile/ProductListing";
-import { gDriveFileId, isSafari } from "../../utils/utils";
+import { gDriveFileId, isSafari, request } from "../../utils/utils";
 import ScreenWrapper from "../ScreenWrapper";
+import { useParams } from "react-router-dom";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
+import { Link, useHistory } from "react-router-dom";
 
-const ProductDetailsBody = ({ item }) => {
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+
+const ProductDetailsBody = () => {
+  const { productName } = useParams();
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
   const auth = useSelector((state) => state.auth);
+  const init = useRef({
+    dispatch,
+  });
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 });
+  let history = useHistory();
+
+  useEffect(() => {
+    const { dispatch } = init.current;
+    !selectedMobileItem &&
+      request({
+        url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/evansHome?filter[product]=${productName.replace(
+          "$",
+          "/"
+        )}&filter[glideStatus]=TRUE`,
+        method: "GET",
+      })
+        .then((res) => {
+          setLoading(false);
+
+          dispatch({
+            type: "selectMobileProduct",
+            payload: res?.evansHome[0],
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+          setLoading(false);
+        });
+  }, [productName, selectedMobileItem]);
+
   const orderProduct = () => {
     if (!auth) {
       dispatch({
@@ -22,29 +61,44 @@ const ProductDetailsBody = ({ item }) => {
     }
     dispatch({
       type: "toggleOrderForm",
-      payload: item,
+      payload: selectedMobileItem,
     });
+    return history.push("/product/order");
   };
+
+  if (loading && !selectedMobileItem) {
+    return (
+      <ScreenWrapper
+        // title={isTabletOrMobile ? selectedMobileItem.product : ""}
+        showBackBtn
+      >
+        <div className="flex justify-center items-center h-screen">
+          <Spin indicator={antIcon} />
+        </div>
+      </ScreenWrapper>
+    );
+  }
 
   const imageSrc = isSafari()
     ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
-        gURL: item.titleImage,
+        gURL: selectedMobileItem?.titleImage,
       })}`
     : `https://drive.google.com/uc?id=${gDriveFileId({
-        gURL: item.titleImage,
+        gURL: selectedMobileItem?.titleImage,
       })}`;
 
-  const message = `Hi I would like to check the availability of the product with SKU ${item?.skUs} on TendoGh 🇬🇭 App`;
+  const message = `Hi I would like to check the availability of the product with SKU ${selectedMobileItem?.skUs} on TendoGh 🇬🇭 App`;
 
   // const check = () => {
-  //   const message = `Hi I would like to check the availability of the product with SKU ${item?.skUs} on TendoGh 🇬🇭 App`;
+  //   const message = `Hi I would like to check the availability of the product with SKU ${selectedMobileItem?.skUs} on TendoGh 🇬🇭 App`;
   //   window.open(`https://wa.me/+233503247275/?text=${message}`, "blank");
   // };
 
-  const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 });
-
   return (
-    <ScreenWrapper title={isTabletOrMobile ? item.product : ""} showBackBtn>
+    <ScreenWrapper
+      title={isTabletOrMobile ? selectedMobileItem.product : ""}
+      showBackBtn
+    >
       <div className="min-h-max lg:grid lg:grid-cols-2 overflow-y-scroll">
         <div className="px-5 py-5">
           <div className="mx-2 my-4 relative rounded-lg overflow-hidden">
@@ -53,7 +107,9 @@ const ProductDetailsBody = ({ item }) => {
         </div>
         <div>
           <div className="px-2 py-4">
-            <p className="text-white font-bold text-base">{item?.product}</p>
+            <p className="text-white font-bold text-base">
+              {selectedMobileItem?.product}
+            </p>
           </div>
           <div
             className="px-2 py-4"
@@ -89,13 +145,13 @@ const ProductDetailsBody = ({ item }) => {
               </p>
               <p className="text-sm font-medium text-white">
                 {" "}
-                {item?.supplierGenericNameGh}
+                {selectedMobileItem?.supplierGenericNameGh}
               </p>
             </div>
           </div>
           <p className="px-2 py-4 text-base font-medium text-white">
             {" "}
-            GHS {item?.wholesale}
+            GHS {selectedMobileItem?.wholesale}
           </p>
           <hr className="my-4 mx-2" />
           <div
@@ -135,7 +191,10 @@ const ProductDetailsBody = ({ item }) => {
                 style={{ whiteSpace: "pre-wrap" }}
               >
                 {" "}
-                {`${item && item["cleanDescriptionWith\n\nSkUs"]}`}
+                {`${
+                  selectedMobileItem &&
+                  selectedMobileItem["cleanDescriptionWith\n\nSkUs"]
+                }`}
               </p>
             </div>
             <div
@@ -154,7 +213,8 @@ const ProductDetailsBody = ({ item }) => {
               }}
               onClick={() => {
                 navigator.clipboard.writeText(
-                  item && item["cleanDescriptionWith\n\nSkUs"]
+                  selectedMobileItem &&
+                    selectedMobileItem["cleanDescriptionWith\n\nSkUs"]
                 );
               }}
             >
@@ -163,7 +223,7 @@ const ProductDetailsBody = ({ item }) => {
           </div>
           <div className="mx-4 my-2">
             <a
-              href={item?.imageLink}
+              href={selectedMobileItem?.imageLink}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-blue-500"
@@ -211,7 +271,9 @@ const ProductDetailsBody = ({ item }) => {
               >
                 Product SKU
               </p>
-              <p className="text-base font-semibold text-white">{item?.skUs}</p>
+              <p className="text-base font-semibold text-white">
+                {selectedMobileItem?.skUs}
+              </p>
             </div>
             <div
               style={{
@@ -228,7 +290,7 @@ const ProductDetailsBody = ({ item }) => {
                 flexShrink: 0,
               }}
               onClick={() => {
-                navigator.clipboard.writeText(item?.skUs);
+                navigator.clipboard.writeText(selectedMobileItem?.skUs);
               }}
             >
               <FiClipboard size={24} />
@@ -251,8 +313,8 @@ const ProductDetailsBody = ({ item }) => {
             <FiCheckSquare size={24} />
           </div> */}
           <div className="mx-4 mt-8 mb-20">
-            <button
-              type="button"
+            <Link
+              to="/product/order"
               className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-blue-500"
               style={{
                 backgroundColor: "rgba(33, 150, 243, 0.118)",
@@ -262,7 +324,7 @@ const ProductDetailsBody = ({ item }) => {
             >
               <FiShoppingCart size={24} className="mr-2" />
               Order Product
-            </button>
+            </Link>
           </div>
           <div className="h-24 lg:h-0 mt-20 lg:mt-0"></div>
         </div>

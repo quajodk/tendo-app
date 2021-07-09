@@ -27,11 +27,12 @@ const ExploreMobile = () => {
 
   useEffect(() => {
     const { dispatch } = init.current;
-    dispatch({
-      type: "getMobileExploreProducts",
-      payload: data,
-    });
-  }, [data]);
+    mobileExploreProducts.length === 0 &&
+      dispatch({
+        type: "getMobileExploreProducts",
+        payload: data,
+      });
+  }, [data, mobileExploreProducts.length]);
 
   const search = (text) => {
     if (mobileExploreProducts.length !== 0) {
@@ -95,7 +96,10 @@ export const ExploreCard = ({ item }) => {
 
   return (
     <>
-      <Link to={`/${item.product.toLowerCase()}`} onClick={selectProduct}>
+      <Link
+        to={`/product/${item.product?.replace("/", "$")}`}
+        onClick={selectProduct}
+      >
         <div onClick={selectProduct}>
           <div className="rounded-lg flex flex-col overflow-hidden">
             <div className="h-32">

@@ -40,8 +40,8 @@ const HelpMobile = () => {
   // };
   return (
     <ScreenWrapper title="Account">
-      <div className="flex lg:justify-center">
-        <div className="flex-1 lg:w-1/2 p-4">
+      <div className="flex lg:justify-center justify-start w-full">
+        <div className="flex-1 lg:w-1/2 w-full p-4">
           <div className="flex flex-col justify-start mb-4">
             {auth && (
               <>
@@ -79,9 +79,12 @@ const HelpMobile = () => {
               </div>
             </Link>
 
-            <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
-              <HiCreditCard size={25} className="mr-6" /> My Earnings
-            </div>
+            <Link to="/account/wallet" className="cursor-pointer">
+              <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
+                <HiCreditCard size={25} className="mr-6" /> My Earnings
+              </div>
+            </Link>
+
             <Link to="/account/delivery" className="cursor-pointer">
               <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
                 <FiPackage size={25} className="mr-6" /> Delivery Prices
