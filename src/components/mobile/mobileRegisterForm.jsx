@@ -39,7 +39,7 @@ const MobileRegisterForm = ({ refCode }) => {
 
   const onSignUpSubmit = (values) => {
     values.phone = phone;
-    values.token = Buffer.from(`${values.fullName} ${phone}`, "base64");
+    values.token = btoa(`${values.fullName} ${phone}`);
     values.referralCode =
       values.referralCode !== undefined
         ? values.referralCode.toUpperCase()
