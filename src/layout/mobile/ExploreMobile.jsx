@@ -118,7 +118,7 @@ export const ExploreCard = ({ item }) => {
                 </p>
               </div>
               <div className="text-sm text-gray-400 font-normal">
-                GHS {item.wholesale}
+                &#8358; {item.wholesale}
               </div>
             </div>
           </div>
