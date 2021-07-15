@@ -19,6 +19,7 @@ const OrderForm = () => {
   const orderProduct = useSelector((state) => state.orderProduct);
   const history = useHistory();
   const auth = useSelector((state) => state.auth);
+  const [ordering, setOrdering] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -40,6 +41,7 @@ const OrderForm = () => {
   };
 
   const onOrderSubmit = (values) => {
+    setOrdering(true);
     if (_.isEmpty(values))
       return message.error("Form fields can not be empty", 5);
 
@@ -79,6 +81,7 @@ const OrderForm = () => {
             .catch((e) => console.log(e));
 
           hide();
+          setOrdering(false);
           message.success("Order was placed successfully", 5);
           closeOrderForm();
           history.push(`/confirmorder/${orderProduct?.skUs}`);
@@ -86,8 +89,12 @@ const OrderForm = () => {
       })
       .catch((e) => {
         hide();
-        message.error("Something went wrong, try again", 5);
+        setOrdering(false);
         console.log(e);
+        if (e.toJSON().message === "Network Error") {
+          return message.error("No internet connection, try again", 5);
+        }
+        message.error("Something went wrong, try again", 5);
       });
   };
 
@@ -463,13 +470,19 @@ const OrderForm = () => {
                 />
               </div>
             </div>
-            <div className="flex mb-12">
-              <div className="mx-4 my-5 w-full">
+
+            <div className="flex">
+              <div className="my-5 mx-4 w-full">
                 <button
                   type="submit"
-                  className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white"
+                  className={`w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2  ${
+                    ordering
+                      ? "cursor-not-allowed bg-gray-200 text-blue-500"
+                      : "bg-blue-500 text-white"
+                  }`}
+                  disabled={ordering ? true : false}
                 >
-                  Place Order
+                  {ordering ? "Placing Order ..." : "Place Order"}
                 </button>
               </div>
             </div>

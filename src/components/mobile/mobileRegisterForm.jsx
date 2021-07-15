@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { message } from "antd";
 import _ from "lodash";
+import { Detector } from "react-detect-offline";
 
 import "react-phone-input-2/lib/bootstrap.css";
 
@@ -70,6 +71,7 @@ const MobileRegisterForm = ({ refCode }) => {
       .then(({ data }) => {
         if (data?.users?.length === 0) {
           //   add user if does not exist
+          console.log(data);
           axios({
             method: "POST",
             headers: {
@@ -80,6 +82,7 @@ const MobileRegisterForm = ({ refCode }) => {
             url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users`,
           })
             .then(({ data }) => {
+              console.log(data);
               hide();
               dispatch({
                 type: "authenticateUser",
@@ -92,9 +95,12 @@ const MobileRegisterForm = ({ refCode }) => {
             })
             .catch((e) => {
               hide();
+              setLoading(false);
               console.log(e);
               message.error("Error occurred, try again", 10);
-              setLoading(false);
+              if (e.toJSON().message === "Network Error") {
+                return message.error("No internet connection, try again", 5);
+              }
             });
         } else {
           hide();
@@ -105,13 +111,21 @@ const MobileRegisterForm = ({ refCode }) => {
       .catch((e) => {
         hide();
         console.log(e);
-        message.error("Error occurred, try again", 10);
         setLoading(false);
+        if (e.toJSON().message === "Network Error") {
+          return message.error("No internet connection, try again", 5);
+        }
+        message.error("Error occurred, try again", 10);
       });
   };
 
   return (
     <>
+      <Detector
+        render={({ online }) =>
+          !online ? message.info("No internet connection ...", 10) : null
+        }
+      />
       <form onSubmit={handleSubmit(onSignUpSubmit)}>
         <div className="text-left mb-9">
           <h1 className="text-3xl">Create your account</h1>
