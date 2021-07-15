@@ -18,6 +18,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { request } from "../utils/utils";
 import CategoryTab from "./mobile/tabs/CategoryTab";
 import Earning from "../components/mobile/earnings";
+import PaymentRequest from "../components/mobile/paymentRequest";
 
 const ShopContent = () => {
   const dispatch = useDispatch();
@@ -66,7 +67,7 @@ const ShopContent = () => {
             request({
               url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetNigeria/nigeriaOrders?filter[username]=${
                 data?.nigeriaUsers[0]?.username
-              }&filter[orderStatus]=${"PROFIT PAID"}`,
+              }&filter[orderStatus]=${"PAYOUT READY"}`,
               method: "GET",
             })
               .then((res) => {
@@ -121,9 +122,14 @@ const ShopContent = () => {
           path="/categories/:categoryName"
           render={(props) => <CategoryTab {...props} />}
         />
-        <Route path="/account/delivery" component={DeliveryPrices} />
-        <Route path="/account/wallet" component={Earning} />
-        <Route path="/account/settings" component={Settings} />
+        <Route path="/account/delivery" component={DeliveryPrices} exact />
+        <Route path="/account/wallet" component={Earning} exact />
+        <Route path="/account/settings" component={Settings} exact />
+        <Route
+          path="/account/payment/:refNumber"
+          component={PaymentRequest}
+          exact
+        />
         <Route path="/account/notification" component={NotificationsPage} />
         <Route path="/myorders" component={UserOrders} />
         <Route path="/confirmorder/:sku" component={OrderConfirm} />
@@ -158,7 +164,7 @@ const ShopContent = () => {
         <Dialog
           as="div"
           open={showMobileLogin}
-          className="fixed inset-0 z-10 overflow-y-auto bg-tendo-bg"
+          className="fixed inset-0 z-30 overflow-y-auto bg-tendo-bg"
           onClose={() =>
             dispatch({
               type: "toggleMobileLogin",
@@ -220,7 +226,7 @@ const ShopContent = () => {
         <Dialog
           as="div"
           open={mobileShowSignUp}
-          className="fixed inset-0 z-10 overflow-y-auto bg-tendo-bg"
+          className="fixed inset-0 z-30 overflow-y-auto bg-tendo-bg"
           onClose={() =>
             dispatch({
               type: "toggleMobileSignUp",

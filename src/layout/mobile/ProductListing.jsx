@@ -131,9 +131,15 @@ export const ImageWithLoading = ({ src }) => {
   const [isLoaded, setIsLoaded] = React.useState(false);
 
   useEffect(() => {
+    let isMounted = true;
     const image = new Image();
-    image.src = src;
-    image.onload = () => setIsLoaded(true);
+    if (isMounted) {
+      image.onload = () => setIsLoaded(true);
+      image.src = src;
+    }
+    return () => {
+      isMounted = false;
+    };
   }, [src]);
 
   return isLoaded ? (

@@ -16,6 +16,8 @@ import OrderDetails from "../../components/mobile/orderDetails";
 import DeliveryPrices from "../../components/mobile/deliveryPrices";
 import Settings from "../../components/Settings";
 import NotificationsPage from "../../components/mobile/notification";
+import Earning from "../../components/mobile/earnings";
+import PaymentRequest from "../../components/mobile/paymentRequest";
 import { Dialog, Transition } from "@headlessui/react";
 import { request } from "../../utils/utils";
 import CategoryTab from "./tabs/CategoryTab";
@@ -66,7 +68,7 @@ const MobileLayer = () => {
             request({
               url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetNigeria/nigeriaOrders?filter[username]=${
                 data?.nigeriaUsers[0]?.username
-              }&filter[orderStatus]=${"PROFIT PAID"}`,
+              }&filter[orderStatus]=${"PAYOUT READY"}`,
               method: "GET",
             })
               .then((res) => {
@@ -125,8 +127,17 @@ const MobileLayer = () => {
                 path="/categories/:categoryName"
                 render={(props) => <CategoryTab {...props} />}
               />
-              <Route path="/account/delivery" component={DeliveryPrices} />
-              <Route path="/account/settings" component={Settings} />
+              <Route
+                path="/account/delivery"
+                component={DeliveryPrices}
+                exact
+              />
+              <Route path="/account/wallet" component={Earning} />
+              <Route path="/account/settings" component={Settings} exact />
+              <Route
+                path="/account/payment/:refNumber"
+                component={PaymentRequest}
+              />
               <Route
                 path="/account/notification"
                 component={NotificationsPage}
