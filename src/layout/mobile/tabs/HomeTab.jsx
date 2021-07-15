@@ -43,7 +43,7 @@ const HomeTab = () => {
       {auth &&
         (auth?.paymentMethod === "" || auth?.paymentMethod === undefined) && (
           <div
-            className="bg-yellow-200 p-2 flex items-center rounded-sm my-4 mx-4"
+            className="bg-yellow-200 p-2 flex items-center rounded-md my-4 mx-4"
             onClick={() => setIsPaymentOpen(true)}
           >
             <AiOutlineWarning className="mr-2 text-red-500 h-6 w-6" /> Payment

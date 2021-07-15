@@ -163,7 +163,7 @@ const ShopContent = () => {
         <Dialog
           as="div"
           open={showMobileLogin}
-          className="fixed inset-0 z-10 overflow-y-auto bg-tendo-bg"
+          className="fixed inset-0 z-30 overflow-y-auto bg-tendo-bg"
           onClose={() =>
             dispatch({
               type: "toggleMobileLogin",
@@ -200,16 +200,6 @@ const ShopContent = () => {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl bg-">
-                {/* <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 flex justify-end"
-                >
-                  <HiOutlineX
-                    onClick={closePaymentModal}
-                    className="cursor-pointer"
-                  />
-                </Dialog.Title> */}
-
                 <div className="w-full px-4 py-4">
                   <div className="w-full max-w-md mx-auto">
                     <MobileLoginForm />
@@ -225,7 +215,7 @@ const ShopContent = () => {
         <Dialog
           as="div"
           open={mobileShowSignUp}
-          className="fixed inset-0 z-10 overflow-y-auto bg-tendo-bg"
+          className="fixed inset-0 z-30 overflow-y-auto bg-tendo-bg"
           onClose={() =>
             dispatch({
               type: "toggleMobileSignUp",
@@ -262,16 +252,6 @@ const ShopContent = () => {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                {/* <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 flex justify-end"
-                >
-                  <HiOutlineX
-                    onClick={closePaymentModal}
-                    className="cursor-pointer"
-                  />
-                </Dialog.Title> */}
-
                 <div className="w-full px-4 py-4">
                   <div className="w-full max-w-md mx-auto">
                     <MobileRegisterForm refCode={referralCode} />
