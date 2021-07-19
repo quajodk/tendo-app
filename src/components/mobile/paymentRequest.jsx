@@ -17,6 +17,11 @@ function PaymentRequest() {
   const dispatch = useDispatch();
   let history = useHistory();
 
+  React.useEffect(() => {
+    (auth?.paymentMethod === "" || auth?.paymentMethod === undefined) &&
+      setPaymentOpen(true);
+  }, [auth?.paymentMethod]);
+
   const onsubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
