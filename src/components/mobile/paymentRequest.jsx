@@ -44,10 +44,16 @@ function PaymentRequest() {
         data: { resellerProfitRequest: values },
       });
       if (res) {
-        console.log(res);
         dispatch({
           type: "getUserEarning",
           payload: totalEarned - values.requestAmount,
+        });
+        auth.profitWithdrawn = values.requestAmount;
+        const user = auth;
+        await request({
+          url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users/${auth?.id}`,
+          method: "PUT",
+          data: { user },
         });
         setLoading(false);
       }

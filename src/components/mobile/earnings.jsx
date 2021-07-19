@@ -91,11 +91,11 @@ function Earning() {
 
         dispatch({
           type: "getUserEarning",
-          payload: amtEarned,
+          payload: amtEarned - (auth?.profitWithdrawn ?? 0),
         });
       })
       .catch((e) => console.log(e));
-  }, [auth?.username, dispatch]);
+  }, [auth?.username, auth?.profitWithdrawn]);
 
   const login = () => {
     dispatch({
