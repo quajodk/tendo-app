@@ -39,15 +39,24 @@ function PaymentRequest() {
     values.requestDate = new Date().toLocaleDateString("en-GB");
     values.balanceAmount = totalEarned - values.requestAmount;
 
-    if (values.requestAmount > totalEarned) {
+    if (parseInt(values.requestAmount) > totalEarned) {
       setLoading(false);
       message.error("You cannot request more than you have earned.", 10);
       return setRequestErr(true);
     }
 
+    if (
+      parseInt(values.requestAmount) < 0 ||
+      parseInt(values.requestAmount) === 0
+    ) {
+      setLoading(false);
+      message.error("You cannot request for amount less or equal zero", 10);
+      return;
+    }
+
     try {
       const res = await request({
-        url: "https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/resellerProfitRequest",
+        url: "https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetNigeria/resellerProfitRequest",
         method: "POST",
         data: { resellerProfitRequest: values },
       });
@@ -55,6 +64,13 @@ function PaymentRequest() {
         dispatch({
           type: "getUserEarning",
           payload: totalEarned - values.requestAmount,
+        });
+        auth.profitWithdrawn = values.requestAmount;
+        const nigeriaUser = auth;
+        await request({
+          url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoNigeriaResellerApp/nigeriaUsers/${auth?.id}`,
+          method: "PUT",
+          data: { nigeriaUser },
         });
         setIsPaymentOpen(true);
         setLoading(false);

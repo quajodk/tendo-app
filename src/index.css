@@ -2,7 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
+}
+
+svg {
+  vertical-align: baseline;
 }
