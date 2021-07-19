@@ -84,7 +84,7 @@ const OrderCard = ({ order }) => {
   return (
     <>
       <Link
-        to={`/order/${order?.orderNumber.toLowerCase()}`}
+        to={`/order/${order?.orderNumber?.toLowerCase()}`}
         className="w-full rounded-lg flex p-4 justify-start bg-gray-800"
       >
         <div className="flex flex-row justify-between items-center w-full">

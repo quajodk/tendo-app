@@ -82,7 +82,9 @@ function Earning() {
             acc +
             parseInt(
               cur?.totalAmountToCollectFromCustomer -
-                (parseInt(cur?.deliveryCost.replace("GHC ", "")) +
+                (parseInt(
+                  cur?.deliveryCost.toString().replace("&#8358; ", "")
+                ) +
                   parseInt(cur?.productPrice))
             )
           );
@@ -107,11 +109,11 @@ function Earning() {
   }
 
   const requestPayment = () => {
-    if (auth?.paymentMethod === "" || auth?.paymentMethod === undefined) {
+    (auth?.paymentMethod === "" || auth?.paymentMethod === undefined) &&
       setIsPaymentOpen(true);
-    }
+
     const refNumber = `TN${Math.floor(Math.random() * 90000) + 10000}`;
-    return history.push(`/account/payment/${refNumber}`);
+    history.push(`/account/payment/${refNumber}`);
   };
 
   return (
@@ -197,7 +199,7 @@ function Earning() {
       <Transition appear show={isPaymentOpen} as={React.Fragment}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-10 overflow-y-auto bg-tendo-bg"
+          className="fixed inset-0 z-30 overflow-y-auto bg-tendo-bg"
           onClose={closePaymentModal}
           open={isPaymentOpen}
         >

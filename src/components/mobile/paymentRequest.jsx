@@ -1,21 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { request } from "../../utils/utils";
 import ScreenWrapper from "../ScreenWrapper";
 import { Dialog, Transition } from "@headlessui/react";
 import { message } from "antd";
+import { HiOutlineX } from "react-icons/hi";
+import UpdateUserPaymentForm from "./paymentDetails";
 
 function PaymentRequest() {
   const [loading, setLoading] = React.useState(false);
   const [requestErr, setRequestErr] = React.useState(false);
   let [isPaymentOpen, setIsPaymentOpen] = React.useState(false);
+  let [paymentOpen, setPaymentOpen] = React.useState(false);
   const [amt, setAmt] = React.useState(0);
   const auth = useSelector((state) => state.auth);
   const totalEarned = useSelector((state) => state.totalEarned);
   const { refNumber } = useParams();
   const dispatch = useDispatch();
   let history = useHistory();
+
+  useEffect(() => {
+    (auth?.paymentMethod === "" || auth?.paymentMethod === undefined) &&
+      setPaymentOpen(true);
+  }, [auth?.paymentMethod]);
 
   const onsubmit = async (e) => {
     setLoading(true);
@@ -44,11 +52,11 @@ function PaymentRequest() {
         data: { resellerProfitRequest: values },
       });
       if (res) {
-        console.log(res);
         dispatch({
           type: "getUserEarning",
           payload: totalEarned - values.requestAmount,
         });
+        setIsPaymentOpen(true);
         setLoading(false);
       }
     } catch (error) {
@@ -60,6 +68,9 @@ function PaymentRequest() {
   function closePaymentModal() {
     setIsPaymentOpen(false);
     history.goBack();
+  }
+  function closePaymentFormModal() {
+    setPaymentOpen(false);
   }
 
   return (
@@ -211,7 +222,7 @@ function PaymentRequest() {
                 </Dialog.Title>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
-                    Your payment request has been successfully submitted.
+                    Your payment request has successfully been submitted.
                     Payment will be processed within 48 hours. You can use the
                     Reference number {refNumber} to track the status of the
                     request.
@@ -226,6 +237,63 @@ function PaymentRequest() {
                   >
                     Got it, thanks!
                   </button>
+                </div>
+              </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition>
+      <Transition appear show={paymentOpen} as={React.Fragment}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 z-30 overflow-y-auto bg-tendo-bg"
+          onClose={closePaymentModal}
+          open={paymentOpen}
+        >
+          <div className="min-h-screen px-4 text-center">
+            <Transition.Child
+              as={React.Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0" />
+            </Transition.Child>
+
+            {/* This element is to trick the browser into centering the modal contents. */}
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <Transition.Child
+              as={React.Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl bg-">
+                <Dialog.Title
+                  as="h3"
+                  className="text-lg font-medium leading-6 text-gray-900 flex justify-end"
+                >
+                  <HiOutlineX
+                    onClick={closePaymentFormModal}
+                    className="cursor-pointer"
+                  />
+                </Dialog.Title>
+
+                <div className="w-full px-4 py-4">
+                  <div className="w-full max-w-md mx-auto">
+                    <UpdateUserPaymentForm setModal={setPaymentOpen} />
+                  </div>
                 </div>
               </div>
             </Transition.Child>
