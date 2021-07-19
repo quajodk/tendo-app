@@ -10,6 +10,7 @@ function PaymentRequest() {
   const [loading, setLoading] = React.useState(false);
   const [requestErr, setRequestErr] = React.useState(false);
   let [isPaymentOpen, setIsPaymentOpen] = React.useState(false);
+  let [paymentOpen, setPaymentOpen] = React.useState(false);
   const [amt, setAmt] = React.useState(0);
   const auth = useSelector((state) => state.auth);
   const totalEarned = useSelector((state) => state.totalEarned);
@@ -42,6 +43,15 @@ function PaymentRequest() {
       return setRequestErr(true);
     }
 
+    if (
+      parseInt(values.requestAmount) < 0 ||
+      parseInt(values.requestAmount) === 0
+    ) {
+      setLoading(false);
+      message.error("You cannot request for amount less or equal zero", 10);
+      return;
+    }
+
     try {
       const res = await request({
         url: "https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/resellerProfitRequest",
@@ -60,6 +70,7 @@ function PaymentRequest() {
           method: "PUT",
           data: { user },
         });
+        setPaymentOpen(true);
         setLoading(false);
       }
     } catch (error) {
