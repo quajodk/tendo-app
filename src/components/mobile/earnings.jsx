@@ -77,12 +77,13 @@ function Earning() {
       method: "GET",
     })
       .then((res) => {
+        console.log(res);
         const amtEarned = res.newAppOrders.reduce((acc, cur) => {
           return (
             acc +
             parseInt(
               cur?.totalAmountToCollectFromCustomer -
-                (parseInt(cur?.deliveryCost.replace("GHC ", "")) +
+                (parseInt(cur?.deliveryCost.toString().replace("GHC ", "")) +
                   parseInt(cur?.productPrice))
             )
           );
