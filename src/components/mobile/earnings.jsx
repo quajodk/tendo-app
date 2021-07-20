@@ -77,21 +77,31 @@ function Earning() {
       method: "GET",
     })
       .then((res) => {
-        console.log(res);
         const amtEarned = res.newAppOrders.reduce((acc, cur) => {
+          const processingFee =
+            (parseInt(
+              cur?.totalAmountToCollectFromCustomer -
+                (parseInt(cur?.deliveryCost.toString().replace("GHC ", "")) +
+                  parseInt(cur?.productPrice) * parseInt(cur?.productQty ?? 1))
+            ) *
+              10) /
+            100;
+          console.log(processingFee);
           return (
             acc +
             parseInt(
               cur?.totalAmountToCollectFromCustomer -
                 (parseInt(cur?.deliveryCost.toString().replace("GHC ", "")) +
-                  parseInt(cur?.productPrice))
+                  parseInt(cur?.productPrice) *
+                    parseInt(cur?.productQty ?? 1)) -
+                processingFee
             )
           );
         }, 0);
 
         dispatch({
           type: "getUserEarning",
-          payload: amtEarned - (auth?.profitWithdrawn ?? 0),
+          payload: amtEarned - parseInt(auth?.profitWithdrawn ?? 0),
         });
       })
       .catch((e) => console.log(e));
