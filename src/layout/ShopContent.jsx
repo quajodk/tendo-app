@@ -19,6 +19,7 @@ import { request } from "../utils/utils";
 import CategoryTab from "./mobile/tabs/CategoryTab";
 import Earning from "../components/mobile/earnings";
 import PaymentRequest from "../components/mobile/paymentRequest";
+import ImageUpload from "./ImageUpload";
 
 const ShopContent = () => {
   const dispatch = useDispatch();
@@ -107,6 +108,11 @@ const ShopContent = () => {
           exact
           path="/product/order"
           render={(props) => <OrderForm {...props} />}
+        />
+        <Route
+          exact
+          path="/image_uploads"
+          render={(props) => <ImageUpload {...props} />}
         />
 
         <Route
