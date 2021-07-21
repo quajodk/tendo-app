@@ -86,10 +86,10 @@ function Earning() {
             ) *
               10) /
             100;
-          console.log(processingFee);
+
           return (
             acc +
-            parseInt(
+            parseFloat(
               cur?.totalAmountToCollectFromCustomer -
                 (parseInt(cur?.deliveryCost.toString().replace("GHC ", "")) +
                   parseInt(cur?.productPrice) *
@@ -101,7 +101,14 @@ function Earning() {
 
         dispatch({
           type: "getUserEarning",
-          payload: amtEarned - parseInt(auth?.profitWithdrawn ?? 0),
+          payload:
+            amtEarned -
+            parseInt(
+              auth?.profitWithdrawn === "" ||
+                auth?.profitWithdrawn === undefined
+                ? 0
+                : auth?.profitWithdrawn
+            ),
         });
       })
       .catch((e) => console.log(e));
