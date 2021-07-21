@@ -81,7 +81,9 @@ function Earning() {
           const processingFee =
             (parseInt(
               cur?.totalAmountToCollectFromCustomer -
-                (parseInt(cur?.deliveryCost.toString().replace("GHC ", "")) +
+                (parseInt(
+                  cur?.deliveryCost.toString().replace("&#8358; ", "")
+                ) +
                   parseInt(cur?.productPrice) * parseInt(cur?.productQty ?? 1))
             ) *
               10) /
@@ -89,9 +91,11 @@ function Earning() {
 
           return (
             acc +
-            parseInt(
+            parseFloat(
               cur?.totalAmountToCollectFromCustomer -
-                (parseInt(cur?.deliveryCost.toString().replace("GHC ", "")) +
+                (parseInt(
+                  cur?.deliveryCost.toString().replace("&#8358; ", "")
+                ) +
                   parseInt(cur?.productPrice) *
                     parseInt(cur?.productQty ?? 1)) -
                 processingFee
@@ -101,7 +105,14 @@ function Earning() {
 
         dispatch({
           type: "getUserEarning",
-          payload: amtEarned - parseInt(auth?.profitWithdrawn ?? 0),
+          payload:
+            amtEarned -
+            parseInt(
+              auth?.profitWithdrawn === "" ||
+                auth?.profitWithdrawn === undefined
+                ? 0
+                : auth?.profitWithdrawn
+            ),
         });
       })
       .catch((e) => console.log(e));
@@ -142,7 +153,7 @@ function Earning() {
           )}
           <div className="flex flex-col justify-start mb-4">
             <span className="text-2xl font-bold text-white">
-              GH&cent; {isNaN(totalEarned) ? 0.0 : totalEarned.toFixed(2)}
+              &#8358; {isNaN(totalEarned) ? 0.0 : totalEarned.toFixed(2)}
             </span>
             <span className="text-sm font-medium text-gray-600 flex items-center">
               Profit Earned - (Available to withdraw)
