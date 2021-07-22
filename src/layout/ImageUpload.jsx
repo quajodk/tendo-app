@@ -37,7 +37,7 @@ function ImageUpload() {
     const data = { filename, filetype: e.target.files[0].type };
 
     const response = await axios.post(
-      "http://3.141.5.74/api/v1/tendo/upload",
+      "https://limitless-eyrie-86093.herokuapp.com/http://18.118.133.19/api/v1/tendo/upload",
       data,
       options
     );
