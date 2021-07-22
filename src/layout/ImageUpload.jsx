@@ -5,6 +5,7 @@ import moment from "moment";
 function ImageUpload() {
   const [imgSrc, setImgSrc] = React.useState();
   const [copy, setCopy] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const uploadToS3 = async (file, signedRequest) => {
     const options = {
@@ -24,10 +25,8 @@ function ImageUpload() {
   };
 
   const fileSelected = async (e) => {
-    console.log(e.target.files);
-
+    setLoading(true);
     const filename = formatFileName(e.target.files[0]);
-
     const options = {
       headers: {
         "Content-Type": "application/json",
@@ -44,10 +43,8 @@ function ImageUpload() {
 
     const { signedRequest, imgUrl } = response?.data?.data;
 
-    console.log(signedRequest);
-
     await uploadToS3(e.target.files[0], signedRequest);
-    console.log(imgUrl);
+    setLoading(false);
     setImgSrc(imgUrl);
   };
 
@@ -120,7 +117,7 @@ function ImageUpload() {
           />
         </div>
       </div>
-
+      {loading ? <div className="mt-4 text-center">Loading...</div> : null}
       {imgSrc && <img src={imgSrc} alt="preview" className="w-32 h-32" />}
     </div>
   );
