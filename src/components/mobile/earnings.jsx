@@ -104,8 +104,7 @@ function Earning() {
           payload:
             amtEarned -
             parseInt(
-              auth?.profitWithdrawn === "" ||
-                auth?.profitWithdrawn === undefined
+              ["", undefined, null, NaN].includes(auth?.profitWithdrawn)
                 ? 0
                 : auth?.profitWithdrawn
             ),

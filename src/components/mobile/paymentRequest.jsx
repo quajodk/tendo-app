@@ -65,18 +65,30 @@ function PaymentRequest() {
           type: "getUserEarning",
           payload: totalEarned - parseInt(values.requestAmount),
         });
+        console.log(res, "request");
+        console.log(
+          [undefined, "", NaN, null].includes(auth?.profitWithdrawn),
+          "is profit"
+        );
         auth.profitWithdrawn =
-          parseInt(auth?.profitWithdrawn ?? 0) + parseInt(values.requestAmount);
+          parseInt(
+            [undefined, "", NaN, null].includes(auth?.profitWithdrawn)
+              ? 0
+              : auth.profitWithdrawn
+          ) + parseInt(values.requestAmount);
         const user = auth;
-        const res = await request({
+        console.log(auth, "auth");
+        console.log(user, "user local");
+
+        const response = await request({
           url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users/${auth?.id}`,
           method: "PUT",
           data: { user },
         });
-
+        console.log(response, "user");
         dispatch({
           type: "authenticateUser",
-          payload: res?.user,
+          payload: response?.user,
         });
 
         setIsPaymentOpen(true);
