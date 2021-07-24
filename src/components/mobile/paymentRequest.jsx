@@ -65,7 +65,7 @@ function PaymentRequest() {
           type: "getUserEarning",
           payload: totalEarned - parseInt(values.requestAmount),
         });
-        auth.profitWithdrawn = values.requestAmount;
+        auth.profitWithdrawn = parseInt(values.requestAmount);
         const nigeriaUser = auth;
         const res = await request({
           url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoNigeriaResellerApp/nigeriaUsers/${auth?.id}`,
