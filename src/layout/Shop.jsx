@@ -2,7 +2,8 @@
 import React, { Fragment } from "react";
 import ShopContent from "./ShopContent";
 import { Offline, Online } from "react-detect-offline";
-import NoInternet from "./NoInternet";
+// import NoInternet from "./NoInternet";
+import { message } from "antd";
 
 const Shop = () => {
   return (
@@ -11,7 +12,8 @@ const Shop = () => {
         <ShopContent />
       </Online>
       <Offline>
-        <NoInternet />
+        {message.info("Check your internet, you're currently offline")}
+        <ShopContent />
       </Offline>
     </Fragment>
   );

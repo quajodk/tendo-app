@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { gDriveFileId, isSafari } from "../../utils/utils";
+// import { gDriveFileId, isSafari } from "../../utils/utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
@@ -86,13 +86,13 @@ export const ExploreCard = ({ item }) => {
     });
   };
 
-  const imageSrc = isSafari()
-    ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
-        gURL: item.titleImage,
-      })}`
-    : `https://drive.google.com/uc?id=${gDriveFileId({
-        gURL: item.titleImage,
-      })}`;
+  // const imageSrc = isSafari()
+  //   ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
+  //       gURL: item.titleImage,
+  //     })}`
+  //   : `https://drive.google.com/uc?id=${gDriveFileId({
+  //       gURL: item.titleImage,
+  //     })}`;
 
   return (
     <>
@@ -103,7 +103,7 @@ export const ExploreCard = ({ item }) => {
         <div onClick={selectProduct}>
           <div className="rounded-lg flex flex-col overflow-hidden">
             <div className="h-32">
-              <ImageWithLoading src={imageSrc} />
+              <ImageWithLoading src={item?.newImageServerLink} />
             </div>
             <div
               className="flex flex-col p-3 flex-grow text-white"
