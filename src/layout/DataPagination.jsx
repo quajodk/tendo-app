@@ -38,12 +38,9 @@ function DataPagination({ data, RenderComponent, dataLimit }) {
       return data.slice(startIndex, endIndex);
     }
 
-    console.log(data, "this data in the effect");
     setPaginatedData((data) => [...data, ...getPaginatedData()]);
     setLoading(false);
   }, [currentPage, data]);
-
-  console.log(paginatedData, "paginated data");
 
   if (paginatedData.length === 0 && loading) {
     return (
