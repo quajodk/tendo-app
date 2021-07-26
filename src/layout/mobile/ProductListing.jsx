@@ -6,6 +6,7 @@ import { Spin } from "antd";
 import { Link } from "react-router-dom";
 import EmptyImage from "../../assets/emptyImage.jpg";
 import useSheetData from "../../hooks/useSheetData";
+import DataPagination from "../DataPagination";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -38,11 +39,17 @@ const ProductListing = () => {
   return (
     <>
       <div className="grid lg:grid-cols-4 grid-cols-1 gap-4 mt-4 lg:mb-12 mb-16">
-        {mobileProducts.map((item, idx) =>
+        {/* {mobileProducts.map((item, idx) =>
           item.glideStatus === "TRUE" ? (
             <ProductCard item={item} key={idx} />
           ) : null
-        )}
+        )} */}
+        {/* @TODO: Testing pagination */}
+        <DataPagination
+          RenderComponent={ProductCard}
+          data={mobileProducts}
+          dataLimit={20}
+        />
       </div>
     </>
   );

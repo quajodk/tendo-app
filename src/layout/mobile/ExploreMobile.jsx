@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { ImageWithLoading } from "./ProductListing";
 import ScreenWrapper from "../../components/ScreenWrapper";
 import useSheetData from "../../hooks/useSheetData";
+import DataPagination from "../DataPagination";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -63,11 +64,17 @@ const ExploreMobile = () => {
         </div>
       ) : (
         <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 mx-4">
-          {mobileExploreProducts.map((item) =>
+          {/* {mobileExploreProducts.map((item) =>
             item.glideStatus === "TRUE" ? (
               <ExploreCard item={item} key={item.id} />
             ) : null
-          )}
+          )} */}
+          {/* @TODO: testing pagination */}
+          <DataPagination
+            RenderComponent={ExploreCard}
+            data={mobileExploreProducts}
+            dataLimit={20}
+          />
         </div>
       )}
     </ScreenWrapper>

@@ -22,10 +22,7 @@ import PaymentRequest from "../components/mobile/paymentRequest";
 
 const ShopContent = () => {
   const dispatch = useDispatch();
-  // const { productName } = useParams();
-  // const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
-  // const showOrderForm = useSelector((state) => state.showOrderForm);
-  // const orderProduct = useSelector((state) => state.orderProduct);
+
   const showMobileLogin = useSelector((state) => state.mobileShowLogin);
   const mobileShowSignUp = useSelector((state) => state.mobileShowSignUp);
   const auth = useSelector((state) => state.auth);

@@ -6,6 +6,7 @@ import reducer from "./reducers/shopReducer";
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["auth"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);
