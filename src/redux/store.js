@@ -6,7 +6,7 @@ import reducer from "./reducers/shopReducer";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["auth"],
+  blacklist: ["auth", "currentMobileScreen"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);

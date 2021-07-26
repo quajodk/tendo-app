@@ -8,6 +8,7 @@ const LastItemComponent = React.forwardRef((props, ref) => (
 ));
 
 function DataPagination({ data, RenderComponent, dataLimit }) {
+  const [loading, setLoading] = React.useState(false);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [paginatedData, setPaginatedData] = React.useState([]);
   const init = React.useRef({ data, dataLimit });
@@ -29,17 +30,22 @@ function DataPagination({ data, RenderComponent, dataLimit }) {
   );
 
   React.useEffect(() => {
-    const { data, dataLimit } = init.current;
+    const { dataLimit } = init.current;
+    setLoading(true);
     function getPaginatedData() {
       const startIndex = currentPage * dataLimit - dataLimit;
       const endIndex = startIndex + dataLimit;
       return data.slice(startIndex, endIndex);
     }
 
+    console.log(data, "this data in the effect");
     setPaginatedData((data) => [...data, ...getPaginatedData()]);
-  }, [currentPage]);
+    setLoading(false);
+  }, [currentPage, data]);
 
-  if (data === null && paginatedData.length === 0) {
+  console.log(paginatedData, "paginated data");
+
+  if (paginatedData.length === 0 && loading) {
     return (
       <div className="flex justify-center items-center h-screen">
         <AiOutlineLoading className="animate-spin text-tendo-active text-lg" />
