@@ -11,7 +11,7 @@ function DataPagination({ data, RenderComponent, dataLimit }) {
   const [loading, setLoading] = React.useState(false);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [paginatedData, setPaginatedData] = React.useState([]);
-  const init = React.useRef({ data, dataLimit });
+  const init = React.useRef({ dataLimit });
 
   const observer = React.useRef();
   const lastItem = React.useCallback(
@@ -32,13 +32,14 @@ function DataPagination({ data, RenderComponent, dataLimit }) {
   React.useEffect(() => {
     const { dataLimit } = init.current;
     setLoading(true);
+
     function getPaginatedData() {
       const startIndex = currentPage * dataLimit - dataLimit;
       const endIndex = startIndex + dataLimit;
       return data.slice(startIndex, endIndex);
     }
 
-    setPaginatedData((data) => [...data, ...getPaginatedData()]);
+    setPaginatedData((data) => [...new Set([...data, ...getPaginatedData()])]);
     setLoading(false);
   }, [currentPage, data]);
 
