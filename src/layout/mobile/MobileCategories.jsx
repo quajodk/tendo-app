@@ -65,7 +65,6 @@ const MobileCategories = () => {
 export default MobileCategories;
 
 const CategoryCard = ({ item }) => {
-  console.log(item, "item obj");
   return (
     <Link
       className="cursor-pointer"
