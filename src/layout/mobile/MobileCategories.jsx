@@ -78,7 +78,7 @@ const CategoryCard = ({ item }) => {
       <div className="relative">
         <div className="h-32 relative rounded-lg overflow-hidden">
           <img
-            src={item.newImageServerLink ?? EmptyImage}
+            src={item.newImageServerLink}
             alt="category"
             className="object-cover h-full w-full"
           />
