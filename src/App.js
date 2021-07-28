@@ -5,7 +5,7 @@ import store, { persistor } from "./redux/store";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./graphql/client";
 import { BrowserRouter } from "react-router-dom";
-import ScrollToTop from "./utils/scrollToTop";
+import ScrollRestoration from "react-scroll-restoration";
 import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>
-            <ScrollToTop />
+            <ScrollRestoration />
             <Shop />
           </BrowserRouter>
         </PersistGate>

@@ -1,5 +1,8 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import {
+  useSelector,
+  // useDispatch
+} from "react-redux";
 import ScreenWrapper from "../../../components/ScreenWrapper";
 import ProductListing from "../ProductListing";
 import { Dialog, Transition } from "@headlessui/react";
@@ -8,38 +11,41 @@ import UpdateUserPaymentForm from "../../../components/mobile/paymentDetails";
 import { AiOutlineWarning } from "react-icons/ai";
 
 const HomeTab = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   let [isPaymentOpen, setIsPaymentOpen] = React.useState(false);
-  const mobileProducts = useSelector((state) => state.orginalMobileProducts);
+  // const mobileProducts = useSelector((state) => state.orginalMobileProducts);
   const auth = useSelector((state) => state.auth);
 
-  const search = (text) => {
-    if (mobileProducts.length !== 0) {
-      const filteredProduct = mobileProducts.filter(
-        (x) =>
-          x.glideStatus === "TRUE" &&
-          (x?.product?.toLowerCase().includes(text.toLowerCase()) ||
-            x?.skUs?.toLowerCase().includes(text.toLowerCase()))
-      );
+  // const search = (text) => {
+  //   if (mobileProducts.length !== 0) {
+  //     const filteredProduct = mobileProducts.filter(
+  //       (x) =>
+  //         x.glideStatus === "TRUE" &&
+  //         (x?.product?.toLowerCase().includes(text.toLowerCase()) ||
+  //           x?.skUs?.toLowerCase().includes(text.toLowerCase()))
+  //     );
 
-      dispatch({
-        type: "updateMobileProducts",
-        payload: filteredProduct,
-      });
-    } else {
-      dispatch({
-        type: "updateMobileProducts",
-        payload: mobileProducts,
-      });
-    }
-  };
+  //     dispatch({
+  //       type: "updateMobileProducts",
+  //       payload: filteredProduct,
+  //     });
+  //   } else {
+  //     dispatch({
+  //       type: "updateMobileProducts",
+  //       payload: mobileProducts,
+  //     });
+  //   }
+  // };
 
   function closePaymentModal() {
     setIsPaymentOpen(false);
   }
 
   return (
-    <ScreenWrapper title="Home" searchFunction={search}>
+    <ScreenWrapper
+      title="Home"
+      // searchFunction={search}
+    >
       {auth &&
         (auth?.paymentMethod === "" || auth?.paymentMethod === undefined) && (
           <div

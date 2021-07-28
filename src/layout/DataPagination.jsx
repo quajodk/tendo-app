@@ -16,7 +16,7 @@ function DataPagination({ data, RenderComponent, dataLimit }) {
   const observer = React.useRef();
   const lastItem = React.useCallback(
     (node) => {
-      if (paginatedData.length === 0) return;
+      if (paginatedData.length === 0 || node === null) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && data.length !== paginatedData.length) {
@@ -40,6 +40,7 @@ function DataPagination({ data, RenderComponent, dataLimit }) {
     }
 
     setPaginatedData((data) => [...new Set([...data, ...getPaginatedData()])]);
+
     setLoading(false);
   }, [currentPage, data]);
 

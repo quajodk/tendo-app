@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { gDriveFileId, isSafari } from "../../utils/utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
@@ -19,9 +18,9 @@ const ExploreMobile = () => {
   const mobileExploreProducts = useSelector(
     (state) => state.mobileExploreProducts
   );
-  const originalMobileExploreProducts = useSelector(
-    (state) => state.originalMobileExploreProducts
-  );
+  // const originalMobileExploreProducts = useSelector(
+  //   (state) => state.originalMobileExploreProducts
+  // );
   const dispatch = useDispatch();
 
   const init = useRef({ dispatch });
@@ -35,29 +34,32 @@ const ExploreMobile = () => {
       });
   }, [data, mobileExploreProducts.length]);
 
-  const search = (text) => {
-    if (mobileExploreProducts.length !== 0) {
-      const filteredProduct = originalMobileExploreProducts.filter(
-        (x) =>
-          x.glideStatus === "TRUE" &&
-          (x?.product?.toLowerCase().includes(text.toLowerCase()) ||
-            x?.skUs?.toLowerCase().includes(text.toLowerCase()))
-      );
+  // const search = (text) => {
+  //   if (mobileExploreProducts.length !== 0) {
+  //     const filteredProduct = originalMobileExploreProducts.filter(
+  //       (x) =>
+  //         x.glideStatus === "TRUE" &&
+  //         (x?.product?.toLowerCase().includes(text.toLowerCase()) ||
+  //           x?.skUs?.toLowerCase().includes(text.toLowerCase()))
+  //     );
 
-      dispatch({
-        type: "updateMobileExploreProducts",
-        payload: filteredProduct,
-      });
-    } else {
-      dispatch({
-        type: "updateMobileExploreProducts",
-        payload: originalMobileExploreProducts,
-      });
-    }
-  };
+  //     dispatch({
+  //       type: "updateMobileExploreProducts",
+  //       payload: filteredProduct,
+  //     });
+  //   } else {
+  //     dispatch({
+  //       type: "updateMobileExploreProducts",
+  //       payload: originalMobileExploreProducts,
+  //     });
+  //   }
+  // };
 
   return (
-    <ScreenWrapper title="Explore" searchFunction={search}>
+    <ScreenWrapper
+      title="Explore"
+      // searchFunction={search}
+    >
       {loading && mobileExploreProducts.length === 0 ? (
         <div className="flex justify-center items-center h-full">
           <Spin indicator={antIcon} />
@@ -92,14 +94,6 @@ export const ExploreCard = ({ item }) => {
       payload: item,
     });
   };
-
-  // const imageSrc = isSafari()
-  //   ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
-  //       gURL: item.titleImage,
-  //     })}`
-  //   : `https://drive.google.com/uc?id=${gDriveFileId({
-  //       gURL: item.titleImage,
-  //     })}`;
 
   return (
     <>
