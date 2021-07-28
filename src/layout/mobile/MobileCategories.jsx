@@ -65,6 +65,7 @@ const MobileCategories = () => {
 export default MobileCategories;
 
 const CategoryCard = ({ item }) => {
+  console.log(item, "item obj");
   return (
     <Link
       className="cursor-pointer"
@@ -78,7 +79,7 @@ const CategoryCard = ({ item }) => {
       <div className="relative">
         <div className="h-32 relative rounded-lg overflow-hidden">
           <img
-            src={item.newImageServerLink}
+            src={item?.newImageServerLink ?? EmptyImage}
             alt="category"
             className="object-cover h-full w-full"
           />
