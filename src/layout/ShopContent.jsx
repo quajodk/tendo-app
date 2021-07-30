@@ -23,10 +23,7 @@ import ImageUpload from "./ImageUpload";
 
 const ShopContent = () => {
   const dispatch = useDispatch();
-  // const { productName } = useParams();
-  // const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
-  // const showOrderForm = useSelector((state) => state.showOrderForm);
-  // const orderProduct = useSelector((state) => state.orderProduct);
+
   const showMobileLogin = useSelector((state) => state.mobileShowLogin);
   const mobileShowSignUp = useSelector((state) => state.mobileShowSignUp);
   const auth = useSelector((state) => state.auth);
@@ -207,16 +204,6 @@ const ShopContent = () => {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl bg-">
-                {/* <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 flex justify-end"
-                >
-                  <HiOutlineX
-                    onClick={closePaymentModal}
-                    className="cursor-pointer"
-                  />
-                </Dialog.Title> */}
-
                 <div className="w-full px-4 py-4">
                   <div className="w-full max-w-md mx-auto">
                     <MobileLoginForm />
@@ -269,16 +256,6 @@ const ShopContent = () => {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                {/* <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 flex justify-end"
-                >
-                  <HiOutlineX
-                    onClick={closePaymentModal}
-                    className="cursor-pointer"
-                  />
-                </Dialog.Title> */}
-
                 <div className="w-full px-4 py-4">
                   <div className="w-full max-w-md mx-auto">
                     <MobileRegisterForm refCode={referralCode} />

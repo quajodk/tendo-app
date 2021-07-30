@@ -1,12 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { gDriveFileId, isSafari } from "../../utils/utils";
+// import { gDriveFileId, isSafari } from "../../utils/utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
 import { ImageWithLoading } from "./ProductListing";
 import ScreenWrapper from "../../components/ScreenWrapper";
 import useSheetData from "../../hooks/useSheetData";
+import DataPagination from "../DataPagination";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -63,11 +64,17 @@ const ExploreMobile = () => {
         </div>
       ) : (
         <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 mx-4">
-          {mobileExploreProducts.map((item) =>
+          {/* {mobileExploreProducts.map((item) =>
             item.glideStatus === "TRUE" ? (
               <ExploreCard item={item} key={item.id} />
             ) : null
-          )}
+          )} */}
+          {/* @TODO: testing pagination */}
+          <DataPagination
+            RenderComponent={ExploreCard}
+            data={mobileExploreProducts}
+            dataLimit={20}
+          />
         </div>
       )}
     </ScreenWrapper>
@@ -86,13 +93,13 @@ export const ExploreCard = ({ item }) => {
     });
   };
 
-  const imageSrc = isSafari()
-    ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
-        gURL: item.titleImage,
-      })}`
-    : `https://drive.google.com/uc?id=${gDriveFileId({
-        gURL: item.titleImage,
-      })}`;
+  // const imageSrc = isSafari()
+  //   ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
+  //       gURL: item.titleImage,
+  //     })}`
+  //   : `https://drive.google.com/uc?id=${gDriveFileId({
+  //       gURL: item.titleImage,
+  //     })}`;
 
   return (
     <>
@@ -103,7 +110,7 @@ export const ExploreCard = ({ item }) => {
         <div onClick={selectProduct}>
           <div className="rounded-lg flex flex-col overflow-hidden">
             <div className="h-32">
-              <ImageWithLoading src={imageSrc} />
+              <ImageWithLoading src={item?.newImageServerLink} />
             </div>
             <div
               className="flex flex-col p-3 flex-grow text-white"

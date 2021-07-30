@@ -77,6 +77,7 @@ function Earning() {
       method: "GET",
     })
       .then((res) => {
+        console.log(res);
         const amtEarned = res.newAppOrders.reduce((acc, cur) => {
           const processingFee =
             (parseInt(

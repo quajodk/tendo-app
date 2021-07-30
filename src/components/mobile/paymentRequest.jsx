@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { request } from "../../utils/utils";
@@ -20,7 +20,7 @@ function PaymentRequest() {
   const dispatch = useDispatch();
   let history = useHistory();
 
-  useEffect(() => {
+  React.useEffect(() => {
     (auth?.paymentMethod === "" || auth?.paymentMethod === undefined) &&
       setPaymentOpen(true);
   }, [auth?.paymentMethod]);

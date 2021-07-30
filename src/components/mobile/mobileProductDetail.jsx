@@ -8,7 +8,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { ImageWithLoading } from "../../layout/mobile/ProductListing";
-import { gDriveFileId, isSafari, request } from "../../utils/utils";
+import {
+  // gDriveFileId,
+  // isSafari,
+  request,
+} from "../../utils/utils";
 import ScreenWrapper from "../ScreenWrapper";
 import { useParams } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -79,13 +83,13 @@ const ProductDetailsBody = () => {
     );
   }
 
-  const imageSrc = isSafari()
-    ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
-        gURL: selectedMobileItem?.titleImage,
-      })}`
-    : `https://drive.google.com/uc?id=${gDriveFileId({
-        gURL: selectedMobileItem?.titleImage,
-      })}`;
+  // const imageSrc = isSafari()
+  //   ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
+  //       gURL: selectedMobileItem?.titleImage,
+  //     })}`
+  //   : `https://drive.google.com/uc?id=${gDriveFileId({
+  //       gURL: selectedMobileItem?.titleImage,
+  //     })}`;
 
   const message = `Hi I would like to check the availability of the product with SKU ${selectedMobileItem?.skUs} on TendoNg 🇳🇬 App`;
 
@@ -102,7 +106,7 @@ const ProductDetailsBody = () => {
       <div className="min-h-max lg:grid lg:grid-cols-2 overflow-y-scroll">
         <div className="px-5 py-5">
           <div className="mx-2 my-4 relative rounded-lg overflow-hidden">
-            <ImageWithLoading src={imageSrc} />
+            <ImageWithLoading src={selectedMobileItem?.newImageServerLink} />
           </div>
         </div>
         <div>
