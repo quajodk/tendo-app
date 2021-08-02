@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import EmptyImage from "../../assets/emptyImage.jpg";
 import ScreenWrapper from "../../components/ScreenWrapper";
 import { Link } from "react-router-dom";
+import { gDriveFileId, isSafari } from "../../utils/utils";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -83,6 +84,13 @@ const MobileCategories = () => {
 export default MobileCategories;
 
 const CategoryCard = ({ item }) => {
+  const imageSrc = isSafari()
+    ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
+        gURL: item.images,
+      })}`
+    : `https://drive.google.com/uc?id=${gDriveFileId({
+        gURL: item.images,
+      })}`;
   return (
     <Link
       className="cursor-pointer"
@@ -96,7 +104,7 @@ const CategoryCard = ({ item }) => {
       <div className="relative">
         <div className="h-32 relative rounded-lg overflow-hidden">
           <img
-            src={item.newImageServerLink ?? EmptyImage}
+            src={imageSrc ?? EmptyImage}
             alt="category"
             className="object-cover h-full w-full"
           />

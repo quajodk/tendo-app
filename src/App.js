@@ -5,7 +5,7 @@ import store, { persistor } from "./redux/store";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./graphql/client";
 import { BrowserRouter } from "react-router-dom";
-import ScrollToTop from "./utils/scrollToTop";
+// import ScrollToTop from "./utils/scrollToTop";
 import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
