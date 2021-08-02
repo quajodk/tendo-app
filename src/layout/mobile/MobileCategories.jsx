@@ -4,7 +4,6 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import EmptyImage from "../../assets/emptyImage.jpg";
-import { gDriveFileId, isSafari } from "../../utils/utils";
 import ScreenWrapper from "../../components/ScreenWrapper";
 import { Link } from "react-router-dom";
 
@@ -14,6 +13,8 @@ const MobileCategories = () => {
   const [data, loading] = useSheetData({ sheet: "categories", method: "GET" });
   const mobileCategories = useSelector((state) => state.mobileCategories);
   const categories = useSelector((state) => state.originalMobileCategories);
+  const searchTerm = useSelector((state) => state.searchTerm);
+  const copyOfCategories = useSelector((state) => state.copyOfCategories);
   const dispatch = useDispatch();
   const init = useRef({ dispatch });
 
@@ -24,12 +25,18 @@ const MobileCategories = () => {
         type: "getMobileCategory",
         payload: data,
       });
+
+    data.length !== 0 &&
+      dispatch({
+        type: "saveCopyOfMobileCategory",
+        payload: data,
+      });
   }, [data, mobileCategories.length]);
 
-  const search = (text) => {
+  const search = () => {
     if (categories.length !== 0) {
       const filteredProduct = categories.filter((x) =>
-        x?.categories?.toLowerCase().includes(text.toLowerCase())
+        x?.categories?.toLowerCase().includes(searchTerm.toLowerCase())
       );
 
       dispatch({
@@ -44,14 +51,25 @@ const MobileCategories = () => {
     }
   };
 
+  const onSearchClear = () => {
+    dispatch({
+      type: "updateMobileCategories",
+      payload: copyOfCategories,
+    });
+  };
+
   return (
-    <ScreenWrapper title="Categories" searchFunction={search}>
+    <ScreenWrapper
+      title="Categories"
+      searchFunction={search}
+      clearSearchFunction={onSearchClear}
+    >
       {loading && mobileCategories.length === 0 ? (
         <div className="flex justify-center items-center h-full">
           <Spin indicator={antIcon} />
         </div>
       ) : (
-        <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 mx-4">
+        <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 mx-4 pb-16">
           {mobileCategories &&
             mobileCategories.map((item, idx) => (
               <CategoryCard item={item} key={idx + 1} />
@@ -65,14 +83,6 @@ const MobileCategories = () => {
 export default MobileCategories;
 
 const CategoryCard = ({ item }) => {
-  const imageSrc = isSafari()
-    ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
-        gURL: item.images,
-      })}`
-    : `https://drive.google.com/uc?id=${gDriveFileId({
-        gURL: item.images,
-      })}`;
-
   return (
     <Link
       className="cursor-pointer"
@@ -86,7 +96,7 @@ const CategoryCard = ({ item }) => {
       <div className="relative">
         <div className="h-32 relative rounded-lg overflow-hidden">
           <img
-            src={imageSrc ?? EmptyImage}
+            src={item.newImageServerLink ?? EmptyImage}
             alt="category"
             className="object-cover h-full w-full"
           />

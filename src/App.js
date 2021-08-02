@@ -14,7 +14,7 @@ function App() {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>
-            <ScrollToTop />
+            {/* <ScrollToTop /> */}
             <Shop />
           </BrowserRouter>
         </PersistGate>
