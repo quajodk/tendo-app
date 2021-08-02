@@ -57,6 +57,11 @@ const initialState = {
   numOfCancelledUserOrders: 0,
   numOfSuccessUserOrders: 0,
   totalEarned: 0,
+  isSearch: false,
+  searchTerm: "",
+  copyOfProducts: [],
+  copyOfExploreProducts: [],
+  copyOfCategories: [],
 };
 
 function shopReducer(state = initialState, action) {
@@ -160,11 +165,21 @@ function shopReducer(state = initialState, action) {
         mobileProducts: action.payload,
         orginalMobileProducts: action.payload,
       };
+    case "saveCopyOfMobileProducts":
+      return {
+        ...state,
+        copyOfProducts: action.payload,
+      };
     case "getMobileExploreProducts":
       return {
         ...state,
         mobileExploreProducts: action.payload,
         originalMobileExploreProducts: action.payload,
+      };
+    case "saveCopyOfExploreProducts":
+      return {
+        ...state,
+        copyOfExploreProducts: action.payload,
       };
     case "updateMobileProducts":
       return {
@@ -181,6 +196,11 @@ function shopReducer(state = initialState, action) {
         ...state,
         mobileCategories: [...action.payload],
         originalMobileCategories: [...action.payload],
+      };
+    case "saveCopyOfMobileCategory":
+      return {
+        ...state,
+        copyOfCategories: action.payload,
       };
     case "updateMobileCategories":
       return {
@@ -279,6 +299,16 @@ function shopReducer(state = initialState, action) {
       return {
         ...state,
         totalEarned: action.payload,
+      };
+    case "setIsSearch":
+      return {
+        ...state,
+        isSearch: action.payload,
+      };
+    case "onSearch":
+      return {
+        ...state,
+        searchTerm: action.payload,
       };
     default:
       return state;

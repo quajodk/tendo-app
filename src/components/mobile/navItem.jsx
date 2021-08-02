@@ -10,6 +10,8 @@ const NavItem = ({ active, icon, title, index, path }) => {
       type: "setScreen",
       payload: index,
     });
+    dispatch({ type: "onSearch", payload: "" });
+    dispatch({ type: "setIsSearch", payload: false });
   };
   return (
     <>

@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  useSelector,
-  // useDispatch
-} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ScreenWrapper from "../../../components/ScreenWrapper";
 import ProductListing from "../ProductListing";
 import { Dialog, Transition } from "@headlessui/react";
@@ -11,40 +8,50 @@ import UpdateUserPaymentForm from "../../../components/mobile/paymentDetails";
 import { AiOutlineWarning } from "react-icons/ai";
 
 const HomeTab = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   let [isPaymentOpen, setIsPaymentOpen] = React.useState(false);
-  // const mobileProducts = useSelector((state) => state.orginalMobileProducts);
+  const mobileProducts = useSelector((state) => state.orginalMobileProducts);
   const auth = useSelector((state) => state.auth);
+  const copyOfProducts = useSelector((state) => state.copyOfProducts);
+  const searchTerm = useSelector((state) => state.searchTerm);
 
-  // const search = (text) => {
-  //   if (mobileProducts.length !== 0) {
-  //     const filteredProduct = mobileProducts.filter(
-  //       (x) =>
-  //         x.glideStatus === "TRUE" &&
-  //         (x?.product?.toLowerCase().includes(text.toLowerCase()) ||
-  //           x?.skUs?.toLowerCase().includes(text.toLowerCase()))
-  //     );
+  const search = () => {
+    if (mobileProducts.length !== 0) {
+      const filteredProduct = mobileProducts.filter(
+        (x) =>
+          x.glideStatus === "TRUE" &&
+          (x?.product?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            x?.skUs?.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
 
-  //     dispatch({
-  //       type: "updateMobileProducts",
-  //       payload: filteredProduct,
-  //     });
-  //   } else {
-  //     dispatch({
-  //       type: "updateMobileProducts",
-  //       payload: mobileProducts,
-  //     });
-  //   }
-  // };
+      dispatch({
+        type: "updateMobileProducts",
+        payload: filteredProduct,
+      });
+    } else {
+      dispatch({
+        type: "updateMobileProducts",
+        payload: mobileProducts,
+      });
+    }
+  };
 
   function closePaymentModal() {
     setIsPaymentOpen(false);
   }
 
+  const onSearchClear = () => {
+    dispatch({
+      type: "updateMobileProducts",
+      payload: copyOfProducts,
+    });
+  };
+
   return (
     <ScreenWrapper
       title="Home"
-      // searchFunction={search}
+      searchFunction={search}
+      clearSearchFunction={onSearchClear}
     >
       {auth &&
         (auth?.paymentMethod === "" || auth?.paymentMethod === undefined) && (

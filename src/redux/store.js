@@ -2,13 +2,13 @@ import { createStore } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import reducer from "./reducers/shopReducer";
-import autoMergeLevel1 from "redux-persist/lib/stateReconciler/autoMergeLevel1";
+import hardSet from "redux-persist/lib/stateReconciler/hardSet";
 
 const persistConfig = {
   key: "root",
   storage,
   blacklist: ["auth", "currentMobileScreen"],
-  stateReconciler: autoMergeLevel1,
+  stateReconciler: hardSet,
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);

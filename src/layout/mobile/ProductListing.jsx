@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { gDriveFileId, isSafari } from "../../utils/utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
@@ -24,6 +23,11 @@ const ProductListing = () => {
     mobileProducts.length === 0 &&
       dispatch({
         type: "getMobileProducts",
+        payload: data,
+      });
+    data.length !== 0 &&
+      dispatch({
+        type: "saveCopyOfMobileProducts",
         payload: data,
       });
   }, [data, mobileProducts.length]);
@@ -66,13 +70,6 @@ export const ProductCard = ({ item }) => {
       payload: item,
     });
   };
-  // const imageSrc = isSafari()
-  //   ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
-  //       gURL: item.titleImage,
-  //     })}`
-  //   : `https://drive.google.com/uc?id=${gDriveFileId({
-  //       gURL: item.titleImage,
-  //     })}`;
 
   return (
     <>
@@ -136,30 +133,28 @@ export const ProductCard = ({ item }) => {
 // }
 
 export const ImageWithLoading = ({ src }) => {
-  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const imageEl = React.useRef(null);
 
   useEffect(() => {
     let isMounted = true;
-    const image = new Image();
+
     if (isMounted) {
-      image.onload = () => setIsLoaded(true);
-      image.src = src;
+      if (imageEl.current) {
+        imageEl.current.onload = () => setIsLoading(false);
+        imageEl.current.src = src;
+      }
     }
     return () => {
       isMounted = false;
     };
   }, [src]);
 
-  return isLoaded ? (
+  return (
     <img
+      ref={imageEl}
       className="w-full h-full lg:h-full object-cover"
-      src={src}
-      alt="product"
-    />
-  ) : (
-    <img
-      className="w-full h-full object-cover"
-      src={EmptyImage}
+      src={isLoading ? EmptyImage : src}
       alt="product"
     />
   );

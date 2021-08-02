@@ -18,9 +18,13 @@ const ExploreMobile = () => {
   const mobileExploreProducts = useSelector(
     (state) => state.mobileExploreProducts
   );
-  // const originalMobileExploreProducts = useSelector(
-  //   (state) => state.originalMobileExploreProducts
-  // );
+  const originalMobileExploreProducts = useSelector(
+    (state) => state.originalMobileExploreProducts
+  );
+  const copyOfExploreProducts = useSelector(
+    (state) => state.copyOfExploreProducts
+  );
+  const searchTerm = useSelector((state) => state.searchTerm);
   const dispatch = useDispatch();
 
   const init = useRef({ dispatch });
@@ -32,33 +36,47 @@ const ExploreMobile = () => {
         type: "getMobileExploreProducts",
         payload: data,
       });
+
+    data.length &&
+      dispatch({
+        type: "saveCopyOfExploreProducts",
+        payload: data,
+      });
   }, [data, mobileExploreProducts.length]);
 
-  // const search = (text) => {
-  //   if (mobileExploreProducts.length !== 0) {
-  //     const filteredProduct = originalMobileExploreProducts.filter(
-  //       (x) =>
-  //         x.glideStatus === "TRUE" &&
-  //         (x?.product?.toLowerCase().includes(text.toLowerCase()) ||
-  //           x?.skUs?.toLowerCase().includes(text.toLowerCase()))
-  //     );
+  const search = () => {
+    if (mobileExploreProducts.length !== 0) {
+      const filteredProduct = originalMobileExploreProducts.filter(
+        (x) =>
+          x.glideStatus === "TRUE" &&
+          (x?.product?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            x?.skUs?.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
 
-  //     dispatch({
-  //       type: "updateMobileExploreProducts",
-  //       payload: filteredProduct,
-  //     });
-  //   } else {
-  //     dispatch({
-  //       type: "updateMobileExploreProducts",
-  //       payload: originalMobileExploreProducts,
-  //     });
-  //   }
-  // };
+      dispatch({
+        type: "updateMobileExploreProducts",
+        payload: filteredProduct,
+      });
+    } else {
+      dispatch({
+        type: "updateMobileExploreProducts",
+        payload: originalMobileExploreProducts,
+      });
+    }
+  };
+
+  const onSearchClear = () => {
+    dispatch({
+      type: "updateMobileExploreProducts",
+      payload: copyOfExploreProducts,
+    });
+  };
 
   return (
     <ScreenWrapper
       title="Explore"
-      // searchFunction={search}
+      searchFunction={search}
+      clearSearchFunction={onSearchClear}
     >
       {loading && mobileExploreProducts.length === 0 ? (
         <div className="flex justify-center items-center h-full">
