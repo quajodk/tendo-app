@@ -15,16 +15,20 @@ function DataPagination({ data, RenderComponent, dataLimit }) {
     window.localStorage.getItem("currentScreenInfo" ?? null)
   );
 
+  const { path } = useRouteMatch();
+
   const [loading, setLoading] = React.useState(false);
   const [scrollPosition, setPosition] = React.useState(
     getCurrentScreenInfo ? getCurrentScreenInfo.scrollY : 0
   );
   const [currentPage, setCurrentPage] = React.useState(
-    getCurrentScreenInfo ? getCurrentScreenInfo.currentPage : 1
+    getCurrentScreenInfo && path === getCurrentScreenInfo.path
+      ? getCurrentScreenInfo.currentPage
+      : 1
   );
   const [paginatedData, setPaginatedData] = React.useState([]);
   const isSearch = useSelector((state) => state.isSearch);
-  const { path } = useRouteMatch();
+
   const isLocalStorageDate =
     getCurrentScreenInfo &&
     path === getCurrentScreenInfo?.path &&
