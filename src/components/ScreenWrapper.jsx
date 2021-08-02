@@ -8,6 +8,7 @@ const ScreenWrapper = ({
   searchFunction,
   children,
   backFunction,
+  clearSearchFunction,
 }) => {
   return (
     <div className="h-screen flex-1 flex flex-col">
@@ -17,6 +18,7 @@ const ScreenWrapper = ({
         search={searchFunction}
         title={title}
         showBack={showBackBtn}
+        onSearchClearFn={clearSearchFunction}
       />
       <div className="flex-1 h-full lg:py-6 overflow-y-scroll bg-tendo-bg">
         {children}
