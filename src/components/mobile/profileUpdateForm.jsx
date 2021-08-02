@@ -28,7 +28,7 @@ const UpdateUserAccountForm = ({ setModal }) => {
     try {
       const result = await request({
         method: "PUT",
-        url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users/${auth.id}`,
+        url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoNigeriaResellerApp/nigeriaUsers/${auth.id}`,
         data: { user },
       });
       setLoading(false);
@@ -80,11 +80,11 @@ const UpdateUserAccountForm = ({ setModal }) => {
         </label>
         <div className="mt-2 relative rounded-md shadow-sm">
           <PhoneInput
-            country={"gh"}
+            country={"ng"}
             enableSearch={true}
             inputStyle={{ width: "100%" }}
             inputClass="focus:ring-gray-300 focus:border-gray-300 sm:text-sm border-gray-300 border-2 py-4"
-            placeholder="+233 20xxxxxx"
+            placeholder="+234 20xxxxxx"
             value={auth?.phone ?? phone}
             onChange={(value) => setPhone(value)}
           />
