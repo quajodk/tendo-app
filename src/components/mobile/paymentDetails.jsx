@@ -30,19 +30,19 @@ const UpdateUserPaymentForm = ({ setModal }) => {
         ? values.accountNumber
         : auth.accountNumber;
 
-    const user = auth;
+    const ghanaUser = auth;
     try {
       const result = await request({
         method: "PUT",
-        url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users/${auth.id}`,
-        data: { user },
+        url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/ghanaUsers/${auth.id}`,
+        data: { ghanaUser },
       });
       setLoading(false);
 
-      if (result.user.id) {
+      if (result.ghanaUser.id) {
         dispatch({
           type: "authenticateUser",
-          payload: result.user,
+          payload: result.ghanaUser,
         });
         message.success("Account updated successfully", 5);
         setModal(false);

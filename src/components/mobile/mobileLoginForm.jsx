@@ -25,17 +25,17 @@ const MobileLoginForm = () => {
         "Content-Type": "application/json",
         Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
       },
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users?filter[phone]=${phone}`,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/ghanaUsers?filter[phone]=${phone}`,
     })
       .then(({ data }) => {
         setLoading(false);
-        if (data?.users.length === 1) {
+        if (data?.ghanaUsers.length === 1) {
           hide();
           dispatch({
             type: "authenticateUser",
-            payload: data?.users[0],
+            payload: data?.ghanaUsers[0],
           });
-          localStorage.setItem("resellerToken", data?.users[0]?.token);
+          localStorage.setItem("resellerToken", data?.ghanaUsers[0]?.token);
           dispatch({
             type: "toggleMobileLogin",
           });

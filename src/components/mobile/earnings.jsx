@@ -80,8 +80,8 @@ function Earning() {
         console.log(res);
         const amtEarned = res.newAppOrders.reduce((acc, cur) => {
           const processingFee =
-            (parseInt(
-              cur?.totalAmountToCollectFromCustomer -
+            (parseFloat(
+              parseInt(cur?.totalAmountToCollectFromCustomer) -
                 (parseInt(cur?.deliveryCost.toString().replace("GHC ", "")) +
                   parseInt(cur?.productPrice) * parseInt(cur?.productQty ?? 1))
             ) *
@@ -91,7 +91,7 @@ function Earning() {
           return (
             acc +
             parseFloat(
-              cur?.totalAmountToCollectFromCustomer -
+              parseInt(cur?.totalAmountToCollectFromCustomer) -
                 (parseInt(cur?.deliveryCost.toString().replace("GHC ", "")) +
                   parseInt(cur?.productPrice) *
                     parseInt(cur?.productQty ?? 1)) -

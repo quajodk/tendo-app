@@ -66,29 +66,28 @@ const MobileRegisterForm = ({ refCode }) => {
         "Content-Type": "application/json",
         Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
       },
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users?filter[phone]=${phone}`,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/ghanaUsers?filter[phone]=${phone}`,
     })
       .then(({ data }) => {
-        if (data?.users?.length === 0) {
-          //   add user if does not exist
-          console.log(data);
+        if (data?.ghanaUsers?.length === 0) {
+          //   add ghanaUser if does not exist
+
           axios({
             method: "POST",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
             },
-            data: { user: values },
-            url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users`,
+            data: { ghanaUser: values },
+            url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/ghanaUsers`,
           })
             .then(({ data }) => {
-              console.log(data);
               hide();
               dispatch({
                 type: "authenticateUser",
-                payload: data?.user,
+                payload: data?.ghanaUser,
               });
-              localStorage.setItem("resellerToken", data?.user?.token);
+              localStorage.setItem("resellerToken", data?.ghanaUser?.token);
               dispatch({
                 type: "toggleMobileSignUp",
               });

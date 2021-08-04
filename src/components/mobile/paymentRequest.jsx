@@ -72,17 +72,17 @@ function PaymentRequest() {
               ? 0
               : auth.profitWithdrawn
           ) + parseInt(values.requestAmount);
-        const user = auth;
+        const ghanaUser = auth;
 
         const response = await request({
-          url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users/${auth?.id}`,
+          url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/ghanaUsers/${auth?.id}`,
           method: "PUT",
-          data: { user },
+          data: { ghanaUser },
         });
-        console.log(response, "user");
+        console.log(response, "ghanaUser");
         dispatch({
           type: "authenticateUser",
-          payload: response?.user,
+          payload: response?.ghanaUser,
         });
 
         setIsPaymentOpen(true);

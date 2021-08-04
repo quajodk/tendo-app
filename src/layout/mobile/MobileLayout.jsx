@@ -56,29 +56,29 @@ const MobileLayer = () => {
           "Content-Type": "application/json",
           Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
         },
-        url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users?filter[token]=${token}`,
+        url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/ghanaUsers?filter[token]=${token}`,
       })
         .then(({ data }) => {
-          if (data?.users.length === 1) {
+          if (data?.ghanaUsers.length === 1) {
             dispatch({
               type: "authenticateUser",
-              payload: data?.users[0],
+              payload: data?.ghanaUsers[0],
             });
 
             request({
               url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders?filter[username]=${
-                data?.users[0]?.username
+                data?.ghanaUsers[0]?.username
               }&filter[orderStatus]=${"PAYOUT READY"}`,
               method: "GET",
             })
               .then((res) => {
                 res && console.log("success");
-                data.users[0].successfulOrders = res.newAppOrders.length;
-                const user = data.users[0];
+                data.ghanaUsers[0].successfulOrders = res.newAppOrders.length;
+                const ghanaUser = data.ghanaUsers[0];
                 request({
-                  url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/users/${data?.users[0]?.id}`,
+                  url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/ghanaUsers/${data?.ghanaUsers[0]?.id}`,
                   method: "PUT",
-                  data: { user },
+                  data: { ghanaUser },
                 })
                   .then((resp) => resp && console.log("success"))
                   .catch((e) => console.log(e));
