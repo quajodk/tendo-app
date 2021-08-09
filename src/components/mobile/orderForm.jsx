@@ -174,7 +174,7 @@ const OrderForm = () => {
               </label>
               <div className="mt-2 border-b border-teal-500 py-2">
                 <input
-                  type="text"
+                  type="number"
                   name="totalAmountToCollectFromCustomer"
                   id="totalAmount"
                   required

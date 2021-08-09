@@ -13,7 +13,6 @@ import { FiPackage } from "react-icons/fi";
 import { Link, useHistory } from "react-router-dom";
 import ScreenWrapper from "../../components/ScreenWrapper";
 import { Dialog, Transition } from "@headlessui/react";
-import { HiOutlineX } from "react-icons/hi";
 
 const HelpMobile = () => {
   let [isPaymentOpen, setIsPaymentOpen] = React.useState(false);
@@ -58,7 +57,7 @@ const HelpMobile = () => {
 
   return (
     <ScreenWrapper title="Account">
-      <div className="flex lg:justify-center justify-start w-full">
+      <div className="flex lg:justify-center justify-start w-full pb-16">
         <div className="flex-1 lg:w-1/2 w-full p-4">
           <div className="flex flex-col justify-start mb-4">
             {auth && (
