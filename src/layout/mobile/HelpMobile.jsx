@@ -13,7 +13,6 @@ import { FiPackage } from "react-icons/fi";
 import { Link, useHistory } from "react-router-dom";
 import ScreenWrapper from "../../components/ScreenWrapper";
 import { Dialog, Transition } from "@headlessui/react";
-import { HiOutlineX } from "react-icons/hi";
 
 const HelpMobile = () => {
   let [isPaymentOpen, setIsPaymentOpen] = React.useState(false);
