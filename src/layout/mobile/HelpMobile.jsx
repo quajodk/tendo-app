@@ -63,7 +63,7 @@ const HelpMobile = () => {
 
   return (
     <ScreenWrapper title="Account">
-      <div className="flex lg:justify-center justify-start w-full">
+      <div className="flex lg:justify-center justify-start w-full pb-16">
         <div className="flex-1 lg:w-1/2 w-full p-4">
           <div className="flex flex-col justify-start mb-4">
             {auth && (
