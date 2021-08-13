@@ -73,7 +73,7 @@ const OrderConfirm = () => {
             <div className="mx-4 my-5 w-full">
               <a
                 className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white hover:text-white"
-                href={`https://wa.me/+233503247275/?text=${message}`}
+                href={`https://rebrand.ly/tendosupport`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
