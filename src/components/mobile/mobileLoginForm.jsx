@@ -29,6 +29,7 @@ const MobileLoginForm = () => {
     })
       .then(({ data }) => {
         setLoading(false);
+        console.log(data);
         if (data?.ghanaUsers.length === 1) {
           hide();
           dispatch({
