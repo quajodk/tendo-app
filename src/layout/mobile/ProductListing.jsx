@@ -154,7 +154,7 @@ export const ImageWithLoading = ({ src }) => {
     <img
       ref={imageEl}
       className="w-full h-full lg:h-full object-cover"
-      src={isLoading ? EmptyImage : src}
+      src={src ?? EmptyImage}
       alt="product"
     />
   );
