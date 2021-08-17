@@ -21,18 +21,18 @@ const MobileCategories = () => {
 
   useEffect(() => {
     const { dispatch } = init.current;
-    mobileCategories.length === 0 &&
-      dispatch({
-        type: "getMobileCategory",
-        payload: data,
-      });
+
+    dispatch({
+      type: "getMobileCategory",
+      payload: data,
+    });
 
     data.length !== 0 &&
       dispatch({
         type: "saveCopyOfMobileCategory",
         payload: data,
       });
-  }, [data, mobileCategories.length]);
+  }, [data]);
 
   const search = () => {
     if (categories.length !== 0) {

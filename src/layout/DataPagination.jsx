@@ -70,7 +70,7 @@ function DataPagination({ data, RenderComponent, dataLimit }) {
     }
 
     if (isSearch) {
-      setPaginatedData(getPaginatedData());
+      setPaginatedData(data);
       setLoading(false);
     }
     setPaginatedData((data) => [

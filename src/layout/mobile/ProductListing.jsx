@@ -20,7 +20,7 @@ const ProductListing = () => {
 
   useEffect(() => {
     const { dispatch } = init.current;
-    mobileProducts.length === 0 &&
+    
       dispatch({
         type: "getMobileProducts",
         payload: data,
@@ -30,7 +30,7 @@ const ProductListing = () => {
         type: "saveCopyOfMobileProducts",
         payload: data,
       });
-  }, [data, mobileProducts.length]);
+  }, [data]);
 
   if (loading && mobileProducts.length === 0) {
     return (
