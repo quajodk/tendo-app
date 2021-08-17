@@ -31,18 +31,18 @@ const ExploreMobile = () => {
 
   useEffect(() => {
     const { dispatch } = init.current;
-    mobileExploreProducts.length === 0 &&
-      dispatch({
-        type: "getMobileExploreProducts",
-        payload: data,
-      });
+
+    dispatch({
+      type: "getMobileExploreProducts",
+      payload: data,
+    });
 
     data.length &&
       dispatch({
         type: "saveCopyOfExploreProducts",
         payload: data,
       });
-  }, [data, mobileExploreProducts.length]);
+  }, [data]);
 
   const search = () => {
     if (mobileExploreProducts.length !== 0) {
