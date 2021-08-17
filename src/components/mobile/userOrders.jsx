@@ -95,7 +95,7 @@ const OrderCard = ({ order }) => {
             <div className="flex flex-row justify-between">
               <div>
                 <span className="text-sm text-white font-medium">
-                  {order?.productSku}
+                  {order?.orderNumber}
                 </span>
               </div>
               <div>
