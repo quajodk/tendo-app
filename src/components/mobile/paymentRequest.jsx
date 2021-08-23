@@ -6,6 +6,8 @@ import ScreenWrapper from "../ScreenWrapper";
 import { Dialog, Transition } from "@headlessui/react";
 import { message } from "antd";
 import { HiOutlineX } from "react-icons/hi";
+import { AiOutlineLoading } from "react-icons/ai";
+
 import UpdateUserPaymentForm from "./paymentDetails";
 
 function PaymentRequest() {
@@ -199,7 +201,17 @@ function PaymentRequest() {
                   }`}
                   disabled={loading || amt === 0 || amt === "" ? true : false}
                 >
-                  {loading ? "Submitting Request ..." : "Submit Request"}
+                  {loading ? (
+                    <>
+                      <AiOutlineLoading
+                        className="animate-spin mr-2"
+                        size="24"
+                      />{" "}
+                      Submitting Request ...
+                    </>
+                  ) : (
+                    "Submit Request"
+                  )}
                 </button>
               </div>
             </div>

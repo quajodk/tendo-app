@@ -9,9 +9,13 @@ import { Dialog, Transition } from "@headlessui/react";
 import { HiOutlineX } from "react-icons/hi";
 import UpdateUserPaymentForm from "./paymentDetails";
 import { useHistory } from "react-router-dom";
+import { FaWallet, FaRegTrashAlt } from "react-icons/fa";
+import { Popconfirm } from "antd";
 
 function Earning() {
   let [isPaymentOpen, setIsPaymentOpen] = React.useState(false);
+  const [transactions, setTransactions] = React.useState([]);
+  const [allProfits, setAllProfits] = React.useState(0);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const numOfUserOrders = useSelector((state) => state.numOfUserOrders);
@@ -77,7 +81,7 @@ function Earning() {
       method: "GET",
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         const amtEarned = res.newAppOrders.reduce((acc, cur) => {
           const processingFee =
             (parseFloat(
@@ -99,7 +103,8 @@ function Earning() {
             )
           );
         }, 0);
-
+        // console.log(amtEarned);
+        setAllProfits(amtEarned.toFixed(2));
         dispatch({
           type: "getUserEarning",
           payload:
@@ -110,6 +115,15 @@ function Earning() {
                 : auth?.profitWithdrawn
             ),
         });
+
+        request({
+          url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/resellerProfitRequest?filter[username]=${auth?.username}`,
+        })
+          .then((res) => {
+            // console.log(res);
+            setTransactions(res.resellerProfitRequest);
+          })
+          .catch((e) => console.log(e));
       })
       .catch((e) => console.log(e));
   }, [auth?.username, auth?.profitWithdrawn]);
@@ -153,6 +167,12 @@ function Earning() {
             </span>
             <span className="text-sm font-medium text-gray-600 flex items-center">
               Profit Earned - (Available to withdraw)
+            </span>
+            <span className="text-sm font-medium text-gray-600 flex items-center">
+              Total Earned: GHS {allProfits}
+            </span>
+            <span className="text-sm font-medium text-gray-600 flex items-center">
+              Profit Withdrawn: GHS{auth?.profitWithdrawn}
             </span>
           </div>
 
@@ -207,6 +227,28 @@ function Earning() {
                   <HiCreditCard size={24} className="mr-2" /> Request Payout
                 </button>
               </div>
+            </div>
+          )}
+          {auth && (
+            <div className="my-6 flex flex-col py-12">
+              <span className="text-sm font-medium text-gray-600">
+                Transactions
+              </span>
+              <hr className="border border-2 border-tendo-active my-4" />
+              {transactions.length > 0 ? (
+                transactions?.map((transaction, index) => (
+                  <TransactionCard
+                    request={transaction}
+                    key={index + 1}
+                    totalEarned={totalEarned}
+                    auth={auth}
+                  />
+                ))
+              ) : (
+                <span className="text-white font-medium">
+                  List of requests will appear here
+                </span>
+              )}
             </div>
           )}
         </div>
@@ -274,3 +316,92 @@ function Earning() {
 }
 
 export default Earning;
+
+const TransactionCard = ({ request, totalEarned = 0, auth }) => {
+  const dispatch = useDispatch();
+  const confirmDelete = async () => {
+    if (request?.status !== "PENDING") return;
+    try {
+      const res = await request({
+        url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/resellerProfitRequest/${request?.id}`,
+        method: "DELETE",
+      });
+      if (res) {
+        dispatch({
+          type: "getUserEarning",
+          payload: totalEarned + parseInt(request.requestAmount),
+        });
+        auth.profitWithdrawn =
+          parseInt(
+            [undefined, "", NaN, null].includes(auth?.profitWithdrawn)
+              ? 0
+              : auth.profitWithdrawn
+          ) - parseInt(request?.requestAmount);
+        const ghanaUser = auth;
+        const response = await request({
+          url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/ghanaUsers/${auth?.id}`,
+          method: "PUT",
+          data: { ghanaUser },
+        });
+        console.log(response, "ghanaUser");
+        dispatch({
+          type: "authenticateUser",
+          payload: response?.ghanaUser,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <div className="w-full rounded-lg flex p-4 justify-start bg-gray-800 my-2">
+      <div className="flex flex-row justify-between items-center w-full">
+        <div className="flex justify-center items-center text-tendo-active rounded-lg mr-2">
+          <FaWallet size={40} />
+        </div>
+        <div className="flex flex-col w-full">
+          <div className="flex flex-row justify-between">
+            <div>
+              <span className="text-sm text-white font-medium">
+                GHS {request?.requestAmount}
+              </span>
+            </div>
+            <div>
+              <span
+                className={`text-sm text-white font-medium p-1 rounded-md ${
+                  request?.status === "PAID" ? "bg-green-500" : "bg-yellow-300"
+                }`}
+              >
+                {request?.status}
+              </span>
+            </div>
+          </div>
+          <div className="flex flex-row justify-between">
+            <div>
+              <span className="text-xs text-gray-400">
+                {request?.requestRefNumber}
+              </span>
+            </div>
+            <div>
+              <span className="text-xs text-gray-400">
+                {request?.requestDate}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {request?.status === "PENDING" && (
+        <Popconfirm
+          title={`Are you sure to delete request ${request?.requestRefNumber}`}
+          onConfirm={confirmDelete}
+          // onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
+        >
+          <FaRegTrashAlt className="text-red-500 mx-2" />
+        </Popconfirm>
+      )}
+    </div>
+  );
+};

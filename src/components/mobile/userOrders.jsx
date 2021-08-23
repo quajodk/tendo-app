@@ -68,7 +68,7 @@ const UserOrders = () => {
 
   return (
     <ScreenWrapper title="My orders" showBackBtn>
-      <div className="grid grid-cols-1 gap-4 p-4">
+      <div className="grid grid-cols-1 gap-4 p-4 mb-12">
         {userOrders.length &&
           userOrders
             .sort((a, b) => (b.id > a.id ? 1 : -1))
