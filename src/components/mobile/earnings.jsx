@@ -343,7 +343,7 @@ const TransactionCard = ({ request, totalEarned = 0, auth }) => {
           method: "PUT",
           data: { ghanaUser },
         });
-        console.log(response, "ghanaUser");
+        // console.log(response, "ghanaUser");
         dispatch({
           type: "authenticateUser",
           payload: response?.ghanaUser,

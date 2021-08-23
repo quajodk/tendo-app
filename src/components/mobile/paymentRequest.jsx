@@ -81,7 +81,7 @@ function PaymentRequest() {
           method: "PUT",
           data: { ghanaUser },
         });
-        console.log(response, "ghanaUser");
+        // console.log(response, "ghanaUser");
         dispatch({
           type: "authenticateUser",
           payload: response?.ghanaUser,
