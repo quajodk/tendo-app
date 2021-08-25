@@ -8,7 +8,7 @@ import {
   HiOutlineInformationCircle,
   HiBell,
 } from "react-icons/hi";
-import { BsFillPersonFill } from "react-icons/bs";
+import { BsFillPersonFill, BsFillChatQuoteFill } from "react-icons/bs";
 import { FiPackage } from "react-icons/fi";
 import { Link, useHistory } from "react-router-dom";
 import ScreenWrapper from "../../components/ScreenWrapper";
@@ -129,6 +129,14 @@ const HelpMobile = () => {
               rel="noopener noreferrer"
             >
               <HiSupport size={25} className="mr-6" /> Help
+            </a>
+            <a
+              className="flex items-center text-lg text-tendo-active my-4 cursor-pointer"
+              href={`https://forms.gle/RgDe7mF6c8mw8hhRA`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BsFillChatQuoteFill size={25} className="mr-6" /> Feedback
             </a>
             <div className="flex items-center text-lg text-tendo-active my-4">
               <HiOutlineInformationCircle size={25} className="mr-6" /> About
