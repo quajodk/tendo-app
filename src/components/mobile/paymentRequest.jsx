@@ -87,6 +87,19 @@ function PaymentRequest() {
           payload: response?.ghanaUser,
         });
 
+        const slackMsg = {
+          text: `Reseller ${auth?.fullName} requested payout\n\nRequest Details\n Reference Number: ${values.requestRefNumber}\nUsername: ${values.username}\nMomo Provider: ${values.momoProvider}\nMomo Number: ${values.momoNumber}\nAccount Name: ${values.accountName}\nAmount: ${values.requestAmount}\nStatus: ${values.status}\nDate: ${values.requestDate}`,
+        };
+
+        fetch(process.env.REACT_APP_PAYOUT_REQUESTS_WEBHOOK, {
+          method: "POST",
+          credentials: "omit",
+          body: JSON.stringify(slackMsg),
+        })
+          .then((res) => res.json())
+          .then((res) => console.log("success slack"))
+          .catch((e) => console.log(e));
+
         setIsPaymentOpen(true);
         setLoading(false);
       }
