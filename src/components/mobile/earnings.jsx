@@ -15,6 +15,7 @@ import { Popconfirm } from "antd";
 function Earning() {
   let [isPaymentOpen, setIsPaymentOpen] = React.useState(false);
   const [transactions, setTransactions] = React.useState([]);
+  const [totalCashOut, setTotalCashOut] = React.useState(0);
   const [allProfits, setAllProfits] = React.useState(0);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
@@ -38,6 +39,7 @@ function Earning() {
       method: "GET",
     })
       .then((res) => {
+        console.log(res, "all orders");
         dispatch({
           type: "getNumOfUserOrders",
           payload: res.newAppOrders.length,
@@ -73,7 +75,34 @@ function Earning() {
       })
       .catch((e) => console.log(e));
 
-    // all successful orders
+    // all transactions
+    request({
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/resellerProfitRequest?filter[username]=${
+        auth?.username
+      }&filter[status]=${"PAID"}`,
+    })
+      .then((res) => {
+        setTransactions(res.resellerProfitRequest);
+      })
+      .catch((e) => console.log(e));
+
+    // total paid transactions
+    request({
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/resellerProfitRequest?filter[username]=${
+        auth?.username
+      }&filter[status]=${"PAID"}`,
+    })
+      .then((res) => {
+        console.log(res, "paid");
+        const snapshot = res.resellerProfitRequest.reduce((acc, cur) => {
+          return acc + parseFloat(cur?.requestAmount);
+        }, 0);
+        console.log(snapshot, "snapshot");
+        setTotalCashOut(snapshot.toFixed(2));
+      })
+      .catch((e) => console.log(e));
+
+    // total earn from successful orders
     request({
       url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/newAppOrders?filter[username]=${
         auth?.username
@@ -81,12 +110,13 @@ function Earning() {
       method: "GET",
     })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         const amtEarned = res.newAppOrders.reduce((acc, cur) => {
+          console.log(cur?.deliveryCost.toString().replace("GHS ", ""));
           const processingFee =
             (parseFloat(
               parseInt(cur?.totalAmountToCollectFromCustomer) -
-                (parseInt(cur?.deliveryCost.toString().replace("GHC ", "")) +
+                (parseInt(cur?.deliveryCost.toString().replace("GHS ", "")) +
                   parseInt(cur?.productPrice) * parseInt(cur?.productQty ?? 1))
             ) *
               10) /
@@ -96,37 +126,28 @@ function Earning() {
             acc +
             parseFloat(
               parseInt(cur?.totalAmountToCollectFromCustomer) -
-                (parseInt(cur?.deliveryCost.toString().replace("GHC ", "")) +
+                (parseInt(cur?.deliveryCost.toString().replace("GHS ", "")) +
                   parseInt(cur?.productPrice) *
                     parseInt(cur?.productQty ?? 1)) -
                 processingFee
             )
           );
         }, 0);
-        // console.log(amtEarned);
+        console.log(amtEarned, "amt earn");
         setAllProfits(amtEarned.toFixed(2));
         dispatch({
           type: "getUserEarning",
           payload:
             amtEarned -
             parseInt(
-              ["", undefined, null, NaN].includes(auth?.profitWithdrawn)
+              ["", undefined, null, NaN].includes(totalCashOut)
                 ? 0
-                : auth?.profitWithdrawn
+                : totalCashOut
             ),
         });
-
-        request({
-          url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/resellerProfitRequest?filter[username]=${auth?.username}`,
-        })
-          .then((res) => {
-            // console.log(res);
-            setTransactions(res.resellerProfitRequest);
-          })
-          .catch((e) => console.log(e));
       })
       .catch((e) => console.log(e));
-  }, [auth?.username, auth?.profitWithdrawn]);
+  }, [auth?.username, totalCashOut]);
 
   const login = () => {
     dispatch({
@@ -169,10 +190,10 @@ function Earning() {
               Profit Earned - (Available to withdraw)
             </span>
             <span className="text-sm font-medium text-gray-600 flex items-center">
-              Total Earned: GHS {allProfits}
+              Total Earned: GH&cent; {allProfits}
             </span>
             <span className="text-sm font-medium text-gray-600 flex items-center">
-              Profit Withdrawn: GHS{auth?.profitWithdrawn}
+              Profit Withdrawn: GH&cent; {totalCashOut ?? 0}
             </span>
           </div>
 
@@ -364,7 +385,7 @@ const TransactionCard = ({ request, totalEarned = 0, auth }) => {
           <div className="flex flex-row justify-between">
             <div>
               <span className="text-sm text-white font-medium">
-                GHS {request?.requestAmount}
+                GH&cent; {request?.requestAmount}
               </span>
             </div>
             <div>
