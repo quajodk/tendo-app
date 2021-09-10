@@ -62,6 +62,7 @@ const initialState = {
   copyOfProducts: [],
   copyOfExploreProducts: [],
   copyOfCategories: [],
+  totalCashOut: 0,
 };
 
 function shopReducer(state = initialState, action) {
@@ -309,6 +310,11 @@ function shopReducer(state = initialState, action) {
       return {
         ...state,
         searchTerm: action.payload,
+      };
+    case "setTotalCashOut":
+      return {
+        ...state,
+        totalCashOut: action.payload,
       };
     default:
       return state;

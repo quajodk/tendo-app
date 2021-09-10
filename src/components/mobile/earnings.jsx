@@ -27,6 +27,7 @@ function Earning() {
     (state) => state.numOfSuccessUserOrders
   );
   const totalEarned = useSelector((state) => state.totalEarned);
+  const totalWithdrawn = useSelector((state) => state.totalCashOut);
   let history = useHistory();
 
   const init = React.useRef({ dispatch });
@@ -99,6 +100,10 @@ function Earning() {
         }, 0);
         console.log(snapshot, "snapshot");
         setTotalCashOut(snapshot.toFixed(2));
+        dispatch({
+          type: "setTotalCashOut",
+          payload: snapshot.toFixed(2),
+        });
       })
       .catch((e) => console.log(e));
 
@@ -140,14 +145,14 @@ function Earning() {
           payload:
             amtEarned -
             parseInt(
-              ["", undefined, null, NaN].includes(totalCashOut)
+              ["", undefined, null, NaN].includes(totalWithdrawn)
                 ? 0
-                : totalCashOut
+                : totalWithdrawn
             ),
         });
       })
       .catch((e) => console.log(e));
-  }, [auth?.username, totalCashOut]);
+  }, [auth?.username, totalWithdrawn]);
 
   const login = () => {
     dispatch({
