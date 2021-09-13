@@ -342,7 +342,7 @@ const OrderDetails = () => {
                   </p>
                   <p className="text-sm font-bold text-white">
                     {" "}
-                    GHS {parseFloat(product?.wholesale).toFixed(2) ?? 0.0}
+                    GH&cent; {parseFloat(product?.wholesale).toFixed(2) ?? 0.0}
                   </p>
                 </div>
               </div>

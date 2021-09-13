@@ -56,7 +56,7 @@ const UserOrders = () => {
       <ScreenWrapper title="My orders" showBackBtn>
         <div className="flex flex-col justify-center items-center h-screen">
           <div className="w-full sm:w-1/2">
-            <EmptyCart />
+            <EmptyCart className="sm:w-24 sm:h-24" />
           </div>
           <span className="text-lg text-white font-medium text-center">
             No order(s) yet. Your list of orders will appear here

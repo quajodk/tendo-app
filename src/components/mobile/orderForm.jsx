@@ -47,6 +47,12 @@ const OrderForm = () => {
 
     if (_.isEmpty(selectedDelivery))
       return message.error("Please select delivery zone/location", 5);
+    const checkAmtWithOrderPrice =
+      orderProduct?.wholesale * +values.productQty >
+      values.totalAmountToCollectFromCustomer;
+
+    if (checkAmtWithOrderPrice) return message.error("Amount is not enough", 5);
+
     const hide = message.loading("Loadings..", 0);
     values.orderStatus = "PENDING";
     values.username = auth?.username;
@@ -55,6 +61,7 @@ const OrderForm = () => {
     values.deliveryLocation = selectedDelivery.locations;
     values.deliveryCost = selectedDelivery.deliveryRateGhs;
     values.productPrice = orderProduct?.wholesale;
+    values.productQty = +values.productQty; // convert string to number
 
     axios({
       method: "POST",

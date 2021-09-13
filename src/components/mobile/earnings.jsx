@@ -40,7 +40,7 @@ function Earning() {
       method: "GET",
     })
       .then((res) => {
-        console.log(res, "all orders");
+        // console.log(res, "all orders");
         dispatch({
           type: "getNumOfUserOrders",
           payload: res.newAppOrders.length,
@@ -78,9 +78,7 @@ function Earning() {
 
     // all transactions
     request({
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/resellerProfitRequest?filter[username]=${
-        auth?.username
-      }&filter[status]=${"PAID"}`,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/resellerProfitRequest?filter[username]=${auth?.username}`,
     })
       .then((res) => {
         setTransactions(res.resellerProfitRequest);
@@ -89,12 +87,10 @@ function Earning() {
 
     // total paid transactions
     request({
-      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/resellerProfitRequest?filter[username]=${
-        auth?.username
-      }&filter[status]=${"PAID"}`,
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/resellerProfitRequest?filter[username]=${auth?.username}&filter[status]=PAID`,
     })
       .then((res) => {
-        console.log(res, "paid");
+        // console.log(res, "paid");
         const snapshot = res.resellerProfitRequest.reduce((acc, cur) => {
           return acc + parseFloat(cur?.requestAmount);
         }, 0);
@@ -115,9 +111,9 @@ function Earning() {
       method: "GET",
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res, "response");
         const amtEarned = res.newAppOrders.reduce((acc, cur) => {
-          console.log(cur?.deliveryCost.toString().replace("GHS ", ""));
+          // console.log(cur?.deliveryCost.toString().replace("GHS ", ""));
           const processingFee =
             (parseFloat(
               parseInt(cur?.totalAmountToCollectFromCustomer) -
@@ -126,6 +122,7 @@ function Earning() {
             ) *
               10) /
             100;
+          // console.log(processingFee, "processing fee");
 
           return (
             acc +
@@ -138,7 +135,8 @@ function Earning() {
             )
           );
         }, 0);
-        console.log(amtEarned, "amt earn");
+        // console.log(amtEarned, "amt earn");
+
         setAllProfits(amtEarned.toFixed(2));
         dispatch({
           type: "getUserEarning",
