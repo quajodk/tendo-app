@@ -122,7 +122,16 @@ function Earning() {
             ) *
               10) /
             100;
+
           // console.log(processingFee, "processing fee");
+          // console.log(
+          //   parseFloat(
+          //     parseInt(cur?.totalAmountToCollectFromCustomer) -
+          //       (parseInt(cur?.deliveryCost.toString().replace("GHS ", "")) +
+          //         parseInt(cur?.productPrice) * parseInt(cur?.productQty ?? 1))
+          //   ),
+          //   "accumulator"
+          // );
 
           return (
             acc +

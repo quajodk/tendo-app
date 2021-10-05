@@ -75,7 +75,7 @@ const OrderForm = () => {
       .then(async (res) => {
         if (res.data) {
           const slackMsg = {
-            text: `You have a new Order\n\nOrder Number: ${values?.orderNumber}\nOrder Status: ${values?.orderStatus}\nProduct SKU: ${values?.productSku}\nProduct Cost: ${values.productPrice}\nOrder Cost: ${values?.totalAmountToCollectFromCustomer}\nPromo Code: ${values?.promoCode}\n\nDelivery Information\nDelivery Location: ${values?.deliveryLocation}\nDelivery Cost: ${values?.deliveryCost}\n\nReseller Information\nReseller Name: ${values?.resellerName}\nReseller Number: ${values?.resellerPhoneNumber}\n\nCustomer Information\nCustomer Name: ${values?.customerName}\nCustomer Location: ${values?.customerLocation}\nCustomer Phone: ${values?.customerPhoneNumber}`,
+            text: `You have a new Order\n\nOrder Number: ${values?.orderNumber}\nOrder Status: ${values?.orderStatus}\nProduct Name: ${orderProduct?.product}\nProduct SKU: ${values?.productSku}\nProduct Cost: ${values.productPrice}\nVariation: ${values["productSpec (type,Size,Color,Etc)"]}\nImage: ${orderProduct?.newImageServerLink}\nAmt to Collect: ${values?.totalAmountToCollectFromCustomer}\nPromo Code: ${values?.promoCode}\n\nDelivery Information\nDelivery Location: ${values?.deliveryLocation}\nCustomer Location: ${values?.customerLocation}\nCustomer Landmark: ${values?.landmarkCloseToLocation}\nDelivery Cost: ${values?.deliveryCost}\n\nReseller Information\nReseller Name: ${values?.resellerName}\nReseller Number: ${values?.resellerPhoneNumber}\n\nCustomer Information\nCustomer Name: ${values?.customerName}\nCustomer Location: ${values?.customerLocation}\nCustomer Phone: ${values?.customerPhoneNumber}`,
           };
 
           fetch(process.env.REACT_APP_SLACK_WEBHOOK, {
@@ -225,7 +225,7 @@ const OrderForm = () => {
                     <span className="block truncate">
                       {_.isEmpty(selectedDelivery)
                         ? "Select delivery location"
-                        : selectedDelivery.locations}
+                        : selectedDelivery?.locations}
                     </span>
                     <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                       <SelectorIcon
