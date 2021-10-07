@@ -58,13 +58,14 @@ const OrderDetails = () => {
         setOrder(res?.data?.newAppOrders[0]);
         axios({
           method: "GET",
-          url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/evansHome?filter[skUs]=${res?.data?.newAppOrders[0].productSku}`,
+          url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/evansHome?filter[skUs]=${res?.data?.newAppOrders[0].sku}`,
           headers: {
             Authorization: "Bearer VGVuZG8gUmVzZWxsZXIkIDIwMjE=",
             Accept: "application/json",
           },
         })
           .then((res) => {
+            console.log(res?.data?.evansHome[0]);
             setProduct(res?.data?.evansHome[0]);
 
             setImageSrc(
@@ -118,7 +119,7 @@ const OrderDetails = () => {
           data: { newAppOrder },
         });
         const slackMsg = {
-          text: `Order Cancellation\n\nOrder Number: ${order?.orderNumber}\n\nOrder Status: ${order?.orderStatus}\nProduct SKU: ${order?.productSku}\n\nReseller Name: ${order?.resellerName}\nReseller Number: ${order?.resellerPhoneNumber}\n\nRemarks: ${order.remarks}`,
+          text: `Order Cancellation\n\nOrder Number: ${order?.orderNumber}\n\nOrder Status: ${order?.orderStatus}\nProduct SKU: ${order?.sku}\n\nReseller Name: ${order?.resellerName}\nReseller Number: ${order?.resellerPhoneNumber}\n\nRemarks: ${order.remarks}`,
         };
 
         fetch(process.env.REACT_APP_SLACK_WEBHOOK, {
@@ -149,7 +150,7 @@ const OrderDetails = () => {
     );
   }
 
-  const message = `Hi I would like to confirm my order with product SKU ${order?.productSku} on TendoGh 🇬🇭 App.`;
+  const message = `Hi I would like to confirm my order with product SKU ${order?.sku} on TendoGh 🇬🇭 App.`;
 
   return (
     <>
@@ -160,7 +161,7 @@ const OrderDetails = () => {
         <div className="min-h-max lg:grid lg:grid-cols-2 overflow-y-scroll">
           <div className="px-5 py-5">
             <div className="mx-2 my-4 relative rounded-lg overflow-hidden">
-              <ImageWithLoading src={imageSrc} />
+              <ImageWithLoading src={product?.newImageServerLink} />
             </div>
           </div>
           <div>
@@ -331,10 +332,7 @@ const OrderDetails = () => {
                 </div>
                 <div className="flex justify-between">
                   <p className="text-sm font-medium text-white">Product SKU:</p>
-                  <p className="text-sm font-bold text-white">
-                    {" "}
-                    {order?.productSku}
-                  </p>
+                  <p className="text-sm font-bold text-white"> {order?.sku}</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-sm font-medium text-white">
@@ -342,7 +340,12 @@ const OrderDetails = () => {
                   </p>
                   <p className="text-sm font-bold text-white">
                     {" "}
-                    GH&cent; {parseFloat(product?.wholesale).toFixed(2) ?? 0.0}
+                    GH&cent;{" "}
+                    {![NaN, undefined, "", null].includes(
+                      parseFloat(product?.wholesale)
+                    )
+                      ? parseFloat(product?.wholesale).toFixed(2)
+                      : 0.0}
                   </p>
                 </div>
               </div>

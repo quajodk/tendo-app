@@ -41,18 +41,25 @@ const OrderForm = () => {
   };
 
   const onOrderSubmit = (values) => {
-    setOrdering(true);
-    if (_.isEmpty(values))
-      return message.error("Form fields can not be empty", 5);
+    if (_.isEmpty(values)) {
+      message.error("Form fields can not be empty", 5);
+      return;
+    }
 
-    if (_.isEmpty(selectedDelivery))
-      return message.error("Please select delivery zone/location", 5);
+    if (_.isEmpty(selectedDelivery)) {
+      message.error("Please select delivery zone/location", 5);
+      return;
+    }
     const checkAmtWithOrderPrice =
       orderProduct?.wholesale * +values.productQty >
       values.totalAmountToCollectFromCustomer;
 
-    if (checkAmtWithOrderPrice) return message.error("Amount is not enough", 5);
+    if (checkAmtWithOrderPrice) {
+      message.error("Amount is not enough", 5);
+      return;
+    }
 
+    setOrdering(true);
     const hide = message.loading("Loadings..", 0);
     values.orderStatus = "PENDING";
     values.username = auth?.username;
@@ -62,6 +69,9 @@ const OrderForm = () => {
     values.deliveryCost = selectedDelivery.deliveryRateGhs;
     values.productPrice = orderProduct?.wholesale;
     values.productQty = +values.productQty; // convert string to number
+    // values.sku = orderProduct?.sku;
+
+    console.log(values);
 
     axios({
       method: "POST",
@@ -74,8 +84,9 @@ const OrderForm = () => {
     })
       .then(async (res) => {
         if (res.data) {
+          console.log(res.data, "res data");
           const slackMsg = {
-            text: `You have a new Order\n\nOrder Number: ${values?.orderNumber}\nOrder Status: ${values?.orderStatus}\nProduct Name: ${orderProduct?.product}\nProduct SKU: ${values?.productSku}\nProduct Cost: ${values.productPrice}\nVariation: ${values["productSpec (type,Size,Color,Etc)"]}\nImage: ${orderProduct?.newImageServerLink}\nAmt to Collect: ${values?.totalAmountToCollectFromCustomer}\nPromo Code: ${values?.promoCode}\n\nDelivery Information\nDelivery Location: ${values?.deliveryLocation}\nCustomer Location: ${values?.customerLocation}\nCustomer Landmark: ${values?.landmarkCloseToLocation}\nDelivery Cost: ${values?.deliveryCost}\n\nReseller Information\nReseller Name: ${values?.resellerName}\nReseller Number: ${values?.resellerPhoneNumber}\n\nCustomer Information\nCustomer Name: ${values?.customerName}\nCustomer Location: ${values?.customerLocation}\nCustomer Phone: ${values?.customerPhoneNumber}`,
+            text: `You have a new Order\n\nOrder Number: ${values?.orderNumber}\nOrder Status: ${values?.orderStatus}\nProduct Name: ${orderProduct?.product}\nProduct SKU: ${values?.sku}\nProduct Cost: ${values.productPrice}\nVariation: ${values["productSpec (type,Size,Color,Etc)"]}\nImage: ${orderProduct?.newImageServerLink}\nAmt to Collect: ${values?.totalAmountToCollectFromCustomer}\nPromo Code: ${values?.promoCode}\n\nDelivery Information\nDelivery Location: ${values?.deliveryLocation}\nCustomer Location: ${values?.customerLocation}\nCustomer Landmark: ${values?.landmarkCloseToLocation}\nDelivery Cost: ${values?.deliveryCost}\n\nReseller Information\nReseller Name: ${values?.resellerName}\nReseller Number: ${values?.resellerPhoneNumber}\n\nCustomer Information\nCustomer Name: ${values?.customerName}\nCustomer Location: ${values?.customerLocation}\nCustomer Phone: ${values?.customerPhoneNumber}`,
           };
 
           fetch(process.env.REACT_APP_SLACK_WEBHOOK, {
@@ -123,7 +134,7 @@ const OrderForm = () => {
               <div className="mt-2 border-b border-teal-500 py-2">
                 <input
                   type="text"
-                  name="productSku"
+                  name="sku"
                   id="sku"
                   required
                   defaultValue={orderProduct?.skUs}
