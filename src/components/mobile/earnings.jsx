@@ -11,6 +11,7 @@ import UpdateUserPaymentForm from "./paymentDetails";
 import { useHistory } from "react-router-dom";
 import { FaWallet, FaRegTrashAlt } from "react-icons/fa";
 import { Popconfirm } from "antd";
+import { ExclamationIcon } from "@heroicons/react/solid";
 
 function Earning() {
   let [isPaymentOpen, setIsPaymentOpen] = React.useState(false);
@@ -94,7 +95,7 @@ function Earning() {
         const snapshot = res.resellerProfitRequest.reduce((acc, cur) => {
           return acc + parseFloat(cur?.requestAmount);
         }, 0);
-        console.log(snapshot, "snapshot");
+        // console.log(snapshot, "snapshot");
         setTotalCashOut(snapshot.toFixed(2));
         dispatch({
           type: "setTotalCashOut",
@@ -233,6 +234,28 @@ function Earning() {
               <span className="text-sm font-medium text-gray-600 flex items-center">
                 Successful Orders
               </span>
+            </div>
+          </div>
+
+          <div className="rounded-md bg-yellow-50 p-4">
+            <div className="flex">
+              <div className="flex-shrink-0">
+                <ExclamationIcon
+                  className="h-5 w-5 text-yellow-400"
+                  aria-hidden="true"
+                />
+              </div>
+              <div className="ml-3">
+                <h3 className="text-sm text-yellow-800">Notice</h3>
+                <div className="mt-2 text-sm text-yellow-700 font-semibold">
+                  <p>
+                    If you request for a payout, it will be processed within 48
+                    - 72 hours. Do not request again when the request is on
+                    pending, your earnings won't reduce until the payout request
+                    is processed.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
