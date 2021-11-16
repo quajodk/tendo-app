@@ -36,7 +36,7 @@ function PaymentRequest() {
     values.momoProvider = auth?.paymentProvider;
     values.accountName = auth?.accountName;
     values.momoNumber = auth?.accountNumber;
-    values.requestAmount = amt;
+    values.requestAmount = +amt;
     values.status = "PENDING";
     values.requestDate = new Date().toLocaleDateString("en-GB");
     values.balanceAmount = totalEarned - values.requestAmount;
