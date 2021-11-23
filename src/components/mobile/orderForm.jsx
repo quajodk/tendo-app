@@ -69,6 +69,8 @@ const OrderForm = () => {
     values.deliveryCost = selectedDelivery.deliveryRateGhs;
     values.productPrice = orderProduct?.wholesale;
     values.productQty = +values.productQty; // convert string to number
+    values.totalAmountToCollectFromCustomer =
+      +values.totalAmountToCollectFromCustomer;
     // values.sku = orderProduct?.sku;
 
     console.log(values);
@@ -86,7 +88,7 @@ const OrderForm = () => {
         if (res.data) {
           console.log(res.data, "res data");
           const slackMsg = {
-            text: `You have a new Order\n\nOrder Number: ${values?.orderNumber}\nOrder Status: ${values?.orderStatus}\nProduct Name: ${orderProduct?.product}\nProduct SKU: ${values?.sku}\nProduct Cost: ${values.productPrice}\nVariation: ${values["productSpec (type,Size,Color,Etc)"]}\nImage: ${orderProduct?.newImageServerLink}\nAmt to Collect: ${values?.totalAmountToCollectFromCustomer}\nPromo Code: ${values?.promoCode}\n\nDelivery Information\nDelivery Location: ${values?.deliveryLocation}\nCustomer Location: ${values?.customerLocation}\nCustomer Landmark: ${values?.landmarkCloseToLocation}\nDelivery Cost: ${values?.deliveryCost}\n\nReseller Information\nReseller Name: ${values?.resellerName}\nReseller Number: ${values?.resellerPhoneNumber}\n\nCustomer Information\nCustomer Name: ${values?.customerName}\nCustomer Location: ${values?.customerLocation}\nCustomer Phone: ${values?.customerPhoneNumber}`,
+            text: `You have a new Order\n\nOrder Number: ${values?.orderNumber}\nOrder Status: ${values?.orderStatus}\nProduct Name: ${orderProduct?.product}\nProduct SKU: ${values?.sku}\nProduct Cost: ${values.productPrice}\nVariation: ${values.productSpec}\nImage: ${orderProduct?.newImageServerLink}\nAmt to Collect: ${values?.totalAmountToCollectFromCustomer}\nPromo Code: ${values?.promoCode}\n\nDelivery Information\nDelivery Location: ${values?.deliveryLocation}\nCustomer Location: ${values?.customerLocation}\nCustomer Landmark: ${values?.landmarkCloseToLocation}\nDelivery Cost: ${values?.deliveryCost}\n\nReseller Information\nReseller Name: ${values?.resellerName}\nReseller Number: ${values?.resellerPhoneNumber}\n\nCustomer Information\nCustomer Name: ${values?.customerName}\nCustomer Location: ${values?.customerLocation}\nCustomer Phone: ${values?.customerPhoneNumber}`,
           };
 
           fetch(process.env.REACT_APP_SLACK_WEBHOOK, {
@@ -173,7 +175,7 @@ const OrderForm = () => {
               <div className="mt-2 border-b border-teal-500 py-2">
                 <input
                   type="text"
-                  name="productSpec (type,Size,Color,Etc)"
+                  name="productSpec"
                   id="productSpec"
                   required
                   ref={register({ required: true })}
