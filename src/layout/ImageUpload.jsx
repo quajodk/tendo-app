@@ -36,7 +36,7 @@ function ImageUpload() {
     const data = { filename, filetype: e.target.files[0].type };
 
     const response = await axios.post(
-      "https://limitless-eyrie-86093.herokuapp.com/http://18.118.133.19/api/v1/tendo/upload",
+      "https://tendo-image-server.staging.tendo.one/api/v1/tendo/upload",
       data,
       options
     );
