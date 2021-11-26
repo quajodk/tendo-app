@@ -21,6 +21,7 @@ import Earning from "../components/mobile/earnings";
 import PaymentRequest from "../components/mobile/paymentRequest";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
+import ScreenWrapper from "../components/ScreenWrapper";
 
 const PromoTab = React.lazy(() => import("./mobile/tabs/PromoTab"));
 const PromoMobile = React.lazy(() => import("./mobile/PromoMobile"));
@@ -98,9 +99,11 @@ const ShopContent = () => {
     <Fragment>
       <Suspense
         fallback={
-          <div className="flex justify-center items-center h-screen">
-            <Spin indicator={antIcon} />
-          </div>
+          <ScreenWrapper>
+            <div className="flex justify-center items-center h-screen">
+              <Spin indicator={antIcon} />
+            </div>
+          </ScreenWrapper>
         }
       >
         <Switch>

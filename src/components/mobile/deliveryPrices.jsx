@@ -24,7 +24,7 @@ const DeliveryPrices = () => {
 
   if (loading && deliveryLocations.length === 0) {
     return (
-      <ScreenWrapper title="orders" showBackBtn>
+      <ScreenWrapper title="Delivery Prices" showBackBtn>
         <div className="flex justify-center items-center h-screen">
           <Spin indicator={antIcon} />
         </div>
