@@ -83,20 +83,17 @@ const ProductDetailsBody = () => {
     );
   }
 
-  // const imageSrc = isSafari()
-  //   ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
-  //       gURL: selectedMobileItem?.titleImage,
-  //     })}`
-  //   : `https://drive.google.com/uc?id=${gDriveFileId({
-  //       gURL: selectedMobileItem?.titleImage,
-  //     })}`;
+  // const find = "tendo-images.s3.amazonaws.com";
+  // const newStr = "d3ug0vbiixnxyq.cloudfront.net";
+
+  // const imageSrc = selectedMobileItem?.newImageServerLink.replaceAll(
+  //   find,
+  //   newStr
+  // );
 
   const message = `Hi I would like to check the availability of the product with SKU ${selectedMobileItem?.skUs} on TendoGh 🇬🇭 App`;
 
-  // const check = () => {
-  //   const message = `Hi I would like to check the availability of the product with SKU ${selectedMobileItem?.skUs} on TendoGh 🇬🇭 App`;
-  //   window.open(`https://wa.me/+233503247275/?text=${message}`, "blank");
-  // };
+  // console.log(imageSrc);
 
   return (
     <ScreenWrapper

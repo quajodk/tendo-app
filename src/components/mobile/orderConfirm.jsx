@@ -6,7 +6,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import ConfirmBg from "../../assets/confirm-order-bg.jpeg";
 import useSheetData from "../../hooks/useSheetData";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ScreenWrapper from "../ScreenWrapper";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -16,7 +16,7 @@ const OrderConfirm = () => {
   const deliveryLocations = useSelector((state) => state.deliveryLocations);
   const dispatch = useDispatch();
   const init = useRef({ dispatch });
-  const { sku } = useParams();
+  // const { sku } = useParams();
   const history = useHistory();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const OrderConfirm = () => {
     });
   }, [data]);
 
-  const message = `Hi I would like to confirm my order with product SKU ${sku} on TendoGh 🇬🇭 App.`;
+  // const message = `Hi I would like to confirm my order with product SKU ${sku} on TendoGh 🇬🇭 App.`;
 
   const goHome = () => {
     return history.push("/");

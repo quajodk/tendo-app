@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Route, Switch, useLocation } from "react-router";
 import ProductDetailsBody from "../components/mobile/mobileProductDetail";
@@ -19,6 +19,13 @@ import { request } from "../utils/utils";
 import CategoryTab from "./mobile/tabs/CategoryTab";
 import Earning from "../components/mobile/earnings";
 import PaymentRequest from "../components/mobile/paymentRequest";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
+
+const PromoTab = React.lazy(() => import("./mobile/tabs/PromoTab"));
+const PromoMobile = React.lazy(() => import("./mobile/PromoMobile"));
+
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const ShopContent = () => {
   const dispatch = useDispatch();
@@ -89,73 +96,62 @@ const ShopContent = () => {
 
   return (
     <Fragment>
-      <Switch>
-        {routes.map((screen, screenID) => (
+      <Suspense
+        fallback={
+          <div className="flex justify-center items-center h-screen">
+            <Spin indicator={antIcon} />
+          </div>
+        }
+      >
+        <Switch>
+          {routes.map((screen, screenID) => (
+            <Route
+              key={screenID}
+              path={screen.path}
+              component={screen.component ?? null}
+              exact={screen.exact}
+            />
+          ))}
+
           <Route
-            key={screenID}
-            path={screen.path}
-            component={screen.component ?? null}
-            exact={screen.exact}
+            exact
+            path="/product/order"
+            render={(props) => <OrderForm {...props} />}
           />
-        ))}
 
-        <Route
-          exact
-          path="/product/order"
-          render={(props) => <OrderForm {...props} />}
-        />
+          <Route
+            path={`/product/:productName`}
+            render={(props) => <ProductDetailsBody {...props} />}
+          />
 
-        <Route
-          path={`/product/:productName`}
-          render={(props) => <ProductDetailsBody {...props} />}
-        />
+          <Route
+            path="/order/:orderNumber"
+            render={(props) => <OrderDetails {...props} />}
+          />
+          <Route
+            path="/categories/:categoryName"
+            render={(props) => <CategoryTab {...props} />}
+          />
+          <Route
+            path="/promotions/:promoName"
+            render={(props) => <PromoTab {...props} />}
+          />
+          <Route path="/account/delivery" component={DeliveryPrices} exact />
+          <Route path="/account/wallet" component={Earning} exact />
+          <Route path="/account/settings" component={Settings} exact />
+          <Route
+            path="/account/payment/:refNumber"
+            component={PaymentRequest}
+            exact
+          />
+          <Route path="/account/notification" component={NotificationsPage} />
+          <Route path="/account/referral" component={PromoMobile} />
+          <Route path="/myorders" component={UserOrders} />
+          <Route path="/confirmorder/:sku" component={OrderConfirm} />
+          <Redirect from="/home" to="/" />
+        </Switch>
+      </Suspense>
 
-        <Route
-          path="/order/:orderNumber"
-          render={(props) => <OrderDetails {...props} />}
-        />
-        <Route
-          path="/categories/:categoryName"
-          render={(props) => <CategoryTab {...props} />}
-        />
-        <Route path="/account/delivery" component={DeliveryPrices} exact />
-        <Route path="/account/wallet" component={Earning} exact />
-        <Route path="/account/settings" component={Settings} exact />
-        <Route
-          path="/account/payment/:refNumber"
-          component={PaymentRequest}
-          exact
-        />
-        <Route path="/account/notification" component={NotificationsPage} />
-        <Route path="/myorders" component={UserOrders} />
-        <Route path="/confirmorder/:sku" component={OrderConfirm} />
-        <Redirect from="/home" to="/" />
-      </Switch>
-
-      {/* <Modal
-        show={showMobileLogin}
-        // canClose={!loading}
-        setShow={() =>
-          dispatch({
-            type: "toggleMobileLogin",
-          })
-        }
-        size={100}
-      >
-        <MobileLoginForm />
-      </Modal> */}
-      {/* <Modal
-        show={mobileShowSignUp}
-        // canClose={!loading}
-        setShow={() =>
-          dispatch({
-            type: "toggleMobileSignUp",
-          })
-        }
-        size={100}
-      >
-        <MobileRegisterForm refCode={referralCode} />
-      </Modal> */}
       <Transition appear show={showMobileLogin} as={Fragment}>
         <Dialog
           as="div"

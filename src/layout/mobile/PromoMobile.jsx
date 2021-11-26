@@ -32,7 +32,7 @@ const PromoMobile = () => {
     }
   };
   return (
-    <ScreenWrapper title="Promotions">
+    <ScreenWrapper showBackBtn title="Refer A Friend">
       <div className="flex lg:justify-center">
         <div className="flex lg:w-1/2 flex-col relative min-h-max">
           <div className="relative h-72">

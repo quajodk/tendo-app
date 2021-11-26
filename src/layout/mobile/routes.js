@@ -1,8 +1,7 @@
 import ExploreMobile from "./ExploreMobile";
 import HelpMobile from "./HelpMobile";
 import MobileCategories from "./MobileCategories";
-import PromoMobile from "./PromoMobile";
-// import CategoryTab from "./tabs/CategoryTab";
+import MobilePromo from "./MobilePromo";
 import HomeTab from "./tabs/HomeTab";
 
 export const routes = [
@@ -15,7 +14,7 @@ export const routes = [
   },
   { component: ExploreMobile, title: "Explore", path: "/explore", exact: true },
   {
-    component: PromoMobile,
+    component: MobilePromo,
     title: "Promotions",
     path: "/promotions",
     exact: true,

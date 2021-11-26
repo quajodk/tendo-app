@@ -1,12 +1,12 @@
 import { createStore } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import localforage from "localforage";
 import reducer from "./reducers/shopReducer";
 import hardSet from "redux-persist/lib/stateReconciler/hardSet";
 
 const persistConfig = {
   key: "root",
-  storage,
+  storage: localforage,
   blacklist: ["auth", "currentMobileScreen"],
   stateReconciler: hardSet,
 };

@@ -1,14 +1,12 @@
-import React, { useEffect, useRef, useState, Fragment } from "react";
+import React, { useEffect, useRef, useState, Fragment, Suspense } from "react";
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-// import Header from "../../components/mobile/Header";
 import ProductDetailsBody from "../../components/mobile/mobileProductDetail";
 
 import { routes } from "./routes";
 import OrderForm from "../../components/mobile/orderForm";
 import OrderConfirm from "../../components/mobile/orderConfirm";
-// import Modal from "../../components/Modal";
 import MobileLoginForm from "../../components/mobile/mobileLoginForm";
 import MobileRegisterForm from "../../components/mobile/mobileRegisterForm";
 import UserOrders from "../../components/mobile/userOrders";
@@ -20,8 +18,14 @@ import Earning from "../../components/mobile/earnings";
 import PaymentRequest from "../../components/mobile/paymentRequest";
 import { Dialog, Transition } from "@headlessui/react";
 import { request } from "../../utils/utils";
-import CategoryTab from "./tabs/CategoryTab";
-// import { HiOutlineX } from "react-icons/hi";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
+
+const PromoTab = React.lazy(() => import("./tabs/PromoTab"));
+const CategoryTab = React.lazy(() => import("./tabs/CategoryTab"));
+const PromoMobile = React.lazy(() => import("./tabs/PromoMobile"));
+
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const MobileLayer = () => {
   const dispatch = useDispatch();
@@ -93,89 +97,85 @@ const MobileLayer = () => {
 
   return (
     <>
-      <div className="flex h-screen flex-1  flex-col font-poppins">
-        {/* Handle when a product is selected */}
-        <div className="h-screen flex-1 flex flex-col">
-          {/* Body Goes here */}
-          <div className="flex-1 overflow-y-scroll bg-tendo-bg">
-            <Switch>
-              {routes.map((screen, screenID) => (
-                <Route
-                  key={screenID}
-                  path={screen.path}
-                  component={screen.component ?? null}
-                  exact={screen.exact}
-                />
-              ))}
+      <div className="flex h-screen flex-1  flex-col font-poppins overflow-y-scroll bg-tendo-bg">
+        <Suspense
+          fallback={
+            <div className="flex justify-center items-center h-screen">
+              <Spin indicator={antIcon} />
+            </div>
+          }
+        >
+          <Switch>
+            {routes.map((screen, screenID) => (
               <Route
-                exact
-                path="/product/order"
-                render={(props) => <OrderForm {...props} />}
+                key={screenID}
+                path={screen.path}
+                component={screen.component ?? null}
+                exact={screen.exact}
               />
+            ))}
+            <Route
+              key="order"
+              path="/product/order"
+              render={(props) => <OrderForm {...props} />}
+            />
 
-              <Route
-                path={`/product/:productName`}
-                render={(props) => <ProductDetailsBody {...props} />}
-              />
+            <Route
+              key="product details"
+              path={`/product/:productName`}
+              render={(props) => <ProductDetailsBody {...props} />}
+            />
 
-              <Route
-                path="/order/:orderNumber"
-                render={(props) => <OrderDetails {...props} />}
-              />
-              <Route
-                path="/categories/:categoryName"
-                render={(props) => <CategoryTab {...props} />}
-              />
-              <Route
-                path="/account/delivery"
-                component={DeliveryPrices}
-                exact
-              />
-              <Route path="/account/wallet" component={Earning} />
-              <Route path="/account/settings" component={Settings} exact />
-              <Route
-                path="/account/payment/:refNumber"
-                component={PaymentRequest}
-              />
-              <Route
-                path="/account/notification"
-                component={NotificationsPage}
-              />
-              <Route path="/myorders" component={UserOrders} />
-              <Route path="/confirmorder/:sku" component={OrderConfirm} />
-              <Redirect from="/home" to="/" />
-            </Switch>
-          </div>
-        </div>
+            <Route
+              key="order details"
+              path="/order/:orderNumber"
+              render={(props) => <OrderDetails {...props} />}
+            />
+            <Route
+              key="category products"
+              path="/categories/:categoryName"
+              render={(props) => <CategoryTab {...props} />}
+            />
 
-        {/* Bottom Tab navigator */}
-        {/* <BottomTabNavigation /> */}
+            <Route
+              key="delivery list"
+              path="/account/delivery"
+              component={DeliveryPrices}
+            />
+            <Route key="wallet" path="/account/wallet" component={Earning} />
+            <Route
+              key="settings"
+              path="/account/settings"
+              component={Settings}
+            />
+            <Route
+              key="payment"
+              path="/account/payment/:refNumber"
+              component={PaymentRequest}
+            />
+            <Route
+              key="notifications"
+              path="/account/notification"
+              component={NotificationsPage}
+            />
+
+            <Route key="user order" path="/myorders" component={UserOrders} />
+            <Route
+              key="confirm orders"
+              path="/confirmorder/:sku"
+              component={OrderConfirm}
+            />
+            <Route key="promo products" path="/promotions/:promoName">
+              <PromoTab />
+            </Route>
+            <Route key="refer a friend" path="/account/referral">
+              <PromoMobile />
+            </Route>
+            <Redirect from="/home" to="/" />
+          </Switch>
+        </Suspense>
       </div>
 
-      {/* <Modal
-        show={showMobileLogin}
-        // canClose={!loading}
-        setShow={() =>
-          dispatch({
-            type: "toggleMobileLogin",
-          })
-        }
-        size={100}
-      >
-        <MobileLoginForm />
-      </Modal> */}
-      {/* <Modal
-        show={mobileShowSignUp}
-        // canClose={!loading}
-        setShow={() =>
-          dispatch({
-            type: "toggleMobileSignUp",
-          })
-        }
-        size={100}
-      >
-        <MobileRegisterForm refCode={referralCode} />
-      </Modal> */}
       <Transition appear show={showMobileLogin} as={Fragment}>
         <Dialog
           as="div"

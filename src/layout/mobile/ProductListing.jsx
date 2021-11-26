@@ -43,11 +43,6 @@ const ProductListing = () => {
   return (
     <>
       <div className="grid lg:grid-cols-4 grid-cols-1 gap-4 mt-4 lg:mb-12 mb-16">
-        {/* {mobileProducts.map((item, idx) =>
-          item.glideStatus === "TRUE" ? (
-            <ProductCard item={item} key={idx} />
-          ) : null
-        )} */}
         {/* @TODO: Testing pagination */}
         <DataPagination
           RenderComponent={ProductCard}
@@ -72,35 +67,33 @@ export const ProductCard = ({ item }) => {
   };
 
   return (
-    <>
-      <Link
-        to={`/product/${item.product?.replace("/", "$")}`}
-        onClick={selectProduct}
-      >
-        <div className="mx-4">
-          <div className="rounded-lg flex flex-col overflow-hidden">
-            <div className="h-32">
-              <ImageWithLoading src={item?.newImageServerLink} />
-            </div>
-            <div
-              className="flex flex-col p-3 flex-grow text-white"
-              style={{ backgroundColor: "rgb(30, 34, 43)" }}
-            >
-              <p className="text-xs font-normal text-blue-700 overflow-ellipsis uppercase whitespace-nowrap">
-                {item.supplierGenericNameGh}
-              </p>
-              <p className="font-normal text-sm overflow-ellipsis overflow-hidden whitespace-nowrap">
-                {item.product}
-              </p>
+    <Link
+      to={`/product/${item.product?.replace("/", "$")}`}
+      onClick={selectProduct}
+    >
+      <div className="mx-4">
+        <div className="rounded-lg flex flex-col overflow-hidden">
+          <div className="h-32">
+            <ImageWithLoading src={item?.newImageServerLink} />
+          </div>
+          <div
+            className="flex flex-col p-3 flex-grow text-white"
+            style={{ backgroundColor: "rgb(30, 34, 43)" }}
+          >
+            <p className="text-xs font-normal text-blue-700 overflow-ellipsis uppercase whitespace-nowrap">
+              {item.supplierGenericNameGh}
+            </p>
+            <p className="font-normal text-sm overflow-ellipsis overflow-hidden whitespace-nowrap">
+              {item.product}
+            </p>
 
-              <div className="text-sm text-gray-400 font-light">
-                GHS {item.wholesale}
-              </div>
+            <div className="text-sm text-gray-400 font-light">
+              GHS {item.wholesale}
             </div>
           </div>
         </div>
-      </Link>
-    </>
+      </div>
+    </Link>
   );
 };
 export class ImageWithLoading extends React.Component {
@@ -116,10 +109,13 @@ export class ImageWithLoading extends React.Component {
     const { src } = this.props;
     const { isLoaded } = this.state;
 
+    const find = "tendo-images.s3.amazonaws.com";
+    const newStr = "d3ug0vbiixnxyq.cloudfront.net";
+
     return isLoaded ? (
       <img
         className="w-full h-full lg:h-full object-cover"
-        src={src}
+        src={src.replaceAll(find, newStr)}
         alt="product"
       />
     ) : (

@@ -13,6 +13,7 @@ import { FiPackage } from "react-icons/fi";
 import { Link, useHistory } from "react-router-dom";
 import ScreenWrapper from "../../components/ScreenWrapper";
 import { Dialog, Transition } from "@headlessui/react";
+import { UsersIcon } from "@heroicons/react/solid";
 
 const HelpMobile = () => {
   let [isPaymentOpen, setIsPaymentOpen] = React.useState(false);
@@ -115,6 +116,11 @@ const HelpMobile = () => {
             <Link to="/account/notification" className="cursor-pointer">
               <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
                 <HiBell size={25} className="mr-6" /> Notifications
+              </div>
+            </Link>
+            <Link to="/account/referral" className="cursor-pointer">
+              <div className="flex items-center text-lg text-tendo-active my-4 cursor-pointer">
+                <UsersIcon className="mr-6 h-6 w-6" /> Refer a friend
               </div>
             </Link>
             <Link to="/account/settings" className="cursor-pointer">

@@ -64,7 +64,9 @@ const OrderForm = () => {
     values.orderStatus = "PENDING";
     values.username = auth?.username;
     values.orderedOn = new Date().toLocaleDateString("en-GB");
-    values.orderNumber = `RS${Math.floor(Math.random() * 90000) + 10000}`;
+    values.orderNumber = `RS${
+      Math.floor(Math.random() * 900000000000000) + 100000000000000
+    }`;
     values.deliveryLocation = selectedDelivery.locations;
     values.deliveryCost = selectedDelivery.deliveryRateGhs;
     values.productPrice = orderProduct?.wholesale;

@@ -1,38 +1,36 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import CategoryProductsScreen from "../../../components/mobile/categoriesProducts";
 import ScreenWrapper from "../../../components/ScreenWrapper";
 import { useParams } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
+import MobilePromoProducts from "../../../components/mobile/mobilePromoProducts";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
-const CategoryTab = () => {
+const PromoTab = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const mobileSelectedCategory = useSelector(
-    (state) => state.mobileSelectedCategory
+  const { promoName } = useParams();
+
+  const { originalPromoProducts, promoProducts } = useSelector(
+    (state) => state
   );
 
-  const originalMobileSelectedCategory = useSelector(
-    (state) => state.originalMobileSelectedCategory
-  );
   const init = useRef({ dispatch });
-  const { categoryName } = useParams();
 
   useEffect(() => {
     const { dispatch } = init.current;
     dispatch({
-      type: "selectedMobileCategory",
-      payload: categoryName,
+      type: "setPromoProducts",
+      payload: promoName,
     });
     setLoading(false);
-  }, [categoryName]);
+  }, [promoName]);
 
   const productSearch = (text) => {
-    if (mobileSelectedCategory.length !== 0) {
-      const filteredProduct = originalMobileSelectedCategory.filter(
+    if (promoProducts.length !== 0) {
+      const filteredProduct = originalPromoProducts.filter(
         (x) =>
           x.glideStatus === "TRUE" &&
           (x?.product?.toLowerCase().includes(text.toLowerCase()) ||
@@ -40,35 +38,30 @@ const CategoryTab = () => {
       );
 
       dispatch({
-        type: "updateSelectedMobileCategory",
+        type: "updatePromoProducts",
         payload: filteredProduct,
       });
     } else {
       dispatch({
-        type: "updateSelectedMobileCategory",
-        payload: originalMobileSelectedCategory,
+        type: "updatePromoProducts",
+        payload: originalPromoProducts,
       });
     }
   };
 
   return (
-    <ScreenWrapper
-      title={categoryName}
-      showBackBtn
-      // backFunction={goBackHandler}
-      searchFunction={productSearch}
-    >
+    <ScreenWrapper title={promoName} showBackBtn searchFunction={productSearch}>
       <div className="overflow-y-scroll mb-24">
         {loading ? (
           <div className="flex justify-center items-center h-screen">
             <Spin indicator={antIcon} />
           </div>
         ) : (
-          <CategoryProductsScreen />
+          <MobilePromoProducts />
         )}
       </div>
     </ScreenWrapper>
   );
 };
 
-export default CategoryTab;
+export default PromoTab;

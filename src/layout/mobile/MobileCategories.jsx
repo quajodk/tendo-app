@@ -10,7 +10,10 @@ import { Link } from "react-router-dom";
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const MobileCategories = () => {
-  const [data, loading] = useSheetData({ sheet: "categories", method: "GET" });
+  const [data, loading] = useSheetData({
+    sheet: "prodAppCategories",
+    method: "GET",
+  });
   const mobileCategories = useSelector((state) => state.mobileCategories);
   const categories = useSelector((state) => state.originalMobileCategories);
   const searchTerm = useSelector((state) => state.searchTerm);
@@ -91,12 +94,12 @@ const CategoryCard = ({ item }) => {
         transition: "transform 0.2s ease 0s",
         color: "white",
       }}
-      to={`/categories/${item.categories}`}
+      to={`/categories/${item.name}`}
     >
       <div className="relative">
         <div className="h-32 relative rounded-lg overflow-hidden">
           <img
-            src={item.newImageServerLink ?? EmptyImage}
+            src={item.icon ?? EmptyImage}
             alt="category"
             className="object-cover h-full w-full"
           />
@@ -129,7 +132,7 @@ const CategoryCard = ({ item }) => {
                   textAlign: "unset",
                 }}
               >
-                {item.categories}
+                {item.name}
               </div>
             </div>
           </div>
