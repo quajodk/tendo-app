@@ -9,7 +9,7 @@ import { DeliveryRateCard } from "./orderConfirm";
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const DeliveryPrices = () => {
-  const [data, loading] = useSheetData({ sheet: "deliveryLocations" });
+  const [data, loading] = useSheetData({ sheet: "prodDeliveryPrices" });
   const deliveryLocations = useSelector((state) => state.deliveryLocations);
   const dispatch = useDispatch();
   const init = useRef({ dispatch });

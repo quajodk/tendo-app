@@ -14,7 +14,7 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 const OrderForm = () => {
   const { register, handleSubmit } = useForm();
   const [selectedDelivery, setSelectedDelivery] = useState({});
-  const [data, loading] = useSheetData({ sheet: "deliveryLocations" });
+  const [data, loading] = useSheetData({ sheet: "prodDeliveryPrices" });
   const deliveryLocations = useSelector((state) => state.deliveryLocations);
   const orderProduct = useSelector((state) => state.orderProduct);
   const history = useHistory();
@@ -68,8 +68,8 @@ const OrderForm = () => {
       Math.floor(Math.random() * 900000000000000) + 100000000000000
     }`;
     values.deliveryLocation = selectedDelivery.locations;
-    values.deliveryCost = selectedDelivery.deliveryRateGhs;
-    values.productPrice = orderProduct?.wholesale;
+    values.deliveryCost = +selectedDelivery.price;
+    values.productPrice = +orderProduct?.wholesale;
     values.productQty = +values.productQty; // convert string to number
     values.totalAmountToCollectFromCustomer =
       +values.totalAmountToCollectFromCustomer;
@@ -281,7 +281,14 @@ const OrderForm = () => {
                                     selected ? "font-medium" : "font-normal"
                                   } block truncate`}
                                 >
-                                  {rate.locations}
+                                  {rate?.locations ?? ""}
+                                </span>
+                                <span
+                                  className={`${
+                                    selected ? "font-medium" : "font-normal"
+                                  } block truncate`}
+                                >
+                                  {rate?.remarks ?? ""}
                                 </span>
                                 {selected ? (
                                   <span
@@ -298,7 +305,7 @@ const OrderForm = () => {
                                     />
                                   </span>
                                 ) : null}
-                                <p>{rate.deliveryRateGhs}</p>
+                                <p> GH&cent; {rate?.price ?? ""}</p>
                               </>
                             )}
                           </Listbox.Option>

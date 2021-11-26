@@ -12,7 +12,7 @@ import ScreenWrapper from "../ScreenWrapper";
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const OrderConfirm = () => {
-  const [data, loading] = useSheetData({ sheet: "deliveryLocations" });
+  const [data, loading] = useSheetData({ sheet: "prodDeliveryPrices" });
   const deliveryLocations = useSelector((state) => state.deliveryLocations);
   const dispatch = useDispatch();
   const init = useRef({ dispatch });
@@ -149,14 +149,17 @@ export const DeliveryRateCard = ({ rate }) => {
   return (
     <>
       <div className="w-full rounded-lg flex flex-col p-4 justify-start bg-gray-800">
-        <div>
+        <div className="flex flex-col">
           <span className="text-sm text-white font-medium my-1">
-            {rate.locations}
+            {rate?.locations ?? ""}
+          </span>
+          <span className="text-xs text-tendo-active font-medium">
+            {rate?.remarks ?? ""}
           </span>
         </div>
         <div>
-          <span className="text-xs text-gray-400 my-1">
-            {rate.deliveryRateGhs}
+          <span className="text-sm text-gray-400 font-semibold my-1">
+            GH&cent; {rate.price}
           </span>
         </div>
       </div>
