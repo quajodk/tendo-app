@@ -19,12 +19,20 @@ const PromoTab = () => {
 
   const init = useRef({ dispatch });
 
-  promoName =
-    promoName.toLowerCase() === "popular products"
-      ? "Popular"
-      : promoName.toLowerCase() === "flash sales"
-      ? "Flash Sale"
-      : promoName;
+  switch (promoName.toLowerCase()) {
+    case "popular products":
+      promoName = "Popular";
+      break;
+    case "flash sales":
+      promoName = "Flash Sale";
+      break;
+    case "tendo glitz":
+      promoName = "Seasonal";
+      break;
+    default:
+      promoName = "Sold Out";
+      break;
+  }
 
   useEffect(() => {
     const { dispatch } = init.current;
