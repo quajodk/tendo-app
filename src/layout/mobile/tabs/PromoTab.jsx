@@ -11,13 +11,20 @@ const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 const PromoTab = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const { promoName } = useParams();
+  let { promoName } = useParams();
 
   const { originalPromoProducts, promoProducts } = useSelector(
     (state) => state
   );
 
   const init = useRef({ dispatch });
+
+  promoName =
+    promoName.toLowerCase() === "popular products"
+      ? "Popular"
+      : promoName.toLowerCase() === "flash sales"
+      ? "Flash Sale"
+      : promoName;
 
   useEffect(() => {
     const { dispatch } = init.current;

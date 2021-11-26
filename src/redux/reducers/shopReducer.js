@@ -180,6 +180,8 @@ function shopReducer(state = initialState, action) {
               items.type6,
               items.type7,
               items.type8,
+              items.type9,
+              items.type10,
             ].includes(action.payload)
           ),
         ],
