@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FiTruck } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,28 +6,40 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import ConfirmBg from "../../assets/confirm-order-bg.jpeg";
 import useSheetData from "../../hooks/useSheetData";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import ScreenWrapper from "../ScreenWrapper";
+import { request } from "../../utils/utils";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const OrderConfirm = () => {
   const [data, loading] = useSheetData({ sheet: "prodDeliveryPrices" });
   const deliveryLocations = useSelector((state) => state.deliveryLocations);
+  const [customerServiceNumber, setCustomerServiceNumber] =
+    useState("233503247275");
   const dispatch = useDispatch();
   const init = useRef({ dispatch });
-  // const { sku } = useParams();
+  const { sku } = useParams();
   const history = useHistory();
 
   useEffect(() => {
     const { dispatch } = init.current;
+    request({
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/customerServiceNumber`,
+      method: "GET",
+    })
+      .then((res) => {
+        setCustomerServiceNumber(res?.customerServiceNumber[1].phoneNumber);
+      })
+      .catch((e) => console.log(e));
+
     dispatch({
       type: "getDeliveryRate",
       payload: data,
     });
   }, [data]);
 
-  // const message = `Hi I would like to confirm my order with product SKU ${sku} on TendoGh 🇬🇭 App.`;
+  const message = `Hi I would like to confirm my order with id ${sku} on TendoGh 🇬🇭 App.`;
 
   const goHome = () => {
     return history.push("/");
@@ -73,7 +85,7 @@ const OrderConfirm = () => {
             <div className="mx-4 my-5 w-full">
               <a
                 className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-medium rounded-md bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 text-white hover:text-white"
-                href={`https://rebrand.ly/tendosupport`}
+                href={`https://wa.me/+${customerServiceNumber}/?text=${message}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

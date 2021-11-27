@@ -8,11 +8,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { ImageWithLoading } from "../../layout/mobile/ProductListing";
-import {
-  // gDriveFileId,
-  // isSafari,
-  request,
-} from "../../utils/utils";
+import { request } from "../../utils/utils";
 import ScreenWrapper from "../ScreenWrapper";
 import { useParams } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -24,6 +20,8 @@ const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 const ProductDetailsBody = () => {
   const { productName } = useParams();
   const [loading, setLoading] = useState(true);
+  const [customerServiceNumber, setCustomerServiceNumber] =
+    useState("233503247275");
   const dispatch = useDispatch();
   const selectedMobileItem = useSelector((state) => state.mobileProductSelect);
   const auth = useSelector((state) => state.auth);
@@ -55,6 +53,14 @@ const ProductDetailsBody = () => {
           console.log(e);
           setLoading(false);
         });
+    request({
+      url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/mainOrderSheetGhana/customerServiceNumber`,
+      method: "GET",
+    })
+      .then((res) => {
+        setCustomerServiceNumber(res?.customerServiceNumber[0].phoneNumber);
+      })
+      .catch((e) => console.log(e));
   }, [productName, selectedMobileItem]);
 
   const orderProduct = () => {
@@ -72,10 +78,7 @@ const ProductDetailsBody = () => {
 
   if (loading && !selectedMobileItem) {
     return (
-      <ScreenWrapper
-        // title={isTabletOrMobile ? selectedMobileItem.product : ""}
-        showBackBtn
-      >
+      <ScreenWrapper showBackBtn>
         <div className="flex justify-center items-center h-screen">
           <Spin indicator={antIcon} />
         </div>
@@ -83,17 +86,7 @@ const ProductDetailsBody = () => {
     );
   }
 
-  // const find = "tendo-images.s3.amazonaws.com";
-  // const newStr = "d3ug0vbiixnxyq.cloudfront.net";
-
-  // const imageSrc = selectedMobileItem?.newImageServerLink.replaceAll(
-  //   find,
-  //   newStr
-  // );
-
   const message = `Hi I would like to check the availability of the product with SKU ${selectedMobileItem?.skUs} on TendoGh 🇬🇭 App`;
-
-  // console.log(imageSrc);
 
   return (
     <ScreenWrapper
@@ -299,7 +292,7 @@ const ProductDetailsBody = () => {
           </div>
           <a
             className="flex justify-between mt-4 mb-12 mx-4 text-blue-500 cursor-pointer"
-            href={`https://wa.me/+233503247275/?text=${message}`}
+            href={`https://wa.me/+${customerServiceNumber}/?text=${message}`}
             target="_blank"
             rel="noopener noreferrer"
           >

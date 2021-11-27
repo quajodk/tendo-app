@@ -106,7 +106,7 @@ const OrderForm = () => {
           setOrdering(false);
           message.success("Order was placed successfully", 5);
           closeOrderForm();
-          history.push(`/confirmorder/${orderProduct?.skUs}`);
+          history.push(`/confirmorder/${values.orderNumber}`);
         }
       })
       .catch((e) => {
