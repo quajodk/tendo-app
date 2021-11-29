@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import ScreenWrapper from "../ScreenWrapper";
 import { ImageWithLoading } from "../../layout/mobile/ProductListing";
-import { gDriveFileId, isSafari, request } from "../../utils/utils";
+import { request } from "../../utils/utils";
 import { FiCheckCircle } from "react-icons/fi";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -36,7 +36,6 @@ const OrderDetails = () => {
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState(null);
   const [product, setProduct] = useState(null);
-  const [imageSrc, setImageSrc] = useState("");
   let [isOpen, setIsOpen] = useState(false);
   let [cancelling, setCancelling] = useState(false);
   const [selected, setSelected] = useState(reasons[0]);
@@ -56,6 +55,7 @@ const OrderDetails = () => {
       .then((res) => {
         setLoading(false);
         setOrder(res?.data?.newAppOrders[0]);
+        console.log(res?.data?.newAppOrders[0]);
         axios({
           method: "GET",
           url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/evansHome?filter[skUs]=${res?.data?.newAppOrders[0].sku}`,
@@ -65,18 +65,7 @@ const OrderDetails = () => {
           },
         })
           .then((res) => {
-            console.log(res?.data?.evansHome[0]);
             setProduct(res?.data?.evansHome[0]);
-
-            setImageSrc(
-              isSafari()
-                ? `https://drive.google.com/thumbnail?id=${gDriveFileId({
-                    gURL: res?.data?.evansHome[0]?.titleImage,
-                  })}`
-                : `https://drive.google.com/uc?id=${gDriveFileId({
-                    gURL: res?.data?.evansHome[0]?.titleImage,
-                  })}`
-            );
           })
           .catch((e) => console.log(e));
       })
@@ -97,7 +86,12 @@ const OrderDetails = () => {
     }, a reseller on TendoGh 🇬🇭 App. I want to cancel an my order with order number ${
       order?.orderNumber
     }`;
-    window.open(`https://wa.me/+2349014992643/?text=${message}`, "blank");
+    window.open(
+      `https://wa.me/+${
+        order?.customerSupportNumber ?? "233503174311"
+      }/?text=${message}`,
+      "blank"
+    );
     closeModal();
   };
 
@@ -358,7 +352,9 @@ const OrderDetails = () => {
                     backgroundColor: "rgba(33, 150, 243, 0.118)",
                     borderColor: "rgba(33, 150, 243, 0.118)",
                   }}
-                  href={`https://wa.me/+233503247275/?text=${message}`}
+                  href={`https://wa.me/+${
+                    order?.customerSupportNumber ?? "233503174311"
+                  }/?text=${message}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
