@@ -25,7 +25,7 @@ const PromoCard = ({ item }) => {
       <div className="relative">
         <div className="h-32 relative rounded-lg overflow-hidden">
           <img
-            src={item?.promoBanner.replaceAll(find, newStr) ?? EmptyImage}
+            src={item?.promoBanner?.replace(find, newStr) ?? EmptyImage}
             alt="category"
             className="object-cover h-full w-full"
           />
