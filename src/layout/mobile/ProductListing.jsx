@@ -142,7 +142,13 @@ export const ImageWithLoading = ({ src }) => {
 
   return (
     <>
-      {!loaded && <img src={EmptyImage} alt="product" />}
+      {!loaded && (
+        <img
+          className="w-full h-full lg:h-full object-cover"
+          src={EmptyImage}
+          alt="product"
+        />
+      )}
       <img
         className="w-full h-full lg:h-full object-cover"
         src={src.replaceAll(find, newStr)}
