@@ -1,32 +1,43 @@
 import React, { Fragment, useEffect, useRef, useState, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Route, Switch, useLocation } from "react-router";
-import ProductDetailsBody from "../components/mobile/mobileProductDetail";
-import OrderConfirm from "../components/mobile/orderConfirm";
-import UserOrders from "../components/mobile/userOrders";
 import { routes } from "./mobile/routes";
 import axios from "axios";
-// import Modal from "../components/Modal";
-import MobileLoginForm from "../components/mobile/mobileLoginForm";
-import MobileRegisterForm from "../components/mobile/mobileRegisterForm";
-import OrderForm from "../components/mobile/orderForm";
-import OrderDetails from "../components/mobile/orderDetails";
-import DeliveryPrices from "../components/mobile/deliveryPrices";
-import NotificationsPage from "../components/mobile/notification";
-import Settings from "../components/Settings";
 import { Dialog, Transition } from "@headlessui/react";
 import { request } from "../utils/utils";
-import CategoryTab from "./mobile/tabs/CategoryTab";
-import Earning from "../components/mobile/earnings";
-import PaymentRequest from "../components/mobile/paymentRequest";
-import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
-import ScreenWrapper from "../components/ScreenWrapper";
+import PageLoader from "../components/PageLoader";
 
 const PromoTab = React.lazy(() => import("./mobile/tabs/PromoTab"));
 const PromoMobile = React.lazy(() => import("./mobile/PromoMobile"));
-
-const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+const ProductDetailsBody = React.lazy(() =>
+  import("../components/mobile/mobileProductDetail")
+);
+const OrderConfirm = React.lazy(() =>
+  import("../components/mobile/orderConfirm")
+);
+const UserOrders = React.lazy(() => import("../components/mobile/userOrders"));
+const MobileLoginForm = React.lazy(() =>
+  import("../components/mobile/mobileLoginForm")
+);
+const MobileRegisterForm = React.lazy(() =>
+  import("../components/mobile/mobileRegisterForm")
+);
+const OrderForm = React.lazy(() => import("../components/mobile/orderForm"));
+const OrderDetails = React.lazy(() =>
+  import("../components/mobile/orderDetails")
+);
+const DeliveryPrices = React.lazy(() =>
+  import("../components/mobile/deliveryPrices")
+);
+const NotificationsPage = React.lazy(() =>
+  import("../components/mobile/notification")
+);
+const Settings = React.lazy(() => import("../components/Settings"));
+const CategoryTab = React.lazy(() => import("./mobile/tabs/CategoryTab"));
+const Earning = React.lazy(() => import("../components/mobile/earnings"));
+const PaymentRequest = React.lazy(() =>
+  import("../components/mobile/paymentRequest")
+);
 
 const ShopContent = () => {
   const dispatch = useDispatch();
@@ -97,15 +108,7 @@ const ShopContent = () => {
 
   return (
     <Fragment>
-      <Suspense
-        fallback={
-          <ScreenWrapper>
-            <div className="flex justify-center items-center h-screen">
-              <Spin indicator={antIcon} />
-            </div>
-          </ScreenWrapper>
-        }
-      >
+      <Suspense fallback={<PageLoader />}>
         <Switch>
           {routes.map((screen, screenID) => (
             <Route
