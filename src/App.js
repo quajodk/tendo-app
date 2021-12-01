@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import store, { persistor } from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
+import { Suspense } from "react";
+import PageLoader from "./components/PageLoader";
 
 function App() {
   return (
@@ -11,7 +13,9 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           {/* <ScrollToTop /> */}
-          <Shop />
+          <Suspense fallback={<PageLoader />}>
+            <Shop />
+          </Suspense>
         </BrowserRouter>
       </PersistGate>
     </Provider>
