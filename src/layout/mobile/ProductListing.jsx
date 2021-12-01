@@ -96,62 +96,59 @@ export const ProductCard = ({ item }) => {
     </Link>
   );
 };
-export class ImageWithLoading extends React.Component {
-  state = { isLoaded: false };
+// export class ImageWithLoading extends React.Component {
+//   state = { isLoaded: false };
 
-  componentDidMount() {
-    const image = new Image();
-    image.onload = () => this.setState({ isLoaded: true });
-    image.src = this.props.src;
-  }
+//   componentDidMount() {
+//     const image = new Image();
+//     image.onload = () => this.setState({ isLoaded: true });
+//     image.src = this.props.src;
+//   }
 
-  render() {
-    const { src } = this.props;
-    const { isLoaded } = this.state;
+//   render() {
+//     const { src } = this.props;
+//     const { isLoaded } = this.state;
 
-    const find = "tendo-images.s3.amazonaws.com";
-    const newStr = "d3ug0vbiixnxyq.cloudfront.net";
+//     const find = "tendo-images.s3.amazonaws.com";
+//     const newStr = "d3ug0vbiixnxyq.cloudfront.net";
 
-    return isLoaded ? (
+//     return isLoaded ? (
+//       <img
+//         className="w-full h-full lg:h-full object-cover"
+//         src={src.replaceAll(find, newStr)}
+//         alt="product"
+//       />
+//     ) : (
+//       <img
+//         className="w-full h-full object-cover"
+//         src={EmptyImage}
+//         alt="product"
+//       />
+//     );
+//   }
+// }
+
+export const ImageWithLoading = ({ src }) => {
+  const loadedImages = {};
+  const [loaded, setLoaded] = React.useState(loadedImages[src]);
+
+  const onLoad = () => {
+    loadedImages[src] = true;
+    setLoaded(true);
+  };
+
+  const find = "tendo-images.s3.amazonaws.com";
+  const newStr = "d3ug0vbiixnxyq.cloudfront.net";
+
+  return (
+    <>
+      {!loaded && <img src={EmptyImage} alt="product" />}
       <img
         className="w-full h-full lg:h-full object-cover"
         src={src.replaceAll(find, newStr)}
         alt="product"
+        onLoad={onLoad}
       />
-    ) : (
-      <img
-        className="w-full h-full object-cover"
-        src={EmptyImage}
-        alt="product"
-      />
-    );
-  }
-}
-
-// export const ImageWithLoading = ({ src }) => {
-//   const [isLoading, setIsLoading] = React.useState(true);
-//   const imageEl = React.useRef(null);
-
-//   useEffect(() => {
-//     let isMounted = true;
-
-//     if (isMounted) {
-//       if (imageEl.current) {
-//         imageEl.current.onload = () => setIsLoading(false);
-//         imageEl.current.src = src;
-//       }
-//     }
-//     return () => {
-//       isMounted = false;
-//     };
-//   }, [src]);
-
-//   return (
-//     <img
-//       ref={imageEl}
-//       className="w-full h-full lg:h-full object-cover"
-//       src={src ?? EmptyImage}
-//       alt="product"
-//     />
-//   );
-// };
+    </>
+  );
+};
