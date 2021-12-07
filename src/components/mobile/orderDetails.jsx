@@ -10,6 +10,7 @@ import { Spin } from "antd";
 import { Dialog, Transition, RadioGroup } from "@headlessui/react";
 import { HiOutlineX } from "react-icons/hi";
 import { useSelector } from "react-redux";
+import EmptyImage from "../../assets/emptyImage.jpg";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -55,7 +56,7 @@ const OrderDetails = () => {
       .then((res) => {
         setLoading(false);
         setOrder(res?.data?.newAppOrders[0]);
-        console.log(res?.data?.newAppOrders[0]);
+        // console.log(res?.data?.newAppOrders[0]);
         axios({
           method: "GET",
           url: `https://api.sheety.co/a565db2f5f48f6cbd0782a1342697a80/tendoGhanaGlide/evansHome?filter[skUs]=${res?.data?.newAppOrders[0].sku}`,
@@ -146,6 +147,8 @@ const OrderDetails = () => {
 
   const message = `Hi I would like to confirm my order with product SKU ${order?.sku} on TendoGh 🇬🇭 App.`;
 
+  // console.log(product);
+
   return (
     <>
       <ScreenWrapper
@@ -155,7 +158,9 @@ const OrderDetails = () => {
         <div className="min-h-max lg:grid lg:grid-cols-2 overflow-y-scroll">
           <div className="px-5 py-5">
             <div className="mx-2 my-4 relative rounded-lg overflow-hidden">
-              <ImageWithLoading src={product?.newImageServerLink} />
+              <ImageWithLoading
+                src={product?.newImageServerLink ?? EmptyImage}
+              />
             </div>
           </div>
           <div>
