@@ -3,6 +3,7 @@ import PhoneInput from "react-phone-input-2";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { message } from "antd";
+import { formatPhoneNumber } from "../../utils/utils";
 
 import "react-phone-input-2/lib/bootstrap.css";
 
@@ -10,6 +11,7 @@ const MobileLoginForm = () => {
   const dispatch = useDispatch();
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
 
   const onLoginSubmit = (e) => {
     e.preventDefault();
@@ -56,6 +58,8 @@ const MobileLoginForm = () => {
       });
   };
 
+  console.log(phone, "formatted number");
+
   return (
     <>
       <form onSubmit={onLoginSubmit} className="w-full mx-4">
@@ -82,13 +86,26 @@ const MobileLoginForm = () => {
             <PhoneInput
               country={"gh"}
               enableSearch={true}
+              onlyCountries={["gh"]}
+              countryCodeEditable={false}
               inputStyle={{ width: "100%" }}
               inputClass="focus:ring-sokoBlue focus:border-sokoBlue sm:text-sm border-gray-300 py-4"
               placeholder="+233 20xxxxxx"
               value={phone}
-              onChange={(value) => setPhone(value)}
+              onChange={(value) => {
+                formatPhoneNumber({
+                  value,
+                  cb: setPhone,
+                  errorCb: setPhoneError,
+                });
+              }}
             />
           </div>
+          {phoneError && (
+            <span className="text-red-500 mt-1 text-xs font-semibold">
+              Invalid phone number
+            </span>
+          )}
         </div>
 
         <div className="flex">

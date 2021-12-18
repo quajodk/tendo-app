@@ -6,6 +6,7 @@ import axios from "axios";
 import { message } from "antd";
 import _ from "lodash";
 import { Detector } from "react-detect-offline";
+import { formatPhoneNumber } from "../../utils/utils";
 
 import "react-phone-input-2/lib/bootstrap.css";
 
@@ -18,6 +19,7 @@ const MobileRegisterForm = ({ refCode }) => {
   } = useForm();
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
 
   useEffect(() => {
     document.getElementById("referralCode").value = refCode ?? "";
@@ -170,14 +172,27 @@ const MobileRegisterForm = ({ refCode }) => {
           <div className="mt-2 relative rounded-md shadow-sm">
             <PhoneInput
               country={"gh"}
+              onlyCountries={["gh"]}
               enableSearch={true}
               inputStyle={{ width: "100%" }}
               inputClass="focus:ring-gray-300 focus:border-gray-300 sm:text-sm border-gray-300 border-2 py-4"
               placeholder="+233 20xxxxxx"
               value={phone}
-              onChange={(value) => setPhone(value)}
+              countryCodeEditable={false}
+              onChange={(value) => {
+                formatPhoneNumber({
+                  value,
+                  cb: setPhone,
+                  errorCb: setPhoneError,
+                });
+              }}
             />
           </div>
+          {phoneError && (
+            <span className="text-red-500 mt-1 text-xs font-semibold">
+              Invalid phone number
+            </span>
+          )}
         </div>
 
         <div className="mb-5">

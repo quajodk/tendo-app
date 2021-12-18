@@ -60,3 +60,23 @@ export const request = async ({ method, url, data = {}, auth = true }) => {
     console.log(error);
   }
 };
+
+export const formatPhoneNumber = ({ value, cb, errorCb }) => {
+  const countryCode = value.substring(0, 3);
+  const phone = value.substring(3);
+
+  if (countryCode === "233" && phone.length === 9) {
+    // console.log(value, "actual number"); // for debugging
+    errorCb(false);
+    cb(value);
+  } else {
+    if (phone.length === 10) {
+      const newPhone = phone.substring(1);
+      // console.log(newPhone, "<<< new phone number"); // for debugging
+      errorCb(false);
+      cb(`233${newPhone}`);
+    } else if (phone.length > 10) {
+      errorCb(true);
+    }
+  }
+};
