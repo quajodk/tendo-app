@@ -68,7 +68,7 @@ export const ProductCard = ({ item }) => {
 
   return (
     <Link
-      to={`/product/${item.product?.replace("/", "$")}`}
+      to={`/product/${item.product?.replace("/", "$").replace("%", "")}`}
       onClick={selectProduct}
     >
       <div className="mx-4">
@@ -96,6 +96,7 @@ export const ProductCard = ({ item }) => {
     </Link>
   );
 };
+
 // export class ImageWithLoading extends React.Component {
 //   state = { isLoaded: false };
 

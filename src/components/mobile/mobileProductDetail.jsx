@@ -187,7 +187,7 @@ const ProductDetailsBody = () => {
                 {" "}
                 {`${
                   selectedMobileItem &&
-                  selectedMobileItem["cleanDescriptionWith\n\nSkUs"]
+                  selectedMobileItem.cleanDescriptionWithSku
                 }`}
               </p>
             </div>
@@ -208,7 +208,7 @@ const ProductDetailsBody = () => {
               onClick={() => {
                 navigator.clipboard.writeText(
                   selectedMobileItem &&
-                    selectedMobileItem["cleanDescriptionWith\n\nSkUs"]
+                    selectedMobileItem.cleanDescriptionWithSku
                 );
               }}
             >
