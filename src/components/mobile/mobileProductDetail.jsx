@@ -86,7 +86,7 @@ const ProductDetailsBody = () => {
     );
   }
 
-  const message = `Hi I would like to check the availability of the product with SKU ${selectedMobileItem?.skUs} on TendoGh 🇬🇭 App`;
+  // const message = `Hi I would like to check the availability of the product with SKU ${selectedMobileItem?.skUs} on TendoGh 🇬🇭 App`;
 
   return (
     <ScreenWrapper
