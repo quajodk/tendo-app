@@ -25,7 +25,7 @@ const Header = ({ title, showBack, search, goBack, onSearchClearFn }) => {
   };
 
   return (
-    <div className="bg-tendo-bg py-3 bg-tendo-bg flex lg:items-center flex-col lg:flex-row py-3">
+    <div className="bg-tendo-bg flex lg:items-center flex-col lg:flex-row py-3">
       <div className="flex w-screen ">
         <div className="w-20 flex justify-center items-center mr-2">
           {showBack ? (
@@ -53,7 +53,7 @@ const Header = ({ title, showBack, search, goBack, onSearchClearFn }) => {
       </div>
       {search && (
         <div className="flex w-screen lg:w-96 mt-3 px-6">
-          <div className=" relative flex overflow-x-hidden bg-gray-400 rounded-lg w-auto flex-1">
+          <div className="relative flex overflow-x-hidden bg-gray-400 rounded-lg w-auto flex-1">
             <div className="bg-gray-400 flex items-center px-3 justify-center">
               <BiSearch color="white" size={20} />
             </div>
@@ -72,7 +72,7 @@ const Header = ({ title, showBack, search, goBack, onSearchClearFn }) => {
             />
             <span
               onClick={isSearch ? () => clearSearch() : null}
-              className="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3 flex items-center justify-center cursor-pointer"
+              className="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 bg-transparent rounded text-base w-8 right-0 pr-3 py-3 flex items-center justify-center cursor-pointer"
             >
               {isSearch ? <HiX className="w-12 h12 text-white" /> : null}
             </span>
